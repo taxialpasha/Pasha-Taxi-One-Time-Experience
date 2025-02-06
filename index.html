@@ -6603,25 +6603,205 @@ function toRad(degrees) {
             }
         };
     }
-
-
-    function calculateDistance(point1, point2) {
-        // التحقق من صحة النقاط
-        if (!point1 || !point2 || !point1.lat || !point1.lng || !point2.lat || !point2.lng) {
-            return null;
-        }
-
-        const R = 6371;
-        const dLat = toRad(point2.lat - point1.lat);
-        const dLon = toRad(point2.lng - point1.lng);
-        const lat1 = toRad(point1.lat);
-        const lat2 = toRad(point2.lat);
-
-        const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-            Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
-        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        return R * c;
+// تحسين دالة حساب المسافة
+function calculateDistance(point1, point2) {
+    if (!point1 || !point2 || !point1.lat || !point1.lng || !point2.lat || !point2.lng) {
+        return null;
     }
+
+    // تحويل الإحداثيات إلى راديان
+    const lat1 = toRadians(point1.lat);
+    const lon1 = toRadians(point1.lng);
+    const lat2 = toRadians(point2.lat);
+    const lon2 = toRadians(point2.lng);
+
+    // صيغة هافرساين لحساب المسافة
+    const R = 6371; // نصف قطر الأرض بالكيلومترات
+    const dLat = lat2 - lat1;
+    const dLon = lon2 - lon1;
+
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1) * Math.cos(lat2) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c;
+
+    return distance;
+}
+
+// تحويل الدرجات إلى راديان
+function toRadians(degrees) {
+    return degrees * (Math.PI / 180);
+}
+
+// تنسيق عرض المسافة
+function formatDistance(distance) {
+    if (distance === null) return 'غير متوفر';
+    if (distance < 1) {
+        return `${Math.round(distance * 1000)} متر`;
+    }
+    return `${distance.toFixed(1)} كم`;
+}
+
+// تحديث دالة إنشاء بطاقة السائق مع المسافة المحسنة
+function createDriverCard(driver, key) {
+    let distanceDisplay = 'غير متوفر';
+    let distanceValue = null;
+
+    if (userLocation && driver.coordinates) {
+        distanceValue = calculateDistance(userLocation, driver.coordinates);
+        distanceDisplay = formatDistance(distanceValue);
+    }
+
+    // ترتيب السائقين حسب المسافة
+    const distanceClass = distanceValue !== null ? 
+        (distanceValue < 1 ? 'distance-near' : 
+         distanceValue < 5 ? 'distance-medium' : 'distance-far') : '';
+
+    return `
+        <div class="driver-card ${distanceClass}" data-driver-id="${key}" data-distance="${distanceValue || 999999}">
+            <div class="driver-image-container">
+                <img src="${driver.imageUrl || 'default-avatar.png'}" alt="${driver.name}" class="driver-image">
+                <div class="driver-status ${driver.active ? 'status-active' : 'status-inactive'}">
+                    ${driver.active ? 'متاح' : 'مشغول'}
+                </div>
+                <div class="distance-badge ${distanceClass}">
+                    <i class="fas fa-map-marker-alt"></i>
+                    ${distanceDisplay}
+                </div>
+            </div>
+            <div class="driver-info">
+                <h5 class="driver-name">${driver.name}</h5>
+                <div class="driver-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">
+                            <i class="fas fa-star"></i>
+                            ${driver.rating ? driver.rating.toFixed(1) : '5.0'}
+                        </div>
+                        <div class="stat-label">التقييم</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">
+                            <i class="fas fa-route"></i>
+                            ${driver.trips || 0}
+                        </div>
+                        <div class="stat-label">الرحلات</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">
+                            ${distanceDisplay}
+                        </div>
+                        <div class="stat-label">المسافة</div>
+                    </div>
+                </div>
+                <div class="text-muted">
+                    <p class="mb-2">
+                        <i class="fas fa-car me-2"></i>
+                        ${driver.carType} ${driver.carModel}
+                    </p>
+                    <p class="mb-0">
+                        <i class="fas fa-map-marker-alt me-2"></i>
+                        ${driver.location}
+                    </p>
+                </div>
+            </div>
+            <div class="driver-actions">
+                <button class="action-btn primary" onclick="viewDriverLocation('${key}')">
+                    <i class="fas fa-map-marker-alt"></i>
+                    عرض الموقع
+                </button>
+                <button class="action-btn secondary" onclick="openChatWindow('${key}')">
+                    <i class="fas fa-comment"></i>
+                    مراسلة
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+// تحديث دالة تحميل السائقين مع فرز حسب المسافة
+function loadDrivers(location = 'all') {
+    if (isLoadingDrivers) return;
+    isLoadingDrivers = true;
+    showLoading();
+
+    const driversRef = database.ref('drivers');
+    driversRef.once('value')
+        .then((snapshot) => {
+            const driversGrid = document.getElementById('driversGrid');
+            driversGrid.innerHTML = '';
+            markerLayer.clearLayers();
+
+            const driversArray = [];
+            snapshot.forEach((childSnapshot) => {
+                const driver = childSnapshot.val();
+                const key = childSnapshot.key;
+
+                if (location === 'all' || driver.location === location) {
+                    const distance = userLocation && driver.coordinates ? 
+                        calculateDistance(userLocation, driver.coordinates) : 999999;
+                    
+                    driversArray.push({
+                        ...driver,
+                        id: key,
+                        distance: distance
+                    });
+                }
+            });
+
+            // فرز السائقين حسب المسافة
+            driversArray.sort((a, b) => a.distance - b.distance);
+
+            // عرض السائقين
+            driversArray.forEach(driver => {
+                driversGrid.innerHTML += createDriverCard(driver, driver.id);
+                addDriverMarker(driver, driver.id);
+            });
+        })
+        .catch((error) => {
+            console.error('Error loading drivers:', error);
+            showToast('حدث خطأ في تحميل بيانات السائقين', 'error');
+        })
+        .finally(() => {
+            hideLoading();
+            isLoadingDrivers = false;
+        });
+}
+
+// إضافة أنماط CSS للمسافات
+const styleSheet = document.createElement('style');
+styleSheet.textContent = `
+    .distance-badge {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        backdrop-filter: blur(5px);
+    }
+
+    .distance-near .distance-badge {
+        background-color: rgba(46, 204, 64, 0.9);
+        color: white;
+    }
+
+    .distance-medium .distance-badge {
+        background-color: rgba(255, 215, 0, 0.9);
+        color: black;
+    }
+
+    .distance-far .distance-badge {
+        background-color: rgba(255, 59, 48, 0.9);
+        color: white;
+    }
+`;
+document.head.appendChild(styleSheet);
 
     function toRad(degrees) {
         return degrees * Math.PI / 180;
