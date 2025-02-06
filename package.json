@@ -1,0 +1,13 @@
+{
+  "name": "al-pasha",
+  "version": "1.0.0",
+  "homepage": "https://alqasimmall.github.io/Al-Pasha",
+  "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d .",
+    "build": "echo 'No build step required'"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.2.0"
+  }
+}
