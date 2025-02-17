@@ -23,7 +23,52 @@
     --spacing-md: 1rem;
     --spacing-lg: 1.5rem;
 }
+/* إضافة هذه الأنماط في نهاية الملف */
+.dark-popup {
+    background-color: #1a1a1a !important;
+    color: #FFFFFF !important;
+    border: 2px solid #FFD700 !important;
+}
 
+#nearbyDriversMap {
+    height: 70vh;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.loading-map {
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #1a1a1a;
+    color: #FFD700;
+}
+
+.loading-map i {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.leaflet-popup-content-wrapper {
+    background-color: #1a1a1a !important;
+    color: #FFFFFF !important;
+    border: 1px solid #FFD700 !important;
+}
+
+.leaflet-popup-tip {
+    background-color: #1a1a1a !important;
+    border: 1px solid #FFD700 !important;
+}
+
+.custom-div-icon {
+    background: none;
+    border: none;
+}
 /* تحسينات العنوان */
 .app-header {
     background: var(--background-dark);
@@ -3419,6 +3464,92 @@ body {
   font-size: 0.8em;
 }
 
+/* أنماط البحث عن السائقين في الجوار */
+.nearby-search-btn {
+    width: 40px;
+    height: 40px;
+    background: #FFD700;
+    border: none;
+    border-radius: 50%;
+    color: #000;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    margin-bottom: 10px;
+    position: absolute;
+    bottom: 90px;
+    right: 10px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nearby-search-btn:hover {
+    transform: scale(1.1);
+    background: #ccac00;
+}
+
+.radius-control {
+    position: absolute;
+    bottom: 140px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid #FFD700;
+    color: #FFFFFF;
+    z-index: 1000;
+    width: 200px;
+}
+
+.radius-control label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.radius-control input[type="range"] {
+    width: 100%;
+    margin: 5px 0;
+}
+
+.nearby-results {
+    position: absolute;
+    top: 70px;
+    right: 10px;
+    width: 300px;
+    max-height: 70vh;
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid #FFD700;
+    border-radius: 15px;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+
+
+.nearby-results-header {
+    padding: 15px;
+    background: #000000;
+    border-bottom: 2px solid #FFD700;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nearby-results-header h3 {
+    color: #FFD700;
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.nearby-results-content {
+    padding: 15px;
+    max-height: calc(70vh - 60px);
+    overflow-y: auto;
+}
 /* Card content colors */
 .driver-card .text-muted {
  color: #FFFFFF !important; 
