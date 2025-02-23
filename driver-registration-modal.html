@@ -1,0 +1,205 @@
+<div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="text-center w-100">
+                <img src="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/driver-images%2F7605a607-6cf8-4b32-aee1-fa7558c98452.png?alt=media&token=5cf9e67c-ba6e-4431-a6a0-79dede15b527"
+                     alt="شعار التطبيق" style="height: 60px;">
+                <h5 class="modal-title mt-2">تسجيل سائق جديد</h5>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+            <form id="driverRegistrationForm" class="needs-validation" novalidate>
+                <!-- المعلومات الشخصية -->
+                <div class="registration-section mb-4">
+                    <h6 class="section-title">المعلومات الشخصية</h6>
+                    <div class="row g-3">
+                        <!-- صورة شخصية -->
+                        <div class="col-12">
+                            <div class="text-center mb-3">
+                                <div class="driver-photo-upload"
+                                     onclick="document.getElementById('driverPhoto').click()">
+                                    <img id="driverPhotoPreview" src="#" alt="">
+                                    <div class="upload-placeholder">
+                                        <i class="fas fa-camera"></i>
+                                        <span>صورة شخصية</span>
+                                    </div>
+                                </div>
+                                <input type="file" id="driverPhoto" name="driverPhoto" 
+                                       accept="image/*" style="display: none;"
+                                       onchange="previewImage(this, 'driverPhotoPreview')" required>
+                            </div>
+                        </div>
+
+                        <!-- معلومات الموقع -->
+                        <div class="col-12">
+                            <div class="location-section">
+                                <label class="form-label">الموقع الحالي</label>
+                                <div class="d-flex gap-2 mb-2">
+                                    <input type="text" class="form-control" id="driverLatitude" 
+                                           name="latitude" placeholder="خط العرض" readonly required>
+                                    <input type="text" class="form-control" id="driverLongitude" 
+                                           name="longitude" placeholder="خط الطول" readonly required>
+                                </div>
+                                <button type="button" class="btn btn-primary w-100" 
+                                        onclick="captureCurrentLocation()">
+                                    <i class="fas fa-location-arrow me-2"></i>
+                                    تحديد الموقع الحالي
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- المعلومات الأساسية -->
+                        <div class="col-md-12">
+                            <label class="form-label">الاسم الثلاثي</label>
+                            <input type="text" class="form-control" name="fullName" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">العمر</label>
+                            <input type="number" class="form-control" name="age" min="18" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">رقم الهاتف</label>
+                            <input type="tel" class="form-control" name="phone" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- معلومات المركبة -->
+                <div class="registration-section mb-4">
+                    <h6 class="section-title">معلومات المركبة</h6>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">نوع المركبة</label>
+                            <select class="form-select" name="vehicleType" required>
+                                <option value="">اختر نوع المركبة</option>
+                                <option value="أجرة">أجرة</option>
+                                <option value="خصوصي">خصوصي</option>
+                                <option value="باص">باص</option>
+                                <option value="صالون">صالون</option>
+                                <option value="تحميل">تحميل</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">موديل المركبة</label>
+                            <input type="number" class="form-control" name="vehicleModel" 
+                                   min="1990" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">رقم المركبة</label>
+                            <input type="text" class="form-control" name="vehicleNumber" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">لون المركبة</label>
+                            <input type="text" class="form-control" name="vehicleColor" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- المستمسكات -->
+                <div class="registration-section mb-4">
+                    <h6 class="section-title">المستمسكات</h6>
+                    <div class="row g-3">
+                        <!-- صور الهوية -->
+                        <div class="col-md-6">
+                            <label class="form-label">صورة الهوية الوجه الأمامي</label>
+                            <div class="document-upload" onclick="document.getElementById('idFront').click()">
+                               <div class="upload-placeholder">
+                                    <i class="fas fa-id-card"></i>
+                                    <span>اضغط للرفع</span>
+                                </div>
+                                <img id="idFrontPreview" src="#" alt="">
+                            </div>
+                            <input type="file" id="idFront" name="idFront" accept="image/*" 
+                                   style="display: none;" 
+                                   onchange="previewImage(this, 'idFrontPreview')" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">صورة الهوية الوجه الخلفي</label>
+                            <div class="document-upload" onclick="document.getElementById('idBack').click()">
+                                <div class="upload-placeholder">
+                                    <i class="fas fa-id-card"></i>
+                                    <span>اضغط للرفع</span>
+                                </div>
+                                <img id="idBackPreview" src="#" alt="">
+                            </div>
+                            <input type="file" id="idBack" name="idBack" accept="image/*" 
+                                   style="display: none;" 
+                                   onchange="previewImage(this, 'idBackPreview')" required>
+                        </div>
+
+                        <!-- صور إجازة السوق -->
+                        <div class="col-md-6">
+                            <label class="form-label">إجازة السوق الوجه الأمامي</label>
+                            <div class="document-upload" onclick="document.getElementById('licenseFront').click()">
+                                <div class="upload-placeholder">
+                                    <i class="fas fa-id-card"></i>
+                                    <span>اضغط للرفع</span>
+                                </div>
+                                <img id="licenseFrontPreview" src="#" alt="">
+                            </div>
+                            <input type="file" id="licenseFront" name="licenseFront" accept="image/*" 
+                                   style="display: none;" 
+                                   onchange="previewImage(this, 'licenseFrontPreview')" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">إجازة السوق الوجه الخلفي</label>
+                            <div class="document-upload" onclick="document.getElementById('licenseBack').click()">
+                                <div class="upload-placeholder">
+                                    <i class="fas fa-id-card"></i>
+                                    <span>اضغط للرفع</span>
+                                </div>
+                                <img id="licenseBackPreview" src="#" alt="">
+                            </div>
+                            <input type="file" id="licenseBack" name="licenseBack" accept="image/*" 
+                                   style="display: none;" 
+                                   onchange="previewImage(this, 'licenseBackPreview')" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- معلومات السكن -->
+                <div class="registration-section mb-4">
+                    <h6 class="section-title">معلومات السكن</h6>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">المحافظة</label>
+                            <select class="form-select" name="province" onchange="loadAreas(this.value)" required>
+                                <option value="">اختر المحافظة</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">المنطقة</label>
+                            <select class="form-select" name="area" required>
+                                <option value="">اختر المنطقة</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">العنوان التفصيلي</label>
+                            <textarea class="form-control" name="address" rows="2" required></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- معلومات إضافية -->
+                <div class="registration-section mb-4">
+                    <h6 class="section-title">معلومات إضافية</h6>
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <label class="form-label">ملاحظات إضافية</label>
+                            <textarea class="form-control" name="additionalInfo" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- زر التسجيل -->
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg px-5">
+                        <i class="fas fa-user-plus me-2"></i>
+                        تسجيل سائق جديد
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

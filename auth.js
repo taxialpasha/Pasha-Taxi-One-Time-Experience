@@ -43,6 +43,7 @@ async function handleUserRegistration(event) {
             address: formData.get('address'),
             photoUrl: photoUrl,
             userType: 'user',
+            approved: false, // إضافة حالة الموافقة
             createdAt: firebase.database.ServerValue.TIMESTAMP
         };
 
@@ -210,6 +211,19 @@ function showUserMenu(event) {
     });
 }
 
+// دالة تسجيل الخروج
+async function handleLogout() {
+    try {
+        await firebase.auth().signOut();
+        localStorage.removeItem('currentUser');
+        resetUserInterface();
+        showToast('تم تسجيل الخروج بنجاح');
+    } catch (error) {
+        console.error('Logout error:', error);
+        showToast('حدث خطأ أثناء تسجيل الخروج', 'error');
+    }
+}
+
 // مراقبة حالة تسجيل الدخول
 firebase.auth().onAuthStateChanged(async (user) => {
     if (user) {
@@ -237,3 +251,101 @@ firebase.auth().onAuthStateChanged(async (user) => {
         resetUserInterface();
     }
 });
+
+// تحديث دالة إضافة السائق لتتضمن حالة التحقق
+async function handleDriverRegistration(event) {
+    event.preventDefault();
+    showLoading();
+
+    try {
+        const formData = new FormData(event.target);
+        const imageFile = document.getElementById('driverPhoto').files[0];
+        if (!imageFile) {
+            throw new Error('الرجاء اختيار صورة شخصية');
+        }
+
+        // إنشاء معرف فريد للسائق
+        const driverId = `DR${Date.now()}`;
+
+        // رفع الصورة الشخصية
+        const imageRef = storage.ref(`drivers/${driverId}/profile_photo`);
+        const uploadTask = await imageRef.put(imageFile);
+        const photoUrl = await uploadTask.ref.getDownloadURL();
+
+        // رفع المستندات
+        const documents = {};
+        const requiredDocs = {
+            idFront: 'هوية-امامي',
+            idBack: 'هوية-خلفي',
+            licenseFront: 'اجازة-امامي',
+            licenseBack: 'اجازة-خلفي'
+        };
+
+        for (const [inputId, docName] of Object.entries(requiredDocs)) {
+            const file = document.getElementById(inputId).files[0];
+            if (!file) {
+                throw new Error(`يرجى رفع ${docName}`);
+            }
+            const docRef = storage.ref(`drivers/${driverId}/documents/${docName}`);
+            const docUpload = await docRef.put(file);
+            documents[docName] = await docUpload.ref.getDownloadURL();
+        }
+
+        // إعداد بيانات السائق
+        const driverData = {
+            id: driverId,
+            fullName: formData.get('fullName'),
+            age: parseInt(formData.get('age')),
+            phone: formData.get('phone'),
+            vehicleType: formData.get('vehicleType'),
+            vehicleModel: formData.get('vehicleModel'),
+            vehicleNumber: formData.get('vehicleNumber'),
+            vehicleColor: formData.get('vehicleColor'),
+            province: formData.get('province'),
+            area: formData.get('area'),
+            address: formData.get('address'),
+            photoUrl: photoUrl,
+            documents: documents,
+            status: 'pending', // حالة التحقق: pending, approved, rejected
+            isVerified: false, // سيتم تغييرها إلى true عند الموافقة
+            createdAt: firebase.database.ServerValue.TIMESTAMP,
+            lastUpdated: firebase.database.ServerValue.TIMESTAMP
+        };
+
+        // حفظ البيانات في Firebase
+        await database.ref(`drivers/${driverId}`).set(driverData);
+
+        // إغلاق النافذة المنبثقة
+        const modal = bootstrap.Modal.getInstance(document.getElementById('driverRegistrationModal'));
+        modal.hide();
+
+        // عرض رسالة النجاح
+        Swal.fire({
+            title: 'تم تقديم الطلب بنجاح!',
+            html: `
+                <div class="success-message">
+                    <p>شكراً لك! تم استلام طلبك بنجاح.</p>
+                    <p>رقم الطلب: <strong>${driverId}</strong></p>
+                    <p>سيتم مراجعة طلبك والرد عليك قريباً.</p>
+                </div>
+            `,
+            icon: 'success',
+            confirmButtonText: 'حسناً',
+            confirmButtonColor: '#FFD700'
+        });
+
+        // إعادة تحميل قائمة السائقين
+        loadDrivers();
+
+    } catch (error) {
+        console.error('Registration error:', error);
+        Swal.fire({
+            title: 'خطأ!',
+            text: error.message || 'حدث خطأ أثناء التسجيل',
+            icon: 'error',
+            confirmButtonText: 'حسناً'
+        });
+    } finally {
+        hideLoading();
+    }
+}
