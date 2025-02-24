@@ -53,8 +53,17 @@
     <meta name="twitter:image"
         content="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/driver-images%2F7605a607-6cf8-4b32-aee1-fa7558c98452.png?alt=media&token=5cf9e67c-ba6e-4431-a6a0-79dede15b527">
 </head>
-
 <body>
+    <!-- ...existing code... -->
+
+    <!-- Import the registration functions -->
+    <script type="module">
+        import { handleUserRegistration, handleDriverRegistration } from './auth.js';
+
+        // Attach the functions to the form submit events
+        document.getElementById('userRegistrationForm').addEventListener('submit', handleUserRegistration);
+        document.getElementById('driverRegistrationForm').addEventListener('submit', handleDriverRegistration);
+    </script>
     <!-- Content will be here -->
 
     <!-- External Libraries -->
@@ -6008,6 +6017,92 @@
         .text-muted {
             color: #999999 !important;
         }
+
+
+
+            /* أنماط لحالة تسجيل الدخول/الخروج */
+    .login-only {
+        /* عناصر تظهر فقط عندما يكون المستخدم غير مسجل */
+        display: block;
+    }
+    .auth-only {
+        /* عناصر تظهر فقط عندما يكون المستخدم مسجل الدخول */
+        display: none;
+    }
+    .driver-only {
+        /* عناصر تظهر فقط للسائقين */
+        display: none;
+    }
+    .user-only {
+        /* عناصر تظهر فقط للمستخدمين العاديين */
+        display: none;
+    }
+    
+    /* تحسينات على أيقونة المستخدم المسجل */
+    .user-profile-btn img {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        border: 2px solid #FFD700;
+        object-fit: cover;
+        transition: all 0.3s ease;
+    }
+    
+    .user-profile-btn img:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    }
+    
+    /* تحسينات على معلومات المستخدم في الشريط الجانبي */
+    .side-nav-user-info {
+        padding: 20px;
+        text-align: center;
+        border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+    }
+    
+    .side-nav-user-info img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        border: 3px solid #FFD700;
+        margin-bottom: 15px;
+        object-fit: cover;
+    }
+    
+    .side-nav-user-info h6 {
+        color: #FFD700;
+        margin: 0 0 8px 0;
+    }
+    
+    .side-nav-user-info .badge {
+        margin-bottom: 10px;
+    }
+    
+    .side-nav-user-info .driver-status {
+        padding: 5px 15px;
+        border-radius: 20px;
+        display: inline-block;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+    
+    .side-nav-user-info .status-active {
+        background: rgba(46, 204, 64, 0.2);
+        color: #2ECC40;
+        border: 1px solid #2ECC40;
+    }
+    
+    .side-nav-user-info .status-inactive {
+        background: rgba(255, 65, 54, 0.2);
+        color: #FF4136;
+        border: 1px solid #FF4136;
+    }
+
+
+    /* إخفاء العناصر المكررة */
+.secondary-user-display {
+    display: none !important;
+}
     </style>
     </head>
 
@@ -6067,14 +6162,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Header -->
-            <nav class="navbar navbar-expand-lg navbar-dark app-header fixed-top">
-
-                <div class="container">
-                    <a class="app-logo navbar-brand" href="#">
-                        <i class="fas fa-taxi"></i>
-                        تاكسي العراق
-                    </a>
+           
                     <!-- زر فتح الشريط الجانبي -->
                     <button class="nav-toggle" onclick="toggleSideNav()">
                         <i class="fas fa-bars"></i>
@@ -6090,7 +6178,6 @@
                                 <!-- أيقونة البحث بجانب الاسم -->
                                 <div class="side-nav" id="sideNav">
                                     <div class="side-nav-header">
-                                        <h2 class="side-nav-title">تاكسي العراق</h2>
                                         <button class="side-nav-close" onclick="toggleSideNav()">×</button>
                                     </div>
 
@@ -6741,8 +6828,8 @@
                     </div>
                     <div class="modal-body py-4">
                         <div class="row g-4">
-                            <!-- زر تسجيل الدخول -->
-                            <div class="col-12 mb-3">
+                            <!-- زر تسجيل الدخول - حالة عدم تسجيل الدخول فقط -->
+                            <div class="col-12 mb-3 login-only">
                                 <div class="account-type-card" onclick="openLoginModal()">
                                     <div class="icon-container mb-3">
                                         <i class="fas fa-sign-in-alt fa-3x"></i>
@@ -6751,8 +6838,8 @@
                                     <p class="small text-muted">لديك حساب بالفعل؟ سجل دخولك</p>
                                 </div>
                             </div>
-                            <!-- زر انشاء حساب -->
-                            <div class="col-12">
+                            <!-- زر انشاء حساب - حالة عدم تسجيل الدخول فقط -->
+                            <div class="col-12 login-only">
                                 <div class="account-type-card" onclick="openUserRegistration()">
                                     <div class="icon-container mb-3">
                                         <i class="fas fa-user fa-3x"></i>
@@ -6761,14 +6848,34 @@
                                     <p class="small text-muted">احجز رحلاتك بسهولة</p>
                                 </div>
                             </div>
-                            <!-- زر إضافة سائق -->
-                            <div class="col-12">
+                            <!-- زر إضافة سائق - حالة عدم تسجيل الدخول فقط -->
+                            <div class="col-12 login-only">
                                 <div class="account-type-card" onclick="showAddDriverModal()">
                                     <div class="icon-container mb-3">
                                         <i class="fas fa-user-plus fa-3x"></i>
                                     </div>
                                     <h6>إضافة سائق</h6>
                                     <p class="small text-muted">أضف سائق جديد إلى النظام</p>
+                                </div>
+                            </div>
+                            
+                            <!-- العناصر التي تظهر للمستخدم المسجل -->
+                            <div class="col-12 auth-only">
+                                <div class="account-type-card" onclick="showUserMenu()">
+                                    <div class="icon-container mb-3">
+                                        <i class="fas fa-user fa-3x"></i>
+                                    </div>
+                                    <h6>الملف الشخصي</h6>
+                                    <p class="small text-muted">عرض وتعديل ملفك الشخصي</p>
+                                </div>
+                            </div>
+                            <div class="col-12 auth-only">
+                                <div class="account-type-card" onclick="handleLogout()">
+                                    <div class="icon-container mb-3">
+                                        <i class="fas fa-sign-out-alt fa-3x"></i>
+                                    </div>
+                                    <h6>تسجيل الخروج</h6>
+                                    <p class="small text-muted">تسجيل الخروج من حسابك</p>
                                 </div>
                             </div>
                         </div>
@@ -6786,22 +6893,30 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
-                        <form id="loginForm" onsubmit="handleLogin(event)">
+                        <form id="loginForm">
                             <div class="mb-3">
                                 <label class="form-label" for="email">البريد الإلكتروني</label>
                                 <input type="email" class="form-control" id="email" name="email" required>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="password">كلمة المرور</label>
-                                <input type="password" class="form-control" id="password" name="password" required>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="password" name="password" required>
+                                    <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility(this)">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-primary w-100">تسجيل الدخول</button>
                         </form>
+                        <div class="text-center mt-3">
+                            <p>ليس لديك حساب؟ <a href="#" onclick="openUserRegistration()">سجل الآن</a></p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
+        
         <!-- نافذة تسجيل السائق -->
         <div class="modal fade" id="driverRegistrationModal" tabindex="-1">
             <div class="modal-dialog modal-lg modal-dialog-scrollable">
@@ -8651,59 +8766,7 @@
     }
 }
 
-// دالة تحديث واجهة السائق بعد تسجيل الدخول
-function updateDriverUIAfterLogin(driverData) {
-    // تحديث القائمة الجانبية
-    const sideNavUserInfo = document.querySelector('.side-nav-user-info');
-    if (sideNavUserInfo) {
-        sideNavUserInfo.innerHTML = `
-            <div class="text-center p-4">
-                <img src="${driverData.imageUrl || 'default-avatar.png'}" 
-                     alt="${driverData.name}" 
-                     class="rounded-circle mb-3"
-                     style="width: 80px; height: 80px; object-fit: cover; border: 2px solid #FFD700;">
-                <h6 class="text-white mb-1">${driverData.name}</h6>
-                <span class="badge bg-warning mb-2">سائق</span>
-                <div class="driver-status ${driverData.active ? 'status-active' : 'status-inactive'}">
-                    ${driverData.active ? 'متاح' : 'غير متاح'}
-                </div>
-                <div class="mt-3">
-                    <button onclick="toggleDriverStatus('${driverData.uid}')" class="btn btn-outline-warning btn-sm w-100 mb-2">
-                        <i class="fas fa-toggle-on me-2"></i>تغيير الحالة
-                    </button>
-                    <button onclick="handleLogout()" class="btn btn-outline-danger btn-sm w-100">
-                        <i class="fas fa-sign-out-alt me-2"></i>تسجيل الخروج
-                    </button>
-                </div>
-            </div>
-        `;
-    }
-
-    // تحديث زر الملف الشخصي
-    const profileBtn = document.querySelector('.user-profile-btn');
-    if (profileBtn) {
-        profileBtn.innerHTML = `
-            <div class="d-flex align-items-center">
-                <img src="${driverData.imageUrl || 'default-avatar.png'}" 
-                     alt="${driverData.name}" 
-                     class="rounded-circle me-2" 
-                     style="width: 35px; height: 35px; object-fit: cover; border: 2px solid #FFD700;">
-                <span class="d-none d-md-inline">${driverData.name}</span>
-            </div>
-        `;
-        profileBtn.onclick = () => showDriverProfile(driverData);
-    }
-
-    // إخفاء زر تسجيل الدخول وإظهار زر الملف الشخصي
-    const loginBtn = document.querySelector('[data-bs-target="#loginModal"]');
-    if (loginBtn) loginBtn.style.display = 'none';
-
-    // تحديث عناصر أخرى في الواجهة
-    document.querySelectorAll('.driver-only').forEach(el => el.style.display = 'block');
-    document.querySelectorAll('.user-only').forEach(el => el.style.display = 'none');
-}
-
-// دالة عرض الملف الشخصي للسائق
+/// دالة عرض الملف الشخصي للسائق
 function showDriverProfile(driverData) {
     Swal.fire({
         title: 'الملف الشخصي',
@@ -8838,52 +8901,9 @@ async function updateDriverProfile(driverId, newData) {
     }
 }
 
-// دالة تحديث واجهة المستخدم بعد تسجيل الدخول
-function updateUIAfterLogin(userData) {
-    // تحديث القائمة الجانبية
-    const sideNavUserInfo = document.querySelector('.side-nav-user-info');
-    if (sideNavUserInfo) {
-        sideNavUserInfo.innerHTML = `
-            <div class="text-center p-4">
-                <img src="${userData.imageUrl}" alt="${userData.name}" 
-                     class="rounded-circle mb-3" style="width: 80px; height: 80px; object-fit: cover;">
-                <h6 class="text-white mb-1">${userData.name}</h6>
-                <span class="badge bg-warning mb-3">سائق</span>
-                <div class="driver-status ${userData.active ? 'status-active' : 'status-inactive'}">
-                    ${userData.active ? 'متاح' : 'غير متاح'}
-                </div>
-            </div>
-        `;
-    }
-
-    // تحديث زر الملف الشخصي
-    const profileBtn = document.querySelector('.user-profile-btn');
-    if (profileBtn) {
-        profileBtn.innerHTML = `
-            <img src="${userData.imageUrl}" alt="${userData.name}" 
-                 class="rounded-circle me-2" style="width: 35px; height: 35px; object-fit: cover;">
-            <span class="d-none d-md-inline">${userData.name}</span>
-        `;
-    }
-}
 
 
-
-
-            function togglePasswordVisibility(button) {
-                const input = button.previousElementSibling;
-                const icon = button.querySelector('i');
-
-                if (input.type === 'password') {
-                    input.type = 'text';
-                    icon.classList.remove('fa-eye');
-                    icon.classList.add('fa-eye-slash');
-                } else {
-                    input.type = 'password';
-                    icon.classList.remove('fa-eye-slash');
-                    icon.classList.add('fa-eye');
-                }
-            }
+   
 
             // دالة معاينة المستندات
             function previewDocument(input, previewId) {
@@ -9881,21 +9901,35 @@ function updateUIAfterLogin(userData) {
                 });
             }
 
-            function showToast(message, type = 'success') {
-                const toast = document.createElement('div');
-                toast.className = `custom-toast animate__animated animate__fadeInRight`;
-                toast.innerHTML = `
-                <i class="fas ${type === 'success' ? 'fa-check-circle text-success' : 'fa-exclamation-circle text-danger'} me-2"></i>
-                <div>${message}</div>
-            `;
+     
 
-                document.getElementById('toastContainer').appendChild(toast);
 
-                setTimeout(() => {
-                    toast.classList.replace('animate__fadeInRight', 'animate__fadeOutRight');
-                    setTimeout(() => toast.remove(), 300);
-                }, 3000);
-            }
+ // الوظيفة المساعدة لإظهار رسائل النجاح/الخطأ
+ function showToast(message, type = 'success') {
+        const toast = document.createElement('div');
+        toast.className = `custom-toast animate__animated animate__fadeInRight`;
+        toast.innerHTML = `
+            <i class="fas ${type === 'success' ? 'fa-check-circle text-success' : 'fa-exclamation-circle text-danger'} me-2"></i>
+            <div>${message}</div>
+        `;
+
+        const container = document.getElementById('toastContainer');
+        if (container) {
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.replace('animate__fadeInRight', 'animate__fadeOutRight');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+    }
+
+
+
+
+
+
+
             function messageDriver(driverId) {
                 database.ref(`drivers/${driverId}`).once('value', (snapshot) => {
                     const driver = snapshot.val();
@@ -9952,13 +9986,23 @@ function updateUIAfterLogin(userData) {
                 map.setView([userLocation.lat, userLocation.lng], map.getZoom());
             }
 
-            function showLoading() {
-                document.getElementById('loadingSpinner').style.display = 'flex';
-            }
+     // وظيفة إظهار/إخفاء مؤشر التحميل
+    function showLoading() {
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        if (loadingSpinner) {
+            loadingSpinner.style.display = 'flex';
+        }
+    }
 
-            function hideLoading() {
-                document.getElementById('loadingSpinner').style.display = 'none';
-            }
+
+
+    function hideLoading() {
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        if (loadingSpinner) {
+            loadingSpinner.style.display = 'none';
+        }
+    }
+
             // دالة لعرض نافذة إضافة السائق
             function showAddDriverModal() {
                 // إغلاق نافذة اختيار العملية أولاً
@@ -11660,50 +11704,6 @@ function updateUIAfterLogin(userData) {
             }
 
 
-            // دالة إعادة تعيين واجهة المستخدم
-            function resetUserInterface() {
-                // إعادة تعيين زر الملف الشخصي
-                const profileBtn = document.querySelector('.user-profile-btn');
-                if (profileBtn) {
-                    profileBtn.innerHTML = `
-            <i class="fas fa-user"></i>
-            <span class="ms-1 d-none d-md-inline">تسجيل</span>
-        `;
-                    profileBtn.setAttribute('data-bs-toggle', 'modal');
-                    profileBtn.setAttribute('data-bs-target', '#profileModal');
-                }
-
-                // إعادة تعيين معلومات المستخدم في الشريط الجانبي
-                const sideNavUserInfo = document.querySelector('.side-nav-user-info');
-                if (sideNavUserInfo) {
-                    sideNavUserInfo.innerHTML = '';
-                }
-            }
-
-            // إنشاء نسخة من مدير الإشعارات
-            const notificationsManager = new NotificationsManager();
-
-
-            document.addEventListener('DOMContentLoaded', function () {
-                // إضافة قسم معلومات المستخدم في الشريط الجانبي
-                const sideNav = document.getElementById('sideNav');
-                if (sideNav && !sideNav.querySelector('.side-nav-user-info')) {
-                    const userInfoSection = document.createElement('div');
-                    userInfoSection.className = 'side-nav-user-info';
-                    sideNav.insertBefore(userInfoSection, sideNav.firstChild);
-                }
-
-                // ربط نماذج التسجيل
-                const driverRegistrationForm = document.getElementById('driverRegistrationForm');
-                if (driverRegistrationForm) {
-                    driverRegistrationForm.addEventListener('submit', handleDriverRegistration);
-                }
-
-                const userRegistrationForm = document.getElementById('userRegistrationForm');
-                if (userRegistrationForm) {
-                    userRegistrationForm.addEventListener('submit', handleUserRegistration);
-                }
-            });
             function checkCurrentUser() {
     const user = firebase.auth().currentUser;
     const storedUser = localStorage.getItem('currentUser');
@@ -11837,17 +11837,19 @@ document.addEventListener('DOMContentLoaded', checkCurrentUser);
                 }
             }
             function togglePasswordVisibility(button) {
-                const input = button.parentElement.querySelector('input');
-                const icon = button.querySelector('i');
+        const input = button.previousElementSibling;
+        const icon = button.querySelector('i');
 
-                if (input.type === 'password') {
-                    input.type = 'text';
-                    icon.classList.replace('fa-eye', 'fa-eye-slash');
-                } else {
-                    input.type = 'password';
-                    icon.classList.replace('fa-eye-slash', 'fa-eye');
-                }
-            }
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        } else {
+            input.type = 'password';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        }
+    }
 
             // التحقق من تطابق كلمات المرور
             function validatePasswords() {

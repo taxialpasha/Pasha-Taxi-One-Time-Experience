@@ -1,0 +1,210 @@
+// Ensure Firebase is initialized only once
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}
+
+// Initialize Firebase Auth
+const auth = firebase.auth();
+
+// دالة معالجة تسجيل الدخول المحدثة
+async function handleLogin(event) {
+    event.preventDefault();
+    showLoading();
+
+    try {
+        const formData = new FormData(event.target);
+        const email = formData.get('email');
+        const password = formData.get('password');
+
+        // تسجيل الدخول باستخدام Firebase Auth
+        const userCredential = await firebase.auth().signInWithEmailAndPassword(email, password);
+        const user = userCredential.user;
+
+        // التحقق من نوع المستخدم (سائق أو مستخدم عادي)
+        const driverSnapshot = await firebase.database().ref(`drivers/${user.uid}`).once('value');
+        const userSnapshot = await firebase.database().ref(`users/${user.uid}`).once('value');
+        
+        let userData;
+        let userType;
+
+        if (driverSnapshot.exists()) {
+            userData = driverSnapshot.val();
+            userType = 'driver';
+        } else if (userSnapshot.exists()) {
+            userData = userSnapshot.val();
+            userType = 'user';
+        } else {
+            throw new Error('لم يتم العثور على بيانات المستخدم');
+        }
+
+        // حفظ بيانات المستخدم في التخزين المحلي
+        localStorage.setItem('currentUser', JSON.stringify({
+            ...userData,
+            uid: user.uid,
+            email: user.email,
+            userType: userType,
+            displayName: user.displayName,
+            photoURL: user.photoURL
+        }));
+
+        // تحديث واجهة المستخدم بناءً على نوع المستخدم
+        if (userType === 'driver') {
+            updateDriverUIAfterLogin(userData);
+        } else {
+            updateUserUIAfterLogin(userData);
+        }
+
+        // إغلاق نافذة تسجيل الدخول
+        const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
+        loginModal.hide();
+
+        showToast('تم تسجيل الدخول بنجاح');
+
+    } catch (error) {
+        console.error('Login error:', error);
+        let errorMessage = 'البريد الإلكتروني أو كلمة المرور غير صحيحة';
+        
+        switch (error.code) {
+            case 'auth/user-not-found':
+            case 'auth/wrong-password':
+                errorMessage = 'البريد الإلكتروني أو كلمة المرور غير صحيحة';
+                break;
+            case 'auth/invalid-email':
+                errorMessage = 'البريد الإلكتروني غير صالح';
+                break;
+            case 'auth/user-disabled':
+                errorMessage = 'تم تعطيل هذا الحساب';
+                break;
+        }
+
+        showToast(errorMessage, 'error');
+    } finally {
+        hideLoading();
+    }
+}
+
+// دالة تحديث واجهة السائق بعد تسجيل الدخول
+function updateDriverUIAfterLogin(driverData) {
+    // تحديث القائمة الجانبية
+    const sideNavUserInfo = document.querySelector('.side-nav-user-info');
+    if (sideNavUserInfo) {
+        sideNavUserInfo.innerHTML = `
+            <div class="text-center p-4">
+                <img src="${driverData.imageUrl}" 
+                     alt="${driverData.name}" 
+                     class="rounded-circle mb-3"
+                     style="width: 80px; height: 80px; object-fit: cover;">
+                <h6 class="text-white mb-1">${driverData.name}</h6>
+                <span class="badge bg-warning mb-2">سائق</span>
+                <div class="driver-status ${driverData.active ? 'status-active' : 'status-inactive'}">
+                    ${driverData.active ? 'متاح' : 'غير متاح'}
+                </div>
+                <div class="mt-3">
+                    <button onclick="toggleDriverStatus()" class="btn btn-outline-warning btn-sm w-100 mb-2">
+                        <i class="fas fa-toggle-on me-2"></i>تغيير الحالة
+                    </button>
+                    <button onclick="handleLogout()" class="btn btn-outline-danger btn-sm w-100">
+                        <i class="fas fa-sign-out-alt me-2"></i>تسجيل الخروج
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+
+    // تحديث زر الملف الشخصي
+    const profileBtn = document.querySelector('.user-profile-btn');
+    if (profileBtn) {
+        profileBtn.innerHTML = `
+            <img src="${driverData.imageUrl}" 
+                 alt="${driverData.name}" 
+                 class="rounded-circle me-2" 
+                 style="width: 35px; height: 35px; object-fit: cover;">
+            <span class="d-none d-md-inline">${driverData.name}</span>
+        `;
+        profileBtn.setAttribute('onclick', 'showDriverMenu(event)');
+    }
+
+    // إظهار/إخفاء عناصر خاصة بالسائق
+    document.querySelectorAll('.driver-only').forEach(el => el.style.display = 'block');
+    document.querySelectorAll('.user-only').forEach(el => el.style.display = 'none');
+}
+
+// دالة تحديث واجهة المستخدم العادي
+function updateUserUIAfterLogin(userData) {
+    const profileBtn = document.querySelector('.user-profile-btn');
+    if (profileBtn) {
+        profileBtn.innerHTML = `
+            <img src="${userData.photoUrl || 'default-avatar.png'}" 
+                 alt="${userData.fullName}" 
+                 class="rounded-circle me-2" 
+                 style="width: 35px; height: 35px; object-fit: cover;">
+            <span class="d-none d-md-inline">${userData.fullName}</span>
+        `;
+        profileBtn.setAttribute('onclick', 'showUserMenu(event)');
+    }
+
+    // إظهار/إخفاء عناصر خاصة بالمستخدم
+    document.querySelectorAll('.user-only').forEach(el => el.style.display = 'block');
+    document.querySelectorAll('.driver-only').forEach(el => el.style.display = 'none');
+}
+
+// دالة عرض قائمة السائق
+function showDriverMenu(event) {
+    event.preventDefault();
+    const userData = JSON.parse(localStorage.getItem('currentUser'));
+    
+    Swal.fire({
+        title: `مرحباً ${userData.name}`,
+        html: `
+            <div class="text-center mb-3">
+                <img src="${userData.imageUrl}" 
+                     alt="صورة السائق" 
+                     class="rounded-circle mb-3"
+                     style="width: 100px; height: 100px; object-fit: cover;">
+                <p class="mb-2">${userData.email}</p>
+                <p class="text-muted">${userData.phone}</p>
+                <div class="driver-status ${userData.active ? 'status-active' : 'status-inactive'}">
+                    ${userData.active ? 'متاح' : 'غير متاح'}
+                </div>
+            </div>
+        `,
+        showCancelButton: true,
+        showDenyButton: true,
+        confirmButtonText: 'الملف الشخصي',
+        denyButtonText: 'تسجيل الخروج',
+        cancelButtonText: 'إغلاق',
+        confirmButtonColor: '#FFD700',
+        denyButtonColor: '#dc3545',
+        cancelButtonColor: '#6c757d'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            showDriverProfile();
+        } else if (result.isDenied) {
+            handleLogout();
+        }
+    });
+}
+
+// مراقبة حالة تسجيل الدخول
+firebase.auth().onAuthStateChanged(async (user) => {
+    if (user) {
+        try {
+            // التحقق من نوع المستخدم
+            const driverSnapshot = await firebase.database().ref(`drivers/${user.uid}`).once('value');
+            const userSnapshot = await firebase.database().ref(`users/${user.uid}`).once('value');
+            
+            if (driverSnapshot.exists()) {
+                const driverData = driverSnapshot.val();
+                updateDriverUIAfterLogin(driverData);
+            } else if (userSnapshot.exists()) {
+                const userData = userSnapshot.val();
+                updateUserUIAfterLogin(userData);
+            }
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+        }
+    } else {
+        localStorage.removeItem('currentUser');
+        resetUserInterface();
+    }
+});

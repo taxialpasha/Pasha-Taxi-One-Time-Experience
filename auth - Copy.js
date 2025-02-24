@@ -517,7 +517,6 @@ async function handleLogout() {
     }
 }
 
-
 // إضافة دالة للتحقق من حالة تسجيل الخروج عند تحميل الصفحة
 function checkLogoutStatus() {
     // التحقق مما إذا كانت هذه الصفحة ناتجة عن تسجيل الخروج
@@ -541,34 +540,14 @@ document.addEventListener('DOMContentLoaded', checkLogoutStatus);
 
 // ------------- وظائف تحديث واجهة المستخدم -------------
 
-// دالة تحديث واجهة المستخدم بعد تسجيل الدخول
+// وظيفة موحدة لتحديث واجهة المستخدم بعد تسجيل الدخول
 function updateUIAfterLogin(userData) {
-    // تنظيف أي عرض متكرر محتمل للمستخدم
-    document.querySelectorAll('.user-profile-display').forEach(el => {
-        el.innerHTML = '';
-    });
-    
     // التحقق من نوع المستخدم
     const isDriver = userData.userType === 'driver';
     
     // المعلومات المشتركة
     const displayName = userData.fullName || userData.name || userData.displayName || '';
     const photoURL = userData.photoUrl || userData.photoURL || 'https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/driver-images%2F7605a607-6cf8-4b32-aee1-fa7558c98452.png?alt=media&token=5cf9e67c-ba6e-4431-a6a0-79dede15b527';
-    
-    // تحديث جميع أماكن عرض صورة المستخدم
-    document.querySelectorAll('.user-avatar-container').forEach(container => {
-        container.innerHTML = `
-            <img src="${photoURL}" 
-                 alt="${displayName}" 
-                 class="rounded-circle"
-                 style="width: 100%; height: 100%; object-fit: cover; border: 2px solid #FFD700;">
-        `;
-    });
-    
-    // تحديث جميع أماكن عرض اسم المستخدم
-    document.querySelectorAll('.user-name-display').forEach(element => {
-        element.textContent = displayName;
-    });
     
     // تحديث القائمة الجانبية
     const sideNavUserInfo = document.querySelector('.side-nav-user-info');
@@ -620,50 +599,27 @@ function updateUIAfterLogin(userData) {
     }
 
     // إخفاء عناصر تسجيل الدخول والتسجيل
-    document.querySelectorAll('.login-only').forEach(el => {
+    const loginElements = document.querySelectorAll('.login-only');
+    loginElements.forEach(el => {
         el.style.display = 'none';
     });
 
     // إظهار العناصر الخاصة بالمستخدمين المسجلين
-    document.querySelectorAll('.auth-only').forEach(el => {
+    const authElements = document.querySelectorAll('.auth-only');
+    authElements.forEach(el => {
         el.style.display = 'block';
     });
 
-    // إظهار العناصر الخاصة بالسائقين فقط أو المستخدمين العاديين
-    document.querySelectorAll('.driver-only').forEach(el => {
+    // إظهار العناصر الخاصة بالسائقين فقط
+    const driverElements = document.querySelectorAll('.driver-only');
+    driverElements.forEach(el => {
         el.style.display = isDriver ? 'block' : 'none';
     });
 
-    document.querySelectorAll('.user-only').forEach(el => {
+    // إظهار العناصر الخاصة بالمستخدمين العاديين
+    const userElements = document.querySelectorAll('.user-only');
+    userElements.forEach(el => {
         el.style.display = !isDriver ? 'block' : 'none';
-    });
-    
-    // حل مشكلة التكرار في الصورة والاسم عبر إخفاء العناصر المكررة
-    // اختر المنطقة التي تريد عرضها فقط
-    const secondaryUserDisplay = document.querySelector('.secondary-user-display');
-    if (secondaryUserDisplay) {
-        secondaryUserDisplay.style.display = 'none';
-    }
-}
-
-// دالة إضافية لتحديث أي مناطق أخرى تظهر فيها معلومات المستخدم
-function updateAdditionalUserAreas(userData) {
-    // يمكنك هنا تحديث أي مناطق إضافية تظهر فيها معلومات المستخدم
-    const userAvatarElements = document.querySelectorAll('.user-avatar');
-    const userNameElements = document.querySelectorAll('.user-name');
-    
-    const displayName = userData.fullName || userData.name || userData.displayName || 'مستخدم';
-    const photoURL = userData.photoUrl || userData.photoURL || userData.imageUrl || 'https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/driver-images%2F7605a607-6cf8-4b32-aee1-fa7558c98452.png?alt=media&token=5cf9e67c-ba6e-4431-a6a0-79dede15b527';
-    
-    // تحديث جميع صور المستخدم
-    userAvatarElements.forEach(element => {
-        element.src = photoURL;
-        element.alt = displayName;
-    });
-    
-    // تحديث جميع أسماء المستخدم
-    userNameElements.forEach(element => {
-        element.textContent = displayName;
     });
 }
 
