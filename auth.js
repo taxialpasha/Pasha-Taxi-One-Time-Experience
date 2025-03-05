@@ -145,6 +145,9 @@ async function handleLogin(event) {
 
         showToast('تم تسجيل الدخول بنجاح');
 
+        // تحديث أيقونة الملف الشخصي
+        updateProfileIcon(user);
+
     } catch (error) {
         console.error('Login error:', error);
         let errorMessage = 'البريد الإلكتروني أو كلمة المرور غير صحيحة';
@@ -238,9 +241,7 @@ function updateUIAfterLogin(userData) {
                 <span class="badge bg-gold mb-2">${userRole}</span>
                 <p class="text-white-50 small mb-3">${userData.email}</p>
                 <div class="mt-3">
-                    <button onclick="handleLogout()" class="btn btn-outline-danger btn-sm w-100">
-                        <i class="fas fa-sign-out-alt me-2"></i>تسجيل الخروج
-                    </button>
+                 
                 </div>
                 ${userData.userType === 'driver' ? `
                 <div class="mt-3">
@@ -259,7 +260,6 @@ function updateUIAfterLogin(userData) {
         element.style.display = userData.userType === 'driver' ? 'block' : 'none';
     });
 }
-
 // دالة عرض قائمة المستخدم
 function showUserMenu(event) {
     event.preventDefault();
@@ -287,8 +287,8 @@ function showUserMenu(event) {
         cancelButtonColor: '#6c757d'
     }).then((result) => {
         if (result.isConfirmed) {
-            // فتح نافذة تعديل الملف الشخصي
-            showEditProfileModal();
+            // نقل المستخدم إلى صفحة تعديل الملف الشخصي
+            window.location.href = 'edit-profile.html';
         } else if (result.isDenied) {
             handleLogout();
         }

@@ -106,26 +106,14 @@ firebase.initializeApp(firebaseConfig);
 
 // تهيئة الإشعارات
 const messaging = firebase.messaging();
-messaging.getToken({ vapidKey: 'BI9cpoewcZa1ftyZ_bGjO0GYa4_cT0HNja4YFd6FwLwHg5c0gQ5iSj_MJZRhMxKdgJ0-d-_rEXcpSQ_cx7GqCSc' })
-.then((currentToken) => {
+messaging.getToken({ vapidKey: 'BI9cpoewcZa1ftyZ_bGjO0GYa4_cT0HNja4YFd6FwLwHg5c0gQ5iSj_MJZRhMxKdgJ0-d-_rEXcpSQ_cx7GqCSc' });
+then((currentToken) => {
   if (currentToken) {
-    console.log('Token retrieved:', currentToken);
-    // يمكنك هنا إرسال الرمز إلى الخادم الخاص بك إذا لزم الأمر
+    console.log('Token:', currentToken);
+    // أرسل التوكن إلى السيرفر الخاص بك لتخزينه
   } else {
-    console.warn('No registration token available. Request permission to generate one.');
+    console.log('No registration token available.');
   }
 }).catch((err) => {
   console.error('Error while retrieving token:', err);
-});
-
-messaging.onMessage((payload) => {
-  console.log('Message received. ', payload);
-  // تخصيص عرض الإشعار
-  const notificationTitle = payload.notification.title;
-  const notificationOptions = {
-    body: payload.notification.body,
-    icon: payload.notification.icon
-  };
-
-  self.registration.showNotification(notificationTitle, notificationOptions);
 });

@@ -83,11 +83,8 @@
     <script type="module" src="user-auth-notifications.js"></script>
     <script type="module" src="notifications-manager.js"></script>
     <script src="firebase-config.js"></script>
+    <!-- قبل إغلاق body -->
     <script src="nearby-drivers-map.js"></script>
-    <script src="nearby-drivers.js"></script>
-    <script src="auth.js"></script>
-    <script src="nearby-drivers.js"></script>
-    <script src="auth.js"></script>
 
 
 
@@ -151,48 +148,13 @@
             font-size: 1.8rem;
         }
 
+        /* تحسينات البطاقات */
         .driver-card {
-            position: relative;
-            transition: all 0.3s ease;
+            background: var(--background-light);
+            border: 1px solid var(--primary-color);
+            border-radius: var(--border-radius-lg);
             overflow: hidden;
-        }
-
-        .status-banner {
-            position: absolute;
-            top: 20px;
-            right: -35px;
-            transform: rotate(45deg);
-            padding: 5px 40px;
-            color: white;
-            font-weight: bold;
-            z-index: 2;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        .status-banner.pending {
-            background-color: #ffd700;
-            color: #000;
-        }
-
-        .status-banner.not-approved {
-            background-color: #dc3545;
-        }
-
-        .status-banner.approved {
-            background-color: #28a745;
-        }
-
-        .driver-card.not-approved .driver-image-container {
-            filter: grayscale(100%);
-        }
-
-        .driver-card.pending .driver-image-container {
-            filter: grayscale(30%);
-        }
-
-        .driver-actions button:disabled {
-            background-color: #6c757d !important;
-            cursor: not-allowed;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .driver-card:hover {
@@ -291,9 +253,6 @@
             padding: var(--spacing-md);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
-
-
-
 
         /* تحسينات الحالة */
         .driver-status.status-active {
@@ -1023,48 +982,6 @@
             text-decoration: none;
             transition: color 0.3s ease;
         }
-
-
-        .driver-card.pending {
-            position: relative;
-            opacity: 0.8;
-            filter: grayscale(30%);
-        }
-
-        .driver-card.not-approved {
-            opacity: 0.7;
-            filter: grayscale(100%);
-        }
-
-        .driver-status-banner {
-            position: absolute;
-            top: 20px;
-            right: -30px;
-            transform: rotate(45deg);
-            padding: 5px 40px;
-            color: white;
-            font-weight: bold;
-            z-index: 2;
-        }
-
-        .driver-status-banner.pending {
-            background-color: #ffd700;
-            color: #000;
-        }
-
-        .driver-status-banner.not-approved {
-            background-color: #dc3545;
-        }
-
-        .driver-info.frozen {
-            pointer-events: none;
-        }
-
-        .driver-card .driver-actions button:disabled {
-            background-color: #6c757d;
-            cursor: not-allowed;
-        }
-
 
         .search-icon:hover {
             color: #ffc107;
@@ -3394,30 +3311,7 @@
 
         .required::after {
             content: ' *';
-            color: #dc3545;
-        }
-
-        .input-group .btn-outline-secondary {
-            border-color: #ced4da;
-        }
-
-        .input-group .btn-outline-secondary:hover {
-            background-color: #f8f9fa;
-            border-color: #ced4da;
-        }
-
-        .registration-section {
-            background: rgba(255, 215, 0, 0.1);
-            border: 1px solid #FFD700;
-            border-radius: 10px;
-            padding: 20px;
-        }
-
-        .section-title {
-            color: #FFD700;
-            border-bottom: 2px solid #FFD700;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
+            color: red;
         }
 
         #locationPickerMap {
@@ -5413,7 +5307,7 @@
             border-radius: 3px;
             outline: none;
             margin: 10px 0;
-
+           
         }
 
         .radius-control input[type="range"]::-webkit-slider-thumb {
@@ -5891,123 +5785,6 @@
         .dropdown-divider {
             border-color: rgba(255, 215, 0, 0.2);
         }
-
-
-        .document-upload {
-            border: 2px dashed #FFD700;
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-            background: #1a1a1a;
-            height: 150px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .document-upload:hover {
-            border-color: #FFF;
-            background: #242424;
-        }
-
-        .document-upload img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-            border-radius: 8px;
-        }
-
-        .upload-placeholder {
-            color: #FFD700;
-        }
-
-        .upload-placeholder i {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-
-        .upload-placeholder p {
-            margin: 0;
-            font-size: 0.9rem;
-        }
-
-        required::after {
-            content: ' *';
-            color: #dc3545;
-        }
-
-        .input-group .btn-outline-secondary {
-            border-color: #FFD700;
-            color: #FFD700;
-        }
-
-        .input-group .btn-outline-secondary:hover {
-            background-color: #FFD700;
-            color: #000000;
-        }
-
-        .form-control:focus {
-            border-color: #FFD700;
-            box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.25);
-        }
-
-        .registration-section {
-            background-color: #242424;
-            border: 1px solid #FFD700;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .section-title {
-            color: #FFD700;
-            border-bottom: 2px solid #FFD700;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-
-        .form-label.required::after {
-            content: ' *';
-            color: #FF4136;
-        }
-
-        .input-group .btn-outline-secondary {
-            border-color: #FFD700;
-            color: #FFD700;
-        }
-
-        .input-group .btn-outline-secondary:hover {
-            background-color: #FFD700;
-            color: #000000;
-        }
-
-        .form-control {
-            background-color: #333333;
-            border: 1px solid #FFD700;
-            color: #FFFFFF;
-        }
-
-        .form-control:focus {
-            background-color: #444444;
-            border-color: #FFD700;
-            box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.25);
-            color: #FFFFFF;
-        }
-
-        .form-control::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .text-muted {
-            color: #999999 !important;
-        }
     </style>
     </head>
 
@@ -6358,7 +6135,7 @@
 
 
 
-        <!-- Add Driver زر اضافة السائقين من قبل الادمنModal -->
+        <!-- Add Driver Modal -->
         <div class="modal fade" id="addDriverModal" tabindex="-1">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -6367,258 +6144,113 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
+
                         <form id="addDriverForm" onsubmit="handleAddDriver(event)">
-                            <!-- معلومات الحساب - إضافة جديدة -->
-
-
-                            <form id="addDriverForm" onsubmit="handleAddDriver(event)">
-                                <div class="mb-4 text-center">
-                                    <div class="image-upload-container"
-                                        onclick="document.getElementById('driverImage').click()">
-                                        <input type="file" id="driverImage" accept="image/*" style="display: none"
-                                            onchange="handleImagePreview(event)">
-                                        <img id="imagePreview" src="#" alt=""
-                                            style="display: none; width: 100%; height: 100%; object-fit: cover;">
-                                        <div class="upload-placeholder">
-                                            <i class="fas fa-camera fa-2x mb-2"></i>
-                                            <p>انقر لإضافة صورة</p>
-                                        </div>
-
+                            <div class="mb-4 text-center">
+                                <div class="image-upload-container"
+                                    onclick="document.getElementById('driverImage').click()">
+                                    <input type="file" id="driverImage" accept="image/*" style="display: none"
+                                        onchange="handleImagePreview(event)">
+                                    <img id="imagePreview" src="#" alt=""
+                                        style="display: none; width: 100%; height: 100%; object-fit: cover;">
+                                    <div class="upload-placeholder">
+                                        <i class="fas fa-camera fa-2x mb-2"></i>
+                                        <p>انقر لإضافة صورة</p>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="location-capture-section">
+                                    <label class="form-label">موقع السائق</label>
+                                    <div class="d-flex gap-2 mb-2">
+                                        <input type="text" class="form-control" id="driverLatitude"
+                                            placeholder="خط العرض" readonly>
+                                        <input type="text" class="form-control" id="driverLongitude"
+                                            placeholder="خط الطول" readonly>
+                                    </div>
+                                    <button type="button" class="btn btn-primary w-100"
+                                        onclick="captureCurrentLocation()">
+                                        <i class="fas fa-location-arrow me-2"></i>
+                                        تحديد الموقع الحالي
+                                    </button>
+                                </div>
+                            </div>
+
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">اسم السائق</label>
+                                    <input type="text" class="form-control" id="driverName" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">رقم الهاتف</label>
+                                    <input type="tel" class="form-control" id="driverPhone" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">نوع السيارة</label>
+                                    <input type="text" class="form-control" id="carType" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">موديل السيارة</label>
+                                    <input type="number" class="form-control" id="carModel" required>
                                 </div>
                                 <div class="col-md-12">
-                                    <div class="location-capture-section">
-                                        <label class="form-label">موقع السائق</label>
-                                        <div class="d-flex gap-2 mb-2">
-                                            <input type="text" class="form-control" id="driverLatitude"
-                                                placeholder="خط العرض" readonly>
-                                            <input type="text" class="form-control" id="driverLongitude"
-                                                placeholder="خط الطول" readonly>
-                                        </div>
-                                        <button type="button" class="btn btn-primary w-100"
-                                            onclick="captureCurrentLocation()">
-                                            <i class="fas fa-location-arrow me-2"></i>
-                                            تحديد الموقع الحالي
-                                        </button>
-                                    </div>
+                                    <label class="form-label">المنطقة</label>
+                                    <select class="form-control" id="driverLocation" required>
+                                        <option value="">اختر المحافظة</option>
+                                        <option value="بغداد">بغداد</option>
+                                        <option value="الكرخ">الكرخ</option>
+                                        <option value="الرصافة">الرصافة</option>
+                                        <option value="البصرة">البصرة</option>
+                                        <option value="نينوى">نينوى</option>
+                                        <option value="الموصل">الموصل</option>
+                                        <option value="النجف">النجف</option>
+                                        <option value="الكوفة">الكوفة</option>
+                                        <option value="كربلاء">كربلاء</option>
+                                        <option value="الحسينية">الحسينية</option>
+                                        <option value="أربيل">أربيل</option>
+                                        <option value="كركوك">كركوك</option>
+                                        <option value="الأنبار">الأنبار</option>
+                                        <option value="الرمادي">الرمادي</option>
+                                        <option value="الفلوجة">الفلوجة</option>
+                                        <option value="بابل">بابل</option>
+                                        <option value="الحلة">الحلة</option>
+                                        <option value="المسيب">المسيب</option>
+                                        <option value="الهاشمية">الهاشمية</option>
+                                        <option value="القاسم">القاسم</option>
+                                        <option value="ديالى">ديالى</option>
+                                        <option value="بعقوبة">بعقوبة</option>
+                                        <option value="ذي قار">ذي قار</option>
+                                        <option value="الناصرية">الناصرية</option>
+                                        <option value="السليمانية">السليمانية</option>
+                                        <option value="صلاح الدين">صلاح الدين</option>
+                                        <option value="تكريت">تكريت</option>
+                                        <option value="واسط">واسط</option>
+                                        <option value="الكوت">الكوت</option>
+                                        <option value="ميسان">ميسان</option>
+                                        <option value="العمارة">العمارة</option>
+                                        <option value="المثنى">المثنى</option>
+                                        <option value="السماوة">السماوة</option>
+                                        <option value="دهوك">دهوك</option>
+                                        <option value="القادسية">القادسية</option>
+                                        <option value="الديوانية">الديوانية</option>
+
+
+
+                                    </select>
+
+
                                 </div>
-                                <div class="registration-section mb-4">
-                                    <h6 class="section-title">المستمسكات الرسمية</h6>
-
-                                    <!-- هوية الأحوال المدنية -->
-                                    <div class="row g-3 mb-4">
-                                        <div class="col-12">
-                                            <label class="form-label">هوية الأحوال المدنية</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="document-upload"
-                                                onclick="document.getElementById('idCardFront').click()">
-                                                <input type="file" id="idCardFront" accept="image/*"
-                                                    style="display: none;"
-                                                    onchange="previewDocument(this, 'idCardFrontPreview')" required>
-                                                <img id="idCardFrontPreview" src="#" alt="" style="display: none;">
-                                                <div class="upload-placeholder">
-                                                    <i class="fas fa-id-card"></i>
-                                                    <p>صورة الهوية (الأمامية)</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="document-upload"
-                                                onclick="document.getElementById('idCardBack').click()">
-                                                <input type="file" id="idCardBack" accept="image/*"
-                                                    style="display: none;"
-                                                    onchange="previewDocument(this, 'idCardBackPreview')" required>
-                                                <img id="idCardBackPreview" src="#" alt="" style="display: none;">
-                                                <div class="upload-placeholder">
-                                                    <i class="fas fa-id-card"></i>
-                                                    <p>صورة الهوية (الخلفية)</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- بطاقة السكن -->
-                                    <div class="row g-3 mb-4">
-                                        <div class="col-12">
-                                            <label class="form-label">بطاقة السكن</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="document-upload"
-                                                onclick="document.getElementById('residenceFront').click()">
-                                                <input type="file" id="residenceFront" accept="image/*"
-                                                    style="display: none;"
-                                                    onchange="previewDocument(this, 'residenceFrontPreview')" required>
-                                                <img id="residenceFrontPreview" src="#" alt="" style="display: none;">
-                                                <div class="upload-placeholder">
-                                                    <i class="fas fa-home"></i>
-                                                    <p>بطاقة السكن (الأمامية)</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="document-upload"
-                                                onclick="document.getElementById('residenceBack').click()">
-                                                <input type="file" id="residenceBack" accept="image/*"
-                                                    style="display: none;"
-                                                    onchange="previewDocument(this, 'residenceBackPreview')" required>
-                                                <img id="residenceBackPreview" src="#" alt="" style="display: none;">
-                                                <div class="upload-placeholder">
-                                                    <i class="fas fa-home"></i>
-                                                    <p>بطاقة السكن (الخلفية)</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- إجازة السوق -->
-                                    <div class="row g-3">
-                                        <div class="col-12">
-                                            <label class="form-label">إجازة السوق</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="document-upload"
-                                                onclick="document.getElementById('licenseFront').click()">
-                                                <input type="file" id="licenseFront" accept="image/*"
-                                                    style="display: none;"
-                                                    onchange="previewDocument(this, 'licenseFrontPreview')" required>
-                                                <img id="licenseFrontPreview" src="#" alt="" style="display: none;">
-                                                <div class="upload-placeholder">
-                                                    <i class="fas fa-id-card"></i>
-                                                    <p>إجازة السوق (الأمامية)</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="document-upload"
-                                                onclick="document.getElementById('licenseBack').click()">
-                                                <input type="file" id="licenseBack" accept="image/*"
-                                                    style="display: none;"
-                                                    onchange="previewDocument(this, 'licenseBackPreview')" required>
-                                                <img id="licenseBackPreview" src="#" alt="" style="display: none;">
-                                                <div class="upload-placeholder">
-                                                    <i class="fas fa-id-card"></i>
-                                                    <p>إجازة السوق (الخلفية)</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="col-12">
+                                    <label class="form-label">معلومات إضافية</label>
+                                    <textarea class="form-control" id="driverBio" rows="3"></textarea>
                                 </div>
+                            </div>
 
-
-
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <label class="form-label">اسم السائق</label>
-                                        <input type="text" class="form-control" id="driverName" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">رقم الهاتف</label>
-                                        <input type="tel" class="form-control" id="driverPhone" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">نوع السيارة</label>
-                                        <input type="text" class="form-control" id="carType" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">موديل السيارة</label>
-                                        <input type="number" class="form-control" id="carModel" required>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label class="form-label">المنطقة</label>
-                                        <select class="form-control" id="driverLocation" required>
-                                            <option value="">اختر المحافظة</option>
-                                            <option value="بغداد">بغداد</option>
-                                            <option value="الكرخ">الكرخ</option>
-                                            <option value="الرصافة">الرصافة</option>
-                                            <option value="البصرة">البصرة</option>
-                                            <option value="نينوى">نينوى</option>
-                                            <option value="الموصل">الموصل</option>
-                                            <option value="النجف">النجف</option>
-                                            <option value="الكوفة">الكوفة</option>
-                                            <option value="كربلاء">كربلاء</option>
-                                            <option value="الحسينية">الحسينية</option>
-                                            <option value="أربيل">أربيل</option>
-                                            <option value="كركوك">كركوك</option>
-                                            <option value="الأنبار">الأنبار</option>
-                                            <option value="الرمادي">الرمادي</option>
-                                            <option value="الفلوجة">الفلوجة</option>
-                                            <option value="بابل">بابل</option>
-                                            <option value="الحلة">الحلة</option>
-                                            <option value="المسيب">المسيب</option>
-                                            <option value="الهاشمية">الهاشمية</option>
-                                            <option value="القاسم">القاسم</option>
-                                            <option value="ديالى">ديالى</option>
-                                            <option value="بعقوبة">بعقوبة</option>
-                                            <option value="ذي قار">ذي قار</option>
-                                            <option value="الناصرية">الناصرية</option>
-                                            <option value="السليمانية">السليمانية</option>
-                                            <option value="صلاح الدين">صلاح الدين</option>
-                                            <option value="تكريت">تكريت</option>
-                                            <option value="واسط">واسط</option>
-                                            <option value="الكوت">الكوت</option>
-                                            <option value="ميسان">ميسان</option>
-                                            <option value="العمارة">العمارة</option>
-                                            <option value="المثنى">المثنى</option>
-                                            <option value="السماوة">السماوة</option>
-                                            <option value="دهوك">دهوك</option>
-                                            <option value="القادسية">القادسية</option>
-                                            <option value="الديوانية">الديوانية</option>
-
-
-
-                                        </select>
-
-                                        <!-- إضافة حقول البريد الإلكتروني وكلمة المرور في نموذج التسجيل -->
-
-                                        <div class="registration-section mb-4">
-                                            <h6 class="section-title">معلومات الحساب</h6>
-                                            <div class="row g-3">
-                                                <div class="col-md-12">
-                                                    <label class="form-label required" for="driverEmail">البريد
-                                                        الإلكتروني</label>
-                                                    <input type="email" class="form-control" id="driverEmail" required>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label class="form-label required" for="driverPassword">كلمة
-                                                        المرور</label>
-                                                    <div class="input-group">
-                                                        <input type="password" class="form-control" id="driverPassword"
-                                                            minlength="6" required>
-                                                        <button class="btn btn-outline-secondary" type="button"
-                                                            onclick="togglePasswordVisibility(this)">
-                                                            <i class="fas fa-eye"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label class="form-label required" for="driverConfirmPassword">تأكيد
-                                                        كلمة المرور</label>
-                                                    <div class="input-group">
-                                                        <input type="password" class="form-control"
-                                                            id="driverConfirmPassword" minlength="6" required>
-                                                        <button class="btn btn-outline-secondary" type="button"
-                                                            onclick="togglePasswordVisibility(this)">
-                                                            <i class="fas fa-eye"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-
-                                    </div>
-                                    <div class="col-12">
-                                        <label class="form-label">معلومات إضافية</label>
-                                        <textarea class="form-control" id="driverBio" rows="3"></textarea>
-                                    </div>
-                                </div>
-
-                                <div class="mt-4">
-                                    <button type="submit" class="btn btn-primary w-100">إضافة السائق</button>
-                                </div>
-                            </form>
+                            <div class="mt-4">
+                                <button type="submit" class="btn btn-primary w-100">إضافة السائق</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -6631,6 +6263,106 @@
         <!-- Loading Spinner -->
         <div class="loading-spinner" id="loadingSpinner">
             <div class="spinner"></div>
+        </div>
+        <!-- نافذة تعديل بيانات السائق -->
+        <div class="modal fade" id="editDriverModal" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">تعديل بيانات السائق</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="editDriverForm" onsubmit="handleEditDriver(event)">
+                            <input type="hidden" id="editDriverId">
+
+                            <div class="mb-4 text-center">
+                                <div class="image-upload-container"
+                                    onclick="document.getElementById('editDriverImage').click()">
+                                    <input type="file" id="editDriverImage" accept="image/*" style="display: none"
+                                        onchange="handleEditImagePreview(event)">
+                                    <img id="editImagePreview" src="#" alt=""
+                                        style="display: none; width: 100%; height: 200px; object-fit: cover; border-radius: 10px;">
+                                    <div class="upload-placeholder">
+                                        <i class="fas fa-camera fa-2x mb-2"></i>
+                                        <p>انقر لتغيير الصورة</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">اسم السائق</label>
+                                    <input type="text" class="form-control" id="editDriverName" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">رقم الهاتف</label>
+                                    <input type="tel" class="form-control" id="editDriverPhone" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">نوع السيارة</label>
+                                    <input type="text" class="form-control" id="editCarType" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">موديل السيارة</label>
+                                    <input type="number" class="form-control" id="editCarModel" required>
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="form-label">المنطقة</label>
+                                    <select class="form-control" id="editDriverLocation" required>
+                                        <option value="">اختر المحافظة</option>
+                                        <option value="بغداد">بغداد</option>
+                                        <option value="الكرخ">الكرخ</option>
+                                        <option value="الرصافة">الرصافة</option>
+                                        <option value="البصرة">البصرة</option>
+                                        <option value="نينوى">نينوى</option>
+                                        <option value="الموصل">الموصل</option>
+                                        <option value="النجف">النجف</option>
+                                        <option value="الكوفة">الكوفة</option>
+                                        <option value="كربلاء">كربلاء</option>
+                                        <option value="الحسينية">الحسينية</option>
+                                        <option value="أربيل">أربيل</option>
+                                        <option value="كركوك">كركوك</option>
+                                        <option value="الأنبار">الأنبار</option>
+                                        <option value="الرمادي">الرمادي</option>
+                                        <option value="الفلوجة">الفلوجة</option>
+                                        <option value="بابل">بابل</option>
+                                        <option value="الحلة">الحلة</option>
+                                        <option value="المسيب">المسيب</option>
+                                        <option value="الهاشمية">الهاشمية</option>
+                                        <option value="القاسم">القاسم</option>
+                                        <option value="ديالى">ديالى</option>
+                                        <option value="بعقوبة">بعقوبة</option>
+                                        <option value="ذي قار">ذي قار</option>
+                                        <option value="الناصرية">الناصرية</option>
+                                        <option value="السليمانية">السليمانية</option>
+                                        <option value="صلاح الدين">صلاح الدين</option>
+                                        <option value="تكريت">تكريت</option>
+                                        <option value="واسط">واسط</option>
+                                        <option value="الكوت">الكوت</option>
+                                        <option value="ميسان">ميسان</option>
+                                        <option value="العمارة">العمارة</option>
+                                        <option value="المثنى">المثنى</option>
+                                        <option value="السماوة">السماوة</option>
+                                        <option value="دهوك">دهوك</option>
+                                        <option value="القادسية">القادسية</option>
+                                        <option value="الديوانية">الديوانية</option>
+                                        <!-- إضافة باقي المدن -->
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">معلومات إضافية</label>
+                                    <textarea class="form-control" id="editDriverBio" rows="3"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                <button type="submit" class="btn btn-primary w-100">حفظ التغييرات</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div id="notificationStatus" class="mt-2 small text-muted"></div>
@@ -6777,30 +6509,35 @@
             </div>
         </div>
 
-        <!-- نافذة تسجيل الدخول -->
-        <div class="modal fade" id="loginModal" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">تسجيل الدخول</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+<!-- نافذة تسجيل الدخول -->
+<div class="modal fade" id="loginModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">تسجيل الدخول</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm" onsubmit="handleLogin(event)">
+                    <div class="mb-3">
+                        <label class="form-label">البريد الإلكتروني</label>
+                        <input type="email" class="form-control" name="email" required>
                     </div>
-                    <div class="modal-body">
-                        <form id="loginForm" onsubmit="handleLogin(event)">
-                            <div class="mb-3">
-                                <label class="form-label" for="email">البريد الإلكتروني</label>
-                                <input type="email" class="form-control" id="email" name="email" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="password">كلمة المرور</label>
-                                <input type="password" class="form-control" id="password" name="password" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100">تسجيل الدخول</button>
-                        </form>
+                    <div class="mb-3">
+                        <label class="form-label">كلمة المرور</label>
+                        <input type="password" class="form-control" name="password" required>
                     </div>
-                </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fas fa-sign-in-alt me-2"></i>
+                            تسجيل الدخول
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
+    </div>
+</div>
 
         <!-- نافذة تسجيل السائق -->
         <div class="modal fade" id="driverRegistrationModal" tabindex="-1">
@@ -6829,8 +6566,6 @@
                                                     <i class="fas fa-camera"></i>
                                                     <span>صورة شخصية</span>
                                                 </div>
-
-
                                             </div>
                                             <input type="file" id="driverPhoto" accept="image/*" style="display: none;"
                                                 onchange="previewDriverPhoto(this)">
@@ -6850,8 +6585,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
 
                             <!-- معلومات المركبة -->
                             <div class="registration-section mb-4">
@@ -7095,6 +6828,7 @@
             <label>نطاق البحث: <span id="radiusValue">5</span> كم</label>
             <input type="range" id="radiusSlider" min="1" max="20" value="5">
         </div>
+
         <div id="nearbyResults" class="nearby-results" style="display: none;">
             <div class="nearby-results-header">
                 <h3>السائقين في الجوار</h3>
@@ -7105,77 +6839,6 @@
             <div class="nearby-results-content"></div>
         </div>
 
-        <script>
-            // تعريف authManager
-            const authManager = {
-                // ...تعريف الدوال والخصائص الخاصة بـ authManager...
-            };
-
-            // دالة معالجة نموذج التسجيل
-            async function handleRegistrationForm(event) {
-                event.preventDefault();
-                showLoading();
-
-                try {
-                    const formData = new FormData(event.target);
-                    const email = formData.get('email');
-                    const password = formData.get('password');
-                    const fullName = formData.get('fullName');
-                    const userType = formData.get('userType'); // تعريف userType
-
-                    // ...بقية الكود الخاص بمعالجة التسجيل...
-
-                } catch (error) {
-                    console.error('Registration error:', error);
-                    showToast(error.message, 'error');
-                } finally {
-                    hideLoading();
-                }
-            }
-            function addTestButton() {
-                // Define the addTestButton function
-            }
-
-            function getAllDrivers() {
-                // Define the getAllDrivers function
-            }
-
-            document.addEventListener('DOMContentLoaded', () => {
-                addTestButton();
-                getAllDrivers();
-            });
-            function createDriverCard(driver, key) {
-                // التحقق من حالة الموافقة والنشاط
-                const isApproved = driver.approved === true;
-                const isPending = driver.approvalStatus === 'pending';
-                const isActive = driver.active && isApproved;
-
-                // تحديد نص وألوان الحالة
-                const statusText = !isApproved ? (isPending ? 'قيد المراجعة' : 'غير مفعل') :
-                    (isActive ? 'متاح' : 'مشغول');
-                const statusColor = !isApproved ? '#FFD700' : (isActive ? '#2ECC40' : '#FF4136');
-
-                // تحديد حالة التعتيم للبطاقة
-                const cardOpacity = isApproved ? '1' : '0.7';
-
-                return `
-                    <div class="driver-card ${isApproved ? 'approved' : (isPending ? 'pending' : 'not-approved')}" data-driver-id="${key}" style="opacity: ${cardOpacity}">
-                        <div class="driver-image-container">
-                            <img src="${driver.imageUrl || 'https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/driver-images%2F7605a607-6cf8-4b32-aee1-fa7558c98452.png?alt=media&token=5cf9e67c-ba6e-4431-a6a0-79dede15b527'}" class="driver-image">
-                        </div>
-                        <div class="driver-info">
-                            <h3 class="driver-name">${driver.name || 'اسم غير متوفر'}</h3>
-                            <p class="driver-status" style="color: ${statusColor};">${statusText}</p>
-                        </div>
-                        <div class="driver-actions">
-                            <button class="btn btn-primary" onclick="openChatWindow('${key}')" ${!isApproved ? 'disabled' : ''}>مراسلة السائق</button>
-                            <button class="btn btn-secondary" onclick="bookDriver('${key}')" ${!isApproved ? 'disabled' : ''}>حجز</button>
-                        </div>
-                    </div>
-                `;
-            }
-        </script>
-
 
         <!-- Scripts -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
@@ -7184,12 +6847,12 @@
         <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+
+
+
         <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"></script>
 
         <script>
-
-
-
 
 
             const firebaseConfig = {
@@ -7643,15 +7306,57 @@
     `;
             }
 
+
+
+
+            function viewDriverLocation(driverId) {
+                isViewingDriverLocation = true; // تعطيل تحديث موقع المستخدم
+
+                database.ref(`drivers/${driverId}`).once('value', (snapshot) => {
+                    const driver = snapshot.val();
+                    if (driver && driver.coordinates) {
+                        const { lat, lng } = driver.coordinates;
+
+                        // تعيين موقع الخريطة إلى موقع السائق
+                        map.setView([lat, lng], 15);
+
+                        // إضافة علامة موقع السائق
+                        const driverMarker = L.marker([lat, lng], {
+                            icon: L.divIcon({
+                                html: `<i class="fas fa-taxi" style="color: #FFD700;"></i>`,
+                                className: 'driver-marker',
+                                iconSize: [30, 30],
+                            }),
+                        }).addTo(markerLayer);
+
+                        driverMarker.bindPopup(`
+                <div style="text-align: center;">
+                    <h6>${driver.name}</h6>
+                    <p>${driver.carType} - ${driver.carModel}</p>
+                    <button class="action-btn secondary" onclick="openChatWindow('${key}')">
+    <i class="fas fa-comment"></i> مراسلة
+</button>
+
+
+                </div>
+            `).openPopup();
+
+                        scrollToMap();
+                    } else {
+                        showToast('لم يتم إضافة موقع للسائق', 'error');
+                    }
+                });
+
+                // إعادة تفعيل تحديث موقع المستخدم بعد فترة
+                setTimeout(() => {
+                    isViewingDriverLocation = false;
+                }, 30000); // 30 ثانية
+            }
             function viewDriverLocation(driverId) {
                 database.ref(`drivers/${driverId}`).once('value', (snapshot) => {
                     const driver = snapshot.val();
                     if (driver && driver.coordinates) {
-                        // التحقق من حالة الموافقة
-                        const isApproved = driver.approved === true;
-                        const isPending = driver.approvalStatus === 'pending';
                         const { lat, lng } = driver.coordinates;
-
                         map.flyTo([lat, lng], 15, {
                             animate: true,
                             duration: 1.5
@@ -7659,26 +7364,17 @@
 
                         markerLayer.clearLayers();
 
-                        // تعديل مظهر العلامة حسب حالة الموافقة
                         const driverMarker = L.marker([lat, lng], {
                             icon: L.divIcon({
                                 html: `
-                        <div style="position: relative; text-align: center;" class="${isApproved ? 'approved' : (isPending ? 'pending' : 'not-approved')}">
+                        <div style="position: relative; text-align: center;">
                             <img src="${driver.imageUrl || 'https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/driver-images%2F7605a607-6cf8-4b32-aee1-fa7558c98452.png?alt=media&token=5cf9e67c-ba6e-4431-a6a0-79dede15b527'}" 
                                  alt="صورة السائق" 
                                  style="width: 50px; height: 50px; border: 3px solid #FFD700; 
-                                 border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-                                 filter: ${!isApproved ? 'grayscale(100%)' : 'none'};
-                                 opacity: ${!isApproved ? '0.7' : '1'};">
+                                 border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
                             <i class="fas fa-taxi" 
                                style="position: absolute; bottom: -5px; right: 50%; transform: translateX(50%); 
-                               color: ${isApproved ? '#FFD700' : '#999'}; font-size: 1.5rem;"></i>
-                            ${!isApproved ? `
-                            <div class="status-badge" style="position: absolute; top: -10px; right: -10px; 
-                                 background: ${isPending ? '#FFD700' : '#dc3545'}; color: ${isPending ? '#000' : '#fff'};
-                                 padding: 3px 8px; border-radius: 10px; font-size: 0.7rem; font-weight: bold;">
-                                ${isPending ? 'قيد المراجعة' : 'غير مفعل'}
-                            </div>` : ''}
+                               color: #FFD700; font-size: 1.5rem;"></i>
                         </div>
                     `,
                                 className: 'driver-marker',
@@ -7686,24 +7382,13 @@
                             }),
                         }).addTo(markerLayer);
 
-                        // تحديث محتوى النافذة المنبثقة
                         const popupContent = `
-                <div style="text-align: center; font-family: 'Segoe UI', sans-serif; min-width: 200px; 
-                     background: #000000; border-radius: 10px; padding: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
-                    ${!isApproved ? `
-                    <div class="status-banner" style="background: ${isPending ? '#FFD700' : '#dc3545'}; 
-                         color: ${isPending ? '#000' : '#fff'}; padding: 5px; margin: -15px -15px 15px -15px; 
-                         border-radius: 10px 10px 0 0; font-weight: bold;">
-                        ${isPending ? 'هذا السائق قيد المراجعة' : 'هذا السائق غير مفعل حالياً'}
-                    </div>
-                    ` : ''}
-                    
+                <div style="text-align: center; font-family: 'Segoe UI', sans-serif; min-width: 200px; background: #000000; border-radius: 10px; padding: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
                     <div class="driver-popup-header" style="margin-bottom: 10px;">
                         <img src="${driver.imageUrl || 'https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/driver-images%2F7605a607-6cf8-4b32-aee1-fa7558c98452.png?alt=media&token=5cf9e67c-ba6e-4431-a6a0-79dede15b527'}" 
                              alt="صورة السائق" 
                              style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid #FFD700; 
-                             margin-bottom: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-                             filter: ${!isApproved ? 'grayscale(100%)' : 'none'};">
+                             margin-bottom: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
                         <h5 style="color: #FFFFFF; font-weight: bold; margin: 8px 0;">${driver.name}</h5>
                     </div>
                     
@@ -7740,16 +7425,16 @@
                     <div class="driver-popup-actions" style="display: grid; grid-template-columns: 1fr; gap: 8px;">
                         <button onclick="openChatWindow('${driverId}')" 
                                 style="background: #FFD700; color: #333; border: none; padding: 8px 15px; 
-                                border-radius: 20px; cursor: ${isApproved ? 'pointer' : 'not-allowed'}; 
-                                font-weight: bold; display: flex; align-items: center; justify-content: center; 
-                                gap: 5px; transition: all 0.3s ease; opacity: ${isApproved ? '1' : '0.5'};"
-                                ${!isApproved ? 'disabled' : ''}>
+                                border-radius: 20px; cursor: pointer; font-weight: bold; 
+                                display: flex; align-items: center; justify-content: center; gap: 5px;
+                                transition: all 0.3s ease;">
                             <i class="fas fa-comment"></i>
-                            ${isApproved ? 'مراسلة السائق' : 'غير متاح حالياً'}
+                            مراسلة السائق
                         </button>
                     </div>
                 </div>
             `;
+
 
                         driverMarker.bindPopup(popupContent, {
                             maxWidth: 300,
@@ -7758,46 +7443,31 @@
 
                         scrollToMap();
 
-                        // تعديل رسالة التأكيد حسب حالة الموافقة
-                        if (isApproved) {
-                            Swal.fire({
-                                title: '🚖 تم تحديد موقع السائق!',
-                                html: `
-                        <p style="font-size: 1rem; color: #555;">
-                            السائق <b>${driver.name}</b> بانتظارك.
-                        </p>
-                        <p style="color: #666;">هل ترغب بمراسلته الآن؟</p>
-                    `,
-                                icon: 'success',
-                                showCancelButton: true,
-                                confirmButtonColor: '#FFD700',
-                                cancelButtonColor: '#6c757d',
-                                confirmButtonText: '📨 نعم، مراسلة السائق',
-                                cancelButtonText: '❌ إغلاق',
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    openChatWindow(driverId);
-                                }
-                            });
-                        } else {
-                            Swal.fire({
-                                title: 'تنبيه!',
-                                html: `
-                        <p style="font-size: 1rem; color: #555;">
-                            السائق <b>${driver.name}</b> ${isPending ? 'قيد المراجعة' : 'غير مفعل حالياً'}.
-                        </p>
-                        <p style="color: #666;">لا يمكن التواصل مع السائق حتى يتم تفعيل حسابه.</p>
-                    `,
-                                icon: 'warning',
-                                confirmButtonColor: '#6c757d',
-                                confirmButtonText: 'حسناً'
-                            });
-                        }
+                        Swal.fire({
+                            title: '🚖 تم تحديد موقع السائق!',
+                            html: `
+                    <p style="font-size: 1rem; color: #555;">
+                        السائق <b>${driver.name}</b> بانتظارك.
+                    </p>
+                    <p style="color: #666;">هل ترغب بمراسلته الآن؟</p>
+                `,
+                            icon: 'success',
+                            showCancelButton: true,
+                            confirmButtonColor: '#FFD700',
+                            cancelButtonColor: '#6c757d',
+                            confirmButtonText: '📨 نعم، مراسلة السائق',
+                            cancelButtonText: '❌ إغلاق',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                openChatWindow(driverId);
+                            }
+                        });
                     } else {
                         showToast('لم يتم العثور على موقع السائق.', 'error');
                     }
                 });
             }
+
 
             // تحسين دالة initMap لدعم تبديل الطبقات
             function initMap() {
@@ -8146,85 +7816,6 @@
 
             }
 
-             // إضافة الدالة لمعالجة تسجيل الخروج
-             function handleLogout() {
-                // عرض تأكيد قبل تسجيل الخروج
-                Swal.fire({
-                    title: 'تسجيل الخروج',
-                    text: 'هل أنت متأكد أنك تريد تسجيل الخروج؟',
-                    icon: 'question',
-                    showCancelButton: true,
-                    confirmButtonColor: '#FFD700',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'نعم، تسجيل الخروج',
-                    cancelButtonText: 'إلغاء',
-                    background: '#1a1a1a',
-                    color: '#FFFFFF'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // حذف بيانات المستخدم من التخزين المحلي
-                        localStorage.removeItem('currentUser');
-
-                        // إعادة تعيين واجهة المستخدم
-                        resetUserInterface();
-
-                        // عرض رسالة نجاح
-                        showToast('تم تسجيل الخروج بنجاح');
-
-                        // تأخير قصير قبل إعادة تحميل الصفحة
-                        setTimeout(() => {
-                            window.location.reload();
-                        }, 1000);
-                    }
-                });
-            }
-
-            // دالة إعادة تعيين واجهة المستخدم
-            function resetUserInterface() {
-                // إعادة تعيين زر الملف الشخصي
-                const profileBtn = document.querySelector('.user-profile-btn');
-                if (profileBtn) {
-                    profileBtn.innerHTML = `
-            <i class="fas fa-user"></i>
-            <span class="ms-1 d-none d-md-inline">تسجيل</span>
-        `;
-                    profileBtn.setAttribute('data-bs-toggle', 'modal');
-                    profileBtn.setAttribute('data-bs-target', '#profileModal');
-                }
-
-                // إعادة تعيين معلومات المستخدم في الشريط الجانبي
-                const sideNavUserInfo = document.querySelector('.side-nav-user-info');
-                if (sideNavUserInfo) {
-                    sideNavUserInfo.innerHTML = '';
-                }
-            }
-
-            // إنشاء نسخة من مدير الإشعارات
-            // const notificationsManager = new NotificationsManager(); // Removed duplicate declaration
-
-
-            document.addEventListener('DOMContentLoaded', function () {
-                // إضافة قسم معلومات المستخدم في الشريط الجانبي
-                const sideNav = document.getElementById('sideNav');
-                if (sideNav && !sideNav.querySelector('.side-nav-user-info')) {
-                    const userInfoSection = document.createElement('div');
-                    userInfoSection.className = 'side-nav-user-info';
-                    sideNav.insertBefore(userInfoSection, sideNav.firstChild);
-                }
-
-                // ربط نماذج التسجيل
-                const driverRegistrationForm = document.getElementById('driverRegistrationForm');
-                if (driverRegistrationForm) {
-                    driverRegistrationForm.addEventListener('submit', handleDriverRegistration);
-                }
-
-                const userRegistrationForm = document.getElementById('userRegistrationForm');
-                if (userRegistrationForm) {
-                    userRegistrationForm.addEventListener('submit', handleUserRegistration);
-                }
-            });
-
-
             // دوال مساعدة لتنسيق المسافة والوقت
             function formatDistance(meters) {
                 return meters >= 1000
@@ -8477,443 +8068,63 @@
                 return locationCoordinates["بغداد"];
             }
 
+            // مثال على الاستخدام في دالة إضافة السائق
             async function handleAddDriver(event) {
-    event.preventDefault();
-    showLoading();
+                event.preventDefault();
+                showLoading();
 
-    try {
-        // التحقق من البريد الإلكتروني وكلمة المرور
-        const email = document.getElementById('driverEmail').value;
-        const password = document.getElementById('driverPassword').value;
-        const confirmPassword = document.getElementById('driverConfirmPassword').value;
+                try {
+                    const imageFile = document.getElementById('driverImage').files[0];
+                    if (!imageFile) {
+                        throw new Error('الرجاء اختيار صورة للسائق');
+                    }
 
-        // التحقق من تطابق كلمات المرور
-        if (password !== confirmPassword) {
-            throw new Error('كلمات المرور غير متطابقة');
-        }
+                    // الحصول على الإحداثيات مباشرة من حقول الإدخال
+                    const latitude = parseFloat(document.getElementById('driverLatitude').value);
+                    const longitude = parseFloat(document.getElementById('driverLongitude').value);
 
-        // التحقق من صحة البريد الإلكتروني
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            throw new Error('يرجى إدخال بريد إلكتروني صحيح');
-        }
+                    // التحقق من وجود الإحداثيات
+                    if (!latitude || !longitude) {
+                        throw new Error('يرجى تحديد موقع السائق أولاً');
+                    }
 
-        // إنشاء حساب المصادقة في Firebase Authentication
-        const authResult = await firebase.auth().createUserWithEmailAndPassword(email, password);
-        const uid = authResult.user.uid;
+                    const imageRef = storage.ref(`drivers/${Date.now()}_${imageFile.name}`);
+                    const uploadTask = await imageRef.put(imageFile);
+                    const imageUrl = await uploadTask.ref.getDownloadURL();
 
-        // التحقق من تحميل جميع المستندات المطلوبة
-        const requiredFiles = {
-            'idCardFront': 'صورة الهوية الأمامية',
-            'idCardBack': 'صورة الهوية الخلفية',
-            'residenceFront': 'صورة بطاقة السكن الأمامية',
-            'residenceBack': 'صورة بطاقة السكن الخلفية',
-            'licenseFront': 'صورة إجازة السوق الأمامية',
-            'licenseBack': 'صورة إجازة السوق الخلفية',
-            'driverImage': 'الصورة الشخصية'
-        };
-
-        const uploadedFiles = {};
-        for (const [fileId, description] of Object.entries(requiredFiles)) {
-            const fileInput = document.getElementById(fileId);
-            if (!fileInput.files || !fileInput.files[0]) {
-                throw new Error(`الرجاء تحميل ${description}`);
-            }
-            uploadedFiles[fileId] = fileInput.files[0];
-        }
-
-        // الحصول على الإحداثيات
-        const latitude = parseFloat(document.getElementById('driverLatitude').value);
-        const longitude = parseFloat(document.getElementById('driverLongitude').value);
-
-        if (!latitude || !longitude) {
-            throw new Error('يرجى تحديد موقع السائق أولاً');
-        }
-
-        // رفع جميع الملفات إلى Firebase Storage
-        const uploadPromises = {};
-        for (const [fileId, file] of Object.entries(uploadedFiles)) {
-            const fileRef = storage.ref(`drivers/${uid}/documents/${Date.now()}_${fileId}_${file.name}`);
-            uploadPromises[fileId] = fileRef.put(file).then(snapshot => snapshot.ref.getDownloadURL());
-        }
-
-        const uploadedUrls = await Promise.all(Object.values(uploadPromises));
-        const documentUrls = {};
-        Object.keys(uploadPromises).forEach((key, index) => {
-            documentUrls[key] = uploadedUrls[index];
-        });
-
-        // إنشاء عن طريق المصادقة
-        await authResult.user.updateProfile({
-            displayName: document.getElementById('driverName').value,
-            photoURL: documentUrls.driverImage
-        });
-
-        // تجهيز بيانات السائق
-        const driverData = {
-            uid: uid,
-            name: document.getElementById('driverName').value,
-            email: email,
-            phone: document.getElementById('driverPhone').value,
-            carType: document.getElementById('carType').value,
-            carModel: document.getElementById('carModel').value,
-            location: document.getElementById('driverLocation').value,
-            coordinates: {
-                lat: latitude,
-                lng: longitude
-            },
-            bio: document.getElementById('driverBio').value,
-            imageUrl: documentUrls.driverImage,
-            documents: {
-                idCard: {
-                    front: documentUrls.idCardFront,
-                    back: documentUrls.idCardBack
-                },
-                residenceCard: {
-                    front: documentUrls.residenceFront,
-                    back: documentUrls.residenceBack
-                },
-                driverLicense: {
-                    front: documentUrls.licenseFront,
-                    back: documentUrls.licenseBack
-                }
-            },
-            userType: 'driver',
-            rating: 5,
-            trips: 0,
-            approved: false,
-            approvalStatus: 'pending',
-            active: false,
-            registrationDate: firebase.database.ServerValue.TIMESTAMP,
-            lastUpdate: firebase.database.ServerValue.TIMESTAMP,
-            accountStatus: {
-                emailVerified: false,
-                lastLogin: null
-            }
-        };
-
-        // حفظ البيانات في Realtime Database
-        await database.ref(`drivers/${uid}`).set(driverData);
-
-        // إرسال رسالة تأكيد البريد الإلكتروني
-        await authResult.user.sendEmailVerification();
-
-        // إغلاق النافذة المنبثقة
-        const modal = bootstrap.Modal.getInstance(document.getElementById('addDriverModal'));
-        modal.hide();
-
-        // إعادة تعيين النموذج
-        document.getElementById('addDriverForm').reset();
-        
-        // إعادة تعيين معاينات الصور
-        resetImagePreviews();
-
-        // تسجيل الدخول تلقائياً
-        await firebase.auth().signInWithEmailAndPassword(email, password);
-
-        // عرض رسالة نجاح
-        Swal.fire({
-            title: 'تم التسجيل بنجاح!',
-            html: `
-                <div class="success-message">
-                    <p>تم إنشاء حسابك بنجاح</p>
-                    <p>تم إرسال رسالة تأكيد إلى بريدك الإلكتروني</p>
-                    <p>رقم الحساب: ${uid}</p>
-                    <small>يرجى تفعيل حسابك من خلال الرابط المرسل إلى بريدك الإلكتروني</small>
-                </div>
-            `,
-            icon: 'success',
-            confirmButtonText: 'حسناً',
-            confirmButtonColor: '#FFD700'
-        });
-
-        // تحديث واجهة المستخدم
-        updateUIAfterLogin(driverData);
-
-    } catch (error) {
-        console.error('Error adding driver:', error);
-        
-        // إذا فشل التسجيل، نحذف المستخدم من المصادقة
-        if (error.code) {
-            try {
-                const currentUser = firebase.auth().currentUser;
-                if (currentUser) {
-                    await currentUser.delete();
-                }
-            } catch (deleteError) {
-                console.error('Error deleting user:', deleteError);
-            }
-        }
-
-        showToast(error.message || 'حدث خطأ أثناء التسجيل', 'error');
-    } finally {
-        hideLoading();
-    }
-}
-
-// دالة تحديث واجهة السائق بعد تسجيل الدخول
-function updateDriverUIAfterLogin(driverData) {
-    // تحديث القائمة الجانبية
-    const sideNavUserInfo = document.querySelector('.side-nav-user-info');
-    if (sideNavUserInfo) {
-        sideNavUserInfo.innerHTML = `
-            <div class="text-center p-4">
-                <img src="${driverData.imageUrl || 'default-avatar.png'}" 
-                     alt="${driverData.name}" 
-                     class="rounded-circle mb-3"
-                     style="width: 80px; height: 80px; object-fit: cover; border: 2px solid #FFD700;">
-                <h6 class="text-white mb-1">${driverData.name}</h6>
-                <span class="badge bg-warning mb-2">سائق</span>
-                <div class="driver-status ${driverData.active ? 'status-active' : 'status-inactive'}">
-                    ${driverData.active ? 'متاح' : 'غير متاح'}
-                </div>
-                <div class="mt-3">
-                    <button onclick="toggleDriverStatus('${driverData.uid}')" class="btn btn-outline-warning btn-sm w-100 mb-2">
-                        <i class="fas fa-toggle-on me-2"></i>تغيير الحالة
-                    </button>
-                    <button onclick="handleLogout()" class="btn btn-outline-danger btn-sm w-100">
-                        <i class="fas fa-sign-out-alt me-2"></i>تسجيل الخروج
-                    </button>
-                </div>
-            </div>
-        `;
-    }
-
-    // تحديث زر الملف الشخصي
-    const profileBtn = document.querySelector('.user-profile-btn');
-    if (profileBtn) {
-        profileBtn.innerHTML = `
-            <div class="d-flex align-items-center">
-                <img src="${driverData.imageUrl || 'default-avatar.png'}" 
-                     alt="${driverData.name}" 
-                     class="rounded-circle me-2" 
-                     style="width: 35px; height: 35px; object-fit: cover; border: 2px solid #FFD700;">
-                <span class="d-none d-md-inline">${driverData.name}</span>
-            </div>
-        `;
-        profileBtn.onclick = () => showDriverProfile(driverData);
-    }
-
-    // إخفاء زر تسجيل الدخول وإظهار زر الملف الشخصي
-    const loginBtn = document.querySelector('[data-bs-target="#loginModal"]');
-    if (loginBtn) loginBtn.style.display = 'none';
-
-    // تحديث عناصر أخرى في الواجهة
-    document.querySelectorAll('.driver-only').forEach(el => el.style.display = 'block');
-    document.querySelectorAll('.user-only').forEach(el => el.style.display = 'none');
-}
-
-// دالة عرض الملف الشخصي للسائق
-function showDriverProfile(driverData) {
-    Swal.fire({
-        title: 'الملف الشخصي',
-        html: `
-            <div class="text-center mb-4">
-                <img src="${driverData.imageUrl || 'default-avatar.png'}" 
-                     alt="${driverData.name}"
-                     class="rounded-circle mb-3"
-                     style="width: 120px; height: 120px; object-fit: cover; border: 3px solid #FFD700;">
-                <h5 class="mb-2">${driverData.name}</h5>
-                <div class="badge bg-warning mb-2">سائق</div>
-                <div class="driver-status ${driverData.active ? 'status-active' : 'status-inactive'} mb-3">
-                    ${driverData.active ? 'متاح' : 'غير متاح'}
-                </div>
-            </div>
-            <div class="driver-info mb-4">
-                <p><i class="fas fa-envelope me-2"></i>${driverData.email}</p>
-                <p><i class="fas fa-phone me-2"></i>${driverData.phone}</p>
-                <p><i class="fas fa-car me-2"></i>${driverData.carType} - ${driverData.carModel}</p>
-                <p><i class="fas fa-map-marker-alt me-2"></i>${driverData.location}</p>
-            </div>
-            <div class="driver-stats text-center">
-                <div class="row">
-                    <div class="col">
-                        <h6><i class="fas fa-star text-warning"></i></h6>
-                        <p>${driverData.rating || '5.0'}</p>
-                        <small>التقييم</small>
-                    </div>
-                    <div class="col">
-                        <h6><i class="fas fa-route"></i></h6>
-                        <p>${driverData.trips || '0'}</p>
-                        <small>الرحلات</small>
-                    </div>
-                </div>
-            </div>
-        `,
-        showCancelButton: true,
-        showDenyButton: true,
-        confirmButtonText: 'تعديل البيانات',
-        denyButtonText: 'تسجيل الخروج',
-        cancelButtonText: 'إغلاق',
-        confirmButtonColor: '#FFD700',
-        denyButtonColor: '#dc3545'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            showEditDriverProfile(driverData);
-        } else if (result.isDenied) {
-            handleLogout();
-        }
-    });
-}
-
-// دالة تبديل حالة السائق
-async function toggleDriverStatus(driverId) {
-    try {
-        const driverRef = firebase.database().ref(`drivers/${driverId}`);
-        const snapshot = await driverRef.once('value');
-        const currentStatus = snapshot.val().active;
-
-        await driverRef.update({
-            active: !currentStatus,
-            lastStatusUpdate: firebase.database.ServerValue.TIMESTAMP
-        });
-
-        showToast(`تم تغيير الحالة إلى ${!currentStatus ? 'متاح' : 'غير متاح'}`, 'success');
-        
-        // تحديث الواجهة
-        const userData = JSON.parse(localStorage.getItem('currentUser'));
-        userData.active = !currentStatus;
-        localStorage.setItem('currentUser', JSON.stringify(userData));
-        updateDriverUIAfterLogin(userData);
-
-    } catch (error) {
-        console.error('Error toggling status:', error);
-        showToast('حدث خطأ أثناء تغيير الحالة', 'error');
-    }
-}
-
-// دالة تعديل بيانات السائق
-function showEditDriverProfile(driverData) {
-    Swal.fire({
-        title: 'تعديل البيانات',
-        html: `
-            <form id="editDriverForm" class="text-start">
-                <div class="mb-3">
-                    <label class="form-label">رقم الهاتف</label>
-                    <input type="tel" class="form-control" id="editPhone" value="${driverData.phone}">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">نوع السيارة</label>
-                    <input type="text" class="form-control" id="editCarType" value="${driverData.carType}">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">موديل السيارة</label>
-                    <input type="text" class="form-control" id="editCarModel" value="${driverData.carModel}">
-                </div>
-            </form>
-        `,
-        showCancelButton: true,
-        confirmButtonText: 'حفظ التغييرات',
-        cancelButtonText: 'إلغاء',
-        confirmButtonColor: '#FFD700',
-        preConfirm: () => {
-            return {
-                phone: document.getElementById('editPhone').value,
-                carType: document.getElementById('editCarType').value,
-                carModel: document.getElementById('editCarModel').value
-            };
-        }
-    }).then((result) => {
-        if (result.isConfirmed) {
-            updateDriverProfile(driverData.uid, result.value);
-        }
-    });
-}
-
-// دالة تحديث بيانات السائق
-async function updateDriverProfile(driverId, newData) {
-    try {
-        await firebase.database().ref(`drivers/${driverId}`).update(newData);
-        
-        // تحديث البيانات المحلية
-        const userData = JSON.parse(localStorage.getItem('currentUser'));
-        Object.assign(userData, newData);
-        localStorage.setItem('currentUser', JSON.stringify(userData));
-        
-        updateDriverUIAfterLogin(userData);
-        showToast('تم تحديث البيانات بنجاح', 'success');
-    } catch (error) {
-        console.error('Error updating profile:', error);
-        showToast('حدث خطأ أثناء تحديث البيانات', 'error');
-    }
-}
-
-// دالة تحديث واجهة المستخدم بعد تسجيل الدخول
-function updateUIAfterLogin(userData) {
-    // تحديث القائمة الجانبية
-    const sideNavUserInfo = document.querySelector('.side-nav-user-info');
-    if (sideNavUserInfo) {
-        sideNavUserInfo.innerHTML = `
-            <div class="text-center p-4">
-                <img src="${userData.imageUrl}" alt="${userData.name}" 
-                     class="rounded-circle mb-3" style="width: 80px; height: 80px; object-fit: cover;">
-                <h6 class="text-white mb-1">${userData.name}</h6>
-                <span class="badge bg-warning mb-3">سائق</span>
-                <div class="driver-status ${userData.active ? 'status-active' : 'status-inactive'}">
-                    ${userData.active ? 'متاح' : 'غير متاح'}
-                </div>
-            </div>
-        `;
-    }
-
-    // تحديث زر الملف الشخصي
-    const profileBtn = document.querySelector('.user-profile-btn');
-    if (profileBtn) {
-        profileBtn.innerHTML = `
-            <img src="${userData.imageUrl}" alt="${userData.name}" 
-                 class="rounded-circle me-2" style="width: 35px; height: 35px; object-fit: cover;">
-            <span class="d-none d-md-inline">${userData.name}</span>
-        `;
-    }
-}
-
-
-
-
-            function togglePasswordVisibility(button) {
-                const input = button.previousElementSibling;
-                const icon = button.querySelector('i');
-
-                if (input.type === 'password') {
-                    input.type = 'text';
-                    icon.classList.remove('fa-eye');
-                    icon.classList.add('fa-eye-slash');
-                } else {
-                    input.type = 'password';
-                    icon.classList.remove('fa-eye-slash');
-                    icon.classList.add('fa-eye');
-                }
-            }
-
-            // دالة معاينة المستندات
-            function previewDocument(input, previewId) {
-                const preview = document.getElementById(previewId);
-                const placeholder = input.parentElement.querySelector('.upload-placeholder');
-
-                if (input.files && input.files[0]) {
-                    const reader = new FileReader();
-                    reader.onload = function (e) {
-                        preview.src = e.target.result;
-                        preview.style.display = 'block';
-                        placeholder.style.display = 'none';
+                    const driverData = {
+                        name: document.getElementById('driverName').value,
+                        phone: document.getElementById('driverPhone').value,
+                        carType: document.getElementById('carType').value,
+                        carModel: document.getElementById('carModel').value,
+                        location: document.getElementById('driverLocation').value, // المحافظة فقط
+                        coordinates: {
+                            lat: latitude,
+                            lng: longitude
+                        },
+                        bio: document.getElementById('driverBio').value,
+                        imageUrl: imageUrl,
+                        rating: 5,
+                        trips: 0,
+                        active: true,
+                        createdAt: firebase.database.ServerValue.TIMESTAMP
                     };
-                    reader.readAsDataURL(input.files[0]);
+
+                    await database.ref('drivers').push(driverData);
+
+                    // إغلاق النافذة المنبثقة بعد النجاح
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('addDriverModal'));
+                    modal.hide();
+
+                    document.getElementById('addDriverForm').reset();
+                    showToast('تم إضافة السائق بنجاح');
+                    loadDrivers();
+                } catch (error) {
+                    console.error('Error adding driver:', error);
+                    showToast(error.message, 'error');
+                } finally {
+                    hideLoading();
                 }
-            }
-
-            // دالة إعادة تعيين معاينات الصور
-            function resetImagePreviews() {
-                const previews = document.querySelectorAll('img[id$="Preview"]');
-                const placeholders = document.querySelectorAll('.upload-placeholder');
-
-                previews.forEach(preview => {
-                    preview.src = '#';
-                    preview.style.display = 'none';
-                });
-
-                placeholders.forEach(placeholder => {
-                    placeholder.style.display = 'flex';
-                });
             }
 
             function handleLocationError(error) {
@@ -8923,119 +8134,84 @@ function updateUIAfterLogin(userData) {
             }
 
 
-
-
-            // تحديث دالة createDriverCard لتشمل حالة الموافقة
-            function createDriverMarkerPopup(driver, driverId) {
-                // التحقق من حالة الموافقة
-                const isApproved = driver.approved === true;
-                const isPending = driver.approvalStatus === 'pending';
-                const statusText = isApproved ? 'مفعل' : (isPending ? 'قيد المراجعة' : 'غير مفعل');
-                const statusColor = isApproved ? '#2ECC40' : (isPending ? '#FFD700' : '#FF4136');
-
-                return `
-        <div class="driver-popup ${isApproved ? 'approved' : (isPending ? 'pending' : 'not-approved')}">
-            <div class="driver-popup-header">
-                <div class="popup-status" style="background-color: ${statusColor}; color: ${isApproved ? '#fff' : '#000'}">
-                    ${statusText}
-                </div>
-                <img src="${driver.imageUrl || 'default-driver.png'}" 
-                     alt="${driver.name}"
-                     style="filter: ${!isApproved ? 'grayscale(100%)' : 'none'}; 
-                            opacity: ${!isApproved ? '0.7' : '1'}">
-                <h4>${driver.name}</h4>
-                <div class="driver-rating">
-                    <i class="fas fa-star"></i> ${driver.rating ? driver.rating.toFixed(1) : '5.0'}
-                </div>
-            </div>
-            
-            <div class="driver-popup-info">
-                <p><i class="fas fa-car"></i> ${driver.carType} ${driver.carModel}</p>
-                <p><i class="fas fa-map-marker-alt"></i> ${driver.location}</p>
-                <p><i class="fas fa-phone"></i> ${driver.phone}</p>
-            </div>
-
-            <div class="driver-popup-actions">
-                <button onclick="openChatWindow('${driverId}')" 
-                        class="chat-btn ripple"
-                        ${!isApproved ? 'disabled' : ''}>
-                    <i class="fas fa-comment"></i>
-                    مراسلة
-                </button>
-                <button onclick="bookDriver('${driverId}')"
-                        class="book-btn ripple"
-                        ${!isApproved ? 'disabled' : ''}>
-                    <i class="fas fa-taxi"></i>
-                    حجز
-                </button>
-            </div>
-
-            ${!isApproved ? `
-                <div class="approval-notice">
-                    ${isPending ?
-                            'هذا السائق قيد المراجعة. سيتم تفعيل الحساب قريباً.' :
-                            'هذا الحساب غير مفعل. يرجى انتظار الموافقة.'}
-                </div>
-            ` : ''}
-        </div>
-    `;
-            }
-
-
-            // دالة تحديث عرض بطاقة السائق
             function createDriverCard(driver, key) {
-                // التحقق من حالة الموافقة
-                const isApproved = driver.approved === true;
-                const isPending = driver.approvalStatus === 'pending';
+                // تحسين حساب المسافة مع التحقق من صحة الإحداثيات
+                const distance = (() => {
+                    if (!userLocation || !driver.coordinates ||
+                        !userLocation.lat || !userLocation.lng ||
+                        !driver.coordinates.lat || !driver.coordinates.lng) {
+                        return null;
+                    }
 
-                // تحديد الحالة وتصميم البطاقة
-                const cardStatus = isApproved ? 'approved' : (isPending ? 'pending' : 'not-approved');
-                const statusText = isApproved ? 'مفعل' : (isPending ? 'قيد المراجعة' : 'غير مفعل');
-                const cardOpacity = isApproved ? '1' : '0.7';
+                    const R = 6371; // نصف قطر الأرض بالكيلومترات
+                    const dLat = toRad(driver.coordinates.lat - userLocation.lat);
+                    const dLon = toRad(driver.coordinates.lng - userLocation.lng);
+                    const lat1 = toRad(userLocation.lat);
+                    const lat2 = toRad(driver.coordinates.lat);
+
+                    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                        Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
+                    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+                    return Math.round(R * c * 10) / 10; // تقريب إلى أقرب 0.1 كم
+                })();
+
+                // تنسيق عرض المسافة
+                const distanceDisplay = distance !== null ?
+                    `${distance.toFixed(1)} كم` :
+                    'غير متوفر';
 
                 return `
-        <div class="driver-card ${cardStatus}" data-driver-id="${key}" style="opacity: ${cardOpacity}">
-            <!-- شريط الحالة -->
-            <div class="status-banner ${cardStatus}">
-                ${statusText}
+        <div class="driver-card animate__animated animate__fadeIn" style="background-color: #000000; color: #FFFFFF; border-radius: 20px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); overflow: hidden;">
+            <div class="driver-image-container" style="position: relative;">
+                <img src="${driver.imageUrl}" alt="${driver.name}" class="driver-image" style="width: 100%; height: 200px; object-fit: cover; border-bottom: 3px solid #FFD700;">
+                <div class="driver-status ${driver.active ? 'status-active' : 'status-inactive'}" 
+                     onclick="toggleDriverStatus('${key}', ${driver.active})"
+                     style="position: absolute; top: 10px; right: 10px; padding: 5px 10px; border-radius: 20px; background: rgba(255, 255, 255, 0.8); font-weight: bold; color: ${driver.active ? '#2ECC40' : '#FF4136'};">
+                    ${driver.active ? 'متاح' : 'مشغول'}
+                </div>
             </div>
-
-            <!-- صورة السائق -->
-            <div class="driver-image-container">
-                <img src="${driver.imageUrl || 'default-avatar.png'}" alt="${driver.name}" class="driver-image">
+            <div class="driver-info" style="padding: 15px;">
+                <h5 class="driver-name" style="font-size: 1.2rem; font-weight: bold; margin-bottom: 10px; color: #FFD700;">${driver.name}</h5>
+                <div class="driver-stats" style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                    <div class="stat-item" style="text-align: center;">
+                        <div class="stat-value" style="font-weight: bold; color: #FFD700;">
+                            <i class="fas fa-star"></i> ${driver.rating.toFixed(1)}
+                        </div>
+                        <div class="stat-label" style="font-size: 0.8rem; color: #FFFFFF;">التقييم</div>
+                    </div>
+                    <div class="stat-item" style="text-align: center;">
+                        <div class="stat-value" style="font-weight: bold; color: #FFFFFF;">
+                            <i class="fas fa-route"></i> ${driver.trips}
+                        </div>
+                        <div class="stat-label" style="font-size: 0.8rem; color: #FFFFFF;">الرحلات</div>
+                    </div>
+                    <div class="stat-item" style="text-align: center;">
+                        <div class="stat-value" style="font-weight: bold; color: #FFFFFF;">
+                            ${distanceDisplay}
+                        </div>
+                        <div class="stat-label" style="font-size: 0.8rem; color: #FFFFFF;">المسافة</div>
+                    </div>
+                </div>
+                <div class="text-muted" style="color: #FFFFFF; margin-bottom: 15px;">
+                    <p class="mb-2">
+                        <i class="fas fa-car me-2" style="color: #FFD700;"></i>
+                        ${driver.carType} ${driver.carModel}
+                    </p>
+                    <p class="mb-0">
+                        <i class="fas fa-map-marker-alt me-2" style="color: #FFD700;"></i>
+                        ${driver.location}
+                    </p>
+                </div>
             </div>
-
-            <!-- معلومات السائق -->
-            <div class="driver-info">
-                <h5 class="driver-name">${driver.name}</h5>
-                <div class="driver-stats">
-                    <div class="stat-item">
-                        <div class="stat-value">
-                            <i class="fas fa-star"></i> ${driver.rating ? driver.rating.toFixed(1) : '5.0'}
-                        </div>
-                        <div class="stat-label">التقييم</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">
-                            <i class="fas fa-route"></i> ${driver.trips || 0}
-                        </div>
-                        <div class="stat-label">الرحلات</div>
-                    </div>
-                </div>
-                <div class="driver-details">
-                    <p><i class="fas fa-car"></i> ${driver.carType} - ${driver.carModel}</p>
-                    <p><i class="fas fa-map-marker-alt"></i> ${driver.location}</p>
-                </div>
-
-                <!-- أزرار التفاعل -->
-                <div class="driver-actions" ${!isApproved ? 'style="pointer-events: none; opacity: 0.7;"' : ''}>
-                    <button class="action-btn primary" onclick="viewDriverLocation('${key}')" ${!isApproved ? 'disabled' : ''}>
-                        <i class="fas fa-map-marker-alt"></i> الموقع
-                    </button>
-                    <button class="action-btn secondary" onclick="openChatWindow('${key}')" ${!isApproved ? 'disabled' : ''}>
-                        <i class="fas fa-comment"></i> مراسلة
-                    </button>
-                </div>
+            <div class="driver-actions" style="display: flex; justify-content: space-between; padding: 10px;">
+                <button class="action-btn primary" onclick="bookDriver('${key}')" 
+                        style="background: #FFD700; color: #333; padding: 10px 20px; border-radius: 20px; border: none; cursor: pointer; font-weight: bold; transition: all 0.3s;">
+                    <i class="fas fa-taxi"></i> حجز
+                </button>
+                <button class="action-btn secondary" onclick="openChatWindow('${key}')" 
+                        style="background: #333; color: #FFD700; padding: 10px 20px; border-radius: 20px; border: 1px solid #FFD700; cursor: pointer; font-weight: bold; transition: all 0.3s;">
+                    <i class="fas fa-comment"></i> مراسلة
+                </button>
             </div>
         </div>
     `;
@@ -9241,36 +8417,43 @@ function updateUIAfterLogin(userData) {
     `;
             }
 
-
-            // تحديث دالة تحميل السائقين
+            // تحديث دالة تحميل السائقين مع فرز حسب المسافة
             function loadDrivers(location = 'all') {
                 if (isLoadingDrivers) return;
                 isLoadingDrivers = true;
                 showLoading();
 
-                database.ref('drivers').once('value')
+                const driversRef = database.ref('drivers');
+                driversRef.once('value')
                     .then((snapshot) => {
                         const driversGrid = document.getElementById('driversGrid');
                         driversGrid.innerHTML = '';
                         markerLayer.clearLayers();
 
+                        const driversArray = [];
                         snapshot.forEach((childSnapshot) => {
                             const driver = childSnapshot.val();
-                            const driverId = childSnapshot.key;
+                            const key = childSnapshot.key;
 
                             if (location === 'all' || driver.location === location) {
-                                // إضافة بطاقة السائق
-                                const driverCard = createDriverCard(driver, driverId);
-                                driversGrid.appendChild(driverCard);
+                                const distance = userLocation && driver.coordinates ?
+                                    calculateDistance(userLocation, driver.coordinates) : 999999;
 
-                                // إضافة علامة السائق على الخريطة
-                                if (driver.coordinates) {
-                                    const { lat, lng } = driver.coordinates;
-                                    const marker = createDriverMarker(driver, driverId, [lat, lng]);
-                                    marker.bindPopup(createDriverMarkerPopup(driver, driverId));
-                                    marker.addTo(markerLayer);
-                                }
+                                driversArray.push({
+                                    ...driver,
+                                    id: key,
+                                    distance: distance
+                                });
                             }
+                        });
+
+                        // فرز السائقين حسب المسافة
+                        driversArray.sort((a, b) => a.distance - b.distance);
+
+                        // عرض السائقين
+                        driversArray.forEach(driver => {
+                            driversGrid.innerHTML += createDriverCard(driver, driver.id);
+                            addDriverMarker(driver, driver.id);
                         });
                     })
                     .catch((error) => {
@@ -9283,51 +8466,40 @@ function updateUIAfterLogin(userData) {
                     });
             }
 
-
-
-            // تحديث CSS للعناصر المقيدة
-            const style = document.createElement('style');
-            style.textContent = `
-    .driver-card.not-approved {
-        opacity: 0.7;
-        filter: grayscale(100%);
+            // إضافة أنماط CSS للمسافات
+            const styleSheet = document.createElement('style');
+            styleSheet.textContent = `
+    .distance-badge {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        backdrop-filter: blur(5px);
     }
 
-    .driver-card.pending {
-        opacity: 0.85;
-        filter: grayscale(30%);
+    .distance-near .distance-badge {
+        background-color: rgba(46, 204, 64, 0.9);
+        color: white;
     }
 
-    .driver-card.not-approved .driver-actions button,
-    .driver-card.pending .driver-actions button {
-        pointer-events: none;
-        opacity: 0.5;
-        cursor: not-allowed;
+    .distance-medium .distance-badge {
+        background-color: rgba(255, 215, 0, 0.9);
+        color: black;
     }
 
-    .approval-notice {
-        background: rgba(255, 0, 0, 0.1);
-        color: #FF4136;
-        padding: 10px;
-        margin-top: 10px;
-        border-radius: 5px;
-        text-align: center;
-        font-size: 0.9rem;
-    }
-
-    .driver-popup.not-approved img,
-    .driver-popup.pending img {
-        filter: grayscale(100%);
-        opacity: 0.7;
-    }
-
-    .driver-popup.not-approved button,
-    .driver-popup.pending button {
-        opacity: 0.5;
-        cursor: not-allowed;
+    .distance-far .distance-badge {
+        background-color: rgba(255, 59, 48, 0.9);
+        color: white;
     }
 `;
-            document.head.appendChild(style);
+            document.head.appendChild(styleSheet);
+
             function toRad(degrees) {
                 return degrees * Math.PI / 180;
             }
@@ -9394,8 +8566,7 @@ function updateUIAfterLogin(userData) {
                                         style="background: #FFD700; color: #333; border: none; 
                                                padding: 8px 15px; border-radius: 20px; width: 100%;
                                                cursor: pointer; display: flex; align-items: center; 
-                                               justify-content: center; gap: 5px; font-weight: bold;"
-                                        ${!driver.approved ? 'disabled' : ''}>
+                                               justify-content: center; gap: 5px; font-weight: bold;">
                                     <i class="fas fa-comment"></i>
                                     مراسلة السائق
                                 </button>
@@ -9418,111 +8589,83 @@ function updateUIAfterLogin(userData) {
                     });
             }
 
+            // تحديث دالة إنشاء بطاقة السائق
+            // دالة إنشاء بطاقة السائق المحدثة
             function createDriverCard(driver, key) {
-                // التحقق من حالة الموافقة والنشاط
-                const isApproved = driver.approved === true;
-                const isPending = driver.approvalStatus === 'pending';
-                const isActive = driver.active && isApproved;
-
-                // تحديد نص وألوان الحالة
-                const statusText = !isApproved ? (isPending ? 'قيد المراجعة' : 'غير مفعل') :
-                    (isActive ? 'متاح' : 'مشغول');
-                const statusColor = !isApproved ? '#FFD700' :
-                    (isActive ? '#2ECC40' : '#FF4136');
-
-                // تحديد حالة التعتيم للبطاقة
-                const cardOpacity = isApproved ? '1' : '0.7';
+                const distance = userLocation && driver.coordinates ?
+                    calculateDistance(userLocation, driver.coordinates) : null;
 
                 return `
-        <div class="driver-card animate__animated animate__fadeIn" 
-             style="background-color: #000000; color: #FFFFFF; border-radius: 20px; 
-                    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); overflow: hidden; 
-                    opacity: ${cardOpacity}; position: relative;">
-            
-            ${!isApproved ? `
-                <div style="position: absolute; top: 20px; right: -35px; transform: rotate(45deg);
-                           background: ${isPending ? '#FFD700' : '#dc3545'}; color: ${isPending ? '#000' : '#fff'};
-                           padding: 5px 40px; z-index: 10; font-weight: bold;">
-                    ${statusText}
-                </div>
-            ` : ''}
-
-            <div class="driver-image-container" style="position: relative;">
-                <img src="${driver.imageUrl}" alt="${driver.name}" 
-                     class="driver-image" style="width: 100%; height: 200px; object-fit: cover; 
-                     border-bottom: 3px solid #FFD700; ${!isApproved ? 'filter: grayscale(50%);' : ''}">
-                
-                ${isApproved ? `
-                    <div class="driver-status ${isActive ? 'status-active' : 'status-inactive'}" 
-                         onclick="toggleDriverStatus('${key}', ${isActive})"
-                         style="position: absolute; top: 10px; right: 10px; padding: 5px 10px; 
-                                border-radius: 20px; background: rgba(255, 255, 255, 0.8); 
-                                font-weight: bold; color: ${statusColor};">
-                        ${isActive ? 'متاح' : 'مشغول'}
-                    </div>
-                ` : ''}
+        <div class="driver-card animate__animated animate__fadeIn" data-driver-id="${key}">
+            <!-- قسم أزرار الإجراءات العلوية -->
+            <div class="driver-card-actions">
+              
             </div>
 
-            <div class="driver-info" style="padding: 15px;">
-                <h5 class="driver-name" style="font-size: 1.2rem; font-weight: bold; 
-                                             margin-bottom: 10px; color: #FFD700;">
-                    ${driver.name}
-                </h5>
-                
-                <div class="driver-stats" style="display: flex; justify-content: space-between; 
-                                               margin-bottom: 15px;">
-                    <div class="stat-item" style="text-align: center;">
-                        <div class="stat-value" style="font-weight: bold; color: #FFD700;">
-                            <i class="fas fa-star"></i> ${driver.rating ? driver.rating.toFixed(1) : '5.0'}
+            <!-- صورة السائق والحالة -->
+            <div class="driver-image-container">
+                <img src="${driver.imageUrl}" alt="${driver.name}" class="driver-image">
+                <div class="driver-status ${driver.active ? 'status-active' : 'status-inactive'}">
+                    ${driver.active ? 'متاح' : 'مشغول'}
+                </div>
+                <!-- مؤشر التتبع -->
+                <div class="tracking-indicator" id="tracking-${key}">
+                    <i class="fas fa-satellite-dish fa-pulse"></i>
+                </div>
+            </div>
+
+            <!-- معلومات السائق -->
+            <div class="driver-info">
+                <h5 class="driver-name">${driver.name}</h5>
+                <div class="driver-stats">
+                    <div class="stat-item" onclick="addRating('${key}')" style="cursor: pointer">
+                        <div class="stat-value">
+                            <i class="fas fa-star" style="color: #FFD700;"></i>
+                            ${driver.rating ? driver.rating.toFixed(1) : '5.0'}
                         </div>
-                        <div class="stat-label" style="font-size: 0.8rem; color: #FFFFFF;">التقييم</div>
+                        <div class="stat-label">اضغط للتقييم</div>
                     </div>
-                    <div class="stat-item" style="text-align: center;">
-                        <div class="stat-value" style="font-weight: bold; color: #FFFFFF;">
-                            <i class="fas fa-route"></i> ${driver.trips || 0}
+                    <div class="stat-item">
+                        <div class="stat-value">
+                            <i class="fas fa-route"></i>
+                            ${driver.trips || 0}
                         </div>
-                        <div class="stat-label" style="font-size: 0.8rem; color: #FFFFFF;">الرحلات</div>
+                        <div class="stat-label">عدد الرحلات</div>
                     </div>
-                    <div class="stat-item" style="text-align: center;">
-                        <div class="stat-value" style="font-weight: bold; color: #FFFFFF;">
-                            ${driver.distance ? `${driver.distance.toFixed(1)} كم` : '--'}
+                    <div class="stat-item">
+                        <div class="stat-value">
+                            ${distance ? distance.toFixed(1) : '--'}
                         </div>
-                        <div class="stat-label" style="font-size: 0.8rem; color: #FFFFFF;">المسافة</div>
+                        <div class="stat-label">كم</div>
                     </div>
                 </div>
-
-                <div class="text-muted" style="color: #FFFFFF; margin-bottom: 15px;">
+                
+                <div class="text-muted">
                     <p class="mb-2">
-                        <i class="fas fa-car me-2" style="color: #FFD700;"></i>
+                        <i class="fas fa-car me-2"></i>
                         ${driver.carType} ${driver.carModel}
                     </p>
                     <p class="mb-0">
-                        <i class="fas fa-map-marker-alt me-2" style="color: #FFD700;"></i>
+                        <i class="fas fa-map-marker-alt me-2"></i>
                         ${driver.location}
                     </p>
                 </div>
             </div>
 
-            <div class="driver-actions" style="display: flex; justify-content: space-between; 
-                                             padding: 10px; ${!isApproved ? 'pointer-events: none; opacity: 0.7;' : ''}">
-  <div class="driver-actions">
+            <!-- أزرار الإجراءات السفلية -->
+            <div class="driver-actions">
                 <button class="action-btn primary" onclick="viewDriverLocation('${key}')">
                     <i class="fas fa-map-marker-alt"></i>
                     عرض الموقع
                 </button>
-                <button class="action-btn secondary" 
-                        onclick="openChatWindow('${key}')" 
-                        style="background: #333; color: #FFD700; padding: 10px 20px; 
-                               border-radius: 20px; border: 1px solid #FFD700; 
-                               cursor: pointer; font-weight: bold; transition: all 0.3s;"
-                        ${!isApproved ? 'disabled' : ''}>
-                    <i class="fas fa-comment"></i> مراسلة
+                <button class="action-btn secondary" onclick="openChatWindow('${key}')">
+                    <i class="fas fa-comment"></i> 
+                    مراسلة
                 </button>
             </div>
         </div>
     `;
             }
-
             function startDriverLocationTracking(driverId) {
                 // ... الكود السابق ...
 
@@ -9847,6 +8990,63 @@ function updateUIAfterLogin(userData) {
                     reader.readAsDataURL(file);
                 }
             }
+            async function handleAddDriver(event) {
+                event.preventDefault();
+                showLoading();
+
+                try {
+                    const imageFile = document.getElementById('driverImage').files[0];
+                    if (!imageFile) {
+                        throw new Error('الرجاء اختيار صورة للسائق');
+                    }
+
+                    // الحصول على الإحداثيات مباشرة من حقول الإدخال
+                    const latitude = parseFloat(document.getElementById('driverLatitude').value);
+                    const longitude = parseFloat(document.getElementById('driverLongitude').value);
+
+                    // التحقق من وجود الإحداثيات
+                    if (!latitude || !longitude) {
+                        throw new Error('يرجى تحديد موقع السائق أولاً');
+                    }
+
+                    const imageRef = storage.ref(`drivers/${Date.now()}_${imageFile.name}`);
+                    const uploadTask = await imageRef.put(imageFile);
+                    const imageUrl = await uploadTask.ref.getDownloadURL();
+
+                    const driverData = {
+                        name: document.getElementById('driverName').value,
+                        phone: document.getElementById('driverPhone').value,
+                        carType: document.getElementById('carType').value,
+                        carModel: document.getElementById('carModel').value,
+                        location: document.getElementById('driverLocation').value, // المحافظة فقط
+                        coordinates: {
+                            lat: latitude,
+                            lng: longitude
+                        },
+                        bio: document.getElementById('driverBio').value,
+                        imageUrl: imageUrl,
+                        rating: 5,
+                        trips: 0,
+                        active: true,
+                        createdAt: firebase.database.ServerValue.TIMESTAMP
+                    };
+
+                    await database.ref('drivers').push(driverData);
+
+                    // إغلاق النافذة المنبثقة بعد النجاح
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('addDriverModal'));
+                    modal.hide();
+
+                    document.getElementById('addDriverForm').reset();
+                    showToast('تم إضافة السائق بنجاح');
+                    loadDrivers();
+                } catch (error) {
+                    console.error('Error adding driver:', error);
+                    showToast(error.message, 'error');
+                } finally {
+                    hideLoading();
+                }
+            }
 
             function bookDriver(driverId) {
                 showLoading();
@@ -9959,47 +9159,19 @@ function updateUIAfterLogin(userData) {
             function hideLoading() {
                 document.getElementById('loadingSpinner').style.display = 'none';
             }
-            // دالة لعرض نافذة إضافة السائق
+
             function showAddDriverModal() {
-                // إغلاق نافذة اختيار العملية أولاً
-                const profileModal = bootstrap.Modal.getInstance(document.getElementById('profileModal'));
-                if (profileModal) {
-                    profileModal.hide();
-                }
-
-                // انتظار قليلاً قبل فتح النافذة الجديدة
-                setTimeout(() => {
-                    // إظهار نافذة إضافة السائق
-                    const addDriverModal = new bootstrap.Modal(document.getElementById('addDriverModal'));
-                    addDriverModal.show();
-                }, 150); // تأخير بسيط للحصول على انتقال سلس
+                const modal = new bootstrap.Modal(document.getElementById('addDriverModal'));
+                modal.show();
             }
-
-            // دالة لعرض نافذة تسجيل الدخول
-            function openLoginModal() {
-                const profileModal = bootstrap.Modal.getInstance(document.getElementById('profileModal'));
-                if (profileModal) {
-                    profileModal.hide();
+            window.addEventListener('scroll', function () {
+                const filter = document.querySelector('.location-filter');
+                if (window.scrollY > 100) {
+                    filter.classList.add('sticky');
+                } else {
+                    filter.classList.remove('sticky');
                 }
-
-                setTimeout(() => {
-                    const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
-                    loginModal.show();
-                }, 150);
-            }
-
-            // دالة لفتح نافذة تسجيل المستخدم
-            function openUserRegistration() {
-                const profileModal = bootstrap.Modal.getInstance(document.getElementById('profileModal'));
-                if (profileModal) {
-                    profileModal.hide();
-                }
-
-                setTimeout(() => {
-                    const userModal = new bootstrap.Modal(document.getElementById('userRegistrationModal'));
-                    userModal.show();
-                }, 150);
-            }
+            });
 
 
             // دالة البحث الرئيسية
@@ -10302,7 +9474,6 @@ function updateUIAfterLogin(userData) {
                 }
             }
 
-
             // تحديث دالة معالجة تسجيل المستخدم
             async function handleUserRegistration(event) {
                 event.preventDefault();
@@ -10391,7 +9562,200 @@ function updateUIAfterLogin(userData) {
                 });
             });
 
+            // دالة معالجة تسجيل السائق
+            // دالة معالجة تسجيل السائق المحسنة
+            async function handleDriverRegistration(event) {
+                event.preventDefault();
+                showLoading();
 
+                try {
+                    const formData = new FormData(event.target);
+                    const fullName = formData.get('fullName')?.trim();
+
+                    // التحقق من الاسم
+                    if (!fullName) {
+                        throw new Error('يرجى إدخال الاسم الكامل');
+                    }
+
+                    // التحقق من طول الاسم
+                    if (fullName.length < 2 || fullName.length > 50) {
+                        throw new Error('يجب أن يكون الاسم بين 2 و 50 حرف');
+                    }
+
+                    // التحقق من رقم الهاتف
+                    const phone = formData.get('phone')?.trim();
+                    if (!phone || phone.length < 10) {
+                        throw new Error('يرجى إدخال رقم هاتف صحيح');
+                    }
+
+                    // التحقق من العمر
+                    const age = parseInt(formData.get('age'));
+                    if (!age || age < 18 || age > 70) {
+                        throw new Error('يجب أن يكون العمر بين 18 و 70 سنة');
+                    }
+
+                    // إنشاء معرف فريد للسائق
+                    const driverId = `DR${Date.now()}`;
+
+                    // إعداد بيانات السائق
+                    const driverData = {
+                        id: driverId,
+                        fullName: fullName,
+                        age: age,
+                        phone: phone,
+                        vehicleType: formData.get('vehicleType')?.trim(),
+                        vehicleModel: formData.get('vehicleModel')?.trim(),
+                        vehicleNumber: formData.get('vehicleNumber')?.trim(),
+                        vehicleColor: formData.get('vehicleColor')?.trim(),
+                        province: formData.get('province')?.trim(),
+                        area: formData.get('area')?.trim(),
+                        address: formData.get('address')?.trim(),
+                        status: 'pending',
+                        createdAt: firebase.database.ServerValue.TIMESTAMP,
+                        lastUpdated: firebase.database.ServerValue.TIMESTAMP
+                    };
+
+                    // التحقق من الصورة الشخصية
+                    const photoFile = document.getElementById('driverPhoto').files[0];
+                    if (!photoFile) {
+                        throw new Error('يرجى اختيار صورة شخصية');
+                    }
+
+                    // التحقق من نوع الملف
+                    const validImageTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+                    if (!validImageTypes.includes(photoFile.type)) {
+                        throw new Error('يرجى اختيار صورة بصيغة JPG أو PNG');
+                    }
+
+                    // رفع الصورة الشخصية مع إظهار نسبة التقدم
+                    try {
+                        driverData.photoUrl = await uploadFile(photoFile, 'driver-photos');
+                    } catch (uploadError) {
+                        throw new Error('فشل في رفع الصورة الشخصية: ' + uploadError.message);
+                    }
+
+                    // رفع المستندات
+                    const documents = {};
+                    const requiredDocuments = {
+                        idFront: 'هوية-امامي',
+                        idBack: 'هوية-خلفي',
+                        licenseFront: 'اجازة-امامي',
+                        licenseBack: 'اجازة-خلفي'
+                    };
+
+                    for (const [inputId, docName] of Object.entries(requiredDocuments)) {
+                        const file = document.getElementById(inputId).files[0];
+                        if (!file) {
+                            throw new Error(`يرجى رفع ${docName}`);
+                        }
+                        if (!validImageTypes.includes(file.type)) {
+                            throw new Error(`يرجى رفع ${docName} بصيغة JPG أو PNG`);
+                        }
+                        try {
+                            documents[docName] = await uploadFile(file, 'driver-documents');
+                        } catch (uploadError) {
+                            throw new Error(`فشل في رفع ${docName}: ${uploadError.message}`);
+                        }
+                    }
+                    driverData.documents = documents;
+
+                    // إنشاء الباركود باستخدام رقم الطلب فقط
+                    let qrCodeUrl;
+                    try {
+                        qrCodeUrl = generateDriverQR({ id: driverId });
+                        await validateQRCode(qrCodeUrl);
+                        driverData.qrCode = qrCodeUrl;
+                    } catch (qrError) {
+                        console.error('QR Code error:', qrError);
+                        // نستمر في العملية حتى لو فشل إنشاء الباركود
+                        driverData.qrCode = null;
+                    }
+
+                    // حفظ البيانات في Firebase
+                    try {
+                        await database.ref('Drivers').child(driverId).set(driverData);
+                    } catch (dbError) {
+                        console.error('Firebase error:', dbError);
+                        throw new Error('حدث خطأ أثناء حفظ البيانات، يرجى المحاولة مرة أخرى');
+                    }
+
+                    // عرض رسالة النجاح
+                    await showSuccessModal(driverData, qrCodeUrl);
+
+                    // إغلاق النافذة وإعادة تعيين النموذج
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('driverRegistrationModal'));
+                    if (modal) {
+                        modal.hide();
+                        event.target.reset();
+                        resetPreviews();
+                    }
+
+                } catch (error) {
+                    console.error('Registration error:', error);
+                    Swal.fire({
+                        title: 'خطأ!',
+                        text: error.message || 'حدث خطأ أثناء التسجيل، يرجى المحاولة مرة أخرى',
+                        icon: 'error',
+                        confirmButtonText: 'حسناً',
+                        confirmButtonColor: '#d33'
+                    });
+                } finally {
+                    hideLoading();
+                }
+            }
+
+            // دالة مساعدة لإظهار نسبة التقدم أثناء رفع الملفات
+            function showUploadProgress(progress) {
+                const progressBar = document.querySelector('.upload-progress');
+                if (progressBar) {
+                    progressBar.style.width = `${progress}%`;
+                    progressBar.textContent = `${Math.round(progress)}%`;
+                }
+            }
+            async function uploadFile(file, folder) {
+                if (!file) {
+                    throw new Error('لم يتم اختيار ملف');
+                }
+
+                // التحقق من حجم الملف (الحد الأقصى 5 ميجابايت)
+                const maxSize = 5 * 1024 * 1024; // 5MB
+                if (file.size > maxSize) {
+                    throw new Error('حجم الملف كبير جداً، يجب أن لا يتجاوز 5 ميجابايت');
+                }
+
+                try {
+                    // إنشاء اسم ملف آمن
+                    const safeFileName = Date.now() + '_' + file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+                    const fileRef = storage.ref(`${folder}/${safeFileName}`);
+
+                    // رفع الملف مع إظهار نسبة التقدم
+                    const uploadTask = fileRef.put(file);
+
+                    return new Promise((resolve, reject) => {
+                        uploadTask.on('state_changed',
+                            (snapshot) => {
+                                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                                console.log('Upload progress:', progress);
+                            },
+                            (error) => {
+                                console.error('Upload error:', error);
+                                reject(new Error('فشل في رفع الملف، يرجى المحاولة مرة أخرى'));
+                            },
+                            async () => {
+                                try {
+                                    const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
+                                    resolve(downloadURL);
+                                } catch (error) {
+                                    reject(new Error('فشل في الحصول على رابط الملف'));
+                                }
+                            }
+                        );
+                    });
+                } catch (error) {
+                    console.error('Error in uploadFile:', error);
+                    throw new Error('فشل في رفع الملف، يرجى المحاولة مرة أخرى');
+                }
+            }
 
             // دالة إعادة تعيين معاينات الصور
             function resetPreviews() {
@@ -10761,7 +10125,7 @@ function updateUIAfterLogin(userData) {
                         province: formData.get('province'),
                         area: formData.get('area'),
                         address: formData.get('address'),
-
+                        
                         photoUrl: photoUrl,
                         userType: userType,
                         createdAt: firebase.database.ServerValue.TIMESTAMP
@@ -11659,6 +11023,299 @@ function updateUIAfterLogin(userData) {
                 }
             }
 
+            // تعديل دالة handleAddDriver لتفعيل التتبع المباشر
+            async function handleAddDriver(event) {
+                event.preventDefault();
+                showLoading();
+
+                try {
+                    const imageFile = document.getElementById('driverImage').files[0];
+                    if (!imageFile) {
+                        throw new Error('الرجاء اختيار صورة للسائق');
+                    }
+
+                    const latitude = parseFloat(document.getElementById('driverLatitude').value);
+                    const longitude = parseFloat(document.getElementById('driverLongitude').value);
+
+                    if (!latitude || !longitude) {
+                        throw new Error('يرجى تحديد موقع السائق أولاً');
+                    }
+
+                    const imageRef = storage.ref(`drivers/${Date.now()}_${imageFile.name}`);
+                    const uploadTask = await imageRef.put(imageFile);
+                    const imageUrl = await uploadTask.ref.getDownloadURL();
+
+                    const driverData = {
+                        name: document.getElementById('driverName').value,
+                        phone: document.getElementById('driverPhone').value,
+                        carType: document.getElementById('carType').value,
+                        carModel: document.getElementById('carModel').value,
+                        location: document.getElementById('driverLocation').value,
+                        coordinates: {
+                            lat: latitude,
+                            lng: longitude
+                        },
+                        bio: document.getElementById('driverBio').value,
+                        imageUrl: imageUrl,
+                        rating: 5,
+                        trips: 0,
+                        active: true,
+                        createdAt: firebase.database.ServerValue.TIMESTAMP
+                    };
+
+                    // إضافة السائق إلى قاعدة البيانات
+                    const newDriverRef = await database.ref('drivers').push(driverData);
+                    const driverId = newDriverRef.key;
+
+                    // تفعيل تتبع الموقع المباشر
+                    startDriverLocationTracking(driverId);
+
+                    // إغلاق النافذة المنبثقة
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('addDriverModal'));
+                    modal.hide();
+
+                    document.getElementById('addDriverForm').reset();
+                    showToast('تم إضافة السائق وتفعيل تتبع الموقع بنجاح');
+                    loadDrivers();
+                } catch (error) {
+                    console.error('Error adding driver:', error);
+                    showToast(error.message, 'error');
+                } finally {
+                    hideLoading();
+                }
+            }
+
+            // إضافة استعادة حالة التتبع عند تحميل الصفحة
+            document.addEventListener('DOMContentLoaded', () => {
+                const activeDriverId = localStorage.getItem('activeDriverId');
+                if (activeDriverId) {
+                    startDriverLocationTracking(activeDriverId);
+                }
+            });
+
+            // نظام إدارة الإشعارات
+            class NotificationsManager {
+                constructor() {
+                    this.database = firebase.database();
+                    this.messageCounter = 0;
+                    this.notificationCounter = 0;
+                    this.notificationSound = new Audio('notification-sound.mp3');
+                    this.messageSound = new Audio('message-sound.mp3');
+                    this.initialize();
+                }
+
+                initialize() {
+                    // تهيئة العناصر عند تحميل الصفحة
+                    document.addEventListener('DOMContentLoaded', () => {
+                        this.setupNotificationButtons();
+                        this.setupNotificationListeners();
+                    });
+                }
+
+                setupNotificationButtons() {
+                    // إعداد زر الإشعارات
+                    const notificationsBtn = document.querySelector('[data-bs-target="#notificationsModal"]');
+                    if (notificationsBtn) {
+                        notificationsBtn.innerHTML = `
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="display: none;">0</span>
+            `;
+                    }
+
+                    // إعداد زر الرسائل
+                    const messagesBtn = document.querySelector('[data-bs-target="#messagesModal"]');
+                    if (messagesBtn) {
+                        messagesBtn.innerHTML = `
+                <i class="fas fa-envelope"></i>
+                <span class="message-badge position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="display: none;">0</span>
+            `;
+                    }
+                }
+
+                setupNotificationListeners() {
+                    // الحصول على معرف السائق من التخزين المحلي
+                    const driverId = localStorage.getItem('currentDriverId');
+                    if (!driverId) return;
+
+                    // مراقبة الرسائل الجديدة
+                    this.database.ref(`chats/${driverId}/messages`).on('child_added', (snapshot) => {
+                        const message = snapshot.val();
+                        if (message && !message.read) {
+                            this.messageCounter++;
+                            this.updateMessageBadge();
+                            this.showMessageNotification(message);
+                            this.messageSound.play().catch(e => console.log('Audio play failed:', e));
+                        }
+                    });
+
+                    // مراقبة الإشعارات الجديدة
+                    this.database.ref(`drivers/${driverId}/notifications`).on('child_added', (snapshot) => {
+                        const notification = snapshot.val();
+                        if (notification && !notification.read) {
+                            this.notificationCounter++;
+                            this.updateNotificationBadge();
+                            this.showNotification(notification);
+                            this.notificationSound.play().catch(e => console.log('Audio play failed:', e));
+                        }
+                    });
+                }
+
+                updateMessageBadge() {
+                    const badge = document.querySelector('.message-badge');
+                    if (badge) {
+                        badge.textContent = this.messageCounter;
+                        badge.style.display = this.messageCounter > 0 ? 'block' : 'none';
+                    }
+                }
+
+                updateNotificationBadge() {
+                    const badge = document.querySelector('.notification-badge');
+                    if (badge) {
+                        badge.textContent = this.notificationCounter;
+                        badge.style.display = this.notificationCounter > 0 ? 'block' : 'none';
+                    }
+                }
+
+                showMessageNotification(message) {
+                    const toast = document.createElement('div');
+                    toast.className = 'notification-toast animate__animated animate__fadeInRight';
+                    toast.innerHTML = `
+            <div class="notification-content">
+                <div class="notification-title">رسالة جديدة</div>
+                <div class="notification-body">
+                    <strong>${message.senderName}</strong>: ${message.text}
+                </div>
+            </div>
+            <button class="notification-close" onclick="this.parentElement.remove()">&times;</button>
+        `;
+
+                    document.body.appendChild(toast);
+                    setTimeout(() => {
+                        toast.classList.replace('animate__fadeInRight', 'animate__fadeOutRight');
+                        setTimeout(() => toast.remove(), 300);
+                    }, 5000);
+                }
+
+                showNotification(notification) {
+                    const toast = document.createElement('div');
+                    toast.className = 'notification-toast animate__animated animate__fadeInRight';
+                    toast.innerHTML = `
+            <div class="notification-content">
+                <div class="notification-title">${notification.title}</div>
+                <div class="notification-body">${notification.body}</div>
+            </div>
+            <button class="notification-close" onclick="this.parentElement.remove()">&times;</button>
+        `;
+
+                    document.body.appendChild(toast);
+                    setTimeout(() => {
+                        toast.classList.replace('animate__fadeInRight', 'animate__fadeOutRight');
+                        setTimeout(() => toast.remove(), 300);
+                    }, 5000);
+                }
+
+                async markMessagesAsRead(driverId) {
+                    try {
+                        const messagesRef = this.database.ref(`chats/${driverId}/messages`);
+                        const snapshot = await messagesRef.once('value');
+                        const updates = {};
+
+                        snapshot.forEach(child => {
+                            if (!child.val().read) {
+                                updates[`${child.key}/read`] = true;
+                            }
+                        });
+
+                        await messagesRef.update(updates);
+                        this.messageCounter = 0;
+                        this.updateMessageBadge();
+                    } catch (error) {
+                        console.error('Error marking messages as read:', error);
+                    }
+                }
+
+                async markNotificationsAsRead(driverId) {
+                    try {
+                        const notificationsRef = this.database.ref(`drivers/${driverId}/notifications`);
+                        const snapshot = await notificationsRef.once('value');
+                        const updates = {};
+
+                        snapshot.forEach(child => {
+                            if (!child.val().read) {
+                                updates[`${child.key}/read`] = true;
+                            }
+                        });
+
+                        await notificationsRef.update(updates);
+                        this.notificationCounter = 0;
+                        this.updateNotificationBadge();
+                    } catch (error) {
+                        console.error('Error marking notifications as read:', error);
+                    }
+                }
+
+                // إضافة رسالة جديدة
+                async addMessage(driverId, message) {
+                    try {
+                        const newMessageRef = this.database.ref(`chats/${driverId}/messages`).push();
+                        await newMessageRef.set({
+                            ...message,
+                            timestamp: firebase.database.ServerValue.TIMESTAMP,
+                            read: false
+                        });
+                    } catch (error) {
+                        console.error('Error adding message:', error);
+                        throw error;
+                    }
+                }
+
+                // إضافة إشعار جديد
+                async addNotification(driverId, notification) {
+                    try {
+                        const newNotificationRef = this.database.ref(`drivers/${driverId}/notifications`).push();
+                        await newNotificationRef.set({
+                            ...notification,
+                            timestamp: firebase.database.ServerValue.TIMESTAMP,
+                            read: false
+                        });
+                    } catch (error) {
+                        console.error('Error adding notification:', error);
+                        throw error;
+                    }
+                }
+            }
+            // إضافة الدالة لمعالجة تسجيل الخروج
+            function handleLogout() {
+                // عرض تأكيد قبل تسجيل الخروج
+                Swal.fire({
+                    title: 'تسجيل الخروج',
+                    text: 'هل أنت متأكد أنك تريد تسجيل الخروج؟',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#FFD700',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'نعم، تسجيل الخروج',
+                    cancelButtonText: 'إلغاء',
+                    background: '#1a1a1a',
+                    color: '#FFFFFF'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // حذف بيانات المستخدم من التخزين المحلي
+                        localStorage.removeItem('currentUser');
+
+                        // إعادة تعيين واجهة المستخدم
+                        resetUserInterface();
+
+                        // عرض رسالة نجاح
+                        showToast('تم تسجيل الخروج بنجاح');
+
+                        // تأخير قصير قبل إعادة تحميل الصفحة
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 1000);
+                    }
+                });
+            }
 
             // دالة إعادة تعيين واجهة المستخدم
             function resetUserInterface() {
@@ -11704,193 +11361,117 @@ function updateUIAfterLogin(userData) {
                     userRegistrationForm.addEventListener('submit', handleUserRegistration);
                 }
             });
-            function checkCurrentUser() {
-    const user = firebase.auth().currentUser;
-    const storedUser = localStorage.getItem('currentUser');
-    
-    if (user && !storedUser) {
-        // المستخدم مسجل في Firebase ولكن ليس في التخزين المحلي
-        firebase.database().ref(`drivers/${user.uid}`).once('value')
-            .then(snapshot => {
-                if (snapshot.exists()) {
-                    updateDriverUIAfterLogin(snapshot.val());
-                } else {
-                    return firebase.database().ref(`users/${user.uid}`).once('value');
-                }
-            })
-            .then(snapshot => {
-                if (snapshot && snapshot.exists()) {
-                    updateUserUIAfterLogin(snapshot.val());
-                }
-            })
-            .catch(error => {
-                console.error('Error checking user status:', error);
-            });
+
+            // دالة فتح نافذة تسجيل الدخول
+function openLoginModal() {
+    // إغلاق نافذة اختيار نوع الحساب
+    const profileModal = bootstrap.Modal.getInstance(document.getElementById('profileModal'));
+    profileModal.hide();
+
+    // فتح نافذة تسجيل الدخول
+    const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+    loginModal.show();
+}
+
+// دالة معالجة تسجيل الدخول
+async function handleLogin(event) {
+    event.preventDefault();
+    showLoading();
+
+    try {
+        const formData = new FormData(event.target);
+        const email = formData.get('email');
+        const password = formData.get('password');
+
+        // البحث عن المستخدم في قاعدة البيانات
+        const usersRef = firebase.database().ref('users');
+        const snapshot = await usersRef.orderByChild('email').equalTo(email).once('value');
+        const users = snapshot.val();
+
+        if (!users) {
+            throw new Error('البريد الإلكتروني أو كلمة المرور غير صحيحة');
+        }
+
+        const userId = Object.keys(users)[0];
+        const user = users[userId];
+
+        // التحقق من كلمة المرور (في الواقع يجب استخدام Firebase Auth)
+        if (password !== user.password) {
+            throw new Error('البريد الإلكتروني أو كلمة المرور غير صحيحة');
+        }
+
+        // حفظ بيانات المستخدم
+        localStorage.setItem('currentUser', JSON.stringify(user));
+
+        // تحديث واجهة المستخدم
+        updateUIAfterLogin(user);
+
+        // إغلاق نافذة تسجيل الدخول
+        const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
+        loginModal.hide();
+
+        // إظهار رسالة نجاح
+        showToast('تم تسجيل الدخول بنجاح');
+
+    } catch (error) {
+        console.error('Login error:', error);
+        showToast(error.message, 'error');
+    } finally {
+        hideLoading();
     }
 }
 
-// استدعاء الدالة عند تحميل الصفحة
-document.addEventListener('DOMContentLoaded', checkCurrentUser);
-            // دالة فتح نافذة تسجيل الدخول
-            function openLoginModal() {
-                // إغلاق نافذة اختيار نوع الحساب
-                const profileModal = bootstrap.Modal.getInstance(document.getElementById('profileModal'));
-                profileModal.hide();
+// دالة تحديث واجهة المستخدم بعد تسجيل الدخول
+function updateUIAfterLogin(user) {
+    // إخفاء زر تسجيل من الشريط العلوي
+    const registrationBtn = document.querySelector('[data-bs-target="#profileModal"]');
+    if (registrationBtn) {
+        registrationBtn.style.display = 'none';
+    }
 
-                // فتح نافذة تسجيل الدخول
-                const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
-                loginModal.show();
-            }
+    // تحديث زر الملف الشخصي
+    const profileBtn = document.querySelector('.user-profile-btn');
+    if (profileBtn) {
+        profileBtn.innerHTML = `
+            <img src="${user.photo || 'default-avatar.png'}" 
+                 alt="${user.name}" 
+                 class="rounded-circle me-2" 
+                 style="width: 35px; height: 35px; object-fit: cover;">
+            <span class="d-none d-md-inline">${user.name}</span>
+        `;
+        
+        // تحديث القائمة المنسدلة
+        const dropdownMenu = document.createElement('div');
+        dropdownMenu.className = 'dropdown-menu dropdown-menu-end';
+        dropdownMenu.innerHTML = `
+            <a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>الملف الشخصي</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item text-danger" href="#" onclick="handleLogout()">
+                <i class="fas fa-sign-out-alt me-2"></i>تسجيل الخروج
+            </a>
+        `;
+        profileBtn.parentElement.appendChild(dropdownMenu);
+    }
 
-            // دالة معالجة تسجيل الدخول
-            async function handleLogin(event) {
-                event.preventDefault();
-                showLoading();
-
-                try {
-                    const email = document.getElementById('email').value;
-                    const password = document.getElementById('password').value;
-
-                    // أولاً نتحقق من وجود السائق
-                    const driversRef = firebase.database().ref('drivers');
-                    const driverQuery = await driversRef.orderByChild('email').equalTo(email).once('value');
-                    const driverData = driverQuery.val();
-
-                    // في حالة لم يتم العثور على السائق، نتحقق من جدول المستخدمين
-                    if (!driverData) {
-                        const usersRef = firebase.database().ref('users');
-                        const userQuery = await usersRef.orderByChild('email').equalTo(email).once('value');
-                        const userData = userQuery.val();
-                        
-                        if (!userData) {
-                            throw new Error('البريد الإلكتروني غير مسجل');
-                        }
-                    }
-
-                    // محاولة تسجيل الدخول باستخدام Firebase Auth
-                    const userCredential = await firebase.auth().signInWithEmailAndPassword(email, password);
-                    const user = userCredential.user;
-
-                    // جلب بيانات المستخدم المحدثة
-                    let userData = null;
-                    let userType = null;
-
-                    // التحقق مرة أخرى من نوع المستخدم
-                    const driverSnapshot = await driversRef.child(user.uid).once('value');
-                    const userSnapshot = await firebase.database().ref(`users/${user.uid}`).once('value');
-
-                    if (driverSnapshot.exists()) {
-                        userData = driverSnapshot.val();
-                        userType = 'driver';
-                    } else if (userSnapshot.exists()) {
-                        userData = userSnapshot.val();
-                        userType = 'user';
-                    }
-
-                    // حفظ بيانات المستخدم
-                    localStorage.setItem('currentUser', JSON.stringify({
-                        ...userData,
-                        uid: user.uid,
-                        email: user.email,
-                        userType: userType
-                    }));
-
-                    // تحديث واجهة المستخدم
-                    if (userType === 'driver') {
-                        updateDriverUIAfterLogin(userData);
-                    } else {
-                        updateUserUIAfterLogin(userData);
-                    }
-
-                    // إغلاق النافذة المنبثقة
-                    const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
-                    if (loginModal) {
-                        loginModal.hide();
-                    }
-
-                    showToast('تم تسجيل الدخول بنجاح', 'success');
-
-                } catch (error) {
-                    console.error('Login error:', error);
-                    let errorMessage;
-
-                    switch (error.code) {
-                        case 'auth/user-not-found':
-                            errorMessage = 'البريد الإلكتروني غير مسجل';
-                            break;
-                        case 'auth/wrong-password':
-                            errorMessage = 'كلمة المرور غير صحيحة';
-                            break;
-                        case 'auth/invalid-email':
-                            errorMessage = 'البريد الإلكتروني غير صالح';
-                            break;
-                        case 'auth/user-disabled':
-                            errorMessage = 'تم تعطيل هذا الحساب';
-                            break;
-                        default:
-                            errorMessage = error.message;
-                    }
-
-                    showToast(errorMessage, 'error');
-                } finally {
-                    hideLoading();
-                }
-            }
-            function togglePasswordVisibility(button) {
-                const input = button.parentElement.querySelector('input');
-                const icon = button.querySelector('i');
-
-                if (input.type === 'password') {
-                    input.type = 'text';
-                    icon.classList.replace('fa-eye', 'fa-eye-slash');
-                } else {
-                    input.type = 'password';
-                    icon.classList.replace('fa-eye-slash', 'fa-eye');
-                }
-            }
-
-            // التحقق من تطابق كلمات المرور
-            function validatePasswords() {
-                const password = document.querySelector('input[name="password"]');
-                const confirmPassword = document.querySelector('input[name="confirmPassword"]');
-
-                function checkMatch() {
-                    if (password.value !== confirmPassword.value) {
-                        confirmPassword.setCustomValidity('كلمات المرور غير متطابقة');
-                    } else {
-                        confirmPassword.setCustomValidity('');
-                    }
-                }
-
-                password.addEventListener('change', checkMatch);
-                confirmPassword.addEventListener('keyup', checkMatch);
-            }
-
-            // تهيئة التحقق عند تحميل الصفحة
-            document.addEventListener('DOMContentLoaded', validatePasswords);
-
-            // التحقق من تطابق كلمات المرور
-            function validatePasswords() {
-                const password = document.querySelector('input[name="password"]');
-                const confirmPassword = document.querySelector('input[name="confirmPassword"]');
-
-                function checkMatch() {
-                    if (password.value !== confirmPassword.value) {
-                        confirmPassword.setCustomValidity('كلمات المرور غير متطابقة');
-                    } else {
-                        confirmPassword.setCustomValidity('');
-                    }
-                }
-
-                password.addEventListener('change', checkMatch);
-                confirmPassword.addEventListener('keyup', checkMatch);
-            }
-
-
-
-
-            // تهيئة التحقق عند تحميل الصفحة
-            document.addEventListener('DOMContentLoaded', validatePasswords);
+    // تحديث معلومات المستخدم في الشريط الجانبي
+    const sideNavUserInfo = document.querySelector('.side-nav-user-info');
+    if (sideNavUserInfo) {
+        sideNavUserInfo.innerHTML = `
+            <div class="text-center p-4">
+                <img src="${user.photo || 'default-avatar.png'}" 
+                     alt="${user.name}" 
+                     class="rounded-circle mb-3"
+                     style="width: 80px; height: 80px; object-fit: cover;">
+                <h6 class="text-white mb-1">${user.name}</h6>
+                <span class="badge bg-primary mb-3">${user.userType}</span>
+                <button onclick="handleLogout()" 
+                        class="btn btn-danger btn-sm w-100">
+                    <i class="fas fa-sign-out-alt me-2"></i>تسجيل الخروج
+                </button>
+            </div>
+        `;
+    }
+}
         </script>
         </main>
         <!-- ربط ملف الجافا سكريبت -->

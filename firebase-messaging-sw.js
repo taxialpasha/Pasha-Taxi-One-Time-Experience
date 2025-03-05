@@ -6,7 +6,6 @@ importScripts('https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js')
 firebase.initializeApp({
     apiKey: "AIzaSyDGpAHia_wEmrhnmYjrPf1n1TrAzwEMiAI",
     authDomain: "messageemeapp.firebaseapp.com",
-    databaseURL: "https://messageemeapp-default-rtdb.firebaseio.com",
     projectId: "messageemeapp",
     storageBucket: "messageemeapp.appspot.com",
     messagingSenderId: "255034474844",
@@ -14,16 +13,6 @@ firebase.initializeApp({
 });
 
 const messaging = firebase.messaging();
-
-messaging.setBackgroundMessageHandler(function(payload) {
-    const notificationTitle = 'Background Message Title';
-    const notificationOptions = {
-        body: 'Background Message body.',
-        icon: '/firebase-logo.png'
-    };
-
-    return self.registration.showNotification(notificationTitle, notificationOptions);
-});
 
 // Enhanced notification handling
 messaging.onBackgroundMessage((payload) => {
