@@ -53,17 +53,8 @@
     <meta name="twitter:image"
         content="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/driver-images%2F7605a607-6cf8-4b32-aee1-fa7558c98452.png?alt=media&token=5cf9e67c-ba6e-4431-a6a0-79dede15b527">
 </head>
-<body>
-    <!-- ...existing code... -->
 
-    <!-- Import the registration functions -->
-    <script type="module">
-        import { handleUserRegistration, handleDriverRegistration } from './auth.js';
 
-        // Attach the functions to the form submit events
-        document.getElementById('userRegistrationForm').addEventListener('submit', handleUserRegistration);
-        document.getElementById('driverRegistrationForm').addEventListener('submit', handleDriverRegistration);
-    </script>
     <!-- Content will be here -->
 
     <!-- External Libraries -->
@@ -92,11 +83,8 @@
     <script type="module" src="user-auth-notifications.js"></script>
     <script type="module" src="notifications-manager.js"></script>
     <script src="firebase-config.js"></script>
+    <!-- قبل إغلاق body -->
     <script src="nearby-drivers-map.js"></script>
-    <script src="nearby-drivers.js"></script>
-    <script src="auth.js"></script>
-    <script src="nearby-drivers.js"></script>
-    <script src="auth.js"></script>
 
 
 
@@ -3403,30 +3391,7 @@
 
         .required::after {
             content: ' *';
-            color: #dc3545;
-        }
-
-        .input-group .btn-outline-secondary {
-            border-color: #ced4da;
-        }
-
-        .input-group .btn-outline-secondary:hover {
-            background-color: #f8f9fa;
-            border-color: #ced4da;
-        }
-
-        .registration-section {
-            background: rgba(255, 215, 0, 0.1);
-            border: 1px solid #FFD700;
-            border-radius: 10px;
-            padding: 20px;
-        }
-
-        .section-title {
-            color: #FFD700;
-            border-bottom: 2px solid #FFD700;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
+            color: red;
         }
 
         #locationPickerMap {
@@ -5946,229 +5911,67 @@
             font-size: 0.9rem;
         }
 
-        required::after {
-            content: ' *';
-            color: #dc3545;
-        }
 
-        .input-group .btn-outline-secondary {
-            border-color: #FFD700;
+        .toggle-availability-btn {
+            background-color: #333;
             color: #FFD700;
-        }
-
-        .input-group .btn-outline-secondary:hover {
-            background-color: #FFD700;
-            color: #000000;
-        }
-
-        .form-control:focus {
-            border-color: #FFD700;
-            box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.25);
-        }
-
-        .registration-section {
-            background-color: #242424;
             border: 1px solid #FFD700;
             border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .section-title {
-            color: #FFD700;
-            border-bottom: 2px solid #FFD700;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
+            padding: 8px 15px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
             font-weight: bold;
         }
 
-        .form-label.required::after {
-            content: ' *';
-            color: #FF4136;
-        }
-
-        .input-group .btn-outline-secondary {
-            border-color: #FFD700;
-            color: #FFD700;
-        }
-
-        .input-group .btn-outline-secondary:hover {
+        .toggle-availability-btn:hover {
             background-color: #FFD700;
-            color: #000000;
+            color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
         }
 
-        .form-control {
-            background-color: #333333;
-            border: 1px solid #FFD700;
-            color: #FFFFFF;
+        .toggle-availability-btn i {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
         }
 
-        .form-control:focus {
-            background-color: #444444;
-            border-color: #FFD700;
-            box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.25);
-            color: #FFFFFF;
+        .toggle-availability-btn:hover i {
+            transform: rotate(180deg);
         }
 
-        .form-control::placeholder {
-            color: rgba(255, 255, 255, 0.6);
+        .badge.bg-gold {
+            background-color: #FFD700;
+            color: #000;
         }
 
-        .text-muted {
-            color: #999999 !important;
+        .side-nav-user-info .btn {
+            margin-top: 10px;
         }
-
-
-
-            /* أنماط لحالة تسجيل الدخول/الخروج */
-    .login-only {
-        /* عناصر تظهر فقط عندما يكون المستخدم غير مسجل */
-        display: block;
-    }
-    .auth-only {
-        /* عناصر تظهر فقط عندما يكون المستخدم مسجل الدخول */
-        display: none;
-    }
-    .driver-only {
-        /* عناصر تظهر فقط للسائقين */
-        display: none;
-    }
-    .user-only {
-        /* عناصر تظهر فقط للمستخدمين العاديين */
-        display: none;
-    }
-    
-    /* تحسينات على أيقونة المستخدم المسجل */
-    .user-profile-btn img {
-        width: 35px;
-        height: 35px;
-        border-radius: 50%;
-        border: 2px solid #FFD700;
-        object-fit: cover;
-        transition: all 0.3s ease;
-    }
-    
-    .user-profile-btn img:hover {
-        transform: scale(1.1);
-        box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
-    }
-    
-    /* تحسينات على معلومات المستخدم في الشريط الجانبي */
-    .side-nav-user-info {
-        padding: 20px;
-        text-align: center;
-        border-bottom: 1px solid rgba(255, 215, 0, 0.2);
-    }
-    
-    .side-nav-user-info img {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        border: 3px solid #FFD700;
-        margin-bottom: 15px;
-        object-fit: cover;
-    }
-    
-    .side-nav-user-info h6 {
-        color: #FFD700;
-        margin: 0 0 8px 0;
-    }
-    
-    .side-nav-user-info .badge {
-        margin-bottom: 10px;
-    }
-    
-    .side-nav-user-info .driver-status {
-        padding: 5px 15px;
-        border-radius: 20px;
-        display: inline-block;
-        font-weight: bold;
-        margin-bottom: 15px;
-    }
-    
-    .side-nav-user-info .status-active {
-        background: rgba(46, 204, 64, 0.2);
-        color: #2ECC40;
-        border: 1px solid #2ECC40;
-    }
-    
-    .side-nav-user-info .status-inactive {
-        background: rgba(255, 65, 54, 0.2);
-        color: #FF4136;
-        border: 1px solid #FF4136;
-    }
-
-
-    /* إخفاء العناصر المكررة */
-.secondary-user-display {
-    display: none !important;
-}
     </style>
     </head>
 
     <body>
 
         <body>
-            <!-- تحديث شريط الأدوات في الأعلى -->
-            <div class="tools">
-                <a class="nav-link position-relative" href="#" data-bs-toggle="modal" data-bs-target="#searchModal">
-                    <i class="fas fa-search"></i>
-                </a>
-
-                <a class="nav-link position-relative" href="#" data-bs-toggle="modal"
-                    data-bs-target="#notificationsModal">
-                    <i class="fas fa-bell"></i>
-                    <span
-                        class="notification-badge position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                        style="display: none;">0</span>
-                </a>
+         
 
 
+         
 
-                <!-- زر الحساب الشخصي -->
-                <a class="nav-link user-profile-btn" href="#" data-bs-toggle="modal" data-bs-target="#profileModal">
-                    <i class="fas fa-user"></i>
-                    <span class="ms-1 d-none d-md-inline">تسجيل</span>
-                </a>
-            </div>
 
-            <!-- إضافة نوافذ الإشعارات والرسائل -->
-            <!-- نافذة الإشعارات -->
-            <div class="modal fade" id="notificationsModal" tabindex="-1">
-                <div class="modal-dialog modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">الإشعارات</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="notifications-list"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- Header -->
+          
 
-            <!-- نافذة الرسائل -->
-            <div class="modal fade" id="messagesModal" tabindex="-1">
-                <div class="modal-dialog modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">الرسائل</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="messages-list"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-           
+                
+                    </a>
                     <!-- زر فتح الشريط الجانبي -->
                     <button class="nav-toggle" onclick="toggleSideNav()">
                         <i class="fas fa-bars"></i>
                     </button>
                     <nav class="navbar app-header fixed-top">
-                        <div class="container d-flex justify-content-between align-items-center">
                             <!-- اللوجو واسم التطبيق مع أيقونة البحث -->
                             <div class="d-flex align-items-center app-title">
                                 <a class="app-logo d-flex align-items-center" href="map.html">
@@ -6178,6 +5981,7 @@
                                 <!-- أيقونة البحث بجانب الاسم -->
                                 <div class="side-nav" id="sideNav">
                                     <div class="side-nav-header">
+                                        <h2 class="side-nav-title">تاكسي العراق</h2>
                                         <button class="side-nav-close" onclick="toggleSideNav()">×</button>
                                     </div>
 
@@ -6243,26 +6047,99 @@
         <div class="tools d-flex align-items-center">
             <!-- Search Icon -->
             <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#searchModal">
-                <i class="fas fa-search"></i>
+            <i class="fas fa-search"></i>
             </a>
 
             <!-- Notifications Icon -->
             <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#notificationsModal">
-                <i class="fas fa-bell"></i>
+            <i class="fas fa-bell"></i>
             </a>
             <a class="nav-link position-relative" href="#" data-bs-toggle="modal" data-bs-target="#messagesModal">
-                <i class="fas fa-envelope"></i>
-                <span
-                    class="message-badge position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                    style="display: none;">0</span>
+            <i class="fas fa-envelope"></i>
+            <span
+                class="message-badge position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                style="display: none;">0</span>
             </a>
 
             <!-- Profile/Account Icon - يفتح نافذة اختيار نوع الحساب -->
             <a class="nav-link user-profile-btn" href="#" data-bs-toggle="modal" data-bs-target="#profileModal">
-                <i class="fas fa-user"></i>
-                <span class="ms-1 d-none d-md-inline">تسجيل</span>
+            <img id="userProfileImage" src="default-profile.png" alt="Profile" class="rounded-circle" style="width: 35px; height: 35px; display: none;">
+            <i class="fas fa-user" id="defaultProfileIcon"></i>
+            <span class="ms-1 d-none d-md-inline" id="profileText">تسجيل</span>
             </a>
         </div>
+
+        <script>
+            function updateProfileIcon(user) {
+            const profileImage = document.getElementById('userProfileImage');
+            const defaultIcon = document.getElementById('defaultProfileIcon');
+            const profileText = document.getElementById('profileText');
+
+            if (user && user.photoURL) {
+                profileImage.src = user.photoURL;
+                profileImage.style.display = 'block';
+                defaultIcon.style.display = 'none';
+                profileText.style.display = 'none';
+            } else {
+                profileImage.style.display = 'none';
+                defaultIcon.style.display = 'block';
+                profileText.style.display = 'block';
+            }
+            }
+
+            // Example usage after user login
+            firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                updateProfileIcon(user);
+            }
+            });
+        function updateProfileIcon(user) {
+            const profileImage = document.getElementById('userProfileImage');
+            const defaultIcon = document.getElementById('defaultProfileIcon');
+            const profileText = document.getElementById('profileText');
+
+            if (user && user.photoURL) {
+                profileImage.src = user.photoURL;
+                profileImage.style.display = 'block';
+                defaultIcon.style.display = 'none';
+                profileText.style.display = 'none';
+            } else {
+                profileImage.style.display = 'none';
+                defaultIcon.style.display = 'block';
+                profileText.style.display = 'block';
+            }
+        }
+
+        // Example usage after user login
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                updateProfileIcon(user);
+            }
+        });
+            function updateProfileIcon(user) {
+                const profileImage = document.getElementById('userProfileImage');
+                const defaultIcon = document.getElementById('defaultProfileIcon');
+                const profileText = document.getElementById('profileText');
+
+                if (user && user.photoURL) {
+                    profileImage.src = user.photoURL;
+                    profileImage.style.display = 'block';
+                    defaultIcon.style.display = 'none';
+                    profileText.style.display = 'none';
+                } else {
+                    profileImage.style.display = 'none';
+                    defaultIcon.style.display = 'block';
+                    profileText.style.display = 'block';
+                }
+            }
+
+            // Example usage after user login
+            firebase.auth().onAuthStateChanged((user) => {
+                if (user) {
+                    updateProfileIcon(user);
+                }
+            });
+        </script>
 
         </nav>
 
@@ -6454,145 +6331,150 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
+
                         <form id="addDriverForm" onsubmit="handleAddDriver(event)">
-                            <!-- معلومات الحساب - إضافة جديدة -->
-
-
-                            <form id="addDriverForm" onsubmit="handleAddDriver(event)">
-                                <div class="mb-4 text-center">
-                                    <div class="image-upload-container"
-                                        onclick="document.getElementById('driverImage').click()">
-                                        <input type="file" id="driverImage" accept="image/*" style="display: none"
-                                            onchange="handleImagePreview(event)">
-                                        <img id="imagePreview" src="#" alt=""
-                                            style="display: none; width: 100%; height: 100%; object-fit: cover;">
-                                        <div class="upload-placeholder">
-                                            <i class="fas fa-camera fa-2x mb-2"></i>
-                                            <p>انقر لإضافة صورة</p>
-                                        </div>
-
+                            <div class="mb-4 text-center">
+                                <div class="image-upload-container"
+                                    onclick="document.getElementById('driverImage').click()">
+                                    <input type="file" id="driverImage" accept="image/*" style="display: none"
+                                        onchange="handleImagePreview(event)">
+                                    <img id="imagePreview" src="#" alt=""
+                                        style="display: none; width: 100%; height: 100%; object-fit: cover;">
+                                    <div class="upload-placeholder">
+                                        <i class="fas fa-camera fa-2x mb-2"></i>
+                                        <p>انقر لإضافة صورة</p>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="location-capture-section">
-                                        <label class="form-label">موقع السائق</label>
-                                        <div class="d-flex gap-2 mb-2">
-                                            <input type="text" class="form-control" id="driverLatitude"
-                                                placeholder="خط العرض" readonly>
-                                            <input type="text" class="form-control" id="driverLongitude"
-                                                placeholder="خط الطول" readonly>
-                                        </div>
-                                        <button type="button" class="btn btn-primary w-100"
-                                            onclick="captureCurrentLocation()">
-                                            <i class="fas fa-location-arrow me-2"></i>
-                                            تحديد الموقع الحالي
-                                        </button>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="location-capture-section">
+                                    <label class="form-label">موقع السائق</label>
+                                    <div class="d-flex gap-2 mb-2">
+                                        <input type="text" class="form-control" id="driverLatitude"
+                                            placeholder="خط العرض" readonly>
+                                        <input type="text" class="form-control" id="driverLongitude"
+                                            placeholder="خط الطول" readonly>
                                     </div>
+                                    <button type="button" class="btn btn-primary w-100"
+                                        onclick="captureCurrentLocation()">
+                                        <i class="fas fa-location-arrow me-2"></i>
+                                        تحديد الموقع الحالي
+                                    </button>
                                 </div>
-                                <div class="registration-section mb-4">
-                                    <h6 class="section-title">المستمسكات الرسمية</h6>
+                            </div>
+                            <div class="registration-section mb-4">
+                                <h6 class="section-title">المستمسكات الرسمية</h6>
 
-                                    <!-- هوية الأحوال المدنية -->
-                                    <div class="row g-3 mb-4">
-                                        <div class="col-12">
-                                            <label class="form-label">هوية الأحوال المدنية</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="document-upload"
-                                                onclick="document.getElementById('idCardFront').click()">
-                                                <input type="file" id="idCardFront" accept="image/*"
-                                                    style="display: none;"
-                                                    onchange="previewDocument(this, 'idCardFrontPreview')" required>
-                                                <img id="idCardFrontPreview" src="#" alt="" style="display: none;">
-                                                <div class="upload-placeholder">
-                                                    <i class="fas fa-id-card"></i>
-                                                    <p>صورة الهوية (الأمامية)</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="document-upload"
-                                                onclick="document.getElementById('idCardBack').click()">
-                                                <input type="file" id="idCardBack" accept="image/*"
-                                                    style="display: none;"
-                                                    onchange="previewDocument(this, 'idCardBackPreview')" required>
-                                                <img id="idCardBackPreview" src="#" alt="" style="display: none;">
-                                                <div class="upload-placeholder">
-                                                    <i class="fas fa-id-card"></i>
-                                                    <p>صورة الهوية (الخلفية)</p>
-                                                </div>
+                                <!-- هوية الأحوال المدنية -->
+                                <div class="row g-3 mb-4">
+                                    <div class="col-12">
+                                        <label class="form-label">هوية الأحوال المدنية</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="document-upload"
+                                            onclick="document.getElementById('idCardFront').click()">
+                                            <input type="file" id="idCardFront" accept="image/*" style="display: none;"
+                                                onchange="previewDocument(this, 'idCardFrontPreview')" required>
+                                            <img id="idCardFrontPreview" src="#" alt="" style="display: none;">
+                                            <div class="upload-placeholder">
+                                                <i class="fas fa-id-card"></i>
+                                                <p>صورة الهوية (الأمامية)</p>
                                             </div>
                                         </div>
                                     </div>
-
-                                    <!-- بطاقة السكن -->
-                                    <div class="row g-3 mb-4">
-                                        <div class="col-12">
-                                            <label class="form-label">بطاقة السكن</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="document-upload"
-                                                onclick="document.getElementById('residenceFront').click()">
-                                                <input type="file" id="residenceFront" accept="image/*"
-                                                    style="display: none;"
-                                                    onchange="previewDocument(this, 'residenceFrontPreview')" required>
-                                                <img id="residenceFrontPreview" src="#" alt="" style="display: none;">
-                                                <div class="upload-placeholder">
-                                                    <i class="fas fa-home"></i>
-                                                    <p>بطاقة السكن (الأمامية)</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="document-upload"
-                                                onclick="document.getElementById('residenceBack').click()">
-                                                <input type="file" id="residenceBack" accept="image/*"
-                                                    style="display: none;"
-                                                    onchange="previewDocument(this, 'residenceBackPreview')" required>
-                                                <img id="residenceBackPreview" src="#" alt="" style="display: none;">
-                                                <div class="upload-placeholder">
-                                                    <i class="fas fa-home"></i>
-                                                    <p>بطاقة السكن (الخلفية)</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- إجازة السوق -->
-                                    <div class="row g-3">
-                                        <div class="col-12">
-                                            <label class="form-label">إجازة السوق</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="document-upload"
-                                                onclick="document.getElementById('licenseFront').click()">
-                                                <input type="file" id="licenseFront" accept="image/*"
-                                                    style="display: none;"
-                                                    onchange="previewDocument(this, 'licenseFrontPreview')" required>
-                                                <img id="licenseFrontPreview" src="#" alt="" style="display: none;">
-                                                <div class="upload-placeholder">
-                                                    <i class="fas fa-id-card"></i>
-                                                    <p>إجازة السوق (الأمامية)</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="document-upload"
-                                                onclick="document.getElementById('licenseBack').click()">
-                                                <input type="file" id="licenseBack" accept="image/*"
-                                                    style="display: none;"
-                                                    onchange="previewDocument(this, 'licenseBackPreview')" required>
-                                                <img id="licenseBackPreview" src="#" alt="" style="display: none;">
-                                                <div class="upload-placeholder">
-                                                    <i class="fas fa-id-card"></i>
-                                                    <p>إجازة السوق (الخلفية)</p>
-                                                </div>
+                                    <div class="col-md-6">
+                                        <div class="document-upload"
+                                            onclick="document.getElementById('idCardBack').click()">
+                                            <input type="file" id="idCardBack" accept="image/*" style="display: none;"
+                                                onchange="previewDocument(this, 'idCardBackPreview')" required>
+                                            <img id="idCardBackPreview" src="#" alt="" style="display: none;">
+                                            <div class="upload-placeholder">
+                                                <i class="fas fa-id-card"></i>
+                                                <p>صورة الهوية (الخلفية)</p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
+                                <!-- بطاقة السكن -->
+                                <div class="row g-3 mb-4">
+                                    <div class="col-12">
+                                        <label class="form-label">بطاقة السكن</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="document-upload"
+                                            onclick="document.getElementById('residenceFront').click()">
+                                            <input type="file" id="residenceFront" accept="image/*"
+                                                style="display: none;"
+                                                onchange="previewDocument(this, 'residenceFrontPreview')" required>
+                                            <img id="residenceFrontPreview" src="#" alt="" style="display: none;">
+                                            <div class="upload-placeholder">
+                                                <i class="fas fa-home"></i>
+                                                <p>بطاقة السكن (الأمامية)</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="document-upload"
+                                            onclick="document.getElementById('residenceBack').click()">
+                                            <input type="file" id="residenceBack" accept="image/*"
+                                                style="display: none;"
+                                                onchange="previewDocument(this, 'residenceBackPreview')" required>
+                                            <img id="residenceBackPreview" src="#" alt="" style="display: none;">
+                                            <div class="upload-placeholder">
+                                                <i class="fas fa-home"></i>
+                                                <p>بطاقة السكن (الخلفية)</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
+                                <!-- إجازة السوق -->
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <label class="form-label">إجازة السوق</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="document-upload"
+                                            onclick="document.getElementById('licenseFront').click()">
+                                            <input type="file" id="licenseFront" accept="image/*" style="display: none;"
+                                                onchange="previewDocument(this, 'licenseFrontPreview')" required>
+                                            <img id="licenseFrontPreview" src="#" alt="" style="display: none;">
+                                            <div class="upload-placeholder">
+                                                <i class="fas fa-id-card"></i>
+                                                <p>إجازة السوق (الأمامية)</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="document-upload"
+                                            onclick="document.getElementById('licenseBack').click()">
+                                            <input type="file" id="licenseBack" accept="image/*" style="display: none;"
+                                                onchange="previewDocument(this, 'licenseBackPreview')" required>
+                                            <img id="licenseBackPreview" src="#" alt="" style="display: none;">
+                                            <div class="upload-placeholder">
+                                                <i class="fas fa-id-card"></i>
+                                                <p>إجازة السوق (الخلفية)</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- New Fields for Email and Password -->
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">البريد الإلكتروني</label>
+                                    <input type="email" class="form-control" id="driverEmail" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">الرمز السري</label>
+                                    <input type="password" class="form-control" id="driverPassword" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">إعادة كتابة الرمز السري</label>
+                                    <input type="password" class="form-control" id="confirmDriverPassword" required>
+                                </div>
 
                                 <div class="row g-3">
                                     <div class="col-md-6">
@@ -6656,44 +6538,6 @@
 
                                         </select>
 
-                                        <!-- إضافة حقول البريد الإلكتروني وكلمة المرور في نموذج التسجيل -->
-
-                                        <div class="registration-section mb-4">
-                                            <h6 class="section-title">معلومات الحساب</h6>
-                                            <div class="row g-3">
-                                                <div class="col-md-12">
-                                                    <label class="form-label required" for="driverEmail">البريد
-                                                        الإلكتروني</label>
-                                                    <input type="email" class="form-control" id="driverEmail" required>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label class="form-label required" for="driverPassword">كلمة
-                                                        المرور</label>
-                                                    <div class="input-group">
-                                                        <input type="password" class="form-control" id="driverPassword"
-                                                            minlength="6" required>
-                                                        <button class="btn btn-outline-secondary" type="button"
-                                                            onclick="togglePasswordVisibility(this)">
-                                                            <i class="fas fa-eye"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label class="form-label required" for="driverConfirmPassword">تأكيد
-                                                        كلمة المرور</label>
-                                                    <div class="input-group">
-                                                        <input type="password" class="form-control"
-                                                            id="driverConfirmPassword" minlength="6" required>
-                                                        <button class="btn btn-outline-secondary" type="button"
-                                                            onclick="togglePasswordVisibility(this)">
-                                                            <i class="fas fa-eye"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
 
                                     </div>
                                     <div class="col-12">
@@ -6705,7 +6549,7 @@
                                 <div class="mt-4">
                                     <button type="submit" class="btn btn-primary w-100">إضافة السائق</button>
                                 </div>
-                            </form>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -6718,6 +6562,106 @@
         <!-- Loading Spinner -->
         <div class="loading-spinner" id="loadingSpinner">
             <div class="spinner"></div>
+        </div>
+        <!-- نافذة تعديل بيانات السائق -->
+        <div class="modal fade" id="editDriverModal" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">تعديل بيانات السائق</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="editDriverForm" onsubmit="handleEditDriver(event)">
+                            <input type="hidden" id="editDriverId">
+
+                            <div class="mb-4 text-center">
+                                <div class="image-upload-container"
+                                    onclick="document.getElementById('editDriverImage').click()">
+                                    <input type="file" id="editDriverImage" accept="image/*" style="display: none"
+                                        onchange="handleEditImagePreview(event)">
+                                    <img id="editImagePreview" src="#" alt=""
+                                        style="display: none; width: 100%; height: 200px; object-fit: cover; border-radius: 10px;">
+                                    <div class="upload-placeholder">
+                                        <i class="fas fa-camera fa-2x mb-2"></i>
+                                        <p>انقر لتغيير الصورة</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">اسم السائق</label>
+                                    <input type="text" class="form-control" id="editDriverName" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">رقم الهاتف</label>
+                                    <input type="tel" class="form-control" id="editDriverPhone" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">نوع السيارة</label>
+                                    <input type="text" class="form-control" id="editCarType" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">موديل السيارة</label>
+                                    <input type="number" class="form-control" id="editCarModel" required>
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="form-label">المنطقة</label>
+                                    <select class="form-control" id="editDriverLocation" required>
+                                        <option value="">اختر المحافظة</option>
+                                        <option value="بغداد">بغداد</option>
+                                        <option value="الكرخ">الكرخ</option>
+                                        <option value="الرصافة">الرصافة</option>
+                                        <option value="البصرة">البصرة</option>
+                                        <option value="نينوى">نينوى</option>
+                                        <option value="الموصل">الموصل</option>
+                                        <option value="النجف">النجف</option>
+                                        <option value="الكوفة">الكوفة</option>
+                                        <option value="كربلاء">كربلاء</option>
+                                        <option value="الحسينية">الحسينية</option>
+                                        <option value="أربيل">أربيل</option>
+                                        <option value="كركوك">كركوك</option>
+                                        <option value="الأنبار">الأنبار</option>
+                                        <option value="الرمادي">الرمادي</option>
+                                        <option value="الفلوجة">الفلوجة</option>
+                                        <option value="بابل">بابل</option>
+                                        <option value="الحلة">الحلة</option>
+                                        <option value="المسيب">المسيب</option>
+                                        <option value="الهاشمية">الهاشمية</option>
+                                        <option value="القاسم">القاسم</option>
+                                        <option value="ديالى">ديالى</option>
+                                        <option value="بعقوبة">بعقوبة</option>
+                                        <option value="ذي قار">ذي قار</option>
+                                        <option value="الناصرية">الناصرية</option>
+                                        <option value="السليمانية">السليمانية</option>
+                                        <option value="صلاح الدين">صلاح الدين</option>
+                                        <option value="تكريت">تكريت</option>
+                                        <option value="واسط">واسط</option>
+                                        <option value="الكوت">الكوت</option>
+                                        <option value="ميسان">ميسان</option>
+                                        <option value="العمارة">العمارة</option>
+                                        <option value="المثنى">المثنى</option>
+                                        <option value="السماوة">السماوة</option>
+                                        <option value="دهوك">دهوك</option>
+                                        <option value="القادسية">القادسية</option>
+                                        <option value="الديوانية">الديوانية</option>
+                                        <!-- إضافة باقي المدن -->
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">معلومات إضافية</label>
+                                    <textarea class="form-control" id="editDriverBio" rows="3"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                <button type="submit" class="btn btn-primary w-100">حفظ التغييرات</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div id="notificationStatus" class="mt-2 small text-muted"></div>
@@ -6828,8 +6772,8 @@
                     </div>
                     <div class="modal-body py-4">
                         <div class="row g-4">
-                            <!-- زر تسجيل الدخول - حالة عدم تسجيل الدخول فقط -->
-                            <div class="col-12 mb-3 login-only">
+                            <!-- زر تسجيل الدخول -->
+                            <div class="col-12 mb-3">
                                 <div class="account-type-card" onclick="openLoginModal()">
                                     <div class="icon-container mb-3">
                                         <i class="fas fa-sign-in-alt fa-3x"></i>
@@ -6838,8 +6782,8 @@
                                     <p class="small text-muted">لديك حساب بالفعل؟ سجل دخولك</p>
                                 </div>
                             </div>
-                            <!-- زر انشاء حساب - حالة عدم تسجيل الدخول فقط -->
-                            <div class="col-12 login-only">
+                            <!-- زر انشاء حساب -->
+                            <div class="col-12">
                                 <div class="account-type-card" onclick="openUserRegistration()">
                                     <div class="icon-container mb-3">
                                         <i class="fas fa-user fa-3x"></i>
@@ -6848,34 +6792,14 @@
                                     <p class="small text-muted">احجز رحلاتك بسهولة</p>
                                 </div>
                             </div>
-                            <!-- زر إضافة سائق - حالة عدم تسجيل الدخول فقط -->
-                            <div class="col-12 login-only">
+                            <!-- زر إضافة سائق -->
+                            <div class="col-12">
                                 <div class="account-type-card" onclick="showAddDriverModal()">
                                     <div class="icon-container mb-3">
                                         <i class="fas fa-user-plus fa-3x"></i>
                                     </div>
                                     <h6>إضافة سائق</h6>
                                     <p class="small text-muted">أضف سائق جديد إلى النظام</p>
-                                </div>
-                            </div>
-                            
-                            <!-- العناصر التي تظهر للمستخدم المسجل -->
-                            <div class="col-12 auth-only">
-                                <div class="account-type-card" onclick="showUserMenu()">
-                                    <div class="icon-container mb-3">
-                                        <i class="fas fa-user fa-3x"></i>
-                                    </div>
-                                    <h6>الملف الشخصي</h6>
-                                    <p class="small text-muted">عرض وتعديل ملفك الشخصي</p>
-                                </div>
-                            </div>
-                            <div class="col-12 auth-only">
-                                <div class="account-type-card" onclick="handleLogout()">
-                                    <div class="icon-container mb-3">
-                                        <i class="fas fa-sign-out-alt fa-3x"></i>
-                                    </div>
-                                    <h6>تسجيل الخروج</h6>
-                                    <p class="small text-muted">تسجيل الخروج من حسابك</p>
                                 </div>
                             </div>
                         </div>
@@ -6893,30 +6817,27 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
-                        <form id="loginForm">
+                        <form id="loginForm" onsubmit="handleLogin(event)">
                             <div class="mb-3">
-                                <label class="form-label" for="email">البريد الإلكتروني</label>
-                                <input type="email" class="form-control" id="email" name="email" required>
+                                <label class="form-label">البريد الإلكتروني</label>
+                                <input type="email" class="form-control" name="email" required>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="password">كلمة المرور</label>
-                                <div class="input-group">
-                                    <input type="password" class="form-control" id="password" name="password" required>
-                                    <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility(this)">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                </div>
+                                <label class="form-label">كلمة المرور</label>
+                                <input type="password" class="form-control" name="password" required>
                             </div>
-                            <button type="submit" class="btn btn-primary w-100">تسجيل الدخول</button>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary w-100">
+                                    <i class="fas fa-sign-in-alt me-2"></i>
+                                    تسجيل الدخول
+                                </button>
+                            </div>
                         </form>
-                        <div class="text-center mt-3">
-                            <p>ليس لديك حساب؟ <a href="#" onclick="openUserRegistration()">سجل الآن</a></p>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        
+
         <!-- نافذة تسجيل السائق -->
         <div class="modal fade" id="driverRegistrationModal" tabindex="-1">
             <div class="modal-dialog modal-lg modal-dialog-scrollable">
@@ -6944,8 +6865,6 @@
                                                     <i class="fas fa-camera"></i>
                                                     <span>صورة شخصية</span>
                                                 </div>
-
-
                                             </div>
                                             <input type="file" id="driverPhoto" accept="image/*" style="display: none;"
                                                 onchange="previewDriverPhoto(this)">
@@ -6965,8 +6884,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
 
                             <!-- معلومات المركبة -->
                             <div class="registration-section mb-4">
@@ -7220,76 +7137,6 @@
             <div class="nearby-results-content"></div>
         </div>
 
-        <script>
-            // تعريف authManager
-            const authManager = {
-                // ...تعريف الدوال والخصائص الخاصة بـ authManager...
-            };
-
-            // دالة معالجة نموذج التسجيل
-            async function handleRegistrationForm(event) {
-                event.preventDefault();
-                showLoading();
-
-                try {
-                    const formData = new FormData(event.target);
-                    const email = formData.get('email');
-                    const password = formData.get('password');
-                    const fullName = formData.get('fullName');
-                    const userType = formData.get('userType'); // تعريف userType
-
-                    // ...بقية الكود الخاص بمعالجة التسجيل...
-
-                } catch (error) {
-                    console.error('Registration error:', error);
-                    showToast(error.message, 'error');
-                } finally {
-                    hideLoading();
-                }
-            }
-            function addTestButton() {
-                // Define the addTestButton function
-            }
-
-            function getAllDrivers() {
-                // Define the getAllDrivers function
-            }
-
-            document.addEventListener('DOMContentLoaded', () => {
-                addTestButton();
-                getAllDrivers();
-            });
-            function createDriverCard(driver, key) {
-                // التحقق من حالة الموافقة والنشاط
-                const isApproved = driver.approved === true;
-                const isPending = driver.approvalStatus === 'pending';
-                const isActive = driver.active && isApproved;
-
-                // تحديد نص وألوان الحالة
-                const statusText = !isApproved ? (isPending ? 'قيد المراجعة' : 'غير مفعل') :
-                    (isActive ? 'متاح' : 'مشغول');
-                const statusColor = !isApproved ? '#FFD700' : (isActive ? '#2ECC40' : '#FF4136');
-
-                // تحديد حالة التعتيم للبطاقة
-                const cardOpacity = isApproved ? '1' : '0.7';
-
-                return `
-                    <div class="driver-card ${isApproved ? 'approved' : (isPending ? 'pending' : 'not-approved')}" data-driver-id="${key}" style="opacity: ${cardOpacity}">
-                        <div class="driver-image-container">
-                            <img src="${driver.imageUrl || 'https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/driver-images%2F7605a607-6cf8-4b32-aee1-fa7558c98452.png?alt=media&token=5cf9e67c-ba6e-4431-a6a0-79dede15b527'}" class="driver-image">
-                        </div>
-                        <div class="driver-info">
-                            <h3 class="driver-name">${driver.name || 'اسم غير متوفر'}</h3>
-                            <p class="driver-status" style="color: ${statusColor};">${statusText}</p>
-                        </div>
-                        <div class="driver-actions">
-                            <button class="btn btn-primary" onclick="openChatWindow('${key}')" ${!isApproved ? 'disabled' : ''}>مراسلة السائق</button>
-                            <button class="btn btn-secondary" onclick="bookDriver('${key}')" ${!isApproved ? 'disabled' : ''}>حجز</button>
-                        </div>
-                    </div>
-                `;
-            }
-        </script>
 
 
         <!-- Scripts -->
@@ -7299,12 +7146,12 @@
         <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+
+
+
         <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"></script>
 
         <script>
-
-
-
 
 
             const firebaseConfig = {
@@ -8261,85 +8108,6 @@
 
             }
 
-             // إضافة الدالة لمعالجة تسجيل الخروج
-             function handleLogout() {
-                // عرض تأكيد قبل تسجيل الخروج
-                Swal.fire({
-                    title: 'تسجيل الخروج',
-                    text: 'هل أنت متأكد أنك تريد تسجيل الخروج؟',
-                    icon: 'question',
-                    showCancelButton: true,
-                    confirmButtonColor: '#FFD700',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'نعم، تسجيل الخروج',
-                    cancelButtonText: 'إلغاء',
-                    background: '#1a1a1a',
-                    color: '#FFFFFF'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // حذف بيانات المستخدم من التخزين المحلي
-                        localStorage.removeItem('currentUser');
-
-                        // إعادة تعيين واجهة المستخدم
-                        resetUserInterface();
-
-                        // عرض رسالة نجاح
-                        showToast('تم تسجيل الخروج بنجاح');
-
-                        // تأخير قصير قبل إعادة تحميل الصفحة
-                        setTimeout(() => {
-                            window.location.reload();
-                        }, 1000);
-                    }
-                });
-            }
-
-            // دالة إعادة تعيين واجهة المستخدم
-            function resetUserInterface() {
-                // إعادة تعيين زر الملف الشخصي
-                const profileBtn = document.querySelector('.user-profile-btn');
-                if (profileBtn) {
-                    profileBtn.innerHTML = `
-            <i class="fas fa-user"></i>
-            <span class="ms-1 d-none d-md-inline">تسجيل</span>
-        `;
-                    profileBtn.setAttribute('data-bs-toggle', 'modal');
-                    profileBtn.setAttribute('data-bs-target', '#profileModal');
-                }
-
-                // إعادة تعيين معلومات المستخدم في الشريط الجانبي
-                const sideNavUserInfo = document.querySelector('.side-nav-user-info');
-                if (sideNavUserInfo) {
-                    sideNavUserInfo.innerHTML = '';
-                }
-            }
-
-            // إنشاء نسخة من مدير الإشعارات
-            // const notificationsManager = new NotificationsManager(); // Removed duplicate declaration
-
-
-            document.addEventListener('DOMContentLoaded', function () {
-                // إضافة قسم معلومات المستخدم في الشريط الجانبي
-                const sideNav = document.getElementById('sideNav');
-                if (sideNav && !sideNav.querySelector('.side-nav-user-info')) {
-                    const userInfoSection = document.createElement('div');
-                    userInfoSection.className = 'side-nav-user-info';
-                    sideNav.insertBefore(userInfoSection, sideNav.firstChild);
-                }
-
-                // ربط نماذج التسجيل
-                const driverRegistrationForm = document.getElementById('driverRegistrationForm');
-                if (driverRegistrationForm) {
-                    driverRegistrationForm.addEventListener('submit', handleDriverRegistration);
-                }
-
-                const userRegistrationForm = document.getElementById('userRegistrationForm');
-                if (userRegistrationForm) {
-                    userRegistrationForm.addEventListener('submit', handleUserRegistration);
-                }
-            });
-
-
             // دوال مساعدة لتنسيق المسافة والوقت
             function formatDistance(meters) {
                 return meters >= 1000
@@ -8593,317 +8361,177 @@
             }
 
             async function handleAddDriver(event) {
-    event.preventDefault();
-    showLoading();
+                event.preventDefault();
+                showLoading();
 
-    try {
-        // التحقق من البريد الإلكتروني وكلمة المرور
-        const email = document.getElementById('driverEmail').value;
-        const password = document.getElementById('driverPassword').value;
-        const confirmPassword = document.getElementById('driverConfirmPassword').value;
+                try {
+                    // التحقق من تطابق كلمات المرور
+                    const email = document.getElementById('driverEmail').value;
+                    const password = document.getElementById('driverPassword').value;
+                    const confirmPassword = document.getElementById('confirmDriverPassword').value;
 
-        // التحقق من تطابق كلمات المرور
-        if (password !== confirmPassword) {
-            throw new Error('كلمات المرور غير متطابقة');
-        }
+                    if (!email || !password) {
+                        throw new Error('يرجى إدخال البريد الإلكتروني وكلمة المرور');
+                    }
 
-        // التحقق من صحة البريد الإلكتروني
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            throw new Error('يرجى إدخال بريد إلكتروني صحيح');
-        }
+                    if (password !== confirmPassword) {
+                        throw new Error('كلمات المرور غير متطابقة');
+                    }
 
-        // إنشاء حساب المصادقة في Firebase Authentication
-        const authResult = await firebase.auth().createUserWithEmailAndPassword(email, password);
-        const uid = authResult.user.uid;
+                    // التحقق من تحميل جميع المستندات المطلوبة
+                    const requiredFiles = {
+                        'idCardFront': 'صورة الهوية الأمامية',
+                        'idCardBack': 'صورة الهوية الخلفية',
+                        'residenceFront': 'صورة بطاقة السكن الأمامية',
+                        'residenceBack': 'صورة بطاقة السكن الخلفية',
+                        'licenseFront': 'صورة إجازة السوق الأمامية',
+                        'licenseBack': 'صورة إجازة السوق الخلفية',
+                        'driverImage': 'الصورة الشخصية'
+                    };
 
-        // التحقق من تحميل جميع المستندات المطلوبة
-        const requiredFiles = {
-            'idCardFront': 'صورة الهوية الأمامية',
-            'idCardBack': 'صورة الهوية الخلفية',
-            'residenceFront': 'صورة بطاقة السكن الأمامية',
-            'residenceBack': 'صورة بطاقة السكن الخلفية',
-            'licenseFront': 'صورة إجازة السوق الأمامية',
-            'licenseBack': 'صورة إجازة السوق الخلفية',
-            'driverImage': 'الصورة الشخصية'
-        };
+                    const uploadedFiles = {};
+                    for (const [fileId, description] of Object.entries(requiredFiles)) {
+                        const fileInput = document.getElementById(fileId);
+                        if (!fileInput.files || !fileInput.files[0]) {
+                            throw new Error(`الرجاء تحميل ${description}`);
+                        }
+                        uploadedFiles[fileId] = fileInput.files[0];
+                    }
 
-        const uploadedFiles = {};
-        for (const [fileId, description] of Object.entries(requiredFiles)) {
-            const fileInput = document.getElementById(fileId);
-            if (!fileInput.files || !fileInput.files[0]) {
-                throw new Error(`الرجاء تحميل ${description}`);
-            }
-            uploadedFiles[fileId] = fileInput.files[0];
-        }
+                    // الحصول على الإحداثيات
+                    const latitude = parseFloat(document.getElementById('driverLatitude').value);
+                    const longitude = parseFloat(document.getElementById('driverLongitude').value);
 
-        // الحصول على الإحداثيات
-        const latitude = parseFloat(document.getElementById('driverLatitude').value);
-        const longitude = parseFloat(document.getElementById('driverLongitude').value);
+                    if (!latitude || !longitude) {
+                        throw new Error('يرجى تحديد موقع السائق أولاً');
+                    }
 
-        if (!latitude || !longitude) {
-            throw new Error('يرجى تحديد موقع السائق أولاً');
-        }
+                    // 1. إنشاء حساب المستخدم في Firebase Authentication
+                    const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
+                    const uid = userCredential.user.uid;
 
-        // رفع جميع الملفات إلى Firebase Storage
-        const uploadPromises = {};
-        for (const [fileId, file] of Object.entries(uploadedFiles)) {
-            const fileRef = storage.ref(`drivers/${uid}/documents/${Date.now()}_${fileId}_${file.name}`);
-            uploadPromises[fileId] = fileRef.put(file).then(snapshot => snapshot.ref.getDownloadURL());
-        }
+                    // رفع جميع الملفات إلى Firebase Storage
+                    const uploadPromises = {};
+                    for (const [fileId, file] of Object.entries(uploadedFiles)) {
+                        const fileRef = storage.ref(`drivers/documents/${uid}/${Date.now()}_${fileId}_${file.name}`);
+                        uploadPromises[fileId] = fileRef.put(file).then(snapshot => snapshot.ref.getDownloadURL());
+                    }
 
-        const uploadedUrls = await Promise.all(Object.values(uploadPromises));
-        const documentUrls = {};
-        Object.keys(uploadPromises).forEach((key, index) => {
-            documentUrls[key] = uploadedUrls[index];
-        });
+                    const uploadedUrls = await Promise.all(Object.values(uploadPromises));
+                    const documentUrls = {};
+                    Object.keys(uploadPromises).forEach((key, index) => {
+                        documentUrls[key] = uploadedUrls[index];
+                    });
 
-        // إنشاء عن طريق المصادقة
-        await authResult.user.updateProfile({
-            displayName: document.getElementById('driverName').value,
-            photoURL: documentUrls.driverImage
-        });
+                    // تجهيز بيانات السائق
+                    const driverData = {
+                        uid: uid, // إضافة معرف المستخدم من Authentication
+                        email: email, // إضافة البريد الإلكتروني
+                        name: document.getElementById('driverName').value,
+                        phone: document.getElementById('driverPhone').value,
+                        carType: document.getElementById('carType').value,
+                        carModel: document.getElementById('carModel').value,
+                        location: document.getElementById('driverLocation').value,
+                        coordinates: {
+                            lat: latitude,
+                            lng: longitude
+                        },
+                        bio: document.getElementById('driverBio').value,
+                        imageUrl: documentUrls.driverImage,
+                        documents: {
+                            idCard: {
+                                front: documentUrls.idCardFront,
+                                back: documentUrls.idCardBack
+                            },
+                            residenceCard: {
+                                front: documentUrls.residenceFront,
+                                back: documentUrls.residenceBack
+                            },
+                            driverLicense: {
+                                front: documentUrls.licenseFront,
+                                back: documentUrls.licenseBack
+                            }
+                        },
+                        rating: 5,
+                        trips: 0,
+                        approved: false,
+                        approvalStatus: 'pending',
+                        active: false,
+                        registrationDate: firebase.database.ServerValue.TIMESTAMP,
+                        lastUpdate: firebase.database.ServerValue.TIMESTAMP,
+                        role: 'driver' // إضافة دور المستخدم
+                    };
 
-        // تجهيز بيانات السائق
-        const driverData = {
-            uid: uid,
-            name: document.getElementById('driverName').value,
-            email: email,
-            phone: document.getElementById('driverPhone').value,
-            carType: document.getElementById('carType').value,
-            carModel: document.getElementById('carModel').value,
-            location: document.getElementById('driverLocation').value,
-            coordinates: {
-                lat: latitude,
-                lng: longitude
-            },
-            bio: document.getElementById('driverBio').value,
-            imageUrl: documentUrls.driverImage,
-            documents: {
-                idCard: {
-                    front: documentUrls.idCardFront,
-                    back: documentUrls.idCardBack
-                },
-                residenceCard: {
-                    front: documentUrls.residenceFront,
-                    back: documentUrls.residenceBack
-                },
-                driverLicense: {
-                    front: documentUrls.licenseFront,
-                    back: documentUrls.licenseBack
-                }
-            },
-            userType: 'driver',
-            rating: 5,
-            trips: 0,
-            approved: false,
-            approvalStatus: 'pending',
-            active: false,
-            registrationDate: firebase.database.ServerValue.TIMESTAMP,
-            lastUpdate: firebase.database.ServerValue.TIMESTAMP,
-            accountStatus: {
-                emailVerified: false,
-                lastLogin: null
-            }
-        };
+                    // 2. حفظ البيانات في قاعدة البيانات الرئيسية
+                    await database.ref(`drivers/${uid}`).set(driverData);
 
-        // حفظ البيانات في Realtime Database
-        await database.ref(`drivers/${uid}`).set(driverData);
+                    // 3. حفظ المعلومات في قسم المستخدمين أيضًا للتحقق من الأدوار
+                    await database.ref(`users/${uid}`).set({
+                        uid: uid,
+                        email: email,
+                        name: driverData.name,
+                        phone: driverData.phone,
+                        imageUrl: driverData.imageUrl,
+                        role: 'driver',
+                        registrationDate: firebase.database.ServerValue.TIMESTAMP
+                    });
 
-        // إرسال رسالة تأكيد البريد الإلكتروني
-        await authResult.user.sendEmailVerification();
+                    // 4. تحديث ملف تعريف المستخدم في Authentication
+                    await userCredential.user.updateProfile({
+                        displayName: driverData.name,
+                        photoURL: driverData.imageUrl
+                    });
 
-        // إغلاق النافذة المنبثقة
-        const modal = bootstrap.Modal.getInstance(document.getElementById('addDriverModal'));
-        modal.hide();
+                    // إرسال بريد تأكيد الحساب
+                    await userCredential.user.sendEmailVerification();
 
-        // إعادة تعيين النموذج
-        document.getElementById('addDriverForm').reset();
-        
-        // إعادة تعيين معاينات الصور
-        resetImagePreviews();
+                    // إغلاق النافذة المنبثقة
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('addDriverModal'));
+                    modal.hide();
 
-        // تسجيل الدخول تلقائياً
-        await firebase.auth().signInWithEmailAndPassword(email, password);
+                    // إعادة تعيين النموذج
+                    document.getElementById('addDriverForm').reset();
 
-        // عرض رسالة نجاح
-        Swal.fire({
-            title: 'تم التسجيل بنجاح!',
-            html: `
+                    // إعادة تعيين معاينات الصور
+                    resetImagePreviews();
+
+                    // عرض رسالة نجاح
+                    Swal.fire({
+                        title: 'تم تقديم الطلب بنجاح!',
+                        html: `
                 <div class="success-message">
-                    <p>تم إنشاء حسابك بنجاح</p>
-                    <p>تم إرسال رسالة تأكيد إلى بريدك الإلكتروني</p>
-                    <p>رقم الحساب: ${uid}</p>
-                    <small>يرجى تفعيل حسابك من خلال الرابط المرسل إلى بريدك الإلكتروني</small>
+                    <p>تم إنشاء حساب السائق وإرسال طلبك للمراجعة</p>
+                    <p>تم إرسال بريد إلكتروني للتحقق إلى: ${email}</p>
+                    <p>معرف السائق: ${uid}</p>
+                    <small>سيتم مراجعة طلبك وتفعيل حسابك قريباً</small>
                 </div>
             `,
-            icon: 'success',
-            confirmButtonText: 'حسناً',
-            confirmButtonColor: '#FFD700'
-        });
+                        icon: 'success',
+                        confirmButtonText: 'حسناً',
+                        confirmButtonColor: '#FFD700'
+                    });
 
-        // تحديث واجهة المستخدم
-        updateUIAfterLogin(driverData);
+                    // تحديث قائمة السائقين
+                    loadDrivers();
 
-    } catch (error) {
-        console.error('Error adding driver:', error);
-        
-        // إذا فشل التسجيل، نحذف المستخدم من المصادقة
-        if (error.code) {
-            try {
-                const currentUser = firebase.auth().currentUser;
-                if (currentUser) {
-                    await currentUser.delete();
+                } catch (error) {
+                    console.error('Error adding driver:', error);
+                    let errorMessage = error.message;
+
+                    // تحسين رسائل خطأ Firebase Authentication
+                    if (error.code === 'auth/email-already-in-use') {
+                        errorMessage = 'البريد الإلكتروني مستخدم بالفعل';
+                    } else if (error.code === 'auth/invalid-email') {
+                        errorMessage = 'البريد الإلكتروني غير صالح';
+                    } else if (error.code === 'auth/weak-password') {
+                        errorMessage = 'كلمة المرور ضعيفة جدًا، يرجى استخدام كلمة مرور أقوى';
+                    }
+
+                    showToast(errorMessage, 'error');
+                } finally {
+                    hideLoading();
                 }
-            } catch (deleteError) {
-                console.error('Error deleting user:', deleteError);
             }
-        }
-
-        showToast(error.message || 'حدث خطأ أثناء التسجيل', 'error');
-    } finally {
-        hideLoading();
-    }
-}
-
-/// دالة عرض الملف الشخصي للسائق
-function showDriverProfile(driverData) {
-    Swal.fire({
-        title: 'الملف الشخصي',
-        html: `
-            <div class="text-center mb-4">
-                <img src="${driverData.imageUrl || 'default-avatar.png'}" 
-                     alt="${driverData.name}"
-                     class="rounded-circle mb-3"
-                     style="width: 120px; height: 120px; object-fit: cover; border: 3px solid #FFD700;">
-                <h5 class="mb-2">${driverData.name}</h5>
-                <div class="badge bg-warning mb-2">سائق</div>
-                <div class="driver-status ${driverData.active ? 'status-active' : 'status-inactive'} mb-3">
-                    ${driverData.active ? 'متاح' : 'غير متاح'}
-                </div>
-            </div>
-            <div class="driver-info mb-4">
-                <p><i class="fas fa-envelope me-2"></i>${driverData.email}</p>
-                <p><i class="fas fa-phone me-2"></i>${driverData.phone}</p>
-                <p><i class="fas fa-car me-2"></i>${driverData.carType} - ${driverData.carModel}</p>
-                <p><i class="fas fa-map-marker-alt me-2"></i>${driverData.location}</p>
-            </div>
-            <div class="driver-stats text-center">
-                <div class="row">
-                    <div class="col">
-                        <h6><i class="fas fa-star text-warning"></i></h6>
-                        <p>${driverData.rating || '5.0'}</p>
-                        <small>التقييم</small>
-                    </div>
-                    <div class="col">
-                        <h6><i class="fas fa-route"></i></h6>
-                        <p>${driverData.trips || '0'}</p>
-                        <small>الرحلات</small>
-                    </div>
-                </div>
-            </div>
-        `,
-        showCancelButton: true,
-        showDenyButton: true,
-        confirmButtonText: 'تعديل البيانات',
-        denyButtonText: 'تسجيل الخروج',
-        cancelButtonText: 'إغلاق',
-        confirmButtonColor: '#FFD700',
-        denyButtonColor: '#dc3545'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            showEditDriverProfile(driverData);
-        } else if (result.isDenied) {
-            handleLogout();
-        }
-    });
-}
-
-// دالة تبديل حالة السائق
-async function toggleDriverStatus(driverId) {
-    try {
-        const driverRef = firebase.database().ref(`drivers/${driverId}`);
-        const snapshot = await driverRef.once('value');
-        const currentStatus = snapshot.val().active;
-
-        await driverRef.update({
-            active: !currentStatus,
-            lastStatusUpdate: firebase.database.ServerValue.TIMESTAMP
-        });
-
-        showToast(`تم تغيير الحالة إلى ${!currentStatus ? 'متاح' : 'غير متاح'}`, 'success');
-        
-        // تحديث الواجهة
-        const userData = JSON.parse(localStorage.getItem('currentUser'));
-        userData.active = !currentStatus;
-        localStorage.setItem('currentUser', JSON.stringify(userData));
-        updateDriverUIAfterLogin(userData);
-
-    } catch (error) {
-        console.error('Error toggling status:', error);
-        showToast('حدث خطأ أثناء تغيير الحالة', 'error');
-    }
-}
-
-// دالة تعديل بيانات السائق
-function showEditDriverProfile(driverData) {
-    Swal.fire({
-        title: 'تعديل البيانات',
-        html: `
-            <form id="editDriverForm" class="text-start">
-                <div class="mb-3">
-                    <label class="form-label">رقم الهاتف</label>
-                    <input type="tel" class="form-control" id="editPhone" value="${driverData.phone}">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">نوع السيارة</label>
-                    <input type="text" class="form-control" id="editCarType" value="${driverData.carType}">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">موديل السيارة</label>
-                    <input type="text" class="form-control" id="editCarModel" value="${driverData.carModel}">
-                </div>
-            </form>
-        `,
-        showCancelButton: true,
-        confirmButtonText: 'حفظ التغييرات',
-        cancelButtonText: 'إلغاء',
-        confirmButtonColor: '#FFD700',
-        preConfirm: () => {
-            return {
-                phone: document.getElementById('editPhone').value,
-                carType: document.getElementById('editCarType').value,
-                carModel: document.getElementById('editCarModel').value
-            };
-        }
-    }).then((result) => {
-        if (result.isConfirmed) {
-            updateDriverProfile(driverData.uid, result.value);
-        }
-    });
-}
-
-// دالة تحديث بيانات السائق
-async function updateDriverProfile(driverId, newData) {
-    try {
-        await firebase.database().ref(`drivers/${driverId}`).update(newData);
-        
-        // تحديث البيانات المحلية
-        const userData = JSON.parse(localStorage.getItem('currentUser'));
-        Object.assign(userData, newData);
-        localStorage.setItem('currentUser', JSON.stringify(userData));
-        
-        updateDriverUIAfterLogin(userData);
-        showToast('تم تحديث البيانات بنجاح', 'success');
-    } catch (error) {
-        console.error('Error updating profile:', error);
-        showToast('حدث خطأ أثناء تحديث البيانات', 'error');
-    }
-}
-
-
-
-   
 
             // دالة معاينة المستندات
             function previewDocument(input, previewId) {
@@ -9453,6 +9081,10 @@ async function updateDriverProfile(driverId, newData) {
                 // تحديد حالة التعتيم للبطاقة
                 const cardOpacity = isApproved ? '1' : '0.7';
 
+                // الحصول على معرف المستخدم الحالي
+                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                const isCurrentDriver = currentUser && currentUser.role === 'driver' && currentUser.uid === key;
+
                 return `
         <div class="driver-card animate__animated animate__fadeIn" 
              style="background-color: #000000; color: #FFFFFF; border-radius: 20px; 
@@ -9472,7 +9104,7 @@ async function updateDriverProfile(driverId, newData) {
                      class="driver-image" style="width: 100%; height: 200px; object-fit: cover; 
                      border-bottom: 3px solid #FFD700; ${!isApproved ? 'filter: grayscale(50%);' : ''}">
                 
-                ${isApproved ? `
+                ${isApproved && isCurrentDriver ? `
                     <div class="driver-status ${isActive ? 'status-active' : 'status-inactive'}" 
                          onclick="toggleDriverStatus('${key}', ${isActive})"
                          style="position: absolute; top: 10px; right: 10px; padding: 5px 10px; 
@@ -9525,23 +9157,45 @@ async function updateDriverProfile(driverId, newData) {
 
             <div class="driver-actions" style="display: flex; justify-content: space-between; 
                                              padding: 10px; ${!isApproved ? 'pointer-events: none; opacity: 0.7;' : ''}">
-  <div class="driver-actions">
                 <button class="action-btn primary" onclick="viewDriverLocation('${key}')">
                     <i class="fas fa-map-marker-alt"></i>
                     عرض الموقع
                 </button>
                 <button class="action-btn secondary" 
-                        onclick="openChatWindow('${key}')" 
+                        onclick="openChatWindow('${key}')"
                         style="background: #333; color: #FFD700; padding: 10px 20px; 
                                border-radius: 20px; border: 1px solid #FFD700; 
                                cursor: pointer; font-weight: bold; transition: all 0.3s;"
                         ${!isApproved ? 'disabled' : ''}>
                     <i class="fas fa-comment"></i> مراسلة
                 </button>
+                ${isCurrentDriver ? `
+                <button class="action-btn toggle-status-btn" 
+                        onclick="toggleDriverStatus('${key}', ${isActive})"
+                        style="background: ${isActive ? '#FF4136' : '#2ECC40'}; color: #FFFFFF; padding: 10px 20px; 
+                               border-radius: 20px; border: none; cursor: pointer; font-weight: bold; transition: all 0.3s;">
+                    ${isActive ? 'تعطيل' : 'تفعيل'}
+                </button>
+                ` : ''}
             </div>
         </div>
     `;
             }
+
+            function toggleDriverStatus(driverId, isActive) {
+                const newStatus = !isActive;
+                database.ref(`drivers/${driverId}`).update({
+                    active: newStatus
+                }).then(() => {
+                    showToast(`تم ${newStatus ? 'تفعيل' : 'تعطيل'} السائق بنجاح`, 'success');
+                    loadDrivers(); // تحديث العرض
+                }).catch((error) => {
+                    console.error('Error updating driver status:', error);
+                    showToast('حدث خطأ أثناء تحديث حالة السائق', 'error');
+                });
+            }
+
+
 
             function startDriverLocationTracking(driverId) {
                 // ... الكود السابق ...
@@ -9901,35 +9555,21 @@ async function updateDriverProfile(driverId, newData) {
                 });
             }
 
-     
+            function showToast(message, type = 'success') {
+                const toast = document.createElement('div');
+                toast.className = `custom-toast animate__animated animate__fadeInRight`;
+                toast.innerHTML = `
+                <i class="fas ${type === 'success' ? 'fa-check-circle text-success' : 'fa-exclamation-circle text-danger'} me-2"></i>
+                <div>${message}</div>
+            `;
 
+                document.getElementById('toastContainer').appendChild(toast);
 
- // الوظيفة المساعدة لإظهار رسائل النجاح/الخطأ
- function showToast(message, type = 'success') {
-        const toast = document.createElement('div');
-        toast.className = `custom-toast animate__animated animate__fadeInRight`;
-        toast.innerHTML = `
-            <i class="fas ${type === 'success' ? 'fa-check-circle text-success' : 'fa-exclamation-circle text-danger'} me-2"></i>
-            <div>${message}</div>
-        `;
-
-        const container = document.getElementById('toastContainer');
-        if (container) {
-            container.appendChild(toast);
-
-            setTimeout(() => {
-                toast.classList.replace('animate__fadeInRight', 'animate__fadeOutRight');
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
-        }
-    }
-
-
-
-
-
-
-
+                setTimeout(() => {
+                    toast.classList.replace('animate__fadeInRight', 'animate__fadeOutRight');
+                    setTimeout(() => toast.remove(), 300);
+                }, 3000);
+            }
             function messageDriver(driverId) {
                 database.ref(`drivers/${driverId}`).once('value', (snapshot) => {
                     const driver = snapshot.val();
@@ -9986,23 +9626,13 @@ async function updateDriverProfile(driverId, newData) {
                 map.setView([userLocation.lat, userLocation.lng], map.getZoom());
             }
 
-     // وظيفة إظهار/إخفاء مؤشر التحميل
-    function showLoading() {
-        const loadingSpinner = document.getElementById('loadingSpinner');
-        if (loadingSpinner) {
-            loadingSpinner.style.display = 'flex';
-        }
-    }
+            function showLoading() {
+                document.getElementById('loadingSpinner').style.display = 'flex';
+            }
 
-
-
-    function hideLoading() {
-        const loadingSpinner = document.getElementById('loadingSpinner');
-        if (loadingSpinner) {
-            loadingSpinner.style.display = 'none';
-        }
-    }
-
+            function hideLoading() {
+                document.getElementById('loadingSpinner').style.display = 'none';
+            }
             // دالة لعرض نافذة إضافة السائق
             function showAddDriverModal() {
                 // إغلاق نافذة اختيار العملية أولاً
@@ -11704,33 +11334,51 @@ async function updateDriverProfile(driverId, newData) {
             }
 
 
-            function checkCurrentUser() {
-    const user = firebase.auth().currentUser;
-    const storedUser = localStorage.getItem('currentUser');
-    
-    if (user && !storedUser) {
-        // المستخدم مسجل في Firebase ولكن ليس في التخزين المحلي
-        firebase.database().ref(`drivers/${user.uid}`).once('value')
-            .then(snapshot => {
-                if (snapshot.exists()) {
-                    updateDriverUIAfterLogin(snapshot.val());
-                } else {
-                    return firebase.database().ref(`users/${user.uid}`).once('value');
+            // دالة إعادة تعيين واجهة المستخدم
+            function resetUserInterface() {
+                // إعادة تعيين زر الملف الشخصي
+                const profileBtn = document.querySelector('.user-profile-btn');
+                if (profileBtn) {
+                    profileBtn.innerHTML = `
+            <i class="fas fa-user"></i>
+            <span class="ms-1 d-none d-md-inline">تسجيل</span>
+        `;
+                    profileBtn.setAttribute('data-bs-toggle', 'modal');
+                    profileBtn.setAttribute('data-bs-target', '#profileModal');
                 }
-            })
-            .then(snapshot => {
-                if (snapshot && snapshot.exists()) {
-                    updateUserUIAfterLogin(snapshot.val());
-                }
-            })
-            .catch(error => {
-                console.error('Error checking user status:', error);
-            });
-    }
-}
 
-// استدعاء الدالة عند تحميل الصفحة
-document.addEventListener('DOMContentLoaded', checkCurrentUser);
+                // إعادة تعيين معلومات المستخدم في الشريط الجانبي
+                const sideNavUserInfo = document.querySelector('.side-nav-user-info');
+                if (sideNavUserInfo) {
+                    sideNavUserInfo.innerHTML = '';
+                }
+            }
+
+            // إنشاء نسخة من مدير الإشعارات
+            const notificationsManager = new NotificationsManager();
+
+
+            document.addEventListener('DOMContentLoaded', function () {
+                // إضافة قسم معلومات المستخدم في الشريط الجانبي
+                const sideNav = document.getElementById('sideNav');
+                if (sideNav && !sideNav.querySelector('.side-nav-user-info')) {
+                    const userInfoSection = document.createElement('div');
+                    userInfoSection.className = 'side-nav-user-info';
+                    sideNav.insertBefore(userInfoSection, sideNav.firstChild);
+                }
+
+                // ربط نماذج التسجيل
+                const driverRegistrationForm = document.getElementById('driverRegistrationForm');
+                if (driverRegistrationForm) {
+                    driverRegistrationForm.addEventListener('submit', handleDriverRegistration);
+                }
+
+                const userRegistrationForm = document.getElementById('userRegistrationForm');
+                if (userRegistrationForm) {
+                    userRegistrationForm.addEventListener('submit', handleUserRegistration);
+                }
+            });
+
             // دالة فتح نافذة تسجيل الدخول
             function openLoginModal() {
                 // إغلاق نافذة اختيار نوع الحساب
@@ -11748,151 +11396,162 @@ document.addEventListener('DOMContentLoaded', checkCurrentUser);
                 showLoading();
 
                 try {
-                    const email = document.getElementById('email').value;
-                    const password = document.getElementById('password').value;
+                    const formData = new FormData(event.target);
+                    const email = formData.get('email');
+                    const password = formData.get('password');
 
-                    // أولاً نتحقق من وجود السائق
-                    const driversRef = firebase.database().ref('drivers');
-                    const driverQuery = await driversRef.orderByChild('email').equalTo(email).once('value');
-                    const driverData = driverQuery.val();
+                    // البحث عن المستخدم في قاعدة البيانات
+                    const usersRef = firebase.database().ref('users');
+                    const snapshot = await usersRef.orderByChild('email').equalTo(email).once('value');
+                    const users = snapshot.val();
 
-                    // في حالة لم يتم العثور على السائق، نتحقق من جدول المستخدمين
-                    if (!driverData) {
-                        const usersRef = firebase.database().ref('users');
-                        const userQuery = await usersRef.orderByChild('email').equalTo(email).once('value');
-                        const userData = userQuery.val();
-                        
-                        if (!userData) {
-                            throw new Error('البريد الإلكتروني غير مسجل');
-                        }
+                    if (!users) {
+                        throw new Error('البريد الإلكتروني أو كلمة المرور غير صحيحة');
                     }
 
-                    // محاولة تسجيل الدخول باستخدام Firebase Auth
-                    const userCredential = await firebase.auth().signInWithEmailAndPassword(email, password);
-                    const user = userCredential.user;
+                    const userId = Object.keys(users)[0];
+                    const user = users[userId];
 
-                    // جلب بيانات المستخدم المحدثة
-                    let userData = null;
-                    let userType = null;
-
-                    // التحقق مرة أخرى من نوع المستخدم
-                    const driverSnapshot = await driversRef.child(user.uid).once('value');
-                    const userSnapshot = await firebase.database().ref(`users/${user.uid}`).once('value');
-
-                    if (driverSnapshot.exists()) {
-                        userData = driverSnapshot.val();
-                        userType = 'driver';
-                    } else if (userSnapshot.exists()) {
-                        userData = userSnapshot.val();
-                        userType = 'user';
+                    // التحقق من كلمة المرور (في الواقع يجب استخدام Firebase Auth)
+                    if (password !== user.password) {
+                        throw new Error('البريد الإلكتروني أو كلمة المرور غير صحيحة');
                     }
 
                     // حفظ بيانات المستخدم
-                    localStorage.setItem('currentUser', JSON.stringify({
-                        ...userData,
-                        uid: user.uid,
-                        email: user.email,
-                        userType: userType
-                    }));
+                    localStorage.setItem('currentUser', JSON.stringify(user));
 
                     // تحديث واجهة المستخدم
-                    if (userType === 'driver') {
-                        updateDriverUIAfterLogin(userData);
-                    } else {
-                        updateUserUIAfterLogin(userData);
-                    }
+                    updateUIAfterLogin(user);
 
-                    // إغلاق النافذة المنبثقة
+                    // إغلاق نافذة تسجيل الدخول
                     const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
-                    if (loginModal) {
-                        loginModal.hide();
-                    }
+                    loginModal.hide();
 
-                    showToast('تم تسجيل الدخول بنجاح', 'success');
+                    // إظهار رسالة نجاح
+                    showToast('تم تسجيل الدخول بنجاح');
 
                 } catch (error) {
                     console.error('Login error:', error);
-                    let errorMessage;
-
-                    switch (error.code) {
-                        case 'auth/user-not-found':
-                            errorMessage = 'البريد الإلكتروني غير مسجل';
-                            break;
-                        case 'auth/wrong-password':
-                            errorMessage = 'كلمة المرور غير صحيحة';
-                            break;
-                        case 'auth/invalid-email':
-                            errorMessage = 'البريد الإلكتروني غير صالح';
-                            break;
-                        case 'auth/user-disabled':
-                            errorMessage = 'تم تعطيل هذا الحساب';
-                            break;
-                        default:
-                            errorMessage = error.message;
-                    }
-
-                    showToast(errorMessage, 'error');
+                    showToast(error.message, 'error');
                 } finally {
                     hideLoading();
                 }
             }
-            function togglePasswordVisibility(button) {
-        const input = button.previousElementSibling;
-        const icon = button.querySelector('i');
 
-        if (input.type === 'password') {
-            input.type = 'text';
-            icon.classList.remove('fa-eye');
-            icon.classList.add('fa-eye-slash');
-        } else {
-            input.type = 'password';
-            icon.classList.remove('fa-eye-slash');
-            icon.classList.add('fa-eye');
-        }
-    }
+            // دالة معالجة تسجيل الخروج
+            function handleLogout() {
+                // إزالة بيانات المستخدم من التخزين المحلي
+                localStorage.removeItem('currentUser');
 
-            // التحقق من تطابق كلمات المرور
-            function validatePasswords() {
-                const password = document.querySelector('input[name="password"]');
-                const confirmPassword = document.querySelector('input[name="confirmPassword"]');
+                // إعادة تعيين واجهة المستخدم
+                resetUserInterface();
 
-                function checkMatch() {
-                    if (password.value !== confirmPassword.value) {
-                        confirmPassword.setCustomValidity('كلمات المرور غير متطابقة');
-                    } else {
-                        confirmPassword.setCustomValidity('');
-                    }
-                }
-
-                password.addEventListener('change', checkMatch);
-                confirmPassword.addEventListener('keyup', checkMatch);
+                // عرض رسالة نجاح
+                showToast('تم تسجيل الخروج بنجاح', 'success');
             }
 
-            // تهيئة التحقق عند تحميل الصفحة
-            document.addEventListener('DOMContentLoaded', validatePasswords);
-
-            // التحقق من تطابق كلمات المرور
-            function validatePasswords() {
-                const password = document.querySelector('input[name="password"]');
-                const confirmPassword = document.querySelector('input[name="confirmPassword"]');
-
-                function checkMatch() {
-                    if (password.value !== confirmPassword.value) {
-                        confirmPassword.setCustomValidity('كلمات المرور غير متطابقة');
-                    } else {
-                        confirmPassword.setCustomValidity('');
-                    }
+            // دالة تحديث واجهة المستخدم بعد تسجيل الدخول
+            function updateUIAfterLogin(user) {
+                // إخفاء زر تسجيل من الشريط العلوي
+                const registrationBtn = document.querySelector('[data-bs-target="#profileModal"]');
+                if (registrationBtn) {
+                    registrationBtn.style.display = 'none';
                 }
 
-                password.addEventListener('change', checkMatch);
-                confirmPassword.addEventListener('keyup', checkMatch);
+                // تحديث زر الملف الشخصي
+                const profileBtn = document.querySelector('.user-profile-btn');
+                if (profileBtn) {
+                    profileBtn.innerHTML = `
+            <img src="${user.photo || 'default-avatar.png'}" 
+                 alt="${user.name}" 
+                 class="rounded-circle me-2" 
+                 style="width: 35px; height: 35px; object-fit: cover;">
+            <span class="d-none d-md-inline">${user.name}</span>
+        `;
+
+                    // تحديث القائمة المنسدلة
+                    const dropdownMenu = document.createElement('div');
+                    dropdownMenu.className = 'dropdown-menu dropdown-menu-end';
+                    dropdownMenu.innerHTML = `
+            <a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>الملف الشخصي</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item text-danger" href="#" onclick="handleLogout()">
+                <i class="fas fa-sign-out-alt me-2"></i>تسجيل الخروج
+            </a>
+        `;
+                    profileBtn.parentElement.appendChild(dropdownMenu);
+                }
+
+                // تحديث معلومات المستخدم في الشريط الجانبي
+                const sideNavUserInfo = document.querySelector('.side-nav-user-info');
+                if (sideNavUserInfo) {
+                    sideNavUserInfo.innerHTML = `
+            <div class="text-center p-4">
+                <img src="${user.photo || 'default-avatar.png'}" 
+                     alt="${user.name}" 
+                     class="rounded-circle mb-3"
+                     style="width: 80px; height: 80px; object-fit: cover;">
+                <h6 class="text-white mb-1">${user.name}</h6>
+                <span class="badge bg-primary mb-3">${user.userType}</span>
+                <button onclick="handleLogout()" 
+                        class="btn btn-danger btn-sm w-100">
+                    <i class="fas fa-sign-out-alt me-2"></i>تسجيل الخروج
+                </button>
+            </div>
+        `;
+                }
+            }
+            async function approveDriver(driverId) {
+                try {
+                    await database.ref(`drivers/${driverId}`).update({
+                        approved: true,
+                        status: 'approved',
+                        active: true
+                    });
+
+                    showToast('تم تفعيل السائق بنجاح', 'success');
+                    loadDrivers(); // تحديث العرض
+                } catch (error) {
+                    console.error('Error approving driver:', error);
+                    showToast('حدث خطأ أثناء تفعيل السائق', 'error');
+                }
             }
 
+            // دالة فحص حالة الموافقة على السائق
+            function checkDriverApprovalStatus(driverId) {
+                return new Promise((resolve, reject) => {
+                    database.ref(`drivers/${driverId}`).once('value')
+                        .then(snapshot => {
+                            const driver = snapshot.val();
+                            if (!driver) {
+                                reject(new Error('لم يتم العثور على السائق'));
+                                return;
+                            }
+                            resolve({
+                                isApproved: driver.approved === true,
+                                isPending: driver.approvalStatus === 'pending',
+                                status: driver.approvalStatus || 'not_approved'
+                            });
+                        })
+                        .catch(error => reject(error));
+                });
+            }
 
+              // دالة لتحديث أيقونة التسجيل عند تسجيل الدخول
+              function updateUserProfileIcon(user) {
+                const userProfile = document.getElementById('userProfile');
+                const userProfileImg = userProfile.querySelector('img');
+                userProfileImg.src = user.photoURL || 'default-profile.png'; // استخدم صورة المستخدم أو صورة افتراضية
+                userProfile.classList.remove('d-none');
+            }
 
+            // مثال على كيفية استخدام الدالة عند تسجيل الدخول
+            firebase.auth().onAuthStateChanged((user) => {
+                if (user) {
+                    updateUserProfileIcon(user);
+                }
+            });
 
-            // تهيئة التحقق عند تحميل الصفحة
-            document.addEventListener('DOMContentLoaded', validatePasswords);
         </script>
         </main>
         <!-- ربط ملف الجافا سكريبت -->
@@ -11900,9 +11559,9 @@ document.addEventListener('DOMContentLoaded', checkCurrentUser);
         <script src="nearby-drivers.js"></script>
         <script src="auth.js"></script>
 
+       
+
 
     </body>
 
 </html>
-
-1234567890-
