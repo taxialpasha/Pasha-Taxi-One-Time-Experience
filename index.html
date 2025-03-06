@@ -71,7 +71,14 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"></script>
+<!-- Primero jQuery (si es necesario para tu versión de Bootstrap) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<!-- Luego Bootstrap Bundle (incluye Popper) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Finalmente tus scripts personalizados -->
+<script src="modal.js"></script>
 
     <!-- App Scripts -->
 
@@ -5983,6 +5990,13 @@
                                     <div class="side-nav-header">
                                         <h2 class="side-nav-title">تاكسي العراق</h2>
                                         <button class="side-nav-close" onclick="toggleSideNav()">×</button>
+                                    <!-- زر الرسائل في الأعلى مع مؤشر الرسائل الجديدة -->
+                                    <button id="messagesButton" class="btn btn-primary position-relative" data-bs-toggle="modal" data-bs-target="#messagesModal">
+                                        <i class="fas fa-envelope"></i> الرسائل
+                                        <span id="unreadMessagesBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="display: none;">
+                                            0
+                                        </span>
+                                    </button>
                                     </div>
 
                                     <div class="side-nav-items">
@@ -6139,6 +6153,108 @@
                     updateProfileIcon(user);
                 }
             });
+            const messagesButton = document.getElementById('messagesButton');
+            const messagesContainer = document.getElementById('messagesContainer');
+            const chatContainer = document.getElementById('chatContainer');
+            const messageInput = document.getElementById('messageInput');
+            const sendMessageButton = document.getElementById('sendMessageButton');
+            const unreadMessagesBadge = document.getElementById('unreadMessagesBadge');
+
+            // Load messages when the modal is shown
+            messagesButton.addEventListener('click', function () {
+                // Load messages from the server or database
+                fetchMessages();
+            });
+
+            // Open chat modal when a message is clicked
+            messagesContainer.addEventListener('click', function (event) {
+                if (event.target.classList.contains('message-item')) {
+                    const messageId = event.target.dataset.messageId;
+                    openChat(messageId);
+                }
+            });
+
+            // Send message
+            sendMessageButton.addEventListener('click', function () {
+                const message = messageInput.value;
+                if (message.trim() !== '') {
+                    // Send the message to the server or database
+                    sendMessage(message);
+                    messageInput.value = ''; // Clear the input
+                }
+            });
+
+            // Example functions to load messages and send messages
+            function fetchMessages() {
+                // Fetch messages from the server or database
+                // Example:
+                // fetch('/api/messages')
+                //     .then(response => response.json())
+                //     .then(messages => {
+                //         messagesContainer.innerHTML = messages.map(msg => `
+                //             <div class="message-item" data-message-id="${msg.id}">
+                //                 <img src="${msg.senderImage}" alt="${msg.senderName}" class="sender-image">
+                //                 <span>${msg.senderName}</span>
+                //                 <span class="message-preview">${msg.preview}</span>
+                //                 ${msg.unread ? '<span class="badge bg-danger">جديد</span>' : ''}
+                //             </div>
+                //         `).join('');
+                //         updateUnreadMessagesBadge(messages.filter(msg => msg.unread).length);
+                //     });
+            }
+
+            function openChat(messageId) {
+                // Load chat messages from the server or database
+                // Example:
+                // fetch(`/api/messages/${messageId}`)
+                //     .then(response => response.json())
+                //     .then(messages => {
+                //         chatContainer.innerHTML = messages.map(msg => `
+                //             <div class="message-bubble ${msg.sender === 'user' ? 'sent' : 'received'}">
+                //                 ${msg.text}
+                //                 <div class="timestamp">${msg.timestamp}</div>
+                //             </div>
+                //         `).join('');
+                //         const chatModal = new bootstrap.Modal(document.getElementById('chatModal'));
+                //         chatModal.show();
+                //     });
+            }
+
+            function sendMessage(message) {
+                // Send the message to the server or database
+                // Example:
+                // fetch('/api/messages', {
+                //     method: 'POST',
+                //     headers: {
+                //         'Content-Type': 'application/json'
+                //     },
+                //     body: JSON.stringify({ message })
+                // });
+            }
+
+            function updateUnreadMessagesBadge(count) {
+                if (count > 0) {
+                    unreadMessagesBadge.textContent = count;
+                    unreadMessagesBadge.style.display = 'block';
+                } else {
+                    unreadMessagesBadge.style.display = 'none';
+                }
+            }
+
+            // Example function to check for new messages periodically
+            function checkForNewMessages() {
+                // Example:
+                // setInterval(() => {
+                //     fetch('/api/messages/unread-count')
+                //         .then(response => response.json())
+                //         .then(count => {
+                //             updateUnreadMessagesBadge(count);
+                //         });
+                // }, 60000); // Check every minute
+            }
+
+            // Start checking for new messages
+            checkForNewMessages();
         </script>
 
         </nav>
@@ -6711,6 +6827,23 @@
                 </div>
             </div>
         </div>
+        <!-- نافذة الرسائل المنبثقة -->
+        <div class="modal fade" id="messagesModal" tabindex="-1" aria-labelledby="messagesModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="messagesModalLabel">الرسائل</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="messagesContainer">
+                            <!-- قائمة الرسائل ستظهر هنا -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- نافذة المحادثة -->
         <div class="modal fade" id="chatModal" tabindex="-1" aria-labelledby="chatModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -11552,12 +11685,45 @@
                 }
             });
 
+            document.addEventListener('DOMContentLoaded', function () {
+    // Proporcionar una configuración explícita
+    const modalOptions = {
+        backdrop: true, // o 'static' para que no cierre al hacer clic fuera
+        keyboard: true,
+        focus: true
+    };
+    
+    // Usar try-catch para manejar errores
+    try {
+        // Inicializar modales existentes en la página
+        const modalTriggers = document.querySelectorAll('[data-bs-toggle="modal"]');
+        modalTriggers.forEach(trigger => {
+            const targetSelector = trigger.getAttribute('data-bs-target');
+            const modalElement = document.querySelector(targetSelector);
+            
+            if (modalElement) {
+                const modalInstance = new bootstrap.Modal(modalElement, modalOptions);
+                
+                // Opcional: Evitar el comportamiento predeterminado
+                trigger.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    modalInstance.show();
+                });
+            }
+        });
+    } catch (error) {
+        console.error('Error inicializando modales:', error);
+    }
+});
+
         </script>
         </main>
         <!-- ربط ملف الجافا سكريبت -->
         <!-- قبل إغلاق body -->
         <script src="nearby-drivers.js"></script>
         <script src="auth.js"></script>
+        <script src="modal.js"></script>
+
 
        
 

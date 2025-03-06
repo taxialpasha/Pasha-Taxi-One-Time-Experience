@@ -562,7 +562,7 @@
                         // استخراج بيانات السائق من النتيجة
                         const driverKey = Object.keys(driversData)[0];
                         const driverData = driversData[driverKey];
-                        populateUserForm(driverData);
+                        populateUserForm(driverData, true);
                     } else {
                         showToast('لم يتم العثور على بيانات المستخدم', 'error');
                         setTimeout(() => {
@@ -581,7 +581,7 @@
         }
 
         // دالة ملء نموذج المستخدم بالبيانات
-        function populateUserForm(userData) {
+        function populateUserForm(userData, isDriver = false) {
             // ملء معلومات المستخدم في الهيدر
             document.getElementById('userName').textContent = userData.fullName || userData.name || 'المستخدم';
             document.getElementById('userEmail').textContent = userData.email || '';
@@ -613,6 +613,14 @@
             if (userData.province) {
                 provinceSelect.value = userData.province;
                 loadAreas(userData.province, userData.area);
+            }
+
+            // إذا كان المستخدم سائقًا، ملء الحقول الإضافية
+            if (isDriver) {
+                document.getElementById('carType').value = userData.carType || '';
+                document.getElementById('carModel').value = userData.carModel || '';
+                document.getElementById('bio').value = userData.bio || '';
+                document.getElementById('approvalStatus').value = userData.approvalStatus || '';
             }
         }
 
@@ -674,12 +682,12 @@
 
                 // تحضير البيانات المحدثة
                 const updatedData = {
-                    fullName: document.getElementById('fullName').value,
-                    email: document.getElementById('email').value,
-                    phone: document.getElementById('phone').value,
-                    province: document.getElementById('province').value,
-                    area: document.getElementById('area').value,
-                    address: document.getElementById('address').value,
+                    fullName: document.getElementById('fullName').value || '',
+                    email: document.getElementById('email').value || '',
+                    phone: document.getElementById('phone').value || '',
+                    province: document.getElementById('province').value || '',
+                    area: document.getElementById('area').value || '',
+                    address: document.getElementById('address').value || '',
                     lastUpdated: firebase.database.ServerValue.TIMESTAMP
                 };
 
@@ -710,6 +718,11 @@
 
                 // تحديث البيانات في قاعدة البيانات
                 if (currentUser.userType === 'driver') {
+                    updatedData.carType = document.getElementById('carType') ? document.getElementById('carType').value : '';
+                    updatedData.carModel = document.getElementById('carModel') ? document.getElementById('carModel').value : '';
+                    updatedData.bio = document.getElementById('bio') ? document.getElementById('bio').value : '';
+                    updatedData.approvalStatus = document.getElementById('approvalStatus') ? document.getElementById('approvalStatus').value : '';
+
                     const driverRef = await database.ref('drivers').orderByChild('uid').equalTo(userId).once('value');
                     const driversData = driverRef.val();
                     
