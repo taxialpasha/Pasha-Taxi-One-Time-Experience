@@ -1,0 +1,57 @@
+<!-- إضافة هذا الجزء في نهاية الملف قبل إغلاق وسم body -->
+
+<!-- نافذة المحادثة المحسنة للسائق -->
+<div class="modal fade" id="driverChatModal" tabindex="-1" aria-labelledby="driverChatModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content chat-window">
+            <!-- رأس النافذة مع صورة واسم المستخدم -->
+            <div class="modal-header chat-header">
+                <img id="userImage" src="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/driver-images%2F7605a607-6cf8-4b32-aee1-fa7558c98452.png?alt=media&token=5cf9e67c-ba6e-4431-a6a0-79dede15b527" 
+                     alt="صورة المستخدم" class="rounded-circle me-2" style="width: 50px; height: 50px;">
+                <div>
+                    <h5 class="modal-title" id="userName">اسم المستخدم</h5>
+                    <small id="userInfo" style="color: #ffffff;">معلومات إضافية</small>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="إغلاق"></button>
+            </div>
+            
+            <!-- منطقة المحادثة -->
+            <div class="modal-body chat-body" id="driverChatBody">
+                <!-- ستتم إضافة الرسائل هنا بشكل ديناميكي -->
+                <div class="no-messages">لا توجد رسائل سابقة</div>
+            </div>
+            
+            <!-- شريط الإدخال -->
+            <div class="modal-footer chat-footer">
+                <div class="input-group w-100">
+                    <input type="text" id="driverChatInput" class="form-control chat-input"
+                           placeholder="اكتب رسالتك هنا...">
+                    <button class="btn send-btn" id="driverSendMessageBtn">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- نافذة قائمة المحادثات -->
+<div class="modal fade" id="chatListModal" tabindex="-1" aria-labelledby="chatListModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="chatListModalLabel">قائمة المحادثات</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="إغلاق"></button>
+            </div>
+            <div class="modal-body">
+                <div class="driver-chats-container" id="driverChatsList">
+                    <!-- ستتم إضافة المحادثات هنا بشكل ديناميكي -->
+                    <div class="no-chats-message">لا توجد محادثات بعد</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- إضافة عناصر الصوت للإشعارات -->
+<audio id="messageSound" src="https://github.com/AlQasimMall/taxialpasha/raw/main/%D8%A7%D9%84%D9%87%D8%A7%D8%AA%D9%81-%D8%A7%D9%84%D8%AB%D8%A7%D8%A8%D8%AA.mp3" preload="auto"></audio>

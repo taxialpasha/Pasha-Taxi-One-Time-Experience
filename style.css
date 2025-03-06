@@ -3709,4 +3709,30 @@ body {
     margin-top: 10px;
 }
 
+/* Chat Modal Styles */
+.chat-messages {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.message {
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    background-color: #e9ecef;
+}
+
+.message-badge {
+    background-color: #dc3545;
+    color: #fff;
+    border-radius: 50%;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    display: none;
+}
+
 /* ...existing code... */
