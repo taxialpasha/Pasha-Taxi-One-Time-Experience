@@ -238,9 +238,7 @@ function updateUIAfterLogin(userData) {
                 <span class="badge bg-gold mb-2">${userRole}</span>
                 <p class="text-white-50 small mb-3">${userData.email}</p>
                 <div class="mt-3">
-                    <button onclick="handleLogout()" class="btn btn-outline-danger btn-sm w-100">
-                        <i class="fas fa-sign-out-alt me-2"></i>تسجيل الخروج
-                    </button>
+                  
                 </div>
                 ${userData.userType === 'driver' ? `
                 <div class="mt-3">

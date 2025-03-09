@@ -571,9 +571,7 @@ function updateUIAfterLogin(userData) {
                         <i class="fas fa-toggle-on me-2"></i>تغيير الحالة
                     </button>
                     ` : ''}
-                    <button onclick="handleLogout()" class="btn btn-outline-danger btn-sm w-100">
-                        <i class="fas fa-sign-out-alt me-2"></i>تسجيل الخروج
-                    </button>
+                    
                 </div>
             </div>
         `;

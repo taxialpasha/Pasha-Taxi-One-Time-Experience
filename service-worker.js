@@ -11,7 +11,14 @@ const urlsToCache = [
   'https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.rtl.min.css',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
   'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css',
-  '/offline.html'
+  '/offline.html',
+  '/style.css',
+  '/app.js',
+  '/notifications-manager.js',
+  '/icons/icon-192x192.png',
+  '/icons/icon-512x512.png',
+  '/default-driver.png',
+  'https://github.com/AlQasimMall/taxialpasha/raw/main/%D8%A7%D9%84%D9%87%D8%A7%D8%AA%D9%81-%D8%A7%D9%84%D8%AB%D8%A7%D8%A8%D8%AA.mp3'
 ];
 
 // تثبيت Service Worker
@@ -38,7 +45,7 @@ self.addEventListener('activate', function(event) {
           }
         })
       );
-    })
+    }).then(() => self.clients.claim())
   );
 });
 
@@ -92,6 +99,62 @@ self.addEventListener('message', function(event) {
   }
 });
 
+// معالجة إشعارات الدفع
+self.addEventListener('push', event => {
+  if (!event.data) return;
+  
+  try {
+    const data = event.data.json();
+    
+    // عرض الإشعار
+    const title = data.title || 'تاكسي العراق';
+    const options = {
+      body: data.message || 'إشعار جديد',
+      icon: data.icon || '/icons/icon-192x192.png',
+      badge: '/icons/badge-96x96.png',
+      tag: data.tag || 'default',
+      data: data.data || {}
+    };
+    
+    event.waitUntil(
+      self.registration.showNotification(title, options)
+    );
+  } catch (error) {
+    console.error('Error showing push notification:', error);
+  }
+});
+
+// معالجة النقر على الإشعار
+self.addEventListener('notificationclick', event => {
+  event.notification.close();
+  
+  const url = event.notification.data.url || '/';
+  const driverId = event.notification.data.driverId;
+  
+  event.waitUntil(
+    clients.matchAll({ type: 'window' }).then(clientList => {
+      // التحقق مما إذا كانت هناك نافذة مفتوحة بالفعل
+      for (const client of clientList) {
+        if (client.url.includes(self.registration.scope) && 'focus' in client) {
+          // إرسال رسالة إلى النافذة لفتح صفحة السائق إذا تم توفير معرف
+          if (driverId) {
+            client.postMessage({
+              type: 'NOTIFICATION_CLICK',
+              driverId: driverId
+            });
+          }
+          return client.focus();
+        }
+      }
+      
+      // فتح نافذة جديدة إذا لم يتم العثور على نافذة مفتوحة
+      if (clients.openWindow) {
+        return clients.openWindow(url);
+      }
+    })
+  );
+});
+
 const firebaseConfig = {
   apiKey: "AIzaSyDGpAHia_wEmrhnmYjrPf1n1TrAzwEMiAI",
   authDomain: "messageemeapp.firebaseapp.com",
@@ -106,8 +169,8 @@ firebase.initializeApp(firebaseConfig);
 
 // تهيئة الإشعارات
 const messaging = firebase.messaging();
-messaging.getToken({ vapidKey: 'BI9cpoewcZa1ftyZ_bGjO0GYa4_cT0HNja4YFd6FwLwHg5c0gQ5iSj_MJZRhMxKdgJ0-d-_rEXcpSQ_cx7GqCSc' });
-then((currentToken) => {
+messaging.getToken({ vapidKey: 'BI9cpoewcZa1ftyZ_bGjO0GYa4_cT0HNja4YFd6FwLwHg5c0gQ5iSj_MJZRhMxKdgJ0-d-_rEXcpSQ_cx7GqCSc' })
+.then((currentToken) => {
   if (currentToken) {
     console.log('Token:', currentToken);
     // أرسل التوكن إلى السيرفر الخاص بك لتخزينه

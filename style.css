@@ -3736,3 +3736,443 @@ body {
 }
 
 /* ...existing code... */
+
+
+
+
+/* أنماط زر مشاركة الموقع */
+.location-btn {
+    background-color: #333;
+    color: #FFD700;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.location-btn:hover {
+    background-color: #FFD700;
+    color: #000;
+    transform: scale(1.1);
+}
+
+/* أنماط رسالة الموقع */
+.location-message {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.location-message:hover {
+    transform: translateY(-2px);
+}
+
+/* تأثير نبض للموقع على الخريطة */
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(2);
+        opacity: 0;
+    }
+}
+
+/* أنماط نافذة الموقع المنبثقة */
+.custom-popup {
+    background-color: #1a1a1a !important;
+    color: #FFFFFF !important;
+    border: 2px solid #FFD700 !important;
+    border-radius: 15px !important;
+}
+
+.custom-popup h6 {
+    color: #FFD700;
+}
+
+.custom-popup button {
+    background-color: #FFD700;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.custom-popup button:hover {
+    background-color: #FFFFFF;
+    transform: translateY(-2px);
+}
+
+
+
+
+/* أنماط زر مشاركة الموقع */
+.location-btn {
+    background-color: #333;
+    color: #FFD700;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.location-btn:hover {
+    background-color: #FFD700;
+    color: #000;
+    transform: scale(1.1);
+}
+
+/* أنماط رسالة الموقع */
+.location-message {
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid #FFD700;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.location-message:hover {
+    background: rgba(255, 215, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.location-message-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.location-message-header i {
+    color: #FFD700;
+    font-size: 1.2rem;
+}
+
+.location-message-preview {
+    width: 100%;
+    height: 120px;
+    border-radius: 8px;
+    border: 1px solid #555;
+    background: #242424;
+    overflow: hidden;
+}
+
+.location-message-action {
+    text-align: center;
+    margin-top: 5px;
+    color: #FFD700;
+    font-size: 0.8rem;
+}
+
+
+
+
+/* أنماط علامة الموقع المشترك */
+.shared-location-marker {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.location-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    background: #FFD700;
+    color: #000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    border: 2px solid #000;
+}
+
+.pulsing-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 215, 0, 0.3);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(2);
+        opacity: 0;
+    }
+}
+
+/* تمييز الرسالة المحددة */
+.highlighted-message {
+    animation: highlight 3s ease;
+}
+
+@keyframes highlight {
+    0%, 100% {
+        background-color: transparent;
+    }
+    50% {
+        background-color: rgba(255, 215, 0, 0.2);
+    }
+}
+
+/* تحسين نافذة الموقع المنبثقة */
+.location-popup {
+    text-align: center;
+    padding: 10px;
+}
+
+.location-popup h6 {
+    color: #FFD700;
+    margin-bottom: 10px;
+}
+
+.location-popup p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.location-popup p i {
+    color: #FFD700;
+}
+
+.open-chat-btn {
+    background: #FFD700;
+    color: #000;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 0 auto;
+}
+
+.open-chat-btn:hover {
+    background: #ccac00;
+    transform: translateY(-2px);
+}
+
+
+/* أنماط زر مشاركة الموقع */
+.location-btn {
+    background-color: #333;
+    color: #FFD700;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.location-btn:hover {
+    background-color: #FFD700;
+    color: #000;
+    transform: scale(1.1);
+}
+
+/* أنماط رسالة الموقع */
+.location-message {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.location-message:hover {
+    transform: translateY(-2px);
+}
+
+/* تأثير نبض للموقع على الخريطة */
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(2);
+        opacity: 0;
+    }
+}
+
+/* أنماط نافذة الموقع المنبثقة */
+.custom-popup {
+    background-color: #1a1a1a !important;
+    color: #FFFFFF !important;
+    border: 2px solid #FFD700 !important;
+    border-radius: 15px !important;
+}
+
+.custom-popup h6 {
+    color: #FFD700;
+}
+
+.custom-popup button {
+    background-color: #FFD700;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.custom-popup button:hover {
+    background-color: #FFFFFF;
+    transform: translateY(-2px);
+}
+
+
+
+
+
+
+
+
+
+
+/* أنماط للتأثيرات الحركية في المسار */
+.animated-route {
+    stroke-dasharray: 10, 10;
+    animation: dash 2s linear infinite;
+}
+
+@keyframes dash {
+    to {
+        stroke-dashoffset: -20;
+    }
+}
+
+/* تأثيرات النبض للمواقع */
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(2);
+        opacity: 0;
+    }
+}
+
+/* تأثير التمرير للخريطة */
+.map-slide-in {
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* تنسيق مربع معلومات المسار */
+.route-info-box {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* تحسين ظهور العلامات على الخريطة */
+.user-location-marker,
+.shared-location-marker,
+.destination-location-marker {
+    transition: transform 0.3s ease;
+}
+
+.user-location-marker:hover,
+.shared-location-marker:hover,
+.destination-location-marker:hover {
+    transform: scale(1.1);
+    z-index: 1000 !important;
+}
+
+/* أنماط النافذة المنبثقة المحسنة */
+.custom-popup .leaflet-popup-content-wrapper {
+    background-color: #1a1a1a !important;
+    color: #FFFFFF !important;
+    border: 2px solid #FFD700 !important;
+    border-radius: 15px !important;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5) !important;
+}
+
+.custom-popup .leaflet-popup-content {
+    margin: 0 !important;
+    padding: 5px !important;
+    min-width: 250px;
+}
+
+.custom-popup .leaflet-popup-tip {
+    background-color: #FFD700 !important;
+}
+
+.custom-popup .leaflet-popup-close-button {
+    color: #FFD700 !important;
+    font-size: 20px !important;
+    padding: 5px !important;
+}
+
+/* تنسيق أزرار النافذة المنبثقة */
+.location-detailed-popup button {
+    transition: all 0.3s ease;
+}
+
+.location-detailed-popup button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+

@@ -40,7 +40,7 @@ class UserAuthSystem {
         // زر تسجيل الخروج
         const logoutButton = document.createElement('button');
         logoutButton.className = 'nav-link';
-        logoutButton.innerHTML = '<i class="fas fa-sign-out-alt"></i>';
+       
         logoutButton.onclick = () => this.handleLogout();
         
         // إضافة زر تسجيل الخروج إلى القائمة
@@ -316,3 +316,31 @@ class UserAuthSystem {
 // إنشاء نسخة من النظام وتصديرها
 const userAuthSystem = new UserAuthSystem();
 export default userAuthSystem;
+
+// تسجيل Service Worker إذا كان متاحًا
+document.addEventListener('DOMContentLoaded', function() {
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js')
+            .then(registration => {
+                console.log('ServiceWorker registered with scope:', registration.scope);
+                
+                // التقاط رسائل من Service Worker
+                navigator.serviceWorker.addEventListener('message', event => {
+                    const data = event.data;
+                    
+                    // إذا كانت الرسالة من نوع NOTIFICATION_CLICK
+                    if (data.type === 'NOTIFICATION_CLICK') {
+                        // إذا كان هناك معرف للسائق، عرض موقعه
+                        if (data.driverId && typeof viewDriverLocation === 'function') {
+                            viewDriverLocation(data.driverId);
+                        }
+                    }
+                });
+            })
+            .catch(error => {
+                console.error('ServiceWorker registration failed:', error);
+            });
+    }
+    
+    // إضافة المزيد من الوظائف حسب الحاجة
+});
