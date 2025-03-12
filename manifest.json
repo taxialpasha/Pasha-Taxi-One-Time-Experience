@@ -1,13 +1,13 @@
 {
-  "name": "تاكسي العراق",
-  "short_name": "تاكسي العراق",
-  "start_url": ".",
+  "name": "Pasha Taxi",
+  "short_name": "PashaTaxi",
+  "start_url": "/index.html",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#1a1a1a",
+  "background_color": "#FFD700",
   "theme_color": "#FFD700",
   "orientation": "portrait-primary",
-  "description": "خدمة حجز سيارات الأجرة الأفضل في العراق",
+  "description": "تطبيق تاكسي العراق - خدمة حجز سيارات الأجرة الأفضل في العراق",
   "categories": ["travel", "transportation"],
   "lang": "ar",
   "dir": "rtl",
@@ -22,12 +22,12 @@
     {
       "src": "https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/driver-images%2F7605a607-6cf8-4b32-aee1-fa7558c98452.png?alt=media&token=5cf9e67c-ba6e-4431-a6a0-79dede15b527",
       "type": "image/png",
-      "sizes": "384x384"
+      "sizes": "512x512"
     },
     {
       "src": "https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/driver-images%2F7605a607-6cf8-4b32-aee1-fa7558c98452.png?alt=media&token=5cf9e67c-ba6e-4431-a6a0-79dede15b527",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "384x384"
     },
     {
       "src": "https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/driver-images%2F7605a607-6cf8-4b32-aee1-fa7558c98452.png?alt=media&token=5cf9e67c-ba6e-4431-a6a0-79dede15b527",

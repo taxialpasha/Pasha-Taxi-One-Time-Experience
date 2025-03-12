@@ -197,7 +197,6 @@ async function toggleDriverAvailability() {
         showToast('حدث خطأ أثناء تغيير الحالة', 'error');
     }
 }
-
 // دالة تحديث واجهة المستخدم بعد تسجيل الدخول - تم تعديلها لتظهر نوع المستخدم (سائق/مستخدم)
 function updateUIAfterLogin(userData) {
     // تحديد نوع المستخدم ليظهر في الواجهة
@@ -420,3 +419,40 @@ async function handleDriverRegistration(event) {
         hideLoading();
     }
 }
+
+function updateProfileIcon(user) {
+    const profileImage = document.getElementById('userProfileImage');
+    const defaultIcon = document.getElementById('defaultProfileIcon');
+    const profileText = document.getElementById('profileText');
+    const userTypeElement = document.getElementById('userType');
+
+    if (profileImage && defaultIcon && profileText && userTypeElement) {
+        if (user && user.photoURL) {
+            profileImage.src = user.photoURL;
+            profileImage.style.display = 'block';
+            defaultIcon.style.display = 'none';
+            profileText.style.display = 'none';
+        } else {
+            profileImage.style.display = 'none';
+            defaultIcon.style.display = 'block';
+            profileText.style.display = 'block';
+        }
+
+        // Set user type
+        const userData = JSON.parse(localStorage.getItem('currentUser'));
+        if (userData) {
+            userTypeElement.textContent = userData.userType === 'driver' ? 'سائق' : 'مستخدم';
+            userTypeElement.style.display = 'block';
+        } else {
+            userTypeElement.style.display = 'none';
+        }
+    } else {
+        console.error('Profile elements not found in the DOM.');
+    }
+}
+
+firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+        updateProfileIcon(user);
+    }
+});

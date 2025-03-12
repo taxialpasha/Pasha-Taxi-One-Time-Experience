@@ -292,7 +292,6 @@
 </head>
 
 
-<!-- Content will be here -->
 
 <!-- External Libraries -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
@@ -320,11 +319,11 @@
 <!-- App Scripts -->
 
 <!-- إضافة المزيد من الأصوات -->
-<audio id="notificationSound" src="notification-sound.mp3" preload="auto"></audio>
-<audio id="messageSound" src="message-sound.mp3" preload="auto"></audio>
+<audio id="notificationSound" src="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/%D9%86%D8%BA%D9%85%D8%A7%D8%AA%20%D8%AA%D9%83%D8%B3%D9%8A%20%D8%A7%D9%84%D8%A8%D8%A7%D8%B4%D9%87%2F%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D8%A6%D9%84-%D8%A7%D9%84%D9%82%D8%B5%D9%8A%D8%B1%D8%A9-%D8%A7%D9%84%D8%A3%D9%86%D9%8A%D9%82%D8%A9.mp3?alt=media&token=94afec9b-097d-471c-a1f6-ee051f95ae0f" preload="auto"></audio>
+<audio id="messageSound" src="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/%D9%86%D8%BA%D9%85%D8%A7%D8%AA%20%D8%AA%D9%83%D8%B3%D9%8A%20%D8%A7%D9%84%D8%A8%D8%A7%D8%B4%D9%87%2F%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D8%A6%D9%84-%D8%A7%D9%84%D9%82%D8%B5%D9%8A%D8%B1%D8%A9-%D8%A7%D9%84%D8%A3%D9%86%D9%8A%D9%82%D8%A9.mp3?alt=media&token=94afec9b-097d-471c-a1f6-ee051f95ae0f" preload="auto"></audio>
 
 <!-- إضافة الملفات الجديدة -->
-<audio id="notificationSound" src="https://github.com/AlQasimMall/taxialpasha/raw/main/%D8%A7%D9%84%D9%87%D8%A7%D8%AA%D9%81-%D8%A7%D9%84%D8%AB%D8%A7%D8%A8%D8%AA.mp3" preload="auto"></audio>
+<audio id="notificationSound" src="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/%D9%86%D8%BA%D9%85%D8%A7%D8%AA%20%D8%AA%D9%83%D8%B3%D9%8A%20%D8%A7%D9%84%D8%A8%D8%A7%D8%B4%D9%87%2F%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D8%A6%D9%84-%D8%A7%D9%84%D9%82%D8%B5%D9%8A%D8%B1%D8%A9-%D8%A7%D9%84%D8%A3%D9%86%D9%8A%D9%82%D8%A9.mp3?alt=media&token=94afec9b-097d-471c-a1f6-ee051f95ae0f" preload="auto"></audio>
 <script type="module" src="user-auth-notifications.js"></script>
 <script type="module" src="notifications-manager.js"></script>
 <script src="firebase-config.js"></script>
@@ -6832,6 +6831,80 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
+
+
+
+/* أنماط معلومات المستخدم في الشريط الجانبي */
+.side-nav-user-info {
+    padding: 20px;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+    margin-bottom: 20px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), transparent);
+}
+
+/* تحسينات لأسلوب صورة المستخدم */
+.side-nav-user-info img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #FFD700;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.side-nav-user-info img:hover {
+    transform: scale(1.05);
+    border-color: #FFFFFF;
+}
+
+/* تحسينات لاسم المستخدم */
+.side-nav-user-info h6 {
+    color: #FFFFFF;
+    font-weight: bold;
+    margin: 10px 0 5px;
+    font-size: 1.1rem;
+}
+
+/* تحسينات لنوع المستخدم (السائق/المستخدم) */
+.side-nav-user-info .badge {
+    font-size: 0.9rem;
+    padding: 5px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.side-nav-user-info .badge.bg-gold {
+    background-color: #FFD700;
+    color: #000000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* تحسينات لأزرار التفاعل */
+.side-nav-user-info .btn {
+    transition: all 0.3s ease;
+    border-radius: 20px;
+    margin-top: 10px;
+}
+
+.side-nav-user-info .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.side-nav-user-info .btn-gold {
+    background-color: #FFD700;
+    color: #000000;
+    border: none;
+}
+
+.side-nav-user-info .btn-gold:hover {
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
+
+
 </style>
 </head>
 
@@ -6867,6 +6940,20 @@
                         <button class="side-nav-close" onclick="toggleSideNav()">×</button>
 
                     </div>
+
+                <!-- Content will be here -->
+                <div class="side-nav-user-info">
+                    <img id="userProfileImage" src="" alt="User Profile Image" style="display:none;">
+                    <div id="defaultProfileIcon" style="display:none;">Default Icon</div>
+                    <h6 id="profileText" style="display:none;">Profile Text</h6>
+                </div>
+
+
+
+
+
+
+
 
                     <div class="side-nav-items">
                         <a href="/" class="side-nav-item"><i class="fas fa-home"></i> الرئيسية</a>
@@ -6951,179 +7038,7 @@
         </a>
     </div>
 
-    <script>
-        function updateProfileIcon(user) {
-            const profileImage = document.getElementById('userProfileImage');
-            const defaultIcon = document.getElementById('defaultProfileIcon');
-            const profileText = document.getElementById('profileText');
-
-            if (user && user.photoURL) {
-                profileImage.src = user.photoURL;
-                profileImage.style.display = 'block';
-                defaultIcon.style.display = 'none';
-                profileText.style.display = 'none';
-            } else {
-                profileImage.style.display = 'none';
-                defaultIcon.style.display = 'block';
-                profileText.style.display = 'block';
-            }
-        }
-
-        // Example usage after user login
-        firebase.auth().onAuthStateChanged((user) => {
-            if (user) {
-                updateProfileIcon(user);
-            }
-        });
-        function updateProfileIcon(user) {
-            const profileImage = document.getElementById('userProfileImage');
-            const defaultIcon = document.getElementById('defaultProfileIcon');
-            const profileText = document.getElementById('profileText');
-
-            if (user && user.photoURL) {
-                profileImage.src = user.photoURL;
-                profileImage.style.display = 'block';
-                defaultIcon.style.display = 'none';
-                profileText.style.display = 'none';
-            } else {
-                profileImage.style.display = 'none';
-                defaultIcon.style.display = 'block';
-                profileText.style.display = 'block';
-            }
-        }
-
-        // Example usage after user login
-        firebase.auth().onAuthStateChanged((user) => {
-            if (user) {
-                updateProfileIcon(user);
-            }
-        });
-        function updateProfileIcon(user) {
-            const profileImage = document.getElementById('userProfileImage');
-            const defaultIcon = document.getElementById('defaultProfileIcon');
-            const profileText = document.getElementById('profileText');
-
-            if (user && user.photoURL) {
-                profileImage.src = user.photoURL;
-                profileImage.style.display = 'block';
-                defaultIcon.style.display = 'none';
-                profileText.style.display = 'none';
-            } else {
-                profileImage.style.display = 'none';
-                defaultIcon.style.display = 'block';
-                profileText.style.display = 'block';
-            }
-        }
-
-        // Example usage after user login
-        firebase.auth().onAuthStateChanged((user) => {
-            if (user) {
-                updateProfileIcon(user);
-            }
-        });
-        const messagesButton = document.getElementById('messagesButton');
-        const messagesContainer = document.getElementById('messagesContainer');
-        const chatContainer = document.getElementById('chatContainer');
-        const messageInput = document.getElementById('messageInput');
-        const sendMessageButton = document.getElementById('sendMessageButton');
-        const unreadMessagesBadge = document.getElementById('unreadMessagesBadge');
-
-        // Load messages when the modal is shown
-        messagesButton.addEventListener('click', function () {
-            // Load messages from the server or database
-            fetchMessages();
-        });
-
-        // Open chat modal when a message is clicked
-        messagesContainer.addEventListener('click', function (event) {
-            if (event.target.classList.contains('message-item')) {
-                const messageId = event.target.dataset.messageId;
-                openChat(messageId);
-            }
-        });
-
-        // Send message
-        sendMessageButton.addEventListener('click', function () {
-            const message = messageInput.value;
-            if (message.trim() !== '') {
-                // Send the message to the server or database
-                sendMessage(message);
-                messageInput.value = ''; // Clear the input
-            }
-        });
-
-        // Example functions to load messages and send messages
-        function fetchMessages() {
-            // Fetch messages from the server or database
-            // Example:
-            // fetch('/api/messages')
-            //     .then(response => response.json())
-            //     .then(messages => {
-            //         messagesContainer.innerHTML = messages.map(msg => `
-            //             <div class="message-item" data-message-id="${msg.id}">
-            //                 <img src="${msg.senderImage}" alt="${msg.senderName}" class="sender-image">
-            //                 <span>${msg.senderName}</span>
-            //                 <span class="message-preview">${msg.preview}</span>
-            //                 ${msg.unread ? '<span class="badge bg-danger">جديد</span>' : ''}
-            //             </div>
-            //         `).join('');
-            //         updateUnreadMessagesBadge(messages.filter(msg => msg.unread).length);
-            //     });
-        }
-
-        function openChat(messageId) {
-            // Load chat messages from the server or database
-            // Example:
-            // fetch(`/api/messages/${messageId}`)
-            //     .then(response => response.json())
-            //     .then(messages => {
-            //         chatContainer.innerHTML = messages.map(msg => `
-            //             <div class="message-bubble ${msg.sender === 'user' ? 'sent' : 'received'}">
-            //                 ${msg.text}
-            //                 <div class="timestamp">${msg.timestamp}</div>
-            //             </div>
-            //         `).join('');
-            //         const chatModal = new bootstrap.Modal(document.getElementById('chatModal'));
-            //         chatModal.show();
-            //     });
-        }
-
-        function sendMessage(message) {
-            // Send the message to the server or database
-            // Example:
-            // fetch('/api/messages', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //     },
-            //     body: JSON.stringify({ message })
-            // });
-        }
-
-        function updateUnreadMessagesBadge(count) {
-            if (count > 0) {
-                unreadMessagesBadge.textContent = count;
-                unreadMessagesBadge.style.display = 'block';
-            } else {
-                unreadMessagesBadge.style.display = 'none';
-            }
-        }
-
-        // Example function to check for new messages periodically
-        function checkForNewMessages() {
-            // Example:
-            // setInterval(() => {
-            //     fetch('/api/messages/unread-count')
-            //         .then(response => response.json())
-            //         .then(count => {
-            //             updateUnreadMessagesBadge(count);
-            //         });
-            // }, 60000); // Check every minute
-        }
-
-        // Start checking for new messages
-        checkForNewMessages();
-    </script>
+   
 
     </nav>
 
@@ -7315,15 +7230,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-
                     <form id="addDriverForm" onsubmit="handleAddDriver(event)">
                         <div class="mb-4 text-center">
-                            <div class="image-upload-container"
-                                onclick="document.getElementById('driverImage').click()">
-                                <input type="file" id="driverImage" accept="image/*" style="display: none"
-                                    onchange="handleImagePreview(event)">
-                                <img id="imagePreview" src="#" alt=""
-                                    style="display: none; width: 100%; height: 100%; object-fit: cover;">
+                            <div class="image-upload-container" onclick="document.getElementById('driverImage').click()">
+                                <input type="file" id="driverImage" accept="image/*" style="display: none" onchange="handleImagePreview(event)">
+                                <img id="imagePreview" src="#" alt="" style="display: none; width: 100%; height: 100%; object-fit: cover;">
                                 <div class="upload-placeholder">
                                     <i class="fas fa-camera fa-2x mb-2"></i>
                                     <p>انقر لإضافة صورة</p>
@@ -7334,10 +7245,8 @@
                             <div class="location-capture-section">
                                 <label class="form-label">موقع السائق</label>
                                 <div class="d-flex gap-2 mb-2">
-                                    <input type="text" class="form-control" id="driverLatitude" placeholder="خط العرض"
-                                        readonly>
-                                    <input type="text" class="form-control" id="driverLongitude" placeholder="خط الطول"
-                                        readonly>
+                                    <input type="text" class="form-control" id="driverLatitude" placeholder="خط العرض" readonly>
+                                    <input type="text" class="form-control" id="driverLongitude" placeholder="خط الطول" readonly>
                                 </div>
                                 <button type="button" class="btn btn-primary w-100" onclick="captureCurrentLocation()">
                                     <i class="fas fa-location-arrow me-2"></i>
@@ -7347,17 +7256,13 @@
                         </div>
                         <div class="registration-section mb-4">
                             <h6 class="section-title">المستمسكات الرسمية</h6>
-
-                            <!-- هوية الأحوال المدنية -->
                             <div class="row g-3 mb-4">
                                 <div class="col-12">
                                     <label class="form-label">هوية الأحوال المدنية</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="document-upload"
-                                        onclick="document.getElementById('idCardFront').click()">
-                                        <input type="file" id="idCardFront" accept="image/*" style="display: none;"
-                                            onchange="previewDocument(this, 'idCardFrontPreview')" required>
+                                    <div class="document-upload" onclick="document.getElementById('idCardFront').click()">
+                                        <input type="file" id="idCardFront" accept="image/*" style="display: none;" onchange="previewDocument(this, 'idCardFrontPreview')" required>
                                         <img id="idCardFrontPreview" src="#" alt="" style="display: none;">
                                         <div class="upload-placeholder">
                                             <i class="fas fa-id-card"></i>
@@ -7366,10 +7271,8 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="document-upload"
-                                        onclick="document.getElementById('idCardBack').click()">
-                                        <input type="file" id="idCardBack" accept="image/*" style="display: none;"
-                                            onchange="previewDocument(this, 'idCardBackPreview')" required>
+                                    <div class="document-upload" onclick="document.getElementById('idCardBack').click()">
+                                        <input type="file" id="idCardBack" accept="image/*" style="display: none;" onchange="previewDocument(this, 'idCardBackPreview')" required>
                                         <img id="idCardBackPreview" src="#" alt="" style="display: none;">
                                         <div class="upload-placeholder">
                                             <i class="fas fa-id-card"></i>
@@ -7378,17 +7281,13 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- بطاقة السكن -->
                             <div class="row g-3 mb-4">
                                 <div class="col-12">
                                     <label class="form-label">بطاقة السكن</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="document-upload"
-                                        onclick="document.getElementById('residenceFront').click()">
-                                        <input type="file" id="residenceFront" accept="image/*" style="display: none;"
-                                            onchange="previewDocument(this, 'residenceFrontPreview')" required>
+                                    <div class="document-upload" onclick="document.getElementById('residenceFront').click()">
+                                        <input type="file" id="residenceFront" accept="image/*" style="display: none;" onchange="previewDocument(this, 'residenceFrontPreview')" required>
                                         <img id="residenceFrontPreview" src="#" alt="" style="display: none;">
                                         <div class="upload-placeholder">
                                             <i class="fas fa-home"></i>
@@ -7397,10 +7296,8 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="document-upload"
-                                        onclick="document.getElementById('residenceBack').click()">
-                                        <input type="file" id="residenceBack" accept="image/*" style="display: none;"
-                                            onchange="previewDocument(this, 'residenceBackPreview')" required>
+                                    <div class="document-upload" onclick="document.getElementById('residenceBack').click()">
+                                        <input type="file" id="residenceBack" accept="image/*" style="display: none;" onchange="previewDocument(this, 'residenceBackPreview')" required>
                                         <img id="residenceBackPreview" src="#" alt="" style="display: none;">
                                         <div class="upload-placeholder">
                                             <i class="fas fa-home"></i>
@@ -7409,17 +7306,13 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- إجازة السوق -->
                             <div class="row g-3">
                                 <div class="col-12">
                                     <label class="form-label">إجازة السوق</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="document-upload"
-                                        onclick="document.getElementById('licenseFront').click()">
-                                        <input type="file" id="licenseFront" accept="image/*" style="display: none;"
-                                            onchange="previewDocument(this, 'licenseFrontPreview')" required>
+                                    <div class="document-upload" onclick="document.getElementById('licenseFront').click()">
+                                        <input type="file" id="licenseFront" accept="image/*" style="display: none;" onchange="previewDocument(this, 'licenseFrontPreview')" required>
                                         <img id="licenseFrontPreview" src="#" alt="" style="display: none;">
                                         <div class="upload-placeholder">
                                             <i class="fas fa-id-card"></i>
@@ -7428,10 +7321,8 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="document-upload"
-                                        onclick="document.getElementById('licenseBack').click()">
-                                        <input type="file" id="licenseBack" accept="image/*" style="display: none;"
-                                            onchange="previewDocument(this, 'licenseBackPreview')" required>
+                                    <div class="document-upload" onclick="document.getElementById('licenseBack').click()">
+                                        <input type="file" id="licenseBack" accept="image/*" style="display: none;" onchange="previewDocument(this, 'licenseBackPreview')" required>
                                         <img id="licenseBackPreview" src="#" alt="" style="display: none;">
                                         <div class="upload-placeholder">
                                             <i class="fas fa-id-card"></i>
@@ -7441,8 +7332,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- New Fields for Email and Password -->
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label class="form-label">البريد الإلكتروني</label>
@@ -7456,85 +7345,121 @@
                                 <label class="form-label">إعادة كتابة الرمز السري</label>
                                 <input type="password" class="form-control" id="confirmDriverPassword" required>
                             </div>
-
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label class="form-label">اسم السائق</label>
-                                    <input type="text" class="form-control" id="driverName" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">رقم الهاتف</label>
-                                    <input type="tel" class="form-control" id="driverPhone" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">نوع السيارة</label>
-                                    <input type="text" class="form-control" id="carType" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">موديل السيارة</label>
-                                    <input type="number" class="form-control" id="carModel" required>
-                                </div>
-                                <div class="col-md-12">
-                                    <label class="form-label">المنطقة</label>
-                                    <select class="form-control" id="driverLocation" required>
-                                        <option value="">اختر المحافظة</option>
-                                        <option value="بغداد">بغداد</option>
-                                        <option value="الكرخ">الكرخ</option>
-                                        <option value="الرصافة">الرصافة</option>
-                                        <option value="البصرة">البصرة</option>
-                                        <option value="نينوى">نينوى</option>
-                                        <option value="الموصل">الموصل</option>
-                                        <option value="النجف">النجف</option>
-                                        <option value="الكوفة">الكوفة</option>
-                                        <option value="كربلاء">كربلاء</option>
-                                        <option value="الحسينية">الحسينية</option>
-                                        <option value="أربيل">أربيل</option>
-                                        <option value="كركوك">كركوك</option>
-                                        <option value="الأنبار">الأنبار</option>
-                                        <option value="الرمادي">الرمادي</option>
-                                        <option value="الفلوجة">الفلوجة</option>
-                                        <option value="بابل">بابل</option>
-                                        <option value="الحلة">الحلة</option>
-                                        <option value="المسيب">المسيب</option>
-                                        <option value="الهاشمية">الهاشمية</option>
-                                        <option value="القاسم">القاسم</option>
-                                        <option value="ديالى">ديالى</option>
-                                        <option value="بعقوبة">بعقوبة</option>
-                                        <option value="ذي قار">ذي قار</option>
-                                        <option value="الناصرية">الناصرية</option>
-                                        <option value="السليمانية">السليمانية</option>
-                                        <option value="صلاح الدين">صلاح الدين</option>
-                                        <option value="تكريت">تكريت</option>
-                                        <option value="واسط">واسط</option>
-                                        <option value="الكوت">الكوت</option>
-                                        <option value="ميسان">ميسان</option>
-                                        <option value="العمارة">العمارة</option>
-                                        <option value="المثنى">المثنى</option>
-                                        <option value="السماوة">السماوة</option>
-                                        <option value="دهوك">دهوك</option>
-                                        <option value="القادسية">القادسية</option>
-                                        <option value="الديوانية">الديوانية</option>
-
-
-
-                                    </select>
-
-
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label">معلومات إضافية</label>
-                                    <textarea class="form-control" id="driverBio" rows="3"></textarea>
-                                </div>
+                            <div class="col-md-6">
+                                <label class="form-label">اسم السائق</label>
+                                <input type="text" class="form-control" id="driverName" required>
                             </div>
-
-                            <div class="mt-4">
-                                <button type="submit" class="btn btn-primary w-100">إضافة السائق</button>
+                            <div class="col-md-6">
+                                <label class="form-label">رقم الهاتف</label>
+                                <input type="tel" class="form-control" id="driverPhone" required>
                             </div>
+                            <div class="col-md-6">
+                                <label class="form-label">نوع السيارة</label>
+                                <input type="text" class="form-control" id="carType" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">موديل السيارة</label>
+                                <input type="number" class="form-control" id="carModel" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">المحافظة</label>
+                                <select class="form-control" id="driverProvince" onchange="loadAreas(this.value)" required>
+                                    <option value="">اختر المحافظة</option>
+                                    <option value="بغداد">بغداد</option>
+                                    <option value="الكرخ">الكرخ</option>
+                                    <option value="الرصافة">الرصافة</option>
+                                    <option value="البصرة">البصرة</option>
+                                    <option value="نينوى">نينوى</option>
+                                    <option value="الموصل">الموصل</option>
+                                    <option value="النجف">النجف</option>
+                                    <option value="الكوفة">الكوفة</option>
+                                    <option value="كربلاء">كربلاء</option>
+                                    <option value="الحسينية">الحسينية</option>
+                                    <option value="أربيل">أربيل</option>
+                                    <option value="كركوك">كركوك</option>
+                                    <option value="الأنبار">الأنبار</option>
+                                    <option value="الرمادي">الرمادي</option>
+                                    <option value="الفلوجة">الفلوجة</option>
+                                    <option value="بابل">بابل</option>
+                                    <option value="الحلة">الحلة</option>
+                                    <option value="المسيب">المسيب</option>
+                                    <option value="الهاشمية">الهاشمية</option>
+                                    <option value="القاسم">القاسم</option>
+                                    <option value="ديالى">ديالى</option>
+                                    <option value="بعقوبة">بعقوبة</option>
+                                    <option value="ذي قار">ذي قار</option>
+                                    <option value="الناصرية">الناصرية</option>
+                                    <option value="السليمانية">السليمانية</option>
+                                    <option value="صلاح الدين">صلاح الدين</option>
+                                    <option value="تكريت">تكريت</option>
+                                    <option value="واسط">واسط</option>
+                                    <option value="الكوت">الكوت</option>
+                                    <option value="ميسان">ميسان</option>
+                                    <option value="العمارة">العمارة</option>
+                                    <option value="المثنى">المثنى</option>
+                                    <option value="السماوة">السماوة</option>
+                                    <option value="دهوك">دهوك</option>
+                                    <option value="القادسية">القادسية</option>
+                                    <option value="الديوانية">الديوانية</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">المنطقة</label>
+                                <select class="form-control" id="driverArea" required>
+                                    <option value="">اختر المنطقة</option>
+                                    <!-- سيتم ملء الخيارات عبر JavaScript -->
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">معلومات إضافية</label>
+                                <textarea class="form-control" id="driverBio" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="mt-4"></div>
+                            <button type="submit" class="btn btn-primary w-100">إضافة السائق</button>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        function loadAreas(province) {
+            const areas = {
+                "بغداد": ["الكرخ", "الرصافة", "الأعظمية", "الكاظمية", "المنصور", "الدورة", "الشعب", "الكرادة", "زيونة", "الغدير", "البلديات", "الشعلة", "الحرية", "الوشاش", "حي الجامعة", "الصليخ", "بغداد الجديدة", "مدينة الصدر", "الزعفرانية", "العامرية", "الغزالية", "الجادرية", "الحارثية", "الجهاد", "البياع", "الخضراء", "حي الخليج", "التاجي"],
+    "البصرة": ["البصرة الجديدة", "الزبير", "أبو الخصيب", "القرنة", "شط العرب", "الفاو", "الهارثة", "الدير", "المدينة", "العشار", "البراضعية", "الخور", "النجيبية", "الفيحاء", "المعقل", "سفوان", "الخصيب", "جبيلة", "القبلة", "ياسين خريبط", "الشعيبة"],
+    "نينوى": ["الموصل", "تلعفر", "الحمدانية", "سنجار", "الحضر", "البعاج", "عين سفني", "تلكيف", "القيارة", "مخمور", "شيخان", "الحيدانية", "الشمال", "وانة", "سميل"],
+    "أربيل": ["عنكاوا", "شقلاوة", "خبات", "سوران", "جومان", "رواندوز", "ميرگسور", "كوية", "المركز", "دشتي هولير", "خيفتي", "دارتو", "بنصلاوة", "حرير", "سيديكان", "شيروان-مزن", "مخمور", "قوشتبة"],
+    "النجف": ["الكوفة", "المناذرة", "المشخاب", "الحيدرية", "العباسية", "القادسية", "الحرية", "النجف القديمة", "الغري", "النصر", "الوفاء", "الزهراء", "الجامعة", "السلام", "الغدير", "المرتضى", "القدس", "الأمير"],
+    "كربلاء": ["الحسينية", "الهندية", "عين التمر", "الحر", "الجدول الغربي", "مركز كربلاء", "الخيرات", "الرشيد", "العباس", "الإصلاح", "الحسين", "المخيم", "الأنصار", "باب الخان", "الإسكان"],
+    "كركوك": ["دبس", "الحويجة", "داقوق", "تازة", "شوان", "يايجي", "الملتقى", "العروبة", "القادسية", "الواسطي", "المنصور", "النصر", "الرياض", "الرشاد", "الزاب", "الرياض", "الصناعي"],
+    "الأنبار": ["الرمادي", "الفلوجة", "هيت", "حديثة", "الخالدية", "الصقلاوية", "كبيسة", "العامرية", "الحبانية", "راوة", "عنه", "الرطبة", "القائم", "البغدادي", "الكرمة", "الوليد", "الحقلانية", "الرحالية"],
+    "بابل": ["الحلة", "المسيب", "الهاشمية", "القاسم", "المحاويل", "الكفل", "النيل", "أبو غرق", "المدحتية", "الإسكندرية", "جرف الصخر", "الأمين", "بابل الجديدة", "الكرار", "الجامعة", "القاضية", "المدينة القديمة", "نادر", "الطهمازية", "الإمام", "المصطفى", "الشوملي"],
+    "ديالى": ["بعقوبة", "المقدادية", "خانقين", "بلدروز", "كفري", "الخالص", "جلولاء", "قزانية", "مندلي", "قرة تبة", "السد العظيم", "بهرز", "كنعان", "هبهب", "أبو صيدا", "الوجيهية", "السلام", "العظيم", "بني سعد"],
+    "ذي قار": ["الناصرية", "سوق الشيوخ", "الشطرة", "الرفاعي", "الجبايش", "قلعة سكر", "الغراف", "البطحاء", "النصر", "الإصلاح", "الفجر", "الدواية", "سيد دخيل", "الفضلية", "النهروان", "الإسكان", "الصدرين", "الحبوبي", "المنتظر"],
+    "السليمانية": ["جمجمال", "حلبجة", "رانية", "دوكان", "قلعة دزة", "بازيان", "بكرجو", "سرجنار", "سيتك", "تانجرو", "سيد صادق", "بينجوين", "قرداغ", "شهرزور", "سيروان", "عربت", "دوكان", "ماوت"],
+    "صلاح الدين": ["تكريت", "سامراء", "بيجي", "بلد", "الدور", "الشرقاط", "طوز خورماتو", "العلم", "يثرب", "الدجيل", "عين الفرس", "سليمان بيك", "الفارس", "صلاح الدين الجديد", "آمرلي", "الحويش", "الأسحاقي", "القادسية", "الدبس"],
+    "واسط": ["الكوت", "النعمانية", "الحي", "بدرة", "الصويرة", "العزيزية", "الموفقية", "الشحيمية", "الزبيدية", "تاج الدين", "الدبوني", "جصان", "الأحرار", "الدجيلة", "الزهراء", "الفلاحية", "الكرامة", "الرميلة"],
+    "ميسان": ["العمارة", "المجر الكبير", "الكحلاء", "علي الغربي", "قلعة صالح", "الميمونة", "الكميت", "السلام", "العدل", "الخير", "الرحمة", "المشرح", "الطيب", "البتيرة", "آل بوشامة", "المناذرة", "المزرعة"],
+    "المثنى": ["السماوة", "الرميثة", "السوير", "المجد", "الخضر", "الهلال", "النجمي", "الوركاء", "الدراجي", "بصية", "السلمان", "آل بدير", "أم راكبة", "الإسلام", "البساتين", "الغدير", "المثنى الجديدة"],
+    "دهوك": ["زاخو", "العمادية", "سميل", "الشيخان", "ئاكرى", "بردرش", "زاويتة", "باتيل", "كاني ماسي", "ديرلوك", "دهوك المركز", "سرسنك", "الدوسكي", "بامرني", "بيبوز", "مانكيش", "فايدة", "شاريا"],
+    "القادسية": ["الديوانية", "عفك", "الشامية", "الحمزة", "نفر", "غماس", "سومر", "الشنافية", "الدغارة", "السنية", "الشافعية", "الجمهوري", "الإسكان", "الفرات", "الزهراء", "المهناوية", "البدير", "سيد الشهداء", "الجزائر", "الصدرين"]
+};
+
+            const areaSelect = document.getElementById('driverArea');
+            areaSelect.innerHTML = '<option value="">اختر المنطقة</option>';
+
+            if (areas[province]) {
+                areas[province].forEach(area => {
+                    const option = document.createElement('option');
+                    option.value = area;
+                    option.textContent = area;
+                    areaSelect.appendChild(option);
+                });
+            }
+        }
+    </script>
 
 
     <!-- Toast Container -->
@@ -8012,107 +7937,216 @@
     <div id="locationOptions">
         <!-- other elements -->
     </div>
-    <!-- نافذة تسجيل المستخدم -->
-    <div class="modal fade" id="userRegistrationModal" tabindex="-1">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div class="text-center w-100">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/driver-images%2F7605a607-6cf8-4b32-aee1-fa7558c98452.png?alt=media&token=5cf9e67c-ba6e-4431-a6a0-79dede15b527"
-                            alt="شعار التطبيق" style="height: 60px;">
-                        <h5 class="modal-title mt-2">تسجيل مستخدم جديد</h5>
-                    </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+   <!-- نافذة تسجيل المستخدم -->
+<div class="modal fade" id="userRegistrationModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="text-center w-100">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/driver-images%2F7605a607-6cf8-4b32-aee1-fa7558c98452.png?alt=media&token=5cf9e67c-ba6e-4431-a6a0-79dede15b527"
+                        alt="شعار التطبيق" style="height: 60px;">
+                    <h5 class="modal-title mt-2">تسجيل مستخدم جديد</h5>
                 </div>
-                <div class="modal-body">
-                    <form id="userRegistrationForm" class="needs-validation" novalidate>
-                        <!-- المعلومات الشخصية -->
-                        <div class="registration-section mb-4">
-                            <h6 class="section-title">المعلومات الشخصية</h6>
-                            <div class="row g-3">
-                                <div class="col-12">
-                                    <div class="text-center mb-3">
-                                        <div class="user-photo-upload"
-                                            onclick="document.getElementById('userPhoto').click()">
-                                            <img id="userPhotoPreview" src="#" alt="">
-                                            <div class="upload-placeholder">
-                                                <i class="fas fa-camera"></i>
-                                                <span>صورة شخصية</span>
-                                            </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="userRegistrationForm" class="needs-validation" novalidate>
+                    <!-- المعلومات الشخصية -->
+                    <div class="registration-section mb-4">
+                        <h6 class="section-title">المعلومات الشخصية</h6>
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="text-center mb-3">
+                                    <div class="user-photo-upload"
+                                        onclick="document.getElementById('userPhoto').click()">
+                                        <img id="userPhotoPreview" src="#" alt="">
+                                        <div class="upload-placeholder">
+                                            <i class="fas fa-camera"></i>
+                                            <span>صورة شخصية</span>
                                         </div>
-                                        <input type="file" id="userPhoto" accept="image/*" style="display: none;"
-                                            onchange="previewUserPhoto(this)">
                                     </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <label class="form-label">الاسم الثلاثي</label>
-                                    <input type="text" class="form-control" name="fullName" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">البريد الإلكتروني</label>
-                                    <input type="email" class="form-control" name="email" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">رقم الهاتف</label>
-                                    <input type="tel" class="form-control" name="phone" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">كلمة المرور</label>
-                                    <input type="password" class="form-control" name="password" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">تأكيد كلمة المرور</label>
-                                    <input type="password" class="form-control" name="confirmPassword" required>
+                                    <input type="file" id="userPhoto" accept="image/*" style="display: none;"
+                                        onchange="previewUserPhoto(this)">
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- معلومات السكن -->
-                        <div class="registration-section mb-4">
-                            <h6 class="section-title">معلومات السكن</h6>
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label class="form-label">المحافظة</label>
-                                    <select class="form-select" name="province" onchange="loadAreas(this.value)"
-                                        required>
-                                        <option value="">اختر المحافظة</option>
-                                        <!-- سيتم ملء الخيارات عبر JavaScript -->
-                                    </select>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">المنطقة</label>
-                                    <select class="form-select" name="area" required>
-                                        <option value="">اختر المنطقة</option>
-                                        <!-- سيتم ملء الخيارات عبر JavaScript -->
-                                    </select>
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label">العنوان التفصيلي</label>
-                                    <textarea class="form-control" name="address" rows="2" required></textarea>
-                                </div>
+                            <div class="col-md-12">
+                                <label class="form-label">الاسم الثلاثي</label>
+                                <input type="text" class="form-control" name="fullName" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">البريد الإلكتروني</label>
+                                <input type="email" class="form-control" name="email" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">رقم الهاتف</label>
+                                <input type="tel" class="form-control" name="phone" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">كلمة المرور</label>
+                                <input type="password" class="form-control" name="password" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">تأكيد كلمة المرور</label>
+                                <input type="password" class="form-control" name="confirmPassword" required>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- الشروط والأحكام -->
-                        <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" name="terms" id="terms" required>
-                            <label class="form-check-label" for="terms">
-                                أوافق على <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">الشروط
-                                    والأحكام</a>
-                            </label>
+                    <!-- معلومات السكن -->
+                    <div class="registration-section mb-4">
+                        <h6 class="section-title">معلومات السكن</h6>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">المحافظة</label>
+                                <select class="form-select" name="province" required>
+                                    <option value="">اختر المحافظة</option>
+                                    <!-- سيتم ملء الخيارات عبر JavaScript -->
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">المنطقة</label>
+                                <select class="form-select" name="area" required>
+                                    <option value="">اختر المنطقة</option>
+                                    <!-- سيتم ملء الخيارات عبر JavaScript -->
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">العنوان التفصيلي</label>
+                                <textarea class="form-control" name="address" rows="2" required></textarea>
+                            </div>
                         </div>
+                    </div>
 
-                        <div class="text-center mt-4">
-                            <button type="submit" class="btn btn-primary btn-lg px-5">
-                                <i class="fas fa-user-plus me-2"></i>
-                                تسجيل
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                    <!-- الشروط والأحكام -->
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" name="terms" id="terms" required>
+                        <label class="form-check-label" for="terms">
+                            أوافق على <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">الشروط
+                                والأحكام</a>
+                        </label>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-primary btn-lg px-5">
+                            <i class="fas fa-user-plus me-2"></i>
+                            تسجيل
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
+<!-- نافذة تسجيل المستخدم -->
+<div class="modal fade" id="userRegistrationModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="text-center w-100">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/driver-images%2F7605a607-6cf8-4b32-aee1-fa7558c98452.png?alt=media&token=5cf9e67c-ba6e-4431-a6a0-79dede15b527"
+                        alt="شعار التطبيق" style="height: 60px;">
+                    <h5 class="modal-title mt-2">تسجيل مستخدم جديد</h5>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="userRegistrationForm" class="needs-validation" novalidate>
+                    <!-- المعلومات الشخصية -->
+                    <div class="registration-section mb-4">
+                        <h6 class="section-title">المعلومات الشخصية</h6>
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="text-center mb-3">
+                                    <div class="user-photo-upload"
+                                        onclick="document.getElementById('userPhoto').click()">
+                                        <img id="userPhotoPreview" src="#" alt="">
+                                        <div class="upload-placeholder">
+                                            <i class="fas fa-camera"></i>
+                                            <span>صورة شخصية</span>
+                                        </div>
+                                    </div>
+                                    <input type="file" id="userPhoto" accept="image/*" style="display: none;"
+                                        onchange="previewUserPhoto(this)">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label">الاسم الثلاثي</label>
+                                <input type="text" class="form-control" name="fullName" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">البريد الإلكتروني</label>
+                                <input type="email" class="form-control" name="email" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">رقم الهاتف</label>
+                                <input type="tel" class="form-control" name="phone" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">كلمة المرور</label>
+                                <input type="password" class="form-control" name="password" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">تأكيد كلمة المرور</label>
+                                <input type="password" class="form-control" name="confirmPassword" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- معلومات السكن -->
+                    <div class="registration-section mb-4">
+                        <h6 class="section-title">معلومات السكن</h6>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">المحافظة</label>
+                                <select class="form-select" name="province" required>
+                                    <option value="">اختر المحافظة</option>
+                                    <!-- سيتم ملء الخيارات عبر JavaScript -->
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">المنطقة</label>
+                                <select class="form-select" name="area" required>
+                                    <option value="">اختر المنطقة</option>
+                                    <!-- سيتم ملء الخيارات عبر JavaScript -->
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">العنوان التفصيلي</label>
+                                <textarea class="form-control" name="address" rows="2" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- الشروط والأحكام -->
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" name="terms" id="terms" required>
+                        <label class="form-check-label" for="terms">
+                            أوافق على <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">الشروط
+                                والأحكام</a>
+                        </label>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-primary btn-lg px-5">
+                            <i class="fas fa-user-plus me-2"></i>
+                            تسجيل
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- جزء الكود JavaScript -->
+<script>
+// سيتم تنفيذ هذا الكود عند تحميل النافذة
+document.addEventListener('DOMContentLoaded', function() {
+    // التأكد من تهيئة قوائم المحافظات والمناطق
+    initializeProvinceSelects();
+});
+</script>
+
     <!-- إضافة قبل نهاية div#map -->
     <button id="nearbySearchBtn" class="nearby-search-btn" title="البحث عن السائقين في الجوار">
         <i class="fas fa-search"></i>
@@ -8192,7 +8226,7 @@
 
     <!-- إضافة عناصر الصوت للإشعارات -->
     <audio id="messageSound"
-        src="https://github.com/AlQasimMall/taxialpasha/raw/main/%D8%A7%D9%84%D9%87%D8%A7%D8%AA%D9%81-%D8%A7%D9%84%D8%AB%D8%A7%D8%A8%D8%AA.mp3"
+        src="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/%D9%86%D8%BA%D9%85%D8%A7%D8%AA%20%D8%AA%D9%83%D8%B3%D9%8A%20%D8%A7%D9%84%D8%A8%D8%A7%D8%B4%D9%87%2F%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D8%A6%D9%84-%D8%A7%D9%84%D9%82%D8%B5%D9%8A%D8%B1%D8%A9-%D8%A7%D9%84%D8%A3%D9%86%D9%8A%D9%82%D8%A9.mp3?alt=media&token=94afec9b-097d-471c-a1f6-ee051f95ae0f"
         preload="auto"></audio>
 
 
@@ -12435,16 +12469,25 @@ function getUnreadCount(chatData, driverId) {
 
         // قائمة المحافظات والمناطق
         const iraqProvinces = {
-            "بغداد": ["الكرخ", "الرصافة", "الأعظمية", "الكاظمية", "المنصور"],
-            "البصرة": ["البصرة الجديدة", "الزبير", "أبو الخصيب", "القرنة"],
-            "نينوى": ["الموصل", "تلعفر", "الحمدانية", "سنجار"],
-            "أربيل": ["عنكاوا", "شقلاوة", "خبات", "سوران"],
-            "النجف": ["الكوفة", "المناذرة", "المشخاب"],
-            "كربلاء": ["الحسينية", "الهندية", "عين التمر"],
-            "كركوك": ["دبس", "الحويجة", "داقوق"],
-            "الأنبار": ["الرمادي", "الفلوجة", "هيت", "حديثة"],
-            // يمكن إضافة المزيد من المحافظات والمناطق
-        };
+            "بغداد": ["الكرخ", "الرصافة", "الأعظمية", "الكاظمية", "المنصور", "الدورة", "الشعب", "الكرادة", "زيونة", "الغدير", "البلديات", "الشعلة", "الحرية", "الوشاش", "حي الجامعة", "الصليخ", "بغداد الجديدة", "مدينة الصدر", "الزعفرانية", "العامرية", "الغزالية", "الجادرية", "الحارثية", "الجهاد", "البياع", "الخضراء", "حي الخليج", "التاجي"],
+    "البصرة": ["البصرة الجديدة", "الزبير", "أبو الخصيب", "القرنة", "شط العرب", "الفاو", "الهارثة", "الدير", "المدينة", "العشار", "البراضعية", "الخور", "النجيبية", "الفيحاء", "المعقل", "سفوان", "الخصيب", "جبيلة", "القبلة", "ياسين خريبط", "الشعيبة"],
+    "نينوى": ["الموصل", "تلعفر", "الحمدانية", "سنجار", "الحضر", "البعاج", "عين سفني", "تلكيف", "القيارة", "مخمور", "شيخان", "الحيدانية", "الشمال", "وانة", "سميل"],
+    "أربيل": ["عنكاوا", "شقلاوة", "خبات", "سوران", "جومان", "رواندوز", "ميرگسور", "كوية", "المركز", "دشتي هولير", "خيفتي", "دارتو", "بنصلاوة", "حرير", "سيديكان", "شيروان-مزن", "مخمور", "قوشتبة"],
+    "النجف": ["الكوفة", "المناذرة", "المشخاب", "الحيدرية", "العباسية", "القادسية", "الحرية", "النجف القديمة", "الغري", "النصر", "الوفاء", "الزهراء", "الجامعة", "السلام", "الغدير", "المرتضى", "القدس", "الأمير"],
+    "كربلاء": ["الحسينية", "الهندية", "عين التمر", "الحر", "الجدول الغربي", "مركز كربلاء", "الخيرات", "الرشيد", "العباس", "الإصلاح", "الحسين", "المخيم", "الأنصار", "باب الخان", "الإسكان"],
+    "كركوك": ["دبس", "الحويجة", "داقوق", "تازة", "شوان", "يايجي", "الملتقى", "العروبة", "القادسية", "الواسطي", "المنصور", "النصر", "الرياض", "الرشاد", "الزاب", "الرياض", "الصناعي"],
+    "الأنبار": ["الرمادي", "الفلوجة", "هيت", "حديثة", "الخالدية", "الصقلاوية", "كبيسة", "العامرية", "الحبانية", "راوة", "عنه", "الرطبة", "القائم", "البغدادي", "الكرمة", "الوليد", "الحقلانية", "الرحالية"],
+    "بابل": ["الحلة", "المسيب", "الهاشمية", "القاسم", "المحاويل", "الكفل", "النيل", "أبو غرق", "المدحتية", "الإسكندرية", "جرف الصخر", "الأمين", "بابل الجديدة", "الكرار", "الجامعة", "القاضية", "المدينة القديمة", "نادر", "الطهمازية", "الإمام", "المصطفى", "الشوملي"],
+    "ديالى": ["بعقوبة", "المقدادية", "خانقين", "بلدروز", "كفري", "الخالص", "جلولاء", "قزانية", "مندلي", "قرة تبة", "السد العظيم", "بهرز", "كنعان", "هبهب", "أبو صيدا", "الوجيهية", "السلام", "العظيم", "بني سعد"],
+    "ذي قار": ["الناصرية", "سوق الشيوخ", "الشطرة", "الرفاعي", "الجبايش", "قلعة سكر", "الغراف", "البطحاء", "النصر", "الإصلاح", "الفجر", "الدواية", "سيد دخيل", "الفضلية", "النهروان", "الإسكان", "الصدرين", "الحبوبي", "المنتظر"],
+    "السليمانية": ["جمجمال", "حلبجة", "رانية", "دوكان", "قلعة دزة", "بازيان", "بكرجو", "سرجنار", "سيتك", "تانجرو", "سيد صادق", "بينجوين", "قرداغ", "شهرزور", "سيروان", "عربت", "دوكان", "ماوت"],
+    "صلاح الدين": ["تكريت", "سامراء", "بيجي", "بلد", "الدور", "الشرقاط", "طوز خورماتو", "العلم", "يثرب", "الدجيل", "عين الفرس", "سليمان بيك", "الفارس", "صلاح الدين الجديد", "آمرلي", "الحويش", "الأسحاقي", "القادسية", "الدبس"],
+    "واسط": ["الكوت", "النعمانية", "الحي", "بدرة", "الصويرة", "العزيزية", "الموفقية", "الشحيمية", "الزبيدية", "تاج الدين", "الدبوني", "جصان", "الأحرار", "الدجيلة", "الزهراء", "الفلاحية", "الكرامة", "الرميلة"],
+    "ميسان": ["العمارة", "المجر الكبير", "الكحلاء", "علي الغربي", "قلعة صالح", "الميمونة", "الكميت", "السلام", "العدل", "الخير", "الرحمة", "المشرح", "الطيب", "البتيرة", "آل بوشامة", "المناذرة", "المزرعة"],
+    "المثنى": ["السماوة", "الرميثة", "السوير", "المجد", "الخضر", "الهلال", "النجمي", "الوركاء", "الدراجي", "بصية", "السلمان", "آل بدير", "أم راكبة", "الإسلام", "البساتين", "الغدير", "المثنى الجديدة"],
+    "دهوك": ["زاخو", "العمادية", "سميل", "الشيخان", "ئاكرى", "بردرش", "زاويتة", "باتيل", "كاني ماسي", "ديرلوك", "دهوك المركز", "سرسنك", "الدوسكي", "بامرني", "بيبوز", "مانكيش", "فايدة", "شاريا"],
+    "القادسية": ["الديوانية", "عفك", "الشامية", "الحمزة", "نفر", "غماس", "سومر", "الشنافية", "الدغارة", "السنية", "الشافعية", "الجمهوري", "الإسكان", "الفرات", "الزهراء", "المهناوية", "البدير", "سيد الشهداء", "الجزائر", "الصدرين"]
+};
 
         // دالة تهيئة النماذج
         function initializeForms() {
@@ -14313,6 +14356,125 @@ function createDetailedLocationPopup(lat, lng, locationInfo, distance, time, mes
     
     return popupContent;
 }
+
+
+
+
+
+
+// دالة لتحميل قائمة المحافظات في نافذتي تسجيل المستخدم والسائق
+function initializeProvinceSelects() {
+    // تحديد جميع قوائم اختيار المحافظات
+    const provinceSelects = document.querySelectorAll('select[name="province"], #driverProvince');
+    
+    provinceSelects.forEach(select => {
+        // تفريغ القائمة أولاً
+        select.innerHTML = '<option value="">اختر المحافظة</option>';
+        
+        // إضافة المحافظات من قاعدة البيانات
+        Object.keys(iraqProvinces).forEach(province => {
+            const option = document.createElement('option');
+            option.value = province;
+            option.textContent = province;
+            select.appendChild(option);
+        });
+        
+        // إضافة مستمع لحدث تغيير المحافظة
+        select.addEventListener('change', function() {
+            // تحديد قائمة المناطق المرتبطة
+            let areaSelect;
+            
+            if (this.getAttribute('name') === 'province') {
+                // للمستخدم العادي
+                areaSelect = this.closest('form').querySelector('select[name="area"]');
+            } else if (this.id === 'driverProvince') {
+                // للسائق
+                areaSelect = document.getElementById('driverArea');
+            }
+            
+            if (areaSelect) {
+                loadAreasToSelect(this.value, areaSelect);
+            }
+        });
+    });
+}
+
+// دالة تحميل المناطق إلى قائمة معينة بناءً على المحافظة المختارة
+function loadAreasToSelect(province, areaSelect) {
+    // تفريغ القائمة وإضافة الخيار الافتراضي
+    areaSelect.innerHTML = '<option value="">اختر المنطقة</option>';
+    
+    // التحقق من وجود المحافظة في قاعدة البيانات
+    if (iraqProvinces[province]) {
+        // إضافة مناطق المحافظة المختارة
+        iraqProvinces[province].forEach(area => {
+            const option = document.createElement('option');
+            option.value = area;
+            option.textContent = area;
+            areaSelect.appendChild(option);
+        });
+        
+        // تفعيل قائمة المناطق
+        areaSelect.disabled = false;
+    } else {
+        // تعطيل قائمة المناطق إذا لم يتم العثور على المحافظة
+        areaSelect.disabled = true;
+    }
+}
+
+// دالة متعددة الاستخدام لتحميل المناطق (للتوافق مع الكود الموجود)
+function loadAreas(province) {
+    // للمستخدم العادي
+    const userAreaSelect = document.querySelector('select[name="area"]');
+    if (userAreaSelect) {
+        loadAreasToSelect(province, userAreaSelect);
+    }
+    
+    // للسائق
+    const driverAreaSelect = document.getElementById('driverArea');
+    if (driverAreaSelect) {
+        loadAreasToSelect(province, driverAreaSelect);
+    }
+}
+
+// تهيئة قوائم المحافظات عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', function() {
+    initializeProvinceSelects();
+    
+    // تحديث معاينة الصورة الشخصية للمستخدم
+    const userPhoto = document.getElementById('userPhoto');
+    if (userPhoto) {
+        userPhoto.addEventListener('change', function() {
+            previewUserPhoto(this);
+        });
+    }
+});
+
+// دالة معاينة الصورة الشخصية للمستخدم
+function previewUserPhoto(input) {
+    const preview = document.getElementById('userPhotoPreview');
+    if (!preview) return;
+    
+    const placeholder = input.parentElement.querySelector('.upload-placeholder');
+    
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+            preview.style.display = 'block';
+            if (placeholder) placeholder.style.display = 'none';
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+
+
+// سيتم تنفيذ هذا الكود عند تحميل النافذة
+document.addEventListener('DOMContentLoaded', function() {
+    // التأكد من تهيئة قوائم المحافظات والمناطق
+    initializeProvinceSelects();
+});
 
 
 

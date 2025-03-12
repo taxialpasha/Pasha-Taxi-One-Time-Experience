@@ -18,7 +18,7 @@ const urlsToCache = [
   '/icons/icon-192x192.png',
   '/icons/icon-512x512.png',
   '/default-driver.png',
-  'https://github.com/AlQasimMall/taxialpasha/raw/main/%D8%A7%D9%84%D9%87%D8%A7%D8%AA%D9%81-%D8%A7%D9%84%D8%AB%D8%A7%D8%A8%D8%AA.mp3'
+  'https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/%D9%86%D8%BA%D9%85%D8%A7%D8%AA%20%D8%AA%D9%83%D8%B3%D9%8A%20%D8%A7%D9%84%D8%A8%D8%A7%D8%B4%D9%87%2F%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D8%A6%D9%84-%D8%A7%D9%84%D9%82%D8%B5%D9%8A%D8%B1%D8%A9-%D8%A7%D9%84%D8%A3%D9%86%D9%8A%D9%82%D8%A9.mp3?alt=media&token=94afec9b-097d-471c-a1f6-ee051f95ae0f'
 ];
 
 // تثبيت Service Worker
@@ -110,8 +110,8 @@ self.addEventListener('push', event => {
     const title = data.title || 'تاكسي العراق';
     const options = {
       body: data.message || 'إشعار جديد',
-      icon: data.icon || '/icons/icon-192x192.png',
-      badge: '/icons/badge-96x96.png',
+      icon: data.icon || 'https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/driver-images%2F7605a607-6cf8-4b32-aee1-fa7558c98452.png?alt=media&token=5cf9e67c-ba6e-4431-a6a0-79dede15b527',
+      badge: 'https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/driver-images%2F7605a607-6cf8-4b32-aee1-fa7558c98452.png?alt=media&token=5cf9e67c-ba6e-4431-a6a0-79dede15b527',
       tag: data.tag || 'default',
       data: data.data || {}
     };
@@ -179,4 +179,20 @@ messaging.getToken({ vapidKey: 'BI9cpoewcZa1ftyZ_bGjO0GYa4_cT0HNja4YFd6FwLwHg5c0
   }
 }).catch((err) => {
   console.error('Error while retrieving token:', err);
+});
+
+importScripts('https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js');
+importScripts('https://www.gstatic.com/firebasejs/9.6.1/firebase-messaging.js');
+
+// Firebase configuration
+// Handle background messages
+messaging.onBackgroundMessage((payload) => {
+  console.log('Received background message ', payload);
+  const notificationTitle = payload.notification.title;
+  const notificationOptions = {
+    body: payload.notification.body,
+    icon: 'https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/driver-images%2F7605a607-6cf8-4b32-aee1-fa7558c98452.png?alt=media&token=5cf9e67c-ba6e-4431-a6a0-79dede15b527'
+  };
+
+  self.registration.showNotification(notificationTitle, notificationOptions);
 });
