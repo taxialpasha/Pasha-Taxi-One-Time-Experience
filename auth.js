@@ -243,11 +243,7 @@ function updateUIAfterLogin(userData) {
                  
                 </div>
                 ${userData.userType === 'driver' ? `
-                <div class="mt-3">
-                    <button onclick="toggleDriverAvailability()" class="btn btn-outline-primary btn-sm w-100 toggle-availability-btn">
-                        <i class="fas fa-toggle-on me-2"></i>${userData.isAvailable ? 'مشغول' : 'متاح'}
-                    </button>
-                </div>
+               
                 ` : ''}
             </div>
         `;
@@ -263,6 +259,11 @@ function updateUIAfterLogin(userData) {
 function showUserMenu(event) {
     event.preventDefault();
     const userData = JSON.parse(localStorage.getItem('currentUser'));
+    
+    if (!userData) {
+        console.error('User data not found.');
+        return;
+    }
     
     Swal.fire({
         title: `مرحباً ${userData.fullName || userData.name}`,
@@ -300,27 +301,141 @@ firebase.auth().onAuthStateChanged(async (user) => {
         // المستخدم مسجل الدخول
         console.log('User is signed in:', user.uid);
         
-        try {
-            const userDataSnapshot = await firebase.database().ref(`users/${user.uid}`).once('value');
-            const userData = userDataSnapshot.val();
-            
-            if (userData) {
-                updateUIAfterLogin({
+        // التحقق من وجود بيانات المستخدم في التخزين المحلي أولاً
+        const cachedUserData = localStorage.getItem('currentUser');
+        
+        if (cachedUserData) {
+            // استخدام البيانات المخزنة محلياً لتحديث الواجهة
+            updateUIAfterLogin(JSON.parse(cachedUserData));
+        } else {
+            // إذا لم تكن البيانات موجودة، نقوم بجلبها من قاعدة البيانات
+            try {
+                // البحث عن بيانات المستخدم في جدول المستخدمين أولاً
+                const userDataSnapshot = await firebase.database().ref(`users/${user.uid}`).once('value');
+                let userData = userDataSnapshot.val();
+                let userType = 'user';
+                
+                // إذا لم يتم العثور على بيانات المستخدم، نبحث في جدول السائقين
+                if (!userData) {
+                    // البحث في جدول السائقين (حسب UID)
+                    const driverDataSnapshot = await firebase.database().ref('drivers').orderByChild('uid').equalTo(user.uid).once('value');
+                    const driversData = driverDataSnapshot.val();
+                    
+                    if (driversData) {
+                        // استخراج بيانات السائق (نأخذ أول سائق يطابق UID)
+                        const driverId = Object.keys(driversData)[0];
+                        userData = driversData[driverId];
+                        userType = 'driver';
+                    } else {
+                        // إذا لم يتم العثور على البيانات، نستخدم البيانات الأساسية من Firebase Auth
+                        userData = {
+                            uid: user.uid,
+                            fullName: user.displayName || 'المستخدم',
+                            email: user.email,
+                            photoUrl: user.photoURL
+                        };
+                    }
+                }
+                
+                // تحسين البيانات المستخرجة
+                const enhancedUserData = {
                     ...userData,
-                    name: user.displayName,
-                    photo: user.photoURL
-                });
+                    uid: user.uid,
+                    email: user.email || userData.email,
+                    fullName: userData.fullName || userData.name || user.displayName || 'المستخدم',
+                    photoUrl: userData.photoUrl || userData.imageUrl || user.photoURL,
+                    userType: userData.role || userData.userType || userType
+                };
+                
+                // حفظ البيانات في التخزين المحلي
+                localStorage.setItem('currentUser', JSON.stringify(enhancedUserData));
+                
+                // تحديث واجهة المستخدم
+                updateUIAfterLogin(enhancedUserData);
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+                // في حالة حدوث خطأ، نقوم بتسجيل الخروج للتأكد من تنظيف الحالة
+                handleLogout();
             }
-        } catch (error) {
-            console.error('Error fetching user data:', error);
         }
     } else {
         // المستخدم غير مسجل الدخول
         console.log('User is signed out');
+        // حذف بيانات المستخدم من التخزين المحلي
         localStorage.removeItem('currentUser');
+        // إعادة تعيين واجهة المستخدم
         resetUserInterface();
     }
 });
+
+// دالة تسجيل الخروج
+async function handleLogout() {
+    try {
+        showLoading();
+        
+        // تسجيل الخروج من Firebase Auth
+        await firebase.auth().signOut();
+        
+        // حذف بيانات المستخدم من التخزين المحلي
+        localStorage.removeItem('currentUser');
+        
+        // إعادة تعيين واجهة المستخدم
+        resetUserInterface();
+        
+        showToast('تم تسجيل الخروج بنجاح', 'success');
+    } catch (error) {
+        console.error('Logout error:', error);
+        showToast('حدث خطأ أثناء تسجيل الخروج', 'error');
+    } finally {
+        hideLoading();
+    }
+}
+
+// دالة إعادة تعيين واجهة المستخدم
+function resetUserInterface() {
+    // إعادة زر الملف الشخصي إلى حالته الأصلية
+    const profileBtn = document.querySelector('.user-profile-btn');
+    if (profileBtn) {
+        profileBtn.innerHTML = `
+            <i class="fas fa-user-circle me-2"></i>
+            <span class="d-none d-md-inline">تسجيل الدخول</span>
+        `;
+        
+        // إعادة تعيين خصائص الزر ليفتح نافذة تسجيل الدخول
+        profileBtn.setAttribute('data-bs-toggle', 'modal');
+        profileBtn.setAttribute('data-bs-target', '#loginModal');
+        profileBtn.removeAttribute('onclick');
+    }
+    
+    // إعادة تعيين معلومات المستخدم في الشريط الجانبي
+    const sideNavUserInfo = document.querySelector('.side-nav-user-info');
+    if (sideNavUserInfo) {
+        sideNavUserInfo.innerHTML = `
+            <div class="text-center">
+                <i class="fas fa-user-circle text-white" style="font-size: 4rem;"></i>
+                <h6 class="text-white mt-3">مرحباً بك</h6>
+                <p class="text-white-50 small">قم بتسجيل الدخول للوصول إلى حسابك</p>
+                <div class="mt-3">
+                    <button class="btn btn-gold w-100 mb-2" data-bs-toggle="modal" data-bs-target="#loginModal">
+                        تسجيل الدخول
+                    </button>
+                    <button class="btn btn-outline-light w-100 mb-2" data-bs-toggle="modal" data-bs-target="#userRegistrationModal">
+                        إنشاء حساب
+                    </button>
+                    <button class="btn btn-outline-light w-100" data-bs-toggle="modal" data-bs-target="#addDriverModal">
+                        إضافة سائق
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+    
+    // إخفاء عناصر واجهة خاصة بالسائقين
+    const driverOnlyElements = document.querySelectorAll('.driver-only');
+    driverOnlyElements.forEach(element => {
+        element.style.display = 'none';
+    });
+}
 
 // تحديث دالة إضافة السائق لتتضمن حالة التحقق
 async function handleDriverRegistration(event) {
