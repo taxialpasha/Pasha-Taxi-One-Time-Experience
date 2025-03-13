@@ -92,6 +92,9 @@ async function handleUserRegistration(event) {
 async function handleLogin(event) {
     event.preventDefault();
     showLoading();
+    
+    // تعطيل التفاعل مع الصفحة أثناء عملية تسجيل الدخول
+    document.body.style.pointerEvents = 'none';
 
     try {
         const formData = new FormData(event.target);
@@ -141,7 +144,9 @@ async function handleLogin(event) {
 
         // إغلاق نافذة تسجيل الدخول
         const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
-        loginModal.hide();
+        if (loginModal) {
+            loginModal.hide();
+        }
 
         showToast('تم تسجيل الدخول بنجاح');
 
@@ -168,6 +173,19 @@ async function handleLogin(event) {
         showToast(errorMessage, 'error');
     } finally {
         hideLoading();
+        
+        // إعادة تفعيل التفاعل مع الصفحة بعد انتهاء عملية تسجيل الدخول
+        document.body.style.pointerEvents = 'auto';
+        
+        // إضافة تأخير بسيط لضمان إعادة تحميل العناصر بشكل صحيح
+        setTimeout(() => {
+            // إعادة التحقق من أن الصفحة تعمل بشكل كامل
+            document.body.classList.remove('modal-open');
+            const modalBackdrops = document.querySelectorAll('.modal-backdrop');
+            modalBackdrops.forEach(backdrop => {
+                backdrop.remove();
+            });
+        }, 500);
     }
 }
 
