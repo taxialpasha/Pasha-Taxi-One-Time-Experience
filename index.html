@@ -8131,32 +8131,45 @@ body {
         </a>
         <!-- زر فتح الشريط الجانبي -->
         <button class="nav-toggle" onclick="toggleSideNav()">
-            <i class="fas fa-bars"></i>
+            <i class="fas fa-bars" style="color: #FFD700;"></i>
         </button>
         <nav class="navbar app-header fixed-top">
             <!-- اللوجو واسم التطبيق مع أيقونة البحث -->
-            <div class="d-flex align-items-center app-title">
-                <a class="app-logo d-flex align-items-center" href="map.html">
-                    <i class="fas fa-taxi me-2"></i>
-                    <span>ataxiPash</span>
-                </a>
-                <!-- أيقونة البحث بجانب الاسم -->
-                <div class="side-nav" id="sideNav">
-                    <div class="side-nav-header">
-                        <h2 class="side-nav-title">تاكسي العراق</h2>
-                        <button class="side-nav-close" onclick="toggleSideNav()">×</button>
-
-                    </div>
-
-                <!-- Content will be here -->
-                <div class="side-nav-user-info">
-                    <img id="userProfileImage" src="" alt="User Profile Image" style="display:none;">
-                    <div id="defaultProfileIcon" style="display:none;">Default Icon</div>
-                    <h6 id="profileText" style="display:none;">Profile Text</h6>
-                </div>
-
-
-
+           
+            <!-- أيقونة البحث بجانب الاسم -->
+            <div class="tools d-flex align-items-center"></div>
+            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#searchModal">
+            <i class="fas fa-search" style="color: #FFD700;"></i>
+            <a class="app-logo d-flex align-items-center" href="map.html">
+                <i class="fas fa-taxi me-2" style="color: #FFD700;"></i>
+            </a>
+            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#notificationsModal">
+            <i class="fas fa-bell" style="color: #FFD700;"></i>
+            </a>
+            <a class="nav-link position-relative" href="#" data-bs-toggle="modal" data-bs-target="#messagesModal">
+            <i class="fas fa-envelope" style="color: #FFD700;"></i>
+            <span class="message-badge position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                style="display: none;">0</span>
+            </a>
+            <a class="nav-link user-profile-btn" href="#" data-bs-toggle="modal" data-bs-target="#profileModal">
+            <img id="userProfileImage" src="default-profile.png" alt="Profile" class="rounded-circle"
+                style="width: 35px; height: 35px; display: none;">
+            <i class="fas fa-user" id="defaultProfileIcon" style="color: #FFD700;"></i>
+            <span class="ms-1 d-none d-md-inline" id="profileText">تسجيل</span>
+            </a>
+            </div>
+            </div>
+        </nav>
+        <div class="side-nav" id="sideNav">
+            <div class="side-nav-header">
+            <h2 class="side-nav-title">تاكسي العراق</h2>
+            <button class="side-nav-close" onclick="toggleSideNav()">×</button>
+            </div>
+            <div class="side-nav-user-info">
+            <img id="userProfileImage" src="" alt="User Profile Image" style="display:none;">
+            <div id="defaultProfileIcon" style="display:none;">Default Icon</div>
+            <h6 id="profileText" style="display:none;">Profile Text</h6>
+            </div>
 
 
 
@@ -8206,35 +8219,10 @@ body {
 
 
 
-                <!-- كود الـ Backdrop للشريط الجانبي -->
-                <div class="nav-backdrop" id="navBackdrop" onclick="toggleSideNav()"></div>
-    </body>
 
+    
 
-    <!-- الأدوات الأخرى (التنبيهات، حسابي) -->
-    <div class="tools d-flex align-items-center">
-        <!-- Search Icon -->
-        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#searchModal">
-            <i class="fas fa-search"></i>
-        </a>
-
-        <!-- Notifications Icon -->
-        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#notificationsModal">
-            <i class="fas fa-bell"></i>
-        </a>
-        <a class="nav-link position-relative" href="#" data-bs-toggle="modal" data-bs-target="#messagesModal">
-            <i class="fas fa-envelope"></i>
-            <span class="message-badge position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                style="display: none;">0</span>
-        </a>
-
-        <!-- Profile/Account Icon - يفتح نافذة اختيار نوع الحساب -->
-        <a class="nav-link user-profile-btn" href="#" data-bs-toggle="modal" data-bs-target="#profileModal">
-            <img id="userProfileImage" src="default-profile.png" alt="Profile" class="rounded-circle"
-                style="width: 35px; height: 35px; display: none;">
-            <i class="fas fa-user" id="defaultProfileIcon"></i>
-            <span class="ms-1 d-none d-md-inline" id="profileText">تسجيل</span>
-        </a>
+       
     </div>
 
    
@@ -12306,7 +12294,7 @@ function isUserInSameLocation(userLocation, driverLocation) {
              data-driver-id="${key}"
              style="background-color: #000000; color: #FFFFFF; border-radius: 20px; 
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); overflow: hidden; 
-            opacity: ${cardOpacity}; position: relative;">
+            opacity: ${cardOpacity}; position: relative; margin-bottom: 20px;">
             
             ${!isApproved ? `
             <div style="position: absolute; top: 20px; right: -35px; transform: rotate(45deg);
@@ -12316,49 +12304,48 @@ function isUserInSameLocation(userLocation, driverLocation) {
             </div>
             ` : ''}
 
-            <div class="driver-image-container" style="position: relative;">
+            <div class="driver-image-container" style="position: relative; height: 200px;">
             <img src="${driver.imageUrl}" alt="${driver.name}" 
-             class="driver-image" style="width: 100%; height: 200px; object-fit: cover; 
+             class="driver-image" style="width: 100%; height: 100%; object-fit: cover; 
              border-bottom: 3px solid #FFD700; ${!isApproved ? 'filter: grayscale(50%);' : ''}">
             
             ${isApproved ? `
             <div class="driver-status ${isActive ? 'status-active' : 'status-inactive'}" 
              style="position: absolute; top: 10px; right: 10px; padding: 5px 10px; 
-                border-radius: 20px; background: rgba(255, 255, 255, 0.8); 
-                font-weight: bold; color: ${statusColor};">
+            border-radius: 20px; background: rgba(255, 255, 255, 0.8); 
+            font-weight: bold; color: ${statusColor};">
             ${isActive ? 'متاح' : 'مشغول'}
             </div>
             ` : ''}
             </div>
 
             <div class="driver-info" style="padding: 15px;">
-            <h5 class="driver-name" style="font-size: 1.2rem; font-weight: bold; 
-                     margin-bottom: 10px; color: #FFD700;">
-            ${driver.name}
-            </h5>
-            
-            <div class="driver-stats" style="display: flex; justify-content: space-between; 
-                       margin-bottom: 15px;">
+            <div class="driver-stats" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
             <div class="stat-item" style="text-align: center;">
             <div class="stat-value" style="font-weight: bold; color: #FFD700;">
-                <i class="fas fa-star"></i> ${driver.rating ? driver.rating.toFixed(1) : '5.0'}
+            <i class="fas fa-star"></i> ${driver.rating ? driver.rating.toFixed(1) : '5.0'}
             </div>
             <div class="stat-label" style="font-size: 0.8rem; color: #FFFFFF;">التقييم</div>
             </div>
             <div class="stat-item" style="text-align: center;">
             <div class="stat-value" style="font-weight: bold; color: #FFFFFF;">
-                <i class="fas fa-route"></i> ${driver.trips || 0}
+            <i class="fas fa-route"></i> ${driver.trips || 0}
             </div>
             <div class="stat-label" style="font-size: 0.8rem; color: #FFFFFF;">الرحلات</div>
             </div>
             <div class="stat-item" style="text-align: center;">
             <div class="stat-value" style="font-weight: bold; color: #FFFFFF;">
-                ${driver.distance ? `${driver.distance.toFixed(1)} كم` : '--'}
+            ${driver.distance ? `${driver.distance.toFixed(1)} كم` : '--'}
             </div>
             <div class="stat-label" style="font-size: 0.8rem; color: #FFFFFF;">المسافة</div>
             </div>
             </div>
 
+            <h5 class="driver-name" style="font-size: 1.2rem; font-weight: bold; 
+             margin-bottom: 10px; color: #FFD700;">
+            ${driver.name}
+            </h5>
+            
             <div class="text-muted" style="color: #FFFFFF; margin-bottom: 15px;">
             <p class="mb-2">
             <i class="fas fa-car me-2" style="color: #FFD700;"></i>
@@ -12372,7 +12359,7 @@ function isUserInSameLocation(userLocation, driverLocation) {
             </div>
 
             <div class="driver-actions" style="display: flex; justify-content: space-between; 
-                     padding: 10px; ${!isApproved ? 'pointer-events: none; opacity: 0.7;' : ''}">
+             padding: 10px; ${!isApproved ? 'pointer-events: none; opacity: 0.7;' : ''}">
             <button class="action-btn primary" onclick="viewDriverLocation('${key}')">
             <i class="fas fa-map-marker-alt"></i>
             عرض الموقع
@@ -12381,8 +12368,8 @@ function isUserInSameLocation(userLocation, driverLocation) {
             <button class="action-btn secondary position-relative" 
             onclick="${isCurrentDriver ? `showDriverMessages('${key}')` : `openChatWindow('${key}')`}"
             style="background: #333; color: #FFD700; padding: 10px 20px; 
-                   border-radius: 20px; border: 1px solid #FFD700; 
-                   cursor: pointer; font-weight: bold; transition: all 0.3s;"
+               border-radius: 20px; border: 1px solid #FFD700; 
+               cursor: pointer; font-weight: bold; transition: all 0.3s;"
             ${!isApproved ? 'disabled' : ''}>
             <i class="fas fa-comment"></i> ${isCurrentDriver ? 'الرسائل' : 'مراسلة'}
             ${isCurrentDriver ? unreadMessagesHtml : ''}
@@ -12392,7 +12379,7 @@ function isUserInSameLocation(userLocation, driverLocation) {
             <button class="action-btn toggle-status-btn" 
             onclick="toggleDriverStatus('${key}', ${isActive})"
             style="background: ${isActive ? '#FF4136' : '#2ECC40'}; color: #FFFFFF; padding: 10px 20px; 
-                   border-radius: 20px; border: none; cursor: pointer; font-weight: bold; transition: all 0.3s;">
+               border-radius: 20px; border: none; cursor: pointer; font-weight: bold; transition: all 0.3s;">
             ${isActive ? 'تعطيل' : 'تفعيل'}
             </button>
             ` : ''}
@@ -12401,7 +12388,7 @@ function isUserInSameLocation(userLocation, driverLocation) {
             <button class="action-btn favorite-btn" 
             onclick="addToFavorites('${key}')"
             style="position: absolute; top: 10px; left: 10px; background: #FFD700; color: #000; padding: 5px 10px; 
-                   border-radius: 20px; border: none; cursor: pointer; font-weight: bold; transition: all 0.3s;">
+               border-radius: 20px; border: none; cursor: pointer; font-weight: bold; transition: all 0.3s;">
             <i class="fas fa-star"></i> مفضلة
             </button>
         </div>
