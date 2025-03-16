@@ -11530,26 +11530,50 @@ function formatRelativeTime(timestamp) {
             'driverImage': 'الصورة الشخصية'
         };
 
+        // نتحقق من وجود كل عنصر في الـ DOM قبل محاولة الوصول إليه
         const uploadedFiles = {};
         for (const [fileId, description] of Object.entries(requiredFiles)) {
             const fileInput = document.getElementById(fileId);
+            
+            // التحقق من وجود عنصر الإدخال في الصفحة
+            if (!fileInput) {
+                console.error(`عنصر الإدخال ${fileId} غير موجود في الصفحة`);
+                throw new Error(`لم يتم العثور على حقل ${description}`);
+            }
+            
+            // التحقق من وجود ملف محدد
             if (!fileInput.files || !fileInput.files[0]) {
                 throw new Error(`الرجاء تحميل ${description}`);
             }
+            
             uploadedFiles[fileId] = fileInput.files[0];
         }
 
-        // الحصول على الإحداثيات
-        const latitude = parseFloat(document.getElementById('driverLatitude').value);
-        const longitude = parseFloat(document.getElementById('driverLongitude').value);
+        // الحصول على الإحداثيات مع التحقق من وجود العناصر
+        const latitudeInput = document.getElementById('driverLatitude');
+        const longitudeInput = document.getElementById('driverLongitude');
+        
+        if (!latitudeInput || !longitudeInput) {
+            throw new Error('عناصر الإحداثيات غير موجودة في النموذج');
+        }
+        
+        const latitude = parseFloat(latitudeInput.value);
+        const longitude = parseFloat(longitudeInput.value);
 
-        if (!latitude || !longitude) {
+        if (isNaN(latitude) || isNaN(longitude)) {
             throw new Error('يرجى تحديد موقع السائق أولاً');
         }
 
         // 1. إنشاء حساب المستخدم في Firebase Authentication
         const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
         const uid = userCredential.user.uid;
+
+        // التأكد من وجود كائن storage
+        const storage = firebase.storage ? firebase.storage() : firebase.storage();
+        
+        if (!storage) {
+            throw new Error('فشل الوصول إلى خدمة التخزين. يرجى التحقق من إعدادات Firebase.');
+        }
 
         // رفع جميع الملفات إلى Firebase Storage
         const uploadPromises = {};
@@ -11558,27 +11582,54 @@ function formatRelativeTime(timestamp) {
             uploadPromises[fileId] = fileRef.put(file).then(snapshot => snapshot.ref.getDownloadURL());
         }
 
-        const uploadedUrls = await Promise.all(Object.values(uploadPromises));
+        // انتظار اكتمال رفع جميع الملفات
+        const uploadedUrls = [];
         const documentUrls = {};
-        Object.keys(uploadPromises).forEach((key, index) => {
-            documentUrls[key] = uploadedUrls[index];
-        });
+        
+        for (const [fileId, promise] of Object.entries(uploadPromises)) {
+            try {
+                const url = await promise;
+                uploadedUrls.push(url);
+                documentUrls[fileId] = url;
+            } catch (uploadError) {
+                console.error(`فشل رفع الملف ${fileId}:`, uploadError);
+                throw new Error(`فشل رفع ${requiredFiles[fileId]}`);
+            }
+        }
+
+        // التأكد من وجود كل عنصر نحتاجه من النموذج
+        const nameInput = document.getElementById('driverName');
+        const phoneInput = document.getElementById('driverPhone');
+        const carTypeInput = document.getElementById('carType');
+        const carModelInput = document.getElementById('carModel');
+        const provinceInput = document.getElementById('driverProvince');
+        const areaInput = document.getElementById('driverArea');
+        const bioInput = document.getElementById('driverBio');
+        
+        if (!nameInput || !phoneInput || !carTypeInput || !carModelInput) {
+            throw new Error('بعض حقول النموذج المطلوبة غير موجودة');
+        }
 
         // تجهيز بيانات السائق
         const driverData = {
-            uid: uid, // إضافة معرف المستخدم من Authentication
-            email: email, // إضافة البريد الإلكتروني
-            name: document.getElementById('driverName').value,
-            phone: document.getElementById('driverPhone').value,
-            carType: document.getElementById('carType').value,
-            carModel: document.getElementById('carModel').value,
-            location: document.getElementById('driverLocation').value,
+            uid: uid,
+            email: email,
+            name: nameInput.value,
+            fullName: nameInput.value, // لضمان التوافق مع بقية التطبيق
+            phone: phoneInput.value,
+            carType: carTypeInput.value,
+            vehicleType: carTypeInput.value, // لضمان التوافق مع بقية التطبيق
+            carModel: carModelInput.value,
+            vehicleModel: carModelInput.value, // لضمان التوافق مع بقية التطبيق
+            province: provinceInput ? provinceInput.value : '',
+            area: areaInput ? areaInput.value : '',
             coordinates: {
                 lat: latitude,
                 lng: longitude
             },
-            bio: document.getElementById('driverBio').value,
+            bio: bioInput ? bioInput.value : '',
             imageUrl: documentUrls.driverImage,
+            photoUrl: documentUrls.driverImage, // لضمان التوافق مع بقية التطبيق
             documents: {
                 idCard: {
                     front: documentUrls.idCardFront,
@@ -11595,26 +11646,45 @@ function formatRelativeTime(timestamp) {
             },
             rating: 5,
             trips: 0,
-            approved: false,
-            approvalStatus: 'pending',
-            active: false,
+            isVerified: true, // مضاف من قبل الأدمن، لذلك موثق
+            isAvailable: true, // متاح للعمل
+            approved: true, // مضاف من قبل الأدمن، لذلك موافق عليه
+            approvalStatus: 'approved',
+            active: true,
+            userType: 'driver', // لضمان التوافق مع بقية التطبيق 
+            role: 'driver',
             registrationDate: firebase.database.ServerValue.TIMESTAMP,
             lastUpdate: firebase.database.ServerValue.TIMESTAMP,
-            role: 'driver' // إضافة دور المستخدم
+            createdAt: firebase.database.ServerValue.TIMESTAMP // لضمان التوافق مع بقية التطبيق
         };
 
+        // التأكد من وجود كائن database
+        const database = firebase.database ? firebase.database() : firebase.database;
+        
+        if (!database) {
+            throw new Error('فشل الوصول إلى قاعدة البيانات. يرجى التحقق من إعدادات Firebase.');
+        }
+
+        // إنشاء معرف فريد للسائق
+        const driverId = `DR${Date.now()}`;
+        driverData.id = driverId; // إضافة المعرف إلى بيانات السائق
+
         // 2. حفظ البيانات في قاعدة البيانات الرئيسية
-        await database.ref(`drivers/${uid}`).set(driverData);
+        await database.ref(`drivers/${driverId}`).set(driverData);
 
         // 3. حفظ المعلومات في قسم المستخدمين أيضًا للتحقق من الأدوار
         await database.ref(`users/${uid}`).set({
             uid: uid,
             email: email,
             name: driverData.name,
+            fullName: driverData.name,
             phone: driverData.phone,
             imageUrl: driverData.imageUrl,
+            photoUrl: driverData.imageUrl,
+            userType: 'driver',
             role: 'driver',
-            registrationDate: firebase.database.ServerValue.TIMESTAMP
+            registrationDate: firebase.database.ServerValue.TIMESTAMP,
+            createdAt: firebase.database.ServerValue.TIMESTAMP
         });
 
         // 4. تحديث ملف تعريف المستخدم في Authentication
@@ -11623,39 +11693,63 @@ function formatRelativeTime(timestamp) {
             photoURL: driverData.imageUrl
         });
 
-        // 5. إرسال إشعار إلى نظام الإشعارات حول السائق الجديد
-        sendNotificationToAllUsers({
-            type: 'new_driver',
-            title: 'سائق جديد في منطقتك',
-            message: `انضم السائق ${driverData.name} إلى منطقة ${driverData.location}`,
-            icon: driverData.imageUrl,
-            driverId: uid,
-            timestamp: Date.now(),
-            location: driverData.location
-        });
+        // 5. محاولة إرسال إشعار إلى نظام الإشعارات إذا كانت الدالة موجودة
+        try {
+            if (typeof sendNotificationToAllUsers === 'function') {
+                sendNotificationToAllUsers({
+                    type: 'new_driver',
+                    title: 'سائق جديد في منطقتك',
+                    message: `انضم السائق ${driverData.name} إلى منطقة ${driverData.province || ''} ${driverData.area || ''}`,
+                    icon: driverData.imageUrl,
+                    driverId: driverId,
+                    timestamp: Date.now(),
+                    location: driverData.province
+                });
+            }
+        } catch (notificationError) {
+            console.warn('فشل إرسال الإشعار:', notificationError);
+            // نستمر بدون إيقاف العملية حتى لو فشل إرسال الإشعار
+        }
 
-        // إرسال بريد تأكيد الحساب
-        await userCredential.user.sendEmailVerification();
+        // محاولة إرسال بريد تأكيد الحساب
+        try {
+            await userCredential.user.sendEmailVerification();
+        } catch (emailError) {
+            console.warn('فشل إرسال بريد التحقق:', emailError);
+            // نستمر بدون إيقاف العملية حتى لو فشل إرسال البريد
+        }
 
         // إغلاق النافذة المنبثقة
         const modal = bootstrap.Modal.getInstance(document.getElementById('addDriverModal'));
-        modal.hide();
+        if (modal) {
+            modal.hide();
+        } else {
+            // إذا لم نجد الكائن modal، نحاول إغلاق النافذة بطريقة أخرى
+            const modalElement = document.getElementById('addDriverModal');
+            if (modalElement) {
+                const bsModal = new bootstrap.Modal(modalElement);
+                bsModal.hide();
+            }
+        }
 
         // إعادة تعيين النموذج
-        document.getElementById('addDriverForm').reset();
+        const form = document.getElementById('addDriverForm');
+        if (form) {
+            form.reset();
+        }
 
         // إعادة تعيين معاينات الصور
         resetImagePreviews();
 
         // عرض رسالة نجاح
         Swal.fire({
-            title: 'تم تقديم الطلب بنجاح!',
+            title: 'تمت إضافة السائق بنجاح!',
             html: `
                 <div class="success-message">
-                    <p>تم إنشاء حساب السائق وإرسال طلبك للمراجعة</p>
-                    <p>تم إرسال بريد إلكتروني للتحقق إلى: ${email}</p>
-                    <p>معرف السائق: ${uid}</p>
-                    <small>سيتم مراجعة طلبك وتفعيل حسابك قريباً</small>
+                    <p>تم إنشاء حساب السائق بنجاح</p>
+                    <p>البريد الإلكتروني: ${email}</p>
+                    <p>معرف السائق: ${driverId}</p>
+                    <small>تم تفعيل الحساب وأصبح السائق جاهزاً للعمل</small>
                 </div>
             `,
             icon: 'success',
@@ -11663,8 +11757,10 @@ function formatRelativeTime(timestamp) {
             confirmButtonColor: '#FFD700'
         });
 
-        // تحديث قائمة السائقين
-        loadDrivers();
+        // تحديث قائمة السائقين إذا كانت الدالة موجودة
+        if (typeof loadDrivers === 'function') {
+            loadDrivers();
+        }
 
     } catch (error) {
         console.error('Error adding driver:', error);
@@ -11679,12 +11775,190 @@ function formatRelativeTime(timestamp) {
             errorMessage = 'كلمة المرور ضعيفة جدًا، يرجى استخدام كلمة مرور أقوى';
         }
 
-        showToast(errorMessage, 'error');
+        // عرض رسالة الخطأ باستخدام SweetAlert2 إذا كان متاحاً، وإلا نستخدم showToast
+        if (typeof Swal !== 'undefined') {
+            Swal.fire({
+                title: 'خطأ!',
+                text: errorMessage,
+                icon: 'error',
+                confirmButtonText: 'حسناً',
+                confirmButtonColor: '#dc3545'
+            });
+        } else if (typeof showToast === 'function') {
+            showToast(errorMessage, 'error');
+        } else {
+            alert(errorMessage);
+        }
     } finally {
         hideLoading();
     }
 }
 
+// دالة مساعدة لإعادة تعيين معاينات الصور
+function resetImagePreviews() {
+    try {
+        // قائمة معرفات عناصر المعاينة
+        const previewIds = [
+            'imagePreview',
+            'idCardFrontPreview',
+            'idCardBackPreview',
+            'residenceFrontPreview',
+            'residenceBackPreview',
+            'licenseFrontPreview',
+            'licenseBackPreview'
+        ];
+
+        // إعادة تعيين كل عنصر معاينة
+        previewIds.forEach(id => {
+            const preview = document.getElementById(id);
+            if (preview) {
+                preview.style.display = 'none';
+                preview.src = '#';
+                
+                // محاولة إظهار عنصر placeholder المقابل
+                const parent = preview.parentElement;
+                if (parent) {
+                    const placeholder = parent.querySelector('.upload-placeholder');
+                    if (placeholder) {
+                        placeholder.style.display = 'flex';
+                    }
+                }
+            }
+        });
+    } catch (error) {
+        console.warn('حدث خطأ أثناء إعادة تعيين معاينات الصور:', error);
+        // نتجاهل أي أخطاء هنا لأنها غير حرجة
+    }
+}
+
+// دالة معاينة المستندات
+function previewDocument(input, previewId) {
+    try {
+        const preview = document.getElementById(previewId);
+        if (!preview) {
+            console.warn(`عنصر المعاينة ${previewId} غير موجود`);
+            return;
+        }
+
+        const placeholder = input.parentElement.querySelector('.upload-placeholder');
+        
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+                if (placeholder) {
+                    placeholder.style.display = 'none';
+                }
+            };
+            
+            reader.onerror = function(e) {
+                console.error('فشل قراءة الملف:', e);
+                // نعرض رسالة خطأ للمستخدم
+                if (typeof showToast === 'function') {
+                    showToast('فشل قراءة الملف. يرجى المحاولة مرة أخرى.', 'error');
+                }
+            };
+            
+            reader.readAsDataURL(input.files[0]);
+        }
+    } catch (error) {
+        console.error('خطأ في معاينة المستند:', error);
+    }
+}
+
+// دالة لتحديد الموقع الحالي
+function captureCurrentLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            // نجاح
+            function(position) {
+                const latInput = document.getElementById('driverLatitude');
+                const lngInput = document.getElementById('driverLongitude');
+                
+                if (latInput && lngInput) {
+                    latInput.value = position.coords.latitude;
+                    lngInput.value = position.coords.longitude;
+                    
+                    if (typeof showToast === 'function') {
+                        showToast('تم تحديد موقعك بنجاح', 'success');
+                    }
+                } else {
+                    console.error('حقول الإحداثيات غير موجودة في النموذج');
+                    if (typeof showToast === 'function') {
+                        showToast('فشل تحديد الموقع: حقول الإحداثيات غير موجودة', 'error');
+                    }
+                }
+            },
+            // فشل
+            function(error) {
+                let errorMessage = 'حدث خطأ أثناء محاولة تحديد موقعك';
+                
+                switch(error.code) {
+                    case error.PERMISSION_DENIED:
+                        errorMessage = 'تم رفض طلب تحديد الموقع. يرجى السماح للموقع بالوصول إلى موقعك.';
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        errorMessage = 'معلومات الموقع غير متوفرة.';
+                        break;
+                    case error.TIMEOUT:
+                        errorMessage = 'انتهت مهلة طلب تحديد الموقع.';
+                        break;
+                }
+                
+                if (typeof showToast === 'function') {
+                    showToast(errorMessage, 'error');
+                } else {
+                    alert(errorMessage);
+                }
+            },
+            // خيارات
+            {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 0
+            }
+        );
+    } else {
+        const message = 'المتصفح الخاص بك لا يدعم تحديد الموقع';
+        
+        if (typeof showToast === 'function') {
+            showToast(message, 'error');
+        } else {
+            alert(message);
+        }
+    }
+}
+
+// دالة لمعاينة صورة السائق الشخصية
+function handleImagePreview(event) {
+    try {
+        const preview = document.getElementById('imagePreview');
+        if (!preview) {
+            console.warn('عنصر معاينة الصورة الشخصية غير موجود');
+            return;
+        }
+
+        const placeholder = event.target.parentElement.querySelector('.upload-placeholder');
+        
+        if (event.target.files && event.target.files[0]) {
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+                if (placeholder) {
+                    placeholder.style.display = 'none';
+                }
+            };
+            
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    } catch (error) {
+        console.error('خطأ في معاينة الصورة الشخصية:', error);
+    }
+}
 // دالة إرسال إشعار إلى جميع المستخدمين في منطقة محددة
 function sendNotificationToAllUsers(notification) {
     // الحصول على قائمة المستخدمين
@@ -12000,81 +12274,7 @@ function isUserInSameLocation(userLocation, driverLocation) {
             return `${distance.toFixed(1)} كم`;
         }
 
-        // تحديث دالة إنشاء بطاقة السائق مع المسافة المحسنة
-        function createDriverCard(driver, key) {
-            let distanceDisplay = 'غير متوفر';
-            let distanceValue = null;
-
-            if (userLocation && driver.coordinates) {
-                distanceValue = calculateDistance(userLocation, driver.coordinates);
-                distanceDisplay = formatDistance(distanceValue);
-            }
-
-            // ترتيب السائقين حسب المسافة
-            const distanceClass = distanceValue !== null ?
-                (distanceValue < 1 ? 'distance-near' :
-                    distanceValue < 5 ? 'distance-medium' : 'distance-far') : '';
-
-            return `
-        <div class="driver-card ${distanceClass}" data-driver-id="${key}" data-distance="${distanceValue || 999999}">
-            <div class="driver-image-container">
-                <img src="${driver.imageUrl || 'https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/driver-images%2F7605a607-6cf8-4b32-aee1-fa7558c98452.png?alt=media&token=5cf9e67c-ba6e-4431-a6a0-79dede15b527'}" alt="${driver.name}" class="driver-image">
-                <div class="driver-status ${driver.active ? 'status-active' : 'status-inactive'}">
-                    ${driver.active ? 'متاح' : 'مشغول'}
-                </div>
-                <div class="distance-badge ${distanceClass}">
-                    <i class="fas fa-map-marker-alt"></i>
-                    ${distanceDisplay}
-                </div>
-            </div>
-            <div class="driver-info">
-                <h5 class="driver-name">${driver.name}</h5>
-                <div class="driver-stats">
-                    <div class="stat-item">
-                        <div class="stat-value">
-                            <i class="fas fa-star"></i>
-                            ${driver.rating ? driver.rating.toFixed(1) : '5.0'}
-                        </div>
-                        <div class="stat-label">التقييم</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">
-                            <i class="fas fa-route"></i>
-                            ${driver.trips || 0}
-                        </div>
-                        <div class="stat-label">الرحلات</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">
-                            ${distanceDisplay}
-                        </div>
-                        <div class="stat-label">المسافة</div>
-                    </div>
-                </div>
-                <div class="text-muted">
-                    <p class="mb-2">
-                        <i class="fas fa-car me-2"></i>
-                        ${driver.carType} ${driver.carModel}
-                    </p>
-                    <p class="mb-0">
-                        <i class="fas fa-map-marker-alt me-2"></i>
-                        ${driver.location}
-                    </p>
-                </div>
-            </div>
-            <div class="driver-actions">
-                <button class="action-btn primary" onclick="viewDriverLocation('${key}')">
-                    <i class="fas fa-map-marker-alt"></i>
-                    عرض الموقع
-                </button>
-                <button class="action-btn secondary" onclick="openChatWindow('${key}')">
-                    <i class="fas fa-comment"></i>
-                    مراسلة
-                </button>
-            </div>
-        </div>
-    `;
-        }
+       
 
 
         // تحديث دالة تحميل السائقين

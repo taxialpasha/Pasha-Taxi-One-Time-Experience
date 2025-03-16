@@ -589,3 +589,115 @@ firebase.auth().onAuthStateChanged((user) => {
         updateProfileIcon(user);
     }
 });
+
+// تحديث دالة updateProfileIcon لتتحقق من وجود العناصر في DOM بشكل أفضل
+function updateProfileIcon(user) {
+    // التحقق من وجود المستخدم أولاً
+    if (!user) {
+        console.warn('تعذر تحديث أيقونة الملف الشخصي: بيانات المستخدم غير متوفرة');
+        return;
+    }
+
+    try {
+        // تحقق مما إذا كانت عناصر الملف الشخصي موجودة في الصفحة الحالية
+        const profileIcon = document.getElementById('profileIcon');
+        const profileName = document.getElementById('profileName');
+        
+        // تحديث الأيقونة إذا كانت موجودة
+        if (profileIcon) {
+            profileIcon.src = user.photoURL || user.photoUrl || 'default-profile.png';
+        }
+        
+        // تحديث الاسم إذا كان موجوداً
+        if (profileName) {
+            profileName.textContent = user.displayName || user.fullName || user.name || 'Anonymous';
+        }
+        
+        // تحقق أيضًا من عناصر الصفحة الرئيسية للملف الشخصي
+        const userProfileBtn = document.querySelector('.user-profile-btn');
+        if (userProfileBtn) {
+            // استخدام الصورة الشخصية من البيانات
+            const userPhoto = user.photoURL || user.photoUrl || user.imageUrl || 'default-avatar.png';
+            const userName = user.displayName || user.fullName || user.name || 'المستخدم';
+            
+            userProfileBtn.innerHTML = `
+                <img src="${userPhoto}" 
+                     alt="${userName}" 
+                     class="rounded-circle me-2" 
+                     style="width: 35px; height: 35px; object-fit: cover;">
+                <span class="d-none d-md-inline">${userName}</span>
+            `;
+        }
+    } catch (error) {
+        // تسجيل الخطأ ولكن لا توقف البرنامج
+        console.warn('خطأ في تحديث أيقونة الملف الشخصي:', error);
+    }
+}
+
+// تحديث مراقب حالة المصادقة
+firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+        console.log('User is signed in:', user.uid);
+        updateProfileIcon(user);
+        
+        // محاولة تحميل بيانات المستخدم من قاعدة البيانات
+        loadUserData(user);
+    } else {
+        console.log('User is signed out');
+        resetUserInterface();
+    }
+});
+
+// دالة إضافية لتحميل بيانات المستخدم من قاعدة البيانات
+async function loadUserData(user) {
+    try {
+        // التحقق من وجود بيانات في التخزين المحلي أولاً
+        const cachedUserData = localStorage.getItem('currentUser');
+        if (cachedUserData) {
+            const userData = JSON.parse(cachedUserData);
+            updateUIAfterLogin(userData);
+            return;
+        }
+        
+        // بحث في قاعدة بيانات المستخدمين
+        const userSnapshot = await firebase.database().ref(`users/${user.uid}`).once('value');
+        const userData = userSnapshot.val();
+        
+        if (userData) {
+            // تحديث بيانات التخزين المحلي والواجهة
+            localStorage.setItem('currentUser', JSON.stringify(userData));
+            updateUIAfterLogin(userData);
+            return;
+        }
+        
+        // بحث في قاعدة بيانات السائقين
+        const driverSnapshot = await firebase.database().ref('drivers').orderByChild('uid').equalTo(user.uid).once('value');
+        const driversData = driverSnapshot.val();
+        
+        if (driversData) {
+            // استخراج بيانات السائق
+            const driverId = Object.keys(driversData)[0];
+            const driverData = driversData[driverId];
+            
+            // تحديث بيانات التخزين المحلي والواجهة
+            localStorage.setItem('currentUser', JSON.stringify(driverData));
+            updateUIAfterLogin(driverData);
+            return;
+        }
+        
+        // إذا لم نجد بيانات، ننشئ بيانات أولية من معلومات المصادقة
+        const basicUserData = {
+            uid: user.uid,
+            email: user.email,
+            fullName: user.displayName || 'المستخدم',
+            photoUrl: user.photoURL,
+            userType: 'user'
+        };
+        
+        localStorage.setItem('currentUser', JSON.stringify(basicUserData));
+        updateUIAfterLogin(basicUserData);
+        
+    } catch (error) {
+        console.error('Error loading user data:', error);
+    }
+}

@@ -460,18 +460,22 @@ class NotificationsManager {
     }
     
     // التحقق مما إذا كان السائق في نفس منطقة المستخدم
-    isDriverInUserLocation(driverLocation) {
-        // إذا لم يكن لدينا معلومات عن موقع المستخدم، نفترض أنه في نفس المنطقة
-        if (!this.userLocation) return true;
+    isDriverInUserLocation(driver, user) {
+        if (!driver || !user) return false;
         
-        // تحويل المواقع إلى نصوص للمقارنة
-        const userLocationStr = typeof this.userLocation === 'string' ? 
-            this.userLocation.toLowerCase() : JSON.stringify(this.userLocation).toLowerCase();
-        const driverLocationStr = driverLocation.toLowerCase();
+        if (!driver.province && !driver.area && !driver.location) return true;
+        if (!user.province && !user.area) return true;
         
-        // التحقق من وجود تطابق في الاسم
-        return userLocationStr.includes(driverLocationStr) || 
-               driverLocationStr.includes(userLocationStr);
+        const driverProvince = (driver.province || driver.location || '').toString().toLowerCase();
+        const driverArea = (driver.area || '').toString().toLowerCase();
+        
+        const userProvince = (user.province || '').toString().toLowerCase();
+        const userArea = (user.area || '').toString().toLowerCase();
+        
+        return driverProvince.includes(userProvince) || 
+               userProvince.includes(driverProvince) || 
+               driverArea.includes(userArea) || 
+               userArea.includes(driverArea);
     }
     
     // إنشاء إشعار للسائق الجديد
