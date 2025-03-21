@@ -17,7 +17,6 @@ function hideLoading() {
     }
 }
 
-// تعديل دالة معالجة تسجيل المستخدم
 // دالة معالجة تسجيل المستخدم الجديد
 async function handleUserRegistration(event) {
     event.preventDefault();
@@ -27,7 +26,23 @@ async function handleUserRegistration(event) {
         const formData = new FormData(event.target);
         const email = formData.get('email');
         const password = formData.get('password');
+        const confirmPassword = formData.get('confirmPassword');
         const fullName = formData.get('fullName');
+        const phone = formData.get('phone');
+        const province = formData.get('province');
+        const area = formData.get('area');
+        const address = formData.get('address');
+        
+        // التحقق من تطابق كلمات المرور
+        if (password !== confirmPassword) {
+            throw new Error('كلمات المرور غير متطابقة');
+        }
+        
+        // التحقق من الموافقة على الشروط والأحكام
+        const terms = formData.get('terms');
+        if (!terms) {
+            throw new Error('يجب الموافقة على الشروط والأحكام');
+        }
 
         // إنشاء حساب جديد في Firebase Authentication
         const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
@@ -46,6 +61,11 @@ async function handleUserRegistration(event) {
                 displayName: fullName,
                 photoURL: photoUrl
             });
+        } else {
+            // تحديث اسم المستخدم في الملف الشخصي حتى لو لم تكن هناك صورة
+            await user.updateProfile({
+                displayName: fullName
+            });
         }
 
         // حفظ البيانات الإضافية في Realtime Database
@@ -53,40 +73,134 @@ async function handleUserRegistration(event) {
             uid: user.uid,
             fullName: fullName,
             email: email,
-            phone: formData.get('phone'),
-            province: formData.get('province'),
-            area: formData.get('area'),
-            address: formData.get('address'),
+            phone: phone,
+            province: province,
+            area: area,
+            address: address,
             photoUrl: photoUrl,
             userType: 'user',
-            createdAt: firebase.database.ServerValue.TIMESTAMP
+            createdAt: firebase.database.ServerValue.TIMESTAMP,
+            lastLogin: firebase.database.ServerValue.TIMESTAMP
         };
 
         await firebase.database().ref(`users/${user.uid}`).set(userData);
 
+        // إرسال بريد تأكيد الحساب
+        await user.sendEmailVerification();
+
+        // حفظ بيانات المستخدم في التخزين المحلي
+        localStorage.setItem('currentUser', JSON.stringify(userData));
+        
+        // تحديث واجهة المستخدم
+        updateUIAfterLogin(userData);
+
         // إغلاق نافذة التسجيل
         const modal = bootstrap.Modal.getInstance(document.getElementById('userRegistrationModal'));
-        modal.hide();
+        if (modal) {
+            modal.hide();
+        }
+
+        // إرسال حدث نجاح تسجيل الدخول
+        document.dispatchEvent(new CustomEvent('login-success'));
 
         // عرض رسالة نجاح
         Swal.fire({
             title: 'تم التسجيل بنجاح!',
-            text: 'مرحباً بك في تطبيق تاكسي العراق',
+            html: `
+                <div class="user-registration-success">
+                    <p>مرحباً بك ${fullName} في تطبيق تاكسي العراق</p>
+                    <p class="text-muted">تم إرسال رابط تأكيد إلى بريدك الإلكتروني: ${email}</p>
+                </div>
+            `,
             icon: 'success',
             confirmButtonColor: '#FFD700',
             confirmButtonText: 'تم'
         });
 
-        // تحديث واجهة المستخدم
-        updateUIAfterLogin(userData);
-
     } catch (error) {
         console.error('Registration error:', error);
-        showToast(error.message, 'error');
+        
+        let errorMessage = 'حدث خطأ أثناء التسجيل';
+        
+        // ترجمة رسائل خطأ Firebase
+        switch (error.code) {
+            case 'auth/email-already-in-use':
+                errorMessage = 'البريد الإلكتروني مستخدم بالفعل';
+                break;
+            case 'auth/invalid-email':
+                errorMessage = 'البريد الإلكتروني غير صالح';
+                break;
+            case 'auth/weak-password':
+                errorMessage = 'كلمة المرور ضعيفة جداً';
+                break;
+            case 'auth/operation-not-allowed':
+                errorMessage = 'تسجيل المستخدمين غير مفعل حالياً';
+                break;
+            default:
+                errorMessage = error.message;
+        }
+        
+        Swal.fire({
+            title: 'خطأ!',
+            text: errorMessage,
+            icon: 'error',
+            confirmButtonColor: '#d33',
+            confirmButtonText: 'حسناً'
+        });
     } finally {
         hideLoading();
     }
 }
+
+// دالة فحص وتهيئة نموذج تسجيل المستخدم
+function initUserRegistrationForm() {
+    const userRegistrationForm = document.getElementById('userRegistrationForm');
+    if (userRegistrationForm) {
+        // إزالة أي مستمعات سابقة لتجنب التكرار
+        const newForm = userRegistrationForm.cloneNode(true);
+        userRegistrationForm.parentNode.replaceChild(newForm, userRegistrationForm);
+        
+        // إضافة مستمع الحدث الجديد
+        newForm.addEventListener('submit', handleUserRegistration);
+        
+        // إضافة التحقق من تطابق كلمات المرور
+        const passwordInput = newForm.querySelector('input[name="password"]');
+        const confirmPasswordInput = newForm.querySelector('input[name="confirmPassword"]');
+        
+        if (passwordInput && confirmPasswordInput) {
+            confirmPasswordInput.addEventListener('input', function() {
+                if (this.value !== passwordInput.value) {
+                    this.setCustomValidity('كلمات المرور غير متطابقة');
+                } else {
+                    this.setCustomValidity('');
+                }
+            });
+            
+            passwordInput.addEventListener('input', function() {
+                if (confirmPasswordInput.value && this.value !== confirmPasswordInput.value) {
+                    confirmPasswordInput.setCustomValidity('كلمات المرور غير متطابقة');
+                } else {
+                    confirmPasswordInput.setCustomValidity('');
+                }
+            });
+        }
+        
+        console.log('تم تهيئة نموذج تسجيل المستخدم');
+    }
+}
+
+// استدعاء دالة التهيئة عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', function() {
+    initUserRegistrationForm();
+    
+    // إعادة تهيئة النموذج عند فتح النافذة المنبثقة
+    const userRegistrationModal = document.getElementById('userRegistrationModal');
+    if (userRegistrationModal) {
+        userRegistrationModal.addEventListener('shown.bs.modal', function() {
+            initUserRegistrationForm();
+        });
+    }
+});
 
 // دالة معالجة تسجيل الدخول - تم تعديلها للبحث عن معلومات السائق أيضًا
 async function handleLogin(event) {
@@ -173,7 +287,6 @@ async function handleLogin(event) {
         showToast(errorMessage, 'error');
     } finally {
         hideLoading();
-        
         // إعادة تفعيل التفاعل مع الصفحة بعد انتهاء عملية تسجيل الدخول
         document.body.style.pointerEvents = 'auto';
         
@@ -188,6 +301,20 @@ async function handleLogin(event) {
         }, 500);
     }
 }
+        // إعادة تفعيل التفاعل مع الصفحة بعد انتهاء عملية تسجيل الدخول
+        document.body.style.pointerEvents = 'auto';
+        
+        // إضافة تأخير بسيط لضمان إعادة تحميل العناصر بشكل صحيح
+        setTimeout(() => {
+            // إعادة التحقق من أن الصفحة تعمل بشكل كامل
+            document.body.classList.remove('modal-open');
+            const modalBackdrops = document.querySelectorAll('.modal-backdrop');
+            modalBackdrops.forEach(backdrop => {
+                backdrop.remove();
+            });
+        }, 500);
+    
+
 
 // دالة لتحديث حالة توفر السائق
 async function toggleDriverAvailability() {
@@ -552,43 +679,6 @@ async function handleDriverRegistration(event) {
         hideLoading();
     }
 }
-
-function updateProfileIcon(user) {
-    const profileImage = document.getElementById('userProfileImage');
-    const defaultIcon = document.getElementById('defaultProfileIcon');
-    const profileText = document.getElementById('profileText');
-    const userTypeElement = document.getElementById('userType');
-
-    if (profileImage && defaultIcon && profileText && userTypeElement) {
-        if (user && user.photoURL) {
-            profileImage.src = user.photoURL;
-            profileImage.style.display = 'block';
-            defaultIcon.style.display = 'none';
-            profileText.style.display = 'none';
-        } else {
-            profileImage.style.display = 'none';
-            defaultIcon.style.display = 'block';
-            profileText.style.display = 'block';
-        }
-
-        // Set user type
-        const userData = JSON.parse(localStorage.getItem('currentUser'));
-        if (userData) {
-            userTypeElement.textContent = userData.userType === 'driver' ? 'سائق' : 'مستخدم';
-            userTypeElement.style.display = 'block';
-        } else {
-            userTypeElement.style.display = 'none';
-        }
-    } else {
-        console.error('Profile elements not found in the DOM.');
-    }
-}
-
-firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-        updateProfileIcon(user);
-    }
-});
 
 // تحديث دالة updateProfileIcon لتتحقق من وجود العناصر في DOM بشكل أفضل
 function updateProfileIcon(user) {

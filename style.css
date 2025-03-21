@@ -141,6 +141,16 @@
     margin-bottom: var(--spacing-md);
 }
 
+.driver-image-container {
+    height: 200px; /* تعديل ارتفاع الصورة ليكون أطول */
+    overflow: hidden;
+}
+
+.driver-image {
+    height: 100%; /* تأكد من أن الصورة تملأ الحاوية بالكامل */
+    width: auto;
+}
+
 /* تحسينات الأزرار */
 .action-btn {
     padding: var(--spacing-md) var(--spacing-lg);
@@ -4268,4 +4278,8816 @@ body {
 .side-nav-user-info .btn-gold:hover {
     background-color: #FFFFFF;
     color: #000000;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* نظام الألوان الأساسي */
+    :root {
+        --primary-color: #FFD700;
+        /* اللون الذهبي الأساسي */
+        --primary-dark: #B8860B;
+        /* درجة داكنة من الذهبي */
+        --primary-light: #FFF8DC;
+        /* درجة فاتحة من الذهبي */
+
+        --background-dark: #1a1a1a;
+        /* خلفية داكنة */
+        --background-light: #242424;
+        /* خلفية فاتحة نسبياً */
+
+        --text-primary: #FFFFFF;
+        /* لون النص الأساسي */
+        --text-secondary: #CCCCCC;
+        /* لون النص الثانوي */
+
+        --accent-success: #2ECC40;
+        /* لون النجاح */
+        --accent-error: #FF4136;
+        /* لون الخطأ */
+        --accent-warning: #FFB236;
+        /* لون التحذير */
+
+        /* المسافات والأحجام */
+        --border-radius-sm: 8px;
+        --border-radius-md: 12px;
+        --border-radius-lg: 20px;
+        --spacing-xs: 0.25rem;
+        --spacing-sm: 0.5rem;
+        --spacing-md: 1rem;
+        --spacing-lg: 1.5rem;
+    }
+
+    /* تحسينات العنوان */
+    .app-header {
+        background: var(--background-dark);
+        border-bottom: 2px solid var(--primary-color);
+        padding: var(--spacing-md) 0;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .app-logo {
+        color: var(--primary-color);
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+    }
+
+    .app-logo i {
+        font-size: 1.8rem;
+    }
+
+    .driver-card {
+        position: relative;
+        transition: all 0.3s ease;
+        overflow: hidden;
+    }
+
+    .status-banner {
+        position: absolute;
+        top: 20px;
+        right: -35px;
+        transform: rotate(45deg);
+        padding: 5px 40px;
+        color: white;
+        font-weight: bold;
+        z-index: 2;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .status-banner.pending {
+        background-color: #ffd700;
+        color: #000;
+    }
+
+    .status-banner.not-approved {
+        background-color: #dc3545;
+    }
+
+    .status-banner.approved {
+        background-color: #28a745;
+    }
+
+    .driver-card.not-approved .driver-image-container {
+        filter: grayscale(100%);
+    }
+
+    .driver-card.pending .driver-image-container {
+        filter: grayscale(30%);
+    }
+
+    .driver-actions button:disabled {
+        background-color: #6c757d !important;
+        cursor: not-allowed;
+    }
+
+    .driver-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(255, 215, 0, 0.2);
+    }
+
+    .driver-info {
+        padding: var(--spacing-lg);
+    }
+
+    .driver-name {
+        color: var(--primary-color);
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin-bottom: var(--spacing-md);
+    }
+
+    /* تحسينات الأزرار */
+    .action-btn {
+        padding: var(--spacing-md) var(--spacing-lg);
+        border-radius: var(--border-radius-md);
+        font-weight: bold;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+    }
+
+    .action-btn.primary {
+        background: var(--primary-color);
+        color: var(--background-dark);
+    }
+
+
+
+    .action-btn.secondary {
+        background: var(--background-dark);
+        color: var(--primary-color);
+        border: 2px solid var(--primary-color);
+    }
+
+    /* تحسينات الفلاتر */
+    .location-chip {
+        background: var(--background-light);
+        color: var(--text-primary);
+        border: 2px solid var(--primary-color);
+        padding: var(--spacing-sm) var(--spacing-lg);
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .location-chip:hover,
+    .location-chip.active {
+        background: var(--primary-color);
+        color: var(--background-dark);
+    }
+
+    /* تحسينات النوافذ المنبثقة */
+    .modal-content {
+        background: var(--background-dark);
+        border: 2px solid var(--primary-color);
+        border-radius: var(--border-radius-lg);
+    }
+
+    .modal-header {
+        border-bottom: 1px solid var(--primary-color);
+        padding: var(--spacing-lg);
+    }
+
+    .modal-title {
+        color: var(--primary-color);
+        font-weight: bold;
+    }
+
+    /* تحسينات النماذج */
+    .form-control {
+        background: var(--background-light);
+        border: 1px solid var(--primary-color);
+        color: var(--text-primary);
+        border-radius: var(--border-radius-sm);
+        padding: var(--spacing-md);
+    }
+
+    .form-control:focus {
+        box-shadow: 0 0 0 2px var(--primary-color);
+        border-color: var(--primary-color);
+    }
+
+    /* تحسينات الإشعارات */
+    .notification-toast {
+        background: var(--background-dark);
+        border: 2px solid var(--primary-color);
+        color: var(--text-primary);
+        border-radius: var(--border-radius-md);
+        padding: var(--spacing-md);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+
+
+
+    /* تحسينات الحالة */
+    .driver-status.status-active {
+        color: var(--accent-success);
+    }
+
+    .driver-status.status-inactive {
+        color: var(--accent-error);
+    }
+
+    /* تحسينات القوائم */
+    .side-nav {
+        background: var(--background-dark);
+        border-left: 2px solid var(--primary-color);
+    }
+
+    .side-nav-item {
+        color: var(--text-primary);
+        padding: var(--spacing-md);
+        transition: all 0.3s ease;
+    }
+
+    .side-nav-item:hover {
+        background: var(--primary-color);
+        color: var(--background-dark);
+    }
+
+    /* أنماط نافذة البحث الرئيسية */
+    #searchModal .modal-content {
+        background-color: #1a1a1a;
+        border: 2px solid #FFD700;
+        border-radius: 15px;
+    }
+
+    #searchModal .modal-header {
+        border-bottom: 1px solid #FFD700;
+        padding: 1rem 1.5rem;
+    }
+
+    #searchModal .modal-title {
+        color: #FFD700;
+        font-weight: bold;
+    }
+
+    /* أنماط حقل البحث */
+    .search-input-wrapper {
+        position: relative;
+        margin-bottom: 1rem;
+    }
+
+    .search-input {
+        background-color: #333;
+        border: 2px solid #FFD700;
+        color: #FFFFFF;
+        padding: 0.8rem 1rem;
+        border-radius: 10px;
+        width: 100%;
+    }
+
+    .search-input:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.3);
+    }
+
+    .search-input::placeholder {
+        color: #999;
+    }
+
+    /* أنماط خيارات البحث */
+    .search-options {
+        margin: 1rem 0;
+    }
+
+    .btn-group {
+        width: 100%;
+        gap: 0.5rem;
+        display: flex;
+    }
+
+    /* تنسيق أزرار الخيارات */
+    .btn-check+.btn-outline-primary {
+        background-color: #333;
+        color: #FFD700;
+        border: 1px solid #FFD700;
+        padding: 0.5rem 1rem;
+        flex: 1;
+        font-weight: bold;
+    }
+
+    .btn-check:checked+.btn-outline-primary {
+        background-color: #FFD700;
+        color: #000000;
+        border-color: #FFD700;
+    }
+
+    /* تنسيق نتائج البحث */
+    .search-results {
+        max-height: 400px;
+        overflow-y: auto;
+        padding: 0.5rem;
+    }
+
+    .search-result-item {
+        background-color: #000000;
+        border: 1px solid #333;
+        border-radius: 10px;
+        padding: 1rem;
+        margin-bottom: 0.8rem;
+        transition: all 0.3s ease;
+    }
+
+    .search-result-item:hover {
+        border-color: #FFD700;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(255, 215, 0, 0.1);
+    }
+
+    /* تنسيق معلومات السائق في النتائج */
+    .search-result-item .driver-info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .search-result-item .driver-image {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: 2px solid #FFD700;
+        object-fit: cover;
+    }
+
+    .search-result-item .driver-details {
+        flex: 1;
+    }
+
+    .search-result-item .driver-name {
+        color: #FFFFFF;
+        font-size: 1.1rem;
+        font-weight: bold;
+        margin-bottom: 0.3rem;
+    }
+
+    .search-result-item .driver-meta {
+        color: #CCCCCC;
+        font-size: 0.9rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .search-result-item .driver-meta i {
+        color: #FFD700;
+        margin-left: 0.5rem;
+    }
+
+    /* تنسيق التمييز في نتائج البحث */
+    .highlight {
+        background-color: rgba(255, 215, 0, 0.3);
+        padding: 0.1rem 0.3rem;
+        border-radius: 3px;
+        color: #FFD700;
+    }
+
+    /* تنسيق رسالة عدم وجود نتائج */
+    .no-results {
+        text-align: center;
+        color: #FFFFFF;
+        padding: 2rem;
+        font-size: 1.1rem;
+    }
+
+    /* تنسيق شريط التمرير */
+    .search-results::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .search-results::-webkit-scrollbar-track {
+        background: #333;
+        border-radius: 3px;
+    }
+
+    .search-results::-webkit-scrollbar-thumb {
+        background: #FFD700;
+        border-radius: 3px;
+    }
+
+    /* حالة تحميل النتائج */
+    .search-loading {
+        text-align: center;
+        padding: 2rem;
+        color: #FFD700;
+    }
+
+    .search-loading .spinner-border {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    /* Preserve original location chip styles */
+    .location-chip {
+        background-color: #000000 !important;
+        border: 2px solid #FFD700 !important;
+        color: #FFFFFF !important;
+    }
+
+    .location-chip:hover,
+    .location-chip.active {
+        background-color: #1a1a1a !important;
+        color: #FFFFFF !important;
+        border-color: #FFD700 !important;
+    }
+
+    .location-chip i {
+        color: #FFD700 !important;
+    }
+
+    /* Preserve driver status styles */
+    .driver-status {
+        background: rgba(255, 255, 255, 0.8) !important;
+    }
+
+    .status-active {
+        color: var(--success-color) !important;
+    }
+
+    .status-inactive {
+        color: var(--accent-color) !important;
+    }
+
+    /* Additional preservation rules for specific components */
+    .search-input,
+    .form-control {
+        color: #000000 !important;
+    }
+
+    .modal-header,
+    .modal-footer {
+        border-color: rgba(255, 215, 0, 0.2) !important;
+    }
+
+    /* Keep original colors for action buttons */
+    .action-btn.primary {
+        background: var(--primary-color) !important;
+        color: var(--secondary-color) !important;
+    }
+
+    .action-btn.secondary {
+        background: var(--secondary-color) !important;
+        color: var(--primary-color) !important;
+    }
+
+    /* Registration Modal Styles */
+    .modal-content {
+        background-color: #1a1a1a !important;
+        border: 2px solid #FFD700 !important;
+        border-radius: 20px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-header {
+        background-color: #000000 !important;
+        border-bottom: 2px solid #FFD700 !important;
+        padding: 1.5rem;
+    }
+
+    .modal-title {
+        color: #FFD700 !important;
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .btn-close {
+        color: #FFD700 !important;
+        opacity: 1 !important;
+        filter: brightness(0) invert(1) sepia(1) saturate(10000%) hue-rotate(300deg);
+    }
+
+    .registration-section {
+        background-color: #242424 !important;
+        border: 1px solid #FFD700 !important;
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .section-title {
+        color: #FFD700 !important;
+        border-bottom: 2px solid #FFD700;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
+
+    /* Form Controls */
+    .form-label {
+        color: #FFFFFF !important;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-control,
+    .form-select {
+        background-color: #333333 !important;
+        border: 1px solid #FFD700 !important;
+        color: #FFFFFF !important;
+        border-radius: 10px;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+        background-color: #444444 !important;
+        border-color: #FFD700 !important;
+        box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.25) !important;
+        color: #FFFFFF !important;
+    }
+
+    .form-control::placeholder {
+        color: rgba(255, 255, 255, 0.6) !important;
+    }
+
+    /* Upload Containers */
+    .user-photo-upload,
+    .driver-photo-upload {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        border: 2px dashed #FFD700 !important;
+        background-color: #242424 !important;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .upload-placeholder {
+        text-align: center;
+        color: #FFD700 !important;
+    }
+
+    .upload-placeholder i {
+        font-size: 2rem;
+        margin-bottom: 10px;
+        color: #FFD700 !important;
+    }
+
+    /* Terms Checkbox */
+    .form-check-label {
+        color: #FFFFFF !important;
+    }
+
+    .form-check-input {
+        border-color: #FFD700 !important;
+    }
+
+    .form-check-input:checked {
+        background-color: #FFD700 !important;
+        border-color: #FFD700 !important;
+    }
+
+    /* Submit Button */
+    .btn-primary {
+        background-color: #FFD700 !important;
+        border-color: #FFD700 !important;
+        color: #000000 !important;
+        font-weight: bold;
+        padding: 0.75rem 2rem;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #ccac00 !important;
+        border-color: #ccac00 !important;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+    }
+
+    /* Account Type Cards */
+    .account-type-card {
+        background-color: #242424 !important;
+        border: 2px solid #FFD700 !important;
+        border-radius: 15px;
+        padding: 20px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .account-type-card:hover {
+        transform: translateY(-5px);
+        background-color: #333333 !important;
+        box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+    }
+
+    .account-type-card h6 {
+        color: #FFD700 !important;
+        margin: 15px 0;
+        font-weight: bold;
+    }
+
+    .account-type-card p {
+        color: #FFFFFF !important;
+    }
+
+    .account-type-card .small {
+        color: rgba(255, 255, 255, 0.8) !important;
+    }
+
+    .icon-container {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto;
+        background-color: #FFD700 !important;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .icon-container i {
+        color: #000000 !important;
+        font-size: 2rem;
+    }
+
+    /* Document Upload Sections */
+    .document-upload {
+        border: 2px dashed #FFD700 !important;
+        background-color: #242424 !important;
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .document-upload:hover {
+        background-color: #333333 !important;
+        border-color: #FFD700 !important;
+    }
+
+    /* Links */
+    .modal-body a {
+        color: #FFD700 !important;
+        text-decoration: none;
+    }
+
+    .modal-body a:hover {
+        color: #ccac00 !important;
+        text-decoration: underline;
+    }
+
+
+    /* تحديثات الخريطة */
+    :root {
+        --map-height: 40vh;
+        /* ارتفاع الخريطة */
+        --map-min-height: 50px;
+        /* الحد الأدنى لارتفاع الخريطة */
+        --map-margin-top: 3rem;
+        /* المسافة بين شريط التايتل والخريطة */
+        --map-margin-bottom: 1rem;
+        /* المسافة بين الخريطة والفلاتر */
+        --map-border-radius: 20px;
+        /* تقويس حواف الخريطة */
+        --map-shadow: 0 10px 20px rgba(141, 16, 16, 0.1);
+        /* ظل الخريطة */
+        --filter-margin-top: 1rem;
+        /* المسافة بين الفلاتر والخريطة */
+        --filter-margin-bottom: 1rem;
+        /* المسافة تحت الفلاتر */
+        --filter-gap: 0.5rem;
+        /* الفجوة بين عناصر الفلاتر */
+        --header-margin-bottom: 2rem;
+        /* المسافة بين شريط التايتل والخريطة */
+    }
+
+
+
+    #map {
+        height: var(--map-height);
+        /* ارتفاع الخريطة */
+        min-height: var(--map-min-height);
+        /* الحد الأدنى للارتفاع */
+        width: 100%;
+        /* عرض الخريطة */
+        border-radius: var(--map-border-radius);
+        /* تقويس الحواف */
+        margin: var(--map-margin-top) auto var(--map-margin-bottom);
+        /* المسافات حول الخريطة */
+        box-shadow: var(--map-shadow);
+        /* الظل */
+        border: 1px solid var(--secondary-color);
+        /* الحدود */
+        z-index: 1;
+        position: relative;
+        background: linear-gradient(135deg, #0e7583, #80deea);
+        /* تدرج الخلفية */
+    }
+
+    /* تحديث الخريطة */
+    /* تحسين مظهر حاوية الخريطة */
+    #map {
+        height: var(--map-height);
+        min-height: var(--map-min-height);
+
+        width: 100%;
+        border: 2px solid #FFD700;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        margin: 20px 0;
+        position: relative;
+        background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+    }
+
+    /* إضافة تأثير شبه شفاف قبل تحميل الخريطة */
+    #map::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.1);
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    /* تحسين مظهر عناصر التحكم بالخريطة */
+    .leaflet-control-container {
+        font-family: 'Cairo', sans-serif;
+    }
+
+    /* تحسين أزرار التحكم بالتكبير/التصغير */
+    .leaflet-bar {
+        border: none !important;
+        margin: 10px !important;
+    }
+
+    .leaflet-bar a {
+        background: rgba(0, 0, 0, 0.8) !important;
+        color: #FFD700 !important;
+        border: 2px solid #FFD700 !important;
+        width: 36px !important;
+        height: 36px !important;
+        line-height: 36px !important;
+        transition: all 0.3s ease !important;
+    }
+
+    .leaflet-bar a:hover {
+        background: rgba(255, 215, 0, 0.2) !important;
+        color: #FFFFFF !important;
+    }
+
+    /* تحسين مظهر التحكم بالطبقات */
+    .leaflet-control-layers {
+        border: 2px solid #FFD700 !important;
+        border-radius: 15px !important;
+        background: rgba(0, 0, 0, 0.9) !important;
+        padding: 15px !important;
+        backdrop-filter: blur(5px);
+    }
+
+    .leaflet-control-layers label {
+        margin: 8px 0 !important;
+        color: #FFFFFF !important;
+    }
+
+    /* تحسين مظهر علامات الخريطة */
+    .leaflet-marker-icon {
+        transition: transform 0.3s ease;
+    }
+
+    .leaflet-marker-icon:hover {
+        transform: scale(1.1);
+    }
+
+    /* تحسين النوافذ المنبثقة */
+    .leaflet-popup-content-wrapper {
+        background: rgba(0, 0, 0, 0.9) !important;
+        color: #FFFFFF !important;
+        border: 2px solid #FFD700;
+        border-radius: 15px !important;
+        backdrop-filter: blur(10px);
+    }
+
+    .leaflet-popup-tip {
+        background: #FFD700 !important;
+    }
+
+    .leaflet-popup-close-button {
+        color: #FFD700 !important;
+        font-size: 20px !important;
+        padding: 5px !important;
+    }
+
+    /* تحسين مقياس الخريطة */
+    .leaflet-control-scale {
+        background: rgba(0, 0, 0, 0.8) !important;
+        padding: 5px 10px !important;
+        border-radius: 10px !important;
+        border: 1px solid #FFD700 !important;
+        color: #FFFFFF !important;
+    }
+
+    /* تحسين مظهر التحميل */
+    .map-loading {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1000;
+        background: rgba(0, 0, 0, 0.8);
+        padding: 20px;
+        border-radius: 15px;
+        border: 2px solid #FFD700;
+        color: #FFFFFF;
+        display: none;
+    }
+
+    /* تحسين حالة التحميل للطبقات */
+    .leaflet-tile-loading {
+        animation: tileLoadingPulse 1s infinite;
+    }
+
+    @keyframes tileLoadingPulse {
+        0% {
+            opacity: 0.6;
+        }
+
+        50% {
+            opacity: 0.8;
+        }
+
+        100% {
+            opacity: 0.6;
+        }
+    }
+
+    /* تحسين مظهر الحدود بين الطبقات */
+    .leaflet-tile-container img {
+        border: 0.5px solid rgba(255, 215, 0, 0.1);
+    }
+
+    /* تحسين مظهر الخريطة عند التفاعل */
+    #map.is-dragging {
+        cursor: grabbing;
+    }
+
+    /* تحسين مظهر النص على الخريطة */
+    .leaflet-tooltip {
+        background: rgba(0, 0, 0, 0.8) !important;
+        color: #FFFFFF !important;
+        border: 1px solid #FFD700 !important;
+        border-radius: 10px !important;
+        padding: 8px 12px !important;
+    }
+
+    /* إضافة تأثيرات تفاعلية عند التحريك */
+    @media (hover: hover) {
+        #map:hover {
+            box-shadow: 0 6px 25px rgba(255, 215, 0, 0.2);
+        }
+    }
+
+    /* تحسين التجاوب مع الشاشات المختلفة */
+    @media screen and (max-width: 768px) {
+        #map {
+            height: 40vh;
+        }
+
+        .leaflet-control-layers {
+            max-width: 90vw;
+        }
+    }
+
+    @media screen and (min-width: 1200px) {
+        #map {
+            height: 60vh;
+        }
+    }
+
+    /* المسافة بين الخريطة والعناصر الأخرى */
+    .container {
+        display: flex;
+        flex-direction: column;
+        /* ترتيب العناصر عموديًا */
+        gap: 2rem;
+        /* مسافة بين العناصر */
+        padding: 0rem;
+        /* حشوة داخلية للحاوية */
+    }
+
+    .app-header {
+        margin-bottom: 3rem;
+        /* مسافة بين شريط التايتل والخريطة */
+    }
+
+    /* تحسين المسافة بين الخريطة والعناصر الأخرى */
+    .container {
+        display: flex;
+        flex-direction: column;
+        gap: 0rem;
+        /* مسافة بين العناصر */
+    }
+
+    /* تحسين شريط التايتل */
+
+    /* اللوجو واسم التطبيق */
+    .app-logo {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: var(--primary-color);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+    }
+
+    .app-logo i {
+        font-size: 1.5rem;
+        margin-right: 0.5rem;
+        color: var(--primary-color);
+    }
+
+    /* أيقونة البحث */
+    .search-icon {
+        color: var(--primary-color);
+        font-size: 1.2rem;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+
+    .driver-card.pending {
+        position: relative;
+        opacity: 0.8;
+        filter: grayscale(30%);
+    }
+
+    .driver-card.not-approved {
+        opacity: 0.7;
+        filter: grayscale(100%);
+    }
+
+    .driver-status-banner {
+        position: absolute;
+        top: 20px;
+        right: -30px;
+        transform: rotate(45deg);
+        padding: 5px 40px;
+        color: white;
+        font-weight: bold;
+        z-index: 2;
+    }
+
+    .driver-status-banner.pending {
+        background-color: #ffd700;
+        color: #000;
+    }
+
+    .driver-status-banner.not-approved {
+        background-color: #dc3545;
+    }
+
+    .driver-info.frozen {
+        pointer-events: none;
+    }
+
+    .driver-card .driver-actions button:disabled {
+        background-color: #6c757d;
+        cursor: not-allowed;
+    }
+
+
+    .search-icon:hover {
+        color: #ffc107;
+    }
+
+    /* الأدوات الأخرى */
+    .tools {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .tools .nav-link {
+        color: #fff;
+        font-size: 1.2rem;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .tools .nav-link:hover {
+        color: var(--primary-color);
+    }
+
+
+
+    /* اللوجو واسم التطبيق */
+    .app-logo {
+        display: flex;
+        align-items: center;
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: var(--primary-color);
+        gap: 0.5rem;
+        text-decoration: none;
+    }
+
+    .app-logo i {
+        font-size: 1.5rem;
+        color: var(--primary-color);
+    }
+
+    /* الأدوات الثلاثة */
+    .tools {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .tools .nav-link {
+        color: #fff;
+        font-size: 1.2rem;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .tools .nav-link i {
+        font-size: 1.2rem;
+    }
+
+    /* تحسين التناسق على الشاشات الصغيرة */
+    @media (max-width: 768px) {
+        .app-header {
+            height: 25px;
+            padding: 0 0.5rem;
+        }
+
+        .app-logo {
+            font-size: 1rem;
+        }
+
+        .app-logo i {
+            font-size: 1.2rem;
+        }
+
+        .tools .nav-link i {
+            font-size: 1rem;
+        }
+    }
+
+    .account-type-card {
+        background-color: #000000;
+        border: 2px solid #FFD700;
+        border-radius: 15px;
+        padding: 2rem;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .account-type-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(255, 215, 0, 0.2);
+        background-color: #1a1a1a;
+    }
+
+    .account-type-card .icon-container {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto 20px;
+        background: #FFD700;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+
+    .account-type-card:hover .icon-container {
+        transform: scale(1.1);
+        box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+    }
+
+    .account-type-card .icon-container i {
+        font-size: 3rem;
+        color: #000000;
+    }
+
+    .account-type-card h6 {
+        color: #FFD700;
+        font-size: 1.3rem;
+        margin: 15px 0;
+        font-weight: bold;
+    }
+
+    .account-type-card .small {
+        color: #FFFFFF;
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    #profileModal .modal-content {
+        background-color: #000000;
+        border: 2px solid #FFD700;
+        border-radius: 20px;
+    }
+
+    #profileModal .modal-header {
+        border-bottom: 1px solid #FFD700;
+        padding: 1.5rem;
+    }
+
+    #profileModal .modal-title {
+        color: #FFD700;
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-align: center;
+        width: 100%;
+    }
+
+    #profileModal .modal-body {
+        padding: 2rem;
+    }
+
+    #profileModal .btn-close {
+        color: #FFD700;
+        opacity: 1;
+        transition: all 0.3s ease;
+    }
+
+    #profileModal .btn-close:hover {
+        transform: rotate(90deg);
+    }
+
+    /* تحسين التفاعلات لجعل الخريطة أكثر جاذبية */
+    #map:hover {
+        transform: scale(1.02);
+        /* تكبير طفيف عند التمرير */
+        box-shadow: 0 6px 25px rgba(192, 19, 19, 0.856);
+        /* تحسين الظلال عند التمرير */
+        transition: all 0.3s ease-in-out;
+    }
+
+
+    /* تحديث حاوية الفلاتر مع التثبيت */
+    .location-filter {
+        background-color: #1a1a1a;
+        /* اللون الجديد */
+        padding: 0;
+        /* إزالة الحشوة */
+        border-radius: 10px;
+        /* تقليل التقويس */
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+        /* تخفيف الظلال */
+        margin: 0.3rem;
+        /* مسافة صغيرة للخارج */
+        position: sticky;
+        top: 100px;
+        /* تقليل المسافة من الأعلى */
+        z-index: 1000;
+        overflow: hidden;
+        backdrop-filter: blur(3px);
+        /* تقليل تأثير التمويه */
+        -webkit-backdrop-filter: blur(3px);
+        border-bottom: none;
+        /* إزالة الحدود */
+        transition: all 0.2s ease;
+    }
+
+    /* تحسين تنسيق الفلاتر */
+    .location-chips {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 0.5rem;
+        /* تقليل الفجوة بين العناصر */
+        overflow-x: 0auto;
+        padding: 1.0rem 0;
+        /* تقليل الحشوة الرأسية */
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        white-space: 1nowrap;
+        margin: 0auto;
+        max-width: 100%;
+    }
+
+    /* تحسين أزرار الفلتر */
+    .location-chip {
+        padding: 0.8rem 1.5rem;
+        border-radius: 25px;
+        background-color: #000000 !important;
+        border: 2px solid #FFD700 !important;
+        font-size: 1rem;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.8rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        flex-shrink: 0;
+        color: #FFFFFF !important;
+        box-shadow: 0 2px 5px rgba(255, 215, 0, 0.2);
+        min-width: 100px;
+        text-align: center;
+        margin: 5px;
+    }
+
+    .location-chip * {
+        background-color: transparent !important;
+        color: #FFFFFF !important;
+    }
+
+    .location-chip i {
+        color: #FFD700 !important;
+        font-size: 1.1rem;
+    }
+
+    /* تحسين الأيقونات */
+    .location-chip i {
+        font-size: 0.8rem;
+        /* تصغير حجم الأيقونة */
+        color: var(--primary-color);
+        transition: all 0.2s ease;
+    }
+
+    /* تحسين حالة التحويم والتنشيط */
+    .location-chip:hover,
+    .location-chip.active {
+        background-color: #1a1a1a;
+        /* اللون الجديد */
+        color: #312f2f;
+        transform: translateY(-1px);
+        /* تخفيف الارتفاع عند التحويم */
+        box-shadow: 0 2px 10px rgba(255, 215, 0, 0.2);
+    }
+
+    .location-chip:hover i,
+    .location-chip.active i {
+        color: #f5f0f0;
+        transform: scale(1.1);
+        /* تأثير تكبير بسيط */
+    }
+
+    /* تحسين شريط التمرير */
+    .location-chips::-webkit-scrollbar {
+        height: 0px;
+        /* تقليل ارتفاع شريط التمرير */
+    }
+
+    .location-chips::-webkit-scrollbar-track {
+        background-color: #1a1a1a;
+        /* اللون الجديد */
+        border-radius: 10px;
+    }
+
+    .location-chips::-webkit-scrollbar-thumb {
+        background-color: #1a1a1a;
+        /* اللون الجديد */
+        border-radius: 10px;
+        border: none;
+    }
+
+    .location-chips::-webkit-scrollbar-thumb:hover {
+        background-color: #1a1a1a;
+        /* اللون الجديد */
+    }
+
+    /* تحسين التجاوب مع شاشات الهواتف */
+    @media (max-width: 768px) {
+        .location-filter {
+            padding: 0;
+            /* إزالة الحشوة على الشاشات الصغيرة */
+            top: 10px;
+            /* تقليل المسافة من الأعلى */
+        }
+
+        .location-chip {
+            padding: 0.3rem 0.5rem;
+            /* تقليل الأزرار أكثر */
+            font-size: 0.8rem;
+            /* تصغير النص */
+        }
+
+        .location-chip i {
+            font-size: 0.7rem;
+            /* تصغير الأيقونات */
+        }
+    }
+
+
+
+
+    /* تحسين التناسق العام */
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 2.5rem;
+    }
+
+    body {
+        padding-top: 1%;
+        /* للتعويض عن الناف بار الثابت */
+    }
+
+    /* إزالة الفراغات والحشوات من الصفحة بالكامل */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    /* جعل الـ body يغطي كامل الشاشة بدون فراغات */
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden;
+        background-color: #1a1a1a;
+        /* اللون الجديد */
+    }
+
+    /* إزالة الفراغات من أي عنصر رئيسي */
+
+
+
+
+
+
+    /* تحسين التنسيق ليكون متناسقًا */
+    .navbar {
+        height: 50px;
+        /* تقليل ارتفاع الشريط */
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 1rem;
+    }
+
+    .tools .nav-link {
+        padding: 0.3rem 0.5rem;
+        /* تقليل الحشوات داخل الروابط */
+        font-size: 1rem;
+    }
+
+
+
+
+    .drivers-grid {
+        gap: 1rem;
+        /* قلل المسافة بين البطاقات */
+    }
+
+    .location-filter {
+        margin: 0.5rem 0;
+        /* تقليل المسافة الخارجية */
+        padding: 0.0rem 0rem;
+        /* تقليل الحشوة */
+    }
+
+    body {
+        font-size: 1rem;
+        /* تكبير النص الأساسي */
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        /* تأكد من تناسق الخط */
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-size: 1.5rem;
+        /* تكبير العناوين */
+        font-weight: bold;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 1rem;
+        /* تكبير الروابط */
+    }
+
+    .driver-name {
+        font-size: 1rem;
+        /* تكبير اسم السائق */
+    }
+
+    .driver-stats .stat-value {
+        font-size: 1rem;
+        /* تكبير القيم الإحصائية */
+    }
+
+    .driver-stats .stat-label {
+        font-size: 1rem;
+        /* تكبير النصوص التوضيحية */
+    }
+
+    .toast-container .custom-toast {
+        font-size: 1.2rem;
+        /* تكبير رسائل الإشعارات */
+    }
+
+    @media (max-width:5000px) {
+        .container {
+            padding: 0.5rem;
+        }
+
+
+        .location-chip {
+            font-size: 1rem;
+            padding: 0.8rem;
+        }
+    }
+
+
+    @media (min-width: 1024px) {
+        body {
+            font-size: 1.5rem;
+            /* حجم أكبر للخطوط على الشاشات الكبيرة */
+        }
+
+        .drivers-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .drivers-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+
+        .location-filter {
+            padding: 0rem;
+            /* حشوة أكبر قليلاً */
+        }
+    }
+
+    /* إزالة الحشوات والهوامش عن العناصر الأساسية */
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden;
+        background-color: #1a1a1a;
+        /* اللون الجديد */
+    }
+
+    /* ضبط الحاوية الرئيسية لتغطي العرض بالكامل */
+    .container {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* إزالة الهوامش من البطاقات أو أي عنصر إضافي */
+
+
+
+    /* تفاعل أفضل للهواتف */
+    @media (max-width: 68px) {
+        .container {
+            padding: 0.5rem;
+        }
+
+
+        .location-chip {
+            font-size: 1rem;
+            padding: 0.8rem;
+        }
+    }
+
+
+    /* للشاشات الكبيرة */
+    .drivers-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    @media (min-width: 768px) {
+        .drivers-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .drivers-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+    }
+
+
+
+
+    /* تحسين شريط التايتل */
+    .app-header {
+        background-color: #1a1a1a;
+        /* اللون الجديد */
+        height: 50px;
+        /* تقليل الارتفاع */
+        padding: 0 0rem;
+        /* إزالة الحشوة العلوية والسفلية */
+        display: flex;
+        justify-content: space-between;
+        /* توزيع العناصر */
+        align-items: center;
+        /* توسيط العناصر عموديًا */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+    }
+
+    /* اللوجو والاسم */
+    .app-logo {
+        display: flex;
+        align-items: center;
+        font-size: 1.2rem;
+        /* تصغير حجم النص */
+        font-weight: bold;
+        color: var(--primary-color);
+        text-decoration: none;
+        gap: 0.5rem;
+        /* مسافة بين الأيقونة والنص */
+    }
+
+    .app-logo i {
+        font-size: 1.5rem;
+        /* حجم أيقونة اللوجو */
+        color: var(--primary-color);
+    }
+
+    /* شريط الأدوات أو العناصر */
+    .navbar-nav {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        /* مسافة بين العناصر */
+        margin: 0;
+        list-style: none;
+        padding: 0;
+    }
+
+    .navbar-nav .nav-link {
+        color: #fff;
+        font-size: 1rem;
+        /* حجم النص */
+        padding: 0.3rem 0.5rem;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .navbar-nav .nav-link:hover {
+        color: var(--primary-color);
+    }
+
+    /* إخفاء أيقونة شريط الأدوات على الشاشة الكبيرة */
+    .navbar-toggler {
+        display: none;
+    }
+
+    /* تحسين التناسق على الشاشات الصغيرة */
+    @media (max-width: 768px) {
+        .app-header {
+            height: 45px;
+            /* تقليل إضافي للارتفاع */
+        }
+
+        .app-logo {
+            font-size: 1rem;
+        }
+
+        .app-logo i {
+            font-size: 1.2rem;
+        }
+
+        .navbar-toggler {
+            display: block;
+            /* إظهار زر القائمة فقط على الشاشات الصغيرة */
+        }
+
+        .navbar-nav {
+            display: none;
+            /* إخفاء شريط الأدوات واستبداله بالزر */
+        }
+    }
+
+
+
+    /* تحسينات التجاوب */
+    @media (max-width: 768px) {
+        .container {
+            padding: 0.5rem;
+        }
+
+        .location-chip {
+            font-size: 1rem;
+            padding: 0.8rem;
+        }
+    }
+
+
+    @media (min-width: 1000px) {
+        .location-filter {
+            padding: 1.8rem;
+        }
+
+        .location-chip {
+            padding: 1.4rem 3rem;
+            font-size: 1.7rem;
+        }
+
+        .location-chip i {
+            font-size: 2rem;
+        }
+    }
+
+    /* إضافة تأثير التثبيت عند التمرير */
+    .location-filter.sticky {
+        background-color: #1a1a1a;
+        /* اللون الجديد */
+        box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .drivers-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    @media (min-width: 768px) {
+        .drivers-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+    .location-chip:hover {
+        transform: scale(1.1);
+        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+    }
+
+    .location-chips {
+        display: flex;
+        overflow-x: auto;
+        gap: 1rem;
+        padding: 0.5rem;
+    }
+
+
+
+
+    .driver-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 40px rgba(250, 243, 243, 0.89);
+    }
+
+    body {
+        color: #FFFFFF;
+        /* تغيير لون النص إلى الأبيض */
+    }
+
+    .driver-image-container {
+        position: relative;
+        height: 240px;
+        overflow: hidden;
+    }
+
+    .driver-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: var(--transition);
+    }
+
+
+    .status-active {
+        color: var(--success-color);
+    }
+
+    .status-inactive {
+        color: var(--accent-color);
+    }
+
+    .driver-info {
+        padding: 1.8rem;
+    }
+
+    .driver-name {
+        font-size: 1.6rem;
+        margin-bottom: 0.8rem;
+        color: var(--secondary-color);
+        font-weight: 600;
+    }
+
+    .driver-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.2rem;
+        margin: 1.2rem 0;
+        text-align: center;
+        border-top: 1px solid #eee;
+        border-bottom: 1px solid #eee;
+        padding: 1.2rem 0;
+    }
+
+    .stat-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.4rem;
+    }
+
+    .stat-value {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: var(--primary-color);
+    }
+
+    .stat-label {
+        font-size: 0.9rem;
+        color: #666;
+    }
+
+    .driver-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        padding: 1.5rem;
+    }
+
+    .action-btn {
+        padding: 1rem;
+        border-radius: 12px;
+        border: none;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.7rem;
+        font-weight: 500;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+
+    .action-btn.primary {
+        background: var(--primary-color);
+        color: var(--secondary-color);
+    }
+
+    .action-btn.secondary {
+        background: var(--secondary-color);
+        color: var(--primary-color);
+    }
+
+    .action-btn:hover {
+        transform: translateY(-2px);
+        filter: brightness(1.1);
+    }
+
+
+
+    .loading-spinner {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.9);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 2000;
+        backdrop-filter: blur(5px);
+    }
+
+    .spinner {
+        width: 50px;
+        height: 50px;
+        border: 4px solid var(--primary-color);
+        border-top: 4px solid transparent;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    .toast-container {
+        position: fixed;
+        top: 30px;
+        right: 30px;
+        z-index: 1000;
+    }
+
+    .custom-toast {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        padding: 1rem;
+        margin-bottom: 1rem;
+        min-width: 300px;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+
+    .modal-content {
+        border-radius: 20px;
+        border: none;
+        box-shadow: var(--card-shadow);
+    }
+
+    .modal-header {
+        border-bottom: 1px solid #eee;
+        padding: 1.5rem;
+    }
+
+    .modal-body {
+        padding: 1rem;
+    }
+
+    .form-label {
+        font-weight: 500;
+        color: var(--secondary-color);
+    }
+
+    .form-control {
+        border-radius: 10px;
+        padding: 0.8rem 1rem;
+        border: 1px solid #dee2e6;
+        transition: var(--transition);
+    }
+
+    .form-control:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+    }
+
+    /* أنماط لأزرار الحذف والتعديل */
+    .driver-card-actions {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        display: flex;
+        gap: 10px;
+        z-index: 10;
+    }
+
+    .action-icon {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(5px);
+    }
+
+    .delete-btn {
+        background: rgba(255, 59, 48, 0.9);
+        color: white;
+    }
+
+    .edit-btn {
+        background: rgba(255, 215, 0, 0.9);
+        color: black;
+    }
+
+    .action-icon:hover {
+        transform: scale(1.1);
+    }
+
+    .delete-btn:hover {
+        background: rgb(255, 59, 48);
+    }
+
+    .edit-btn:hover {
+        background: rgb(255, 215, 0);
+    }
+
+    .search-wrapper {
+        position: relative;
+    }
+
+    .search-input-wrapper {
+        position: relative;
+    }
+
+    .search-input {
+        padding-right: 40px;
+        border-radius: 20px;
+        border: 2px solid #eee;
+        transition: all 0.3s ease;
+    }
+
+    .search-input:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.25);
+    }
+
+    .search-results {
+        max-height: 400px;
+        overflow-y: auto;
+        padding: 10px 0;
+    }
+
+    .search-result-item {
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        background: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .search-result-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .search-result-item .driver-info {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .search-result-item .driver-image {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid var(--primary-color);
+    }
+
+    .search-result-item .driver-details {
+        flex: 1;
+    }
+
+    .search-result-item .driver-name {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 5px;
+        color: var(--secondary-color);
+    }
+
+    .search-result-item .driver-meta {
+        font-size: 0.9rem;
+        color: #666;
+    }
+
+    .highlight {
+        background: rgba(255, 215, 0, 0.3);
+        padding: 0 3px;
+        border-radius: 3px;
+    }
+
+    /* تنسيق شريط التمرير */
+    .search-results::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .search-results::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+    }
+
+    .search-results::-webkit-scrollbar-thumb {
+        background: var(--primary-color);
+        border-radius: 10px;
+    }
+
+    .no-results {
+        text-align: center;
+        padding: 20px;
+        color: #666;
+    }
+
+    /* تحسينات للأزرار */
+    .btn-outline-primary {
+        border-color: var(--primary-color);
+        color: var(--secondary-color);
+    }
+
+    .btn-outline-primary:hover,
+    .btn-outline-primary:focus,
+    .btn-check:checked+.btn-outline-primary {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        color: var(--secondary-color);
+    }
+
+    /* تحسين تصميم نافذة المحادثة */
+    /* تصميم الرسائل */
+    .message {
+        display: flex;
+        /* استخدام التصميم المرن */
+        flex-direction: column;
+        /* ترتيب الرسائل عموديًا */
+        margin: 5px 0;
+        /* المسافة بين الرسائل */
+    }
+
+    /* فقاعات الرسائل */
+    .message-bubble {
+        max-width: 75%;
+        /* تحديد العرض الأقصى للفقاعة */
+        padding: 12px 15px;
+        /* مسافة داخلية */
+        border-radius: 20px;
+        /* تقويس الحواف */
+        font-size: 15px;
+        /* حجم النص */
+        word-wrap: break-word;
+        /* منع تداخل النص */
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        /* إضافة ظل خفيف */
+        position: relative;
+        /* تحديد الموضع */
+        transition: transform 0.2s ease-in-out;
+        /* تأثير التحويل */
+    }
+
+    .message-bubble:hover {
+        transform: scale(1.02);
+        /* تكبير الفقاعة عند التحويم */
+    }
+
+    /* الرسائل المرسلة */
+    .message-bubble.sent {
+        background: linear-gradient(135deg, #fffffe, #f8f8f7);
+        /* خلفية ذهبية متدرجة */
+        color: #333;
+        /* لون النص */
+        margin-left: auto;
+        /* توجيه الفقاعة لليمين */
+        text-align: right;
+        /* محاذاة النص لليمين */
+        border-bottom-right-radius: 5px;
+        /* تعديل الحواف السفلية */
+    }
+
+    /* الرسائل المستلمة */
+    .message-bubble.received {
+        background: #fffcfc;
+        /* خلفية رمادية غامقة */
+        color: #FFD700;
+        /* نص باللون الذهبي */
+        margin-right: auto;
+        /* توجيه الفقاعة لليسار */
+        text-align: left;
+        /* محاذاة النص لليسار */
+        border-bottom-left-radius: 5px;
+        /* تعديل الحواف السفلية */
+    }
+
+    /* تصميم وقت الرسائل */
+    .timestamp {
+        font-size: 11px;
+        /* حجم الخط للوقت */
+        margin-top: 3px;
+        /* مسافة فوق الوقت */
+        color: #aaa;
+        /* لون رمادي للوقت */
+        text-align: right;
+        /* محاذاة لليمين */
+    }
+
+    /* تحسين نافذة المحادثة */
+    .chat-window {
+        border-radius: 15px;
+        /* تقويس الحواف */
+        overflow: hidden;
+        /* إخفاء الزوائد */
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        /* ظل خفيف */
+        border: 2px solid #ecebe4;
+        /* إطار ذهبي */
+        background-color: #1e1e1e;
+        /* خلفية رمادية غامقة */
+    }
+
+    /* ترويسة نافذة المحادثة */
+    .chat-header {
+        background: linear-gradient(135deg, #FFD700, #B8860B);
+        /* خلفية متدرجة ذهبية */
+        color: #333;
+        /* لون النص */
+        font-size: 18px;
+        /* حجم الخط */
+        font-weight: bold;
+        /* جعل النص عريض */
+        padding: 1.2rem;
+        /* مسافة داخلية */
+        display: flex;
+        /* استخدام التصميم المرن */
+        align-items: center;
+        /* محاذاة عمودية للعنصر */
+        justify-content: space-between;
+        /* توزيع العناصر أفقياً */
+        border-bottom: 2px solid #FFD700;
+        /* خط ذهبي سفلي */
+    }
+
+    /* تصميم صورة السائق */
+    .chat-header img {
+        width: 50px;
+        /* عرض الصورة */
+        height: 50px;
+        /* ارتفاع الصورة */
+        border-radius: 50%;
+        /* جعل الصورة دائرية */
+        border: 2px solid #fff;
+        /* إطار أبيض للصورة */
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        /* ظل خفيف */
+    }
+
+    /* محتوى الرسائل */
+    .chat-body {
+        background: #2e2e2e;
+        /* خلفية رمادية داكنة */
+        height: 450px;
+        /* ارتفاع نافذة الرسائل */
+        overflow-y: auto;
+        /* إضافة تمرير عمودي */
+        padding: 1.5rem;
+        /* مسافة داخلية */
+        display: flex;
+        /* استخدام التصميم المرن */
+        flex-direction: column;
+        /* ترتيب الرسائل عموديًا */
+        gap: 0.5rem;
+        /* مسافة بين الرسائل */
+        color: white;
+        /* لون النص */
+    }
+
+    /* شريط إدخال النص */
+    .chat-footer {
+        background-color: #333;
+        /* خلفية رمادية غامقة */
+        padding: 10px;
+        /* مسافة داخلية */
+        border-top: 2px solid #b39e28;
+        /* خط علوي ذهبي */
+        display: flex;
+        /* استخدام التصميم المرن */
+        gap: 10px;
+        /* مسافة بين العناصر */
+        align-items: center;
+        /* توسيط العناصر عموديًا */
+    }
+
+    .chat-input {
+        flex: 1;
+        /* توسعة الحقل ليشغل المساحة */
+        border-radius: 30px;
+        /* تقويس الحواف */
+        padding: 10px;
+        /* مسافة داخلية */
+        border: 1px solid #FFD700;
+        /* إطار ذهبي */
+        background: #fff;
+        /* خلفية بيضاء */
+        color: #333;
+        /* لون النص */
+        font-size: 1rem;
+        /* حجم الخط */
+    }
+
+    .chat-input:focus {
+        box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+        /* تأثير مضيء عند التركيز */
+    }
+
+    /* زر الإرسال */
+    .send-btn {
+        border-radius: 50%;
+        /* شكل دائري */
+        background: linear-gradient(135deg, #FFD700, #B8860B);
+        /* خلفية متدرجة ذهبية */
+        color: #333;
+        /* لون النص */
+        width: 45px;
+        /* عرض الزر */
+        height: 45px;
+        /* ارتفاع الزر */
+        display: flex;
+        /* استخدام التصميم المرن */
+        align-items: center;
+        /* توسيط الأيقونة */
+        justify-content: center;
+        /* توسيط الأيقونة */
+        font-size: 1.2rem;
+        /* حجم الأيقونة */
+        transition: transform 0.2s ease-in-out;
+        /* تأثير التحريك */
+    }
+
+    .send-btn:hover {
+        transform: scale(1.1);
+        /* تكبير الزر عند التحويم */
+    }
+
+    /* تأثير التوجيه للرسائل */
+    .message-bubble.sent::before {
+        content: '';
+        /* إضافة سهم */
+        position: absolute;
+        bottom: 0;
+        right: -10px;
+        border: 10px solid transparent;
+        border-top-color: #B8860B;
+        /* لون السهم مطابق للخلفية */
+        border-bottom: 0;
+    }
+
+    .message-bubble.received::before {
+        content: '';
+        /* إضافة سهم */
+        position: absolute;
+        bottom: 0;
+        left: -10px;
+        border: 10px solid transparent;
+        border-top-color: #3a3a3a;
+        /* لون السهم مطابق للخلفية */
+        border-bottom: 0;
+    }
+
+    .stat-item[onclick] {
+        transition: transform 0.2s ease;
+    }
+
+    .stat-item[onclick]:hover {
+        transform: scale(1.1);
+    }
+
+    .stat-item[onclick] .stat-value {
+        position: relative;
+    }
+
+    .stat-item[onclick]:hover .fa-star {
+        animation: starPulse 0.5s ease infinite;
+    }
+
+    @keyframes starPulse {
+        0% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.2);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    .account-type-card {
+        border: 2px solid #eee;
+        border-radius: 15px;
+        padding: 20px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .account-type-card:hover {
+        border-color: var(--primary-color);
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .icon-container {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto;
+        background: #f8f9fa;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .registration-section {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .section-title {
+        color: var(--primary-color);
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--primary-color);
+    }
+
+    .driver-photo-upload {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        border: 2px dashed #ddd;
+        margin: 0 auto;
+        cursor: pointer;
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f8f9fa;
+    }
+
+    .driver-photo-upload img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: none;
+    }
+
+    .upload-placeholder {
+        text-align: center;
+        color: #666;
+    }
+
+    .upload-placeholder i {
+        font-size: 2rem;
+        margin-bottom: 10px;
+        color: var(--primary-color);
+    }
+
+    .document-upload {
+        border: 2px dashed #ddd;
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+        cursor: pointer;
+        background: white;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    .document-upload img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: none;
+    }
+
+
+
+    /* إضافة المزيد من التنسيقات للتحسينات البصرية */
+    .modal-content {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .modal-header {
+        border-bottom: 2px solid #f8f9fa;
+        padding: 1.5rem;
+    }
+
+    .form-control,
+    .form-select {
+        padding: 0.75rem 1rem;
+        border-radius: 8px;
+        border: 2px solid #eee;
+        transition: all 0.3s ease;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.25);
+    }
+
+    .btn-primary {
+        background-color: var(--primary-color);
+        border: none;
+        padding: 0.75rem 2rem;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+    }
+
+    .document-upload:hover {
+        border-color: var(--primary-color);
+    }
+
+    .upload-placeholder span {
+        display: block;
+        margin-top: 5px;
+        font-size: 0.9rem;
+    }
+
+    /* تنسيق أزرار شريط الأدوات */
+    .tools .nav-link {
+        color: var(--primary-color);
+        font-size: 1.2rem;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+    }
+
+    .tools .nav-link:hover {
+        background: rgba(255, 215, 0, 0.1);
+        transform: translateY(-2px);
+    }
+
+    /* تنسيق خاص لزر الحساب */
+
+
+    .registration-details {
+        margin-bottom: 30px;
+    }
+
+    .registration-details .lead {
+        color: var(--primary-color);
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin-bottom: 15px;
+    }
+
+    .qr-code-section {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: var(--border-radius);
+        margin: 20px 0;
+    }
+
+    .qr-code-image {
+        width: 200px;
+        height: 200px;
+        margin: 15px auto;
+        padding: 10px;
+        background: white;
+        border: 2px solid var(--primary-color);
+        border-radius: var(--border-radius);
+    }
+
+    .download-qr-btn {
+        background: var(--primary-color);
+        color: var(--secondary-color);
+        border: none;
+        padding: 10px 20px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .download-qr-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+    }
+
+    .note-section {
+        margin-top: 20px;
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+    }
+
+    @keyframes scaleIn {
+        from {
+            transform: scale(0);
+            opacity: 0;
+        }
+
+        to {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    .success-registration-popup {
+        max-width: 500px;
+        padding: 20px;
+    }
+
+    /* Navigation Styles */
+    .side-nav {
+        position: fixed;
+        top: 0;
+        right: -280px;
+        /* يبدأ مخفياً */
+        width: 280px;
+        height: 100%;
+        background: #fff;
+        z-index: 1000;
+        transition: 0.3s;
+        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+        direction: rtl;
+    }
+
+    .side-nav.open {
+        transform: translateX(0);
+    }
+
+    .side-nav-header {
+        padding: 20px;
+        background: var(--secondary-color);
+        color: var(--primary-color);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .side-nav-title {
+        color: var(--primary-color);
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    .side-nav-close {
+        background: none;
+        border: none;
+        color: var(--primary-color);
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+    }
+
+    .side-nav-close:hover {
+        background: rgba(255, 215, 0, 0.1);
+    }
+
+    .side-nav-items {
+        padding: 1rem;
+    }
+
+    .side-nav-item {
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+        color: var(--primary-color);
+        text-decoration: none;
+        border-radius: 10px;
+        margin-bottom: 0.5rem;
+        transition: all 0.3s ease;
+    }
+
+    .side-nav-item:hover {
+        background: var(--primary-color);
+        color: var(--secondary-color);
+    }
+
+    .side-nav-item i {
+        margin-left: 1rem;
+        font-size: 1.2rem;
+    }
+
+    .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 65px;
+        background: var(--secondary-color);
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        z-index: 1040;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .bottom-nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: var(--primary-color);
+        text-decoration: none;
+        padding: 0.5rem;
+        transition: all 0.3s ease;
+    }
+
+    .bottom-nav-item i {
+        font-size: 1.3rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .bottom-nav-item span {
+        font-size: 0.8rem;
+    }
+
+    .bottom-nav-item:hover {
+        color: #fff;
+        transform: translateY(-2px);
+    }
+
+    .nav-toggle {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        z-index: 1060;
+        background: var(--primary-color);
+        color: var(--secondary-color);
+        width: 45px;
+        height: 45px;
+        border: none;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+
+    .nav-toggle:hover {
+        transform: scale(1.1);
+        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+    }
+
+    .nav-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1045;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .nav-backdrop.show {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* تعديلات التصميم المتجاوب */
+    @media (max-width: 768px) {
+        .side-nav {
+            width: 100%;
+        }
+
+        .bottom-nav-item span {
+            font-size: 0.7rem;
+        }
+    }
+
+    /* تعديل الهوامش للمحتوى الرئيسي */
+    .main-content {
+        padding-bottom: 70px;
+        /* لتجنب تداخل المحتوى مع شريط التنقل السفلي */
+    }
+
+    /* إضافة تأثيرات حركية */
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+        }
+
+        to {
+            transform: translateX(0);
+        }
+    }
+
+    .side-nav.open {
+        animation: slideIn 0.3s ease forwards;
+    }
+
+    /* شريط الأدوات الجانبي */
+    /* شريط الأدوات الجانبي */
+    :root {
+        --side-nav-height-top: -0%;
+        /* المسافة من الأعلى */
+        --side-nav-height-bottom: 0%;
+        /* المسافة من الأسفل */
+        --side-nav-width: 200px;
+        /* عرض الشريط الجانبي */
+        --side-nav-border-radius: 40px;
+        /* تقويس الحواف */
+        --side-nav-bg-color: var(--secondary-color);
+        /* لون خلفية الشريط */
+        --side-nav-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+        /* ظل الشريط */
+        --backdrop-bg-color: rgba(252, 252, 252, 0);
+        /* لون خلفية التمويه */
+    }
+
+    /* الشريط الجانبي */
+    .side-nav {
+        position: fixed;
+        top: var(--side-nav-height-top);
+        /* المسافة من الأعلى */
+        bottom: var(--side-nav-height-bottom);
+        /* المسافة من الأسفل */
+        right: 0;
+        /* ظهور الشريط على اليمين */
+        height: calc(100% - var(--side-nav-height-top) - var(--side-nav-height-bottom));
+        /* ارتفاع ديناميكي */
+        width: var(--side-nav-width);
+        /* عرض الشريط */
+        background: var(--side-nav-bg-color);
+        /* لون الخلفية */
+        transform: translateX(100%);
+        /* إخفاء الشريط افتراضيًا */
+        transition: transform 0.3s ease-in-out;
+        /* تأثير عند الفتح والإغلاق */
+        z-index: 9999;
+        /* ضمان الظهور فوق جميع العناصر */
+        box-shadow: var(--side-nav-shadow);
+        /* الظل */
+        border-radius: var(--side-nav-border-radius) 0 0 var(--side-nav-border-radius);
+        /* تقويس الحواف اليمنى فقط */
+    }
+
+    /* عند الفتح */
+    .side-nav.open {
+        transform: translateX(0);
+        /* عرض الشريط */
+    }
+
+    /* الخلفية الشفافة */
+    .nav-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--backdrop-bg-color);
+        /* خلفية سوداء شفافة */
+        z-index: 9998;
+        /* أقل قليلاً من الشريط الجانبي */
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+
+    /* عند تفعيل الخلفية */
+    .nav-backdrop.open {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* عند الفتح */
+    .nav-backdrop.show {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* الفلاتر */
+    .location-filter {
+        position: relative;
+        z-index: 999;
+        /* أقل من الخلفية والشريط الجانبي */
+    }
+
+    .nav-toggle {
+        position: absolute;
+        /* لجعل الموضع النسبي للشريط */
+        top: 10px;
+        /* المسافة من أعلى الشريط */
+        right: 10px;
+        /* المسافة من الجانب الأيمن */
+        background-color: var(--primary-color);
+        /* لون الخلفية */
+        color: var(--secondary-color);
+        /* لون النص */
+        width: 25px;
+        /* عرض الزر */
+        height: 25px;
+        /* ارتفاع الزر */
+        border: none;
+        /* إزالة الحدود */
+        border-radius: 50%;
+        /* جعل الزر دائريًا */
+        display: flex;
+        /* لتوسيط الأيقونة */
+        align-items: center;
+        /* لتوسيط الأيقونة عموديًا */
+        justify-content: center;
+        /* لتوسيط الأيقونة أفقيًا */
+        box-shadow: 0 2px 10px rgb(243, 241, 241);
+        /* إضافة ظل */
+        cursor: pointer;
+        /* لتغيير المؤشر عند التمرير */
+        transition: transform 0.3s ease;
+        /* تأثير الانتقال */
+    }
+
+    .nav-toggle:hover {
+        transform: scale(1);
+        /* تكبير الزر قليلاً عند التمرير */
+        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        /* تحسين الظل */
+    }
+
+    /* أنماط زر إضافة السائق */
+    .add-driver-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        /* مسافة بين الأيقونة والنص */
+        padding: 0.5rem 1rem;
+        /* حشوة داخلية */
+        background-color: var(--primary-color);
+        /* لون الخلفية الأساسي */
+        color: #fff;
+        /* لون النص */
+        border: none;
+        /* إزالة الإطار */
+        border-radius: 50px;
+        /* تقويس الحواف */
+        font-size: 1rem;
+        /* حجم النص */
+        cursor: pointer;
+        /* مؤشر التفاعل */
+        transition: all 0.3s ease-in-out;
+        /* تأثير عند التحويم */
+        text-align: left;
+        width: 100%;
+        /* ليظهر بعرض الزر الأصلي */
+    }
+
+    .add-driver-btn:hover {
+
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        /* إضافة ظل */
+    }
+
+    .add-driver-btn i {
+        font-size: 1.2rem;
+        /* حجم الأيقونة */
+        transition: transform 0.3s ease;
+        /* تأثير تكبير الأيقونة */
+    }
+
+    .add-driver-btn:hover i {
+        transform: scale(1.1);
+        /* تكبير الأيقونة عند التحويم */
+    }
+
+    .driver-status {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(4px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .driver-card {
+        margin: 0;
+        /* أزل الفراغات الخارجية */
+        padding: 0rem;
+        /* حشوة داخلية بسيطة */
+        gap: 0.0rem;
+        /* فراغ بسيط بين العناصر داخل البطاقة */
+    }
+
+    .driver-card {
+        margin-bottom: 1rem;
+    }
+
+    .driver-card {
+        margin: 0;
+        padding: 0.0rem;
+        /* حشوة بسيطة داخلية للبطاقة */
+        box-sizing: border-box;
+    }
+
+    .driver-card {
+        margin-bottom: 1rem;
+    }
+
+    .driver-card {
+        margin-bottom: 1rem;
+    }
+
+    .driver-card {
+        background-color: #000000;
+        /* اللون الجديد */
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: var(--card-shadow);
+        transition: var(--transition);
+        position: relative;
+        border: 1px solid rgb(228, 212, 212);
+    }
+
+    /* تنسيق النوافذ المنبثقة */
+    .dark-popup {
+        background-color: #1a1a1a !important;
+        color: #FFFFFF !important;
+        border: 2px solid #FFD700 !important;
+    }
+
+    .text-white {
+        color: #FFFFFF !important;
+    }
+
+    .swal-button-custom {
+        background-color: #FFD700 !important;
+        color: #000000 !important;
+        border: none !important;
+        font-weight: bold !important;
+    }
+
+    .swal-button-custom:hover {
+        background-color: #FFC800 !important;
+        transform: translateY(-2px);
+    }
+
+    .swal-button-cancel-custom {
+        background-color: #333333 !important;
+        color: #FFFFFF !important;
+        border: 1px solid #FFD700 !important;
+    }
+
+    .swal-button-cancel-custom:hover {
+        background-color: #444444 !important;
+        transform: translateY(-2px);
+    }
+
+    /* تنسيق Popup الخريطة */
+    .custom-popup {
+        background-color: #000000 !important;
+        border: 2px solid #FFD700 !important;
+        border-radius: 10px !important;
+        color: #FFFFFF !important;
+    }
+
+    .custom-popup .leaflet-popup-content-wrapper {
+        background-color: #000000 !important;
+        color: #FFFFFF !important;
+        border-radius: 10px !important;
+    }
+
+    .custom-popup .leaflet-popup-content {
+        color: #FFFFFF !important;
+        margin: 0 !important;
+        padding: 10px !important;
+    }
+
+    .custom-popup .leaflet-popup-tip {
+        background-color: #000000 !important;
+        border: 2px solid #FFD700 !important;
+    }
+
+    .user-photo-upload {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        border: 2px dashed #FFD700;
+        margin: 0 auto;
+        cursor: pointer;
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #1a1a1a;
+    }
+
+    .user-photo-upload img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: none;
+    }
+
+    .user-photo-upload .upload-placeholder {
+        text-align: center;
+        color: #FFD700;
+    }
+
+    .user-photo-upload .upload-placeholder i {
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+
+    .registration-section {
+        background: #1a1a1a;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        border: 1px solid #FFD700;
+    }
+
+    .section-title {
+        color: #FFD700;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #FFD700;
+    }
+
+    .form-control,
+    .form-select {
+        background-color: #333;
+        border: 1px solid #FFD700;
+        color: #fff;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+        background-color: #444;
+        border-color: #FFD700;
+        box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.25);
+        color: #fff;
+    }
+
+    .form-check-label {
+        color: #fff;
+    }
+
+    .form-check-input {
+        border-color: #FFD700;
+    }
+
+    .form-check-input:checked {
+        background-color: #FFD700;
+        border-color: #FFD700;
+    }
+
+    .btn-primary {
+        background-color: #FFD700;
+        border-color: #FFD700;
+        color: #000;
+    }
+
+    .btn-primary:hover {
+        background-color: #ccac00;
+        border-color: #ccac00;
+        color: #000;
+    }
+
+    .modal-content {
+        background-color: #1a1a1a;
+        border: 2px solid #FFD700;
+        border-radius: 15px;
+    }
+
+    .modal-header {
+        border-bottom: 1px solid #FFD700;
+        padding: 1.5rem;
+    }
+
+    .modal-title {
+        color: #FFD700;
+        font-weight: bold;
+    }
+
+    .btn-close {
+        color: #FFD700;
+    }
+
+    .registration-section {
+        background-color: #242424;
+        border: 1px solid #FFD700;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .section-title {
+        color: #FFD700;
+        border-bottom: 2px solid #FFD700;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+
+    .form-label {
+        color: #FFFFFF;
+    }
+
+    .form-control,
+    .form-select {
+        background-color: #333;
+        border: 1px solid #FFD700;
+        color: #FFFFFF;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+        background-color: #444;
+        border-color: #FFD700;
+        box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.25);
+        color: #FFFFFF;
+    }
+
+    .form-check-label {
+        color: #FFFFFF;
+    }
+
+    .form-check-input {
+        border-color: #FFD700;
+    }
+
+    .form-check-input:checked {
+        background-color: #FFD700;
+        border-color: #FFD700;
+    }
+
+    .btn-primary {
+        background-color: #FFD700;
+        border-color: #FFD700;
+        color: #000000;
+        font-weight: bold;
+    }
+
+    .btn-primary:hover {
+        background-color: #ccac00;
+        border-color: #ccac00;
+        color: #000000;
+        transform: translateY(-2px);
+    }
+
+    /* Account Type Cards */
+    .account-type-card {
+        background-color: #242424;
+        border: 2px solid #FFD700;
+        border-radius: 15px;
+        padding: 20px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .account-type-card:hover {
+        transform: translateY(-5px);
+        background-color: #333;
+        box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+    }
+
+    .account-type-card h6 {
+        color: #FFD700;
+        margin: 15px 0;
+    }
+
+    .account-type-card p {
+        color: #FFFFFF;
+    }
+
+    .icon-container {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto;
+        background: #FFD700;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .icon-container i {
+        color: #000000;
+    }
+
+    /* Notification Styles */
+    .notification-toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #000000;
+        border: 2px solid #FFD700;
+        border-radius: 10px;
+        padding: 15px;
+        min-width: 300px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        z-index: 9999;
+        color: #FFFFFF;
+    }
+
+    .notification-content {
+        margin-right: 20px;
+    }
+
+    .notification-title {
+        font-weight: bold;
+        color: #FFD700;
+        margin-bottom: 5px;
+    }
+
+    .notification-body {
+        font-size: 0.9rem;
+    }
+
+    .notification-close {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background: none;
+        border: none;
+        color: #FFD700;
+        font-size: 1.2rem;
+        cursor: pointer;
+        padding: 0 5px;
+    }
+
+    .notification-close:hover {
+        color: #FFF;
+    }
+
+    @keyframes fadeInRight {
+        from {
+            opacity: 0;
+            transform: translateX(100%);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes fadeOutRight {
+        from {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        to {
+            opacity: 0;
+            transform: translateX(100%);
+        }
+    }
+
+    .animate__animated {
+        animation-duration: 0.5s;
+        animation-fill-mode: both;
+    }
+
+    .animate__fadeInRight {
+        animation-name: fadeInRight;
+    }
+
+    .animate__fadeOutRight {
+        animation-name: fadeOutRight;
+    }
+
+    .required::after {
+        content: ' *';
+        color: red;
+    }
+
+    #locationPickerMap {
+        border-radius: 8px;
+        border: 2px solid #ddd;
+    }
+
+    #notification-test {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    #notification-status {
+        margin-top: 15px;
+        padding: 10px;
+        background-color: #f8f9fa;
+        border-radius: 4px;
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+    .status-item {
+        margin: 8px 0;
+        padding: 8px;
+        border-radius: 4px;
+        background-color: #fff;
+        border-right: 3px solid #007bff;
+    }
+
+    .status-item strong {
+        color: #007bff;
+    }
+
+    .status-detail {
+        display: block;
+        margin-top: 4px;
+        font-family: monospace;
+        font-size: 12px;
+        word-break: break-all;
+        background-color: #f8f9fa;
+        padding: 4px;
+        border-radius: 2px;
+    }
+
+    .test-button {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+    }
+
+    .test-button:hover {
+        background-color: #0056b3;
+    }
+
+    .test-button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
+
+    /* أنماط الإشعارات المحسنة */
+    .notification-container {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-width: 400px;
+        width: 100%;
+    }
+
+    .notification {
+        background: #FFFFFF;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        animation: slideIn 0.5s ease forwards;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .notification.success {
+        border-right: 5px solid #2ECC40;
+    }
+
+    .notification.error {
+        border-right: 5px solid #FF4136;
+    }
+
+    .notification.warning {
+        border-right: 5px solid #FFB236;
+    }
+
+    .notification.info {
+        border-right: 5px solid #0074D9;
+    }
+
+    .notification-icon {
+        font-size: 24px;
+        min-width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+    }
+
+    .notification.success .notification-icon {
+        color: #2ECC40;
+        background: rgba(46, 204, 64, 0.1);
+    }
+
+    .notification.error .notification-icon {
+        color: #FF4136;
+        background: rgba(255, 65, 54, 0.1);
+    }
+
+    .notification.warning .notification-icon {
+        color: #FFB236;
+        background: rgba(255, 178, 54, 0.1);
+    }
+
+    .notification.info .notification-icon {
+        color: #0074D9;
+        background: rgba(0, 116, 217, 0.1);
+    }
+
+    .notification-content {
+        flex: 1;
+    }
+
+    .notification-title {
+        font-size: 18px;
+        font-weight: bold;
+        color: #000000;
+        margin-bottom: 5px;
+    }
+
+    .notification-message {
+        color: #666666;
+        font-size: 14px;
+    }
+
+    .notification-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: none;
+        border: none;
+        color: #999999;
+        cursor: pointer;
+        font-size: 18px;
+        padding: 5px;
+        transition: color 0.3s ease;
+    }
+
+    .notification-close:hover {
+        color: #000000;
+    }
+
+    .notification-progress {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 3px;
+        background: #E0E0E0;
+        width: 100%;
+    }
+
+    .notification-progress::before {
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background: currentColor;
+        animation: progress 3s linear forwards;
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideOut {
+        from {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        to {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+    }
+
+    @keyframes progress {
+        from {
+            width: 100%;
+        }
+
+        to {
+            width: 0%;
+        }
+    }
+
+    /* تصميم نافذة طلب الإذن */
+    .permission-dialog {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #FFFFFF;
+        border-radius: 20px;
+        padding: 30px;
+        max-width: 500px;
+        width: 90%;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        z-index: 9999;
+        text-align: center;
+    }
+
+    .permission-dialog-icon {
+        font-size: 48px;
+        color: #FFD700;
+        margin-bottom: 20px;
+    }
+
+    .permission-dialog-title {
+        font-size: 24px;
+        color: #000000;
+        margin-bottom: 15px;
+        font-weight: bold;
+    }
+
+    .permission-dialog-message {
+        color: #666666;
+        margin-bottom: 25px;
+        line-height: 1.6;
+    }
+
+    .permission-dialog-buttons {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+    }
+
+    .permission-button {
+        padding: 12px 30px;
+        border-radius: 10px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: none;
+    }
+
+    .permission-button.allow {
+        background: #FFD700;
+        color: #000000;
+    }
+
+    .permission-button.deny {
+        background: #F5F5F5;
+        color: #666666;
+    }
+
+    .permission-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .side-nav {
+        position: fixed;
+        top: var(--side-nav-height-top);
+        bottom: var(--side-nav-height-bottom);
+        right: 0;
+        height: calc(100% - var(--side-nav-height-top) - var(--side-nav-height-bottom));
+        width: var(--side-nav-width);
+        background: rgba(51, 51, 51, 0.95);
+        /* خلفية رمادية شبه شفافة */
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+        z-index: 9999;
+        box-shadow: var(--side-nav-shadow);
+        border-radius: var(--side-nav-border-radius) 0 0 var(--side-nav-border-radius);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+
+    .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 65px;
+        background: #000000;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        z-index: 1040;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+        border-top: 1px solid #333333;
+    }
+
+    /* Card text colors */
+    .driver-card {
+        color: #FFFFFF;
+    }
+
+    .driver-name,
+    .stat-value,
+    .stat-label {
+        color: #FFFFFF !important;
+    }
+
+    /* Status badge styling */
+    .driver-status {
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-weight: bold;
+    }
+
+    .status-active {
+        background: rgba(46, 204, 64, 0.2);
+        color: #2ECC40 !important;
+        border: 1px solid #2ECC40;
+    }
+
+    .status-inactive {
+        background: rgba(255, 65, 54, 0.2);
+        color: #FF4136 !important;
+        border: 1px solid #FF4136;
+    }
+
+    /* Chat modal styling */
+    .chat-window {
+        background: #1a1a1a;
+        border: 2px solid #FFD700;
+    }
+
+    .chat-header {
+        background: linear-gradient(135deg, #FFD700, #B8860B);
+        color: #000000;
+    }
+
+    .chat-body {
+        background: #242424;
+    }
+
+    .message-bubble {
+        max-width: 75%;
+        padding: 12px;
+        border-radius: 15px;
+    }
+
+    .message-bubble.sent {
+        background: #FFD700;
+        color: #000000;
+        margin-left: auto;
+    }
+
+    .message-bubble.received {
+        background: #333333;
+        color: #FFFFFF;
+        margin-right: auto;
+    }
+
+    .chat-footer {
+        background: #1a1a1a;
+        border-top: 2px solid #FFD700;
+    }
+
+    .chat-input {
+        background: #333333;
+        border: 1px solid #FFD700;
+        color: #FFFFFF;
+    }
+
+    .send-btn {
+        background: #FFD700;
+        color: #000000;
+    }
+
+    .timestamp {
+        color: #888888;
+        font-size: 0.8em;
+    }
+
+    /* Card content colors */
+    .driver-card .text-muted {
+        color: #FFFFFF !important;
+    }
+
+    .driver-card .text-muted i {
+        color: #FFFFFF !important;
+    }
+
+    .driver-card .driver-info p {
+        color: #FFFFFF !important;
+    }
+
+    /* Keep original rating/trips/km colors */
+    .stat-item .stat-value i.fa-star {
+        color: #FFD700 !important;
+    }
+
+    .stat-item .stat-value i.fa-route,
+    .stat-item:last-child .stat-value {
+        color: #FFD700 !important;
+    }
+
+    .stat-item .stat-label {
+        color: #FFFFFF !important;
+    }
+
+    /* Vehicle info text */
+    .driver-card .mb-2 i.fa-car,
+    .driver-card .mb-0 i.fa-map-marker-alt {
+        color: #FFFFFF !important;
+    }
+
+    .driver-card .mb-2,
+    .driver-card .mb-0 {
+        color: #FFFFFF !important;
+    }
+
+    /* تحسين أزرار الإجراءات */
+    .driver-card-actions {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        display: flex;
+        gap: 8px;
+        z-index: 10;
+    }
+
+    .action-icon {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(5px);
+        color: white;
+    }
+
+    .delete-btn {
+        background: rgba(255, 59, 48, 0.9);
+    }
+
+    .edit-btn {
+        background: rgba(255, 215, 0, 0.9);
+    }
+
+    .track-btn {
+        background: rgba(52, 199, 89, 0.9);
+    }
+
+    .stop-track-btn {
+        background: rgba(142, 142, 147, 0.9);
+    }
+
+    .action-icon:hover {
+        transform: scale(1.1);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* مؤشر التتبع */
+    .tracking-indicator {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: rgba(0, 0, 0, 0.7);
+        color: #FFD700;
+        padding: 5px 8px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        display: none;
+    }
+
+    .tracking-indicator.active {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0.5;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    /* تحسين حالة التتبع النشط */
+    .driver-card[data-tracking="true"] .tracking-indicator {
+        display: flex;
+    }
+
+    .driver-card[data-tracking="true"] {
+        border: 2px solid #34C759;
+    }
+
+
+
+
+    /* أنماط زر تحديد الموقع */
+    .user-location-btn {
+        width: 40px;
+        height: 40px;
+        background: #FFD700;
+        border: none;
+        border-radius: 50%;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        margin-bottom: 10px;
+    }
+
+    .user-location-btn:hover {
+        transform: scale(1.1);
+        background: #ffd900;
+    }
+
+    .user-location-btn i {
+        color: #000;
+        font-size: 1.2rem;
+    }
+
+    /* أنماط علامة موقع المستخدم */
+    .user-marker-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    .user-marker-container i {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #007bff;
+        font-size: 2rem;
+        z-index: 2;
+    }
+
+
+
+
+    /* تكملة أنماط علامة موقع المستخدم */
+    .pulse {
+        width: 40px;
+        height: 40px;
+        background: rgba(0, 123, 255, 0.2);
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+
+        100% {
+            transform: translate(-50%, -50%) scale(2);
+            opacity: 0;
+        }
+    }
+
+    /* أنماط علامات المسار */
+    .marker-icon {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    .marker-icon i {
+        font-size: 2rem;
+        filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.3));
+    }
+
+    .start-marker::after,
+    .end-marker::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 10px;
+        height: 10px;
+        background: inherit;
+        border-radius: 50%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    /* أنماط المسار المتحرك */
+    .animated-route {
+        stroke-dasharray: 8, 12;
+        animation: dash 1.5s linear infinite;
+    }
+
+    @keyframes dash {
+        to {
+            stroke-dashoffset: -20;
+        }
+    }
+
+    /* تحسين النوافذ المنبثقة */
+    .route-popup {
+        padding: 10px;
+        text-align: center;
+        min-width: 200px;
+    }
+
+    .route-popup h6 {
+        color: #FFD700;
+        margin: 0 0 10px 0;
+        font-size: 1.1rem;
+        font-weight: bold;
+    }
+
+    .route-popup p {
+        margin: 5px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .route-popup i {
+        color: #FFD700;
+    }
+
+    /* معلومات المسار */
+    .route-info-container {
+        background: rgba(0, 0, 0, 0.8);
+        border-radius: 10px;
+        margin: 10px;
+        padding: 15px;
+        color: #fff;
+        max-width: 300px;
+        border: 2px solid #FFD700;
+    }
+
+    .route-info {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .route-info h6 {
+        color: #FFD700;
+        margin: 0 0 10px 0;
+        padding-bottom: 8px;
+        border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+        text-align: center;
+    }
+
+    .info-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .info-item i {
+        color: #FFD700;
+        width: 20px;
+        text-align: center;
+    }
+
+    /* تحسين أزرار التحكم في الخريطة */
+    .leaflet-control-layers {
+        border: 2px solid #FFD700 !important;
+        border-radius: 10px !important;
+        background: rgba(0, 0, 0, 0.8) !important;
+        padding: 10px !important;
+    }
+
+    .leaflet-control-layers-base label {
+        color: #fff !important;
+        margin: 5px 0 !important;
+    }
+
+    .leaflet-control-layers-base input[type="radio"] {
+        accent-color: #FFD700;
+    }
+
+    .leaflet-control-zoom a {
+        background: rgba(0, 0, 0, 0.8) !important;
+        color: #FFD700 !important;
+        border: 2px solid #FFD700 !important;
+    }
+
+    .leaflet-control-zoom a:hover {
+        background: rgba(255, 215, 0, 0.2) !important;
+    }
+
+    /* تحسين علامة الموقع الحالي */
+    .location-popup {
+        text-align: center;
+        padding: 10px;
+    }
+
+    .location-popup h6 {
+        color: #FFD700;
+        margin: 0 0 8px 0;
+    }
+
+    .location-popup p {
+        margin: 0;
+        font-family: monospace;
+        font-size: 0.9rem;
+    }
+
+    .location-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+    }
+
+    .location-header i {
+        color: #FFD700;
+        font-size: 1.2rem;
+    }
+
+    .user-marker-container i {
+        font-size: 24px;
+        color: #FFD700;
+        z-index: 2;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    }
+
+
+    .leaflet-popup-tip {
+        background: rgba(0, 0, 0, 0.8) !important;
+        border: 1px solid #FFD700;
+    }
+
+
+
+    #map {
+        height: 50vh;
+        width: 100%;
+        border: 2px solid #FFD700;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        margin: 20px 0;
+        position: relative;
+        background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+    }
+
+    #map:hover {
+        box-shadow: 0 6px 20px rgba(255, 215, 0, 0.2);
+    }
+
+    /* تحسينات التجاوب */
+    @media (max-width: 768px) {
+        .route-info-container {
+            max-width: calc(100% - 20px);
+        }
+
+        .user-location-btn {
+            width: 35px;
+            height: 35px;
+        }
+
+        .route-popup {
+            min-width: 150px;
+        }
+    }
+
+    /* أنماط علامة موقع المستخدم */
+    .user-location-marker {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    .user-avatar {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 40px;
+        height: 40px;
+        background: #FFD700;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        animation: bounceIn 0.5s ease;
+    }
+
+    .user-avatar i {
+        color: #000000;
+        font-size: 20px;
+    }
+
+    .accuracy-circle {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        background: rgba(255, 215, 0, 0.1);
+        border: 2px solid rgba(255, 215, 0, 0.3);
+        opacity: 0.5;
+        animation: scaleIn 1s ease;
+    }
+
+    .pulse-circle {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 215, 0, 0.2);
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+    }
+
+    /* أنماط النافذة المنبثقة */
+    .user-location-popup {
+        min-width: 280px;
+        padding: 15px;
+        background: rgba(0, 0, 0, 0.8);
+        border-radius: 10px;
+        color: #FFFFFF;
+    }
+
+    .location-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+    }
+
+    .location-header i {
+        color: #FFD700;
+        font-size: 1.2rem;
+    }
+
+    .location-header h6 {
+        margin: 0;
+        color: #FFD700;
+        font-size: 1.1rem;
+        font-weight: bold;
+    }
+
+    .location-info {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .info-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .info-item i {
+        color: #FFD700;
+        font-size: 1rem;
+        margin-top: 4px;
+    }
+
+    .info-item span {
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+
+    /* تأثيرات حركية */
+    @keyframes bounceIn {
+        0% {
+            transform: translate(-50%, -50%) scale(0);
+        }
+
+        50% {
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+
+        100% {
+            transform: translate(-50%, -50%) scale(1);
+        }
+    }
+
+    @keyframes scaleIn {
+        from {
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0;
+        }
+
+        to {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 0.5;
+        }
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+
+        100% {
+            transform: translate(-50%, -50%) scale(2);
+            opacity: 0;
+        }
+    }
+
+    /* حاوية الخريطة */
+    #map {
+        margin-top: 20px;
+        /* مسافة من العناصر العلوية */
+        height: 80vh;
+        width: 100%;
+        border: 2px solid #FFD700;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* تحسين مظهر حاوية الخريطة مع إضافة المسافات */
+    /* تحسين مظهر حاوية الخريطة مع إضافة المسافات */
+    #map {
+        height: 60vh;
+        /* ارتفاع نسبي */
+        width: 100%;
+        border: 2px solid #FFD700;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        margin: 1px 10;
+        /* إضافة مسافة 50px من الأعلى والأسفل */
+        position: relative;
+        background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+    }
+
+    /* تحسين المسافات للشاشات الصغيرة */
+    @media screen and (max-width: 768px) {
+        #map {
+            margin: 40px 0;
+            /* مسافة أقل للشاشات الصغيرة */
+            height: 50vh;
+        }
+    }
+
+    /* تحسين المسافات للشاشات الكبيرة */
+    @media screen and (min-width: 1200px) {
+        #map {
+            margin: 70px 0;
+            /* مسافة أكبر للشاشات الكبيرة */
+            height: 60vh;
+        }
+    }
+
+    /* تأكيد على عدم وجود مسافات جانبية */
+    .map-container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    /* إضافة هذه الأنماط في نهاية الملف */
+    .dark-popup {
+        background-color: #1a1a1a !important;
+        color: #FFFFFF !important;
+        border: 2px solid #FFD700 !important;
+    }
+
+    #nearbyDriversMap {
+        height: 70vh;
+        width: 100%;
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+    }
+
+    .loading-map {
+        height: 70vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #1a1a1a;
+        color: #FFD700;
+    }
+
+    .loading-map i {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .leaflet-popup-content-wrapper {
+        background-color: #1a1a1a !important;
+        color: #FFFFFF !important;
+        border: 1px solid #FFD700 !important;
+    }
+
+    .leaflet-popup-tip {
+        background-color: #1a1a1a !important;
+        border: 1px solid #FFD700 !important;
+    }
+
+    .custom-div-icon {
+        background: none;
+        border: none;
+    }
+
+
+    /* تحسين أنماط مؤشرات الخريطة */
+    .custom-div-icon {
+        background: transparent;
+        border: none;
+    }
+
+    .driver-marker {
+        width: 50px;
+        height: 50px;
+        position: relative;
+        transform: translate(-50%, -50%);
+    }
+
+    .driver-marker img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 2px solid #FFD700;
+        background: #000000;
+        object-fit: cover;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .driver-marker i {
+        position: absolute;
+        bottom: -5px;
+        right: -5px;
+        background: #FFD700;
+        color: #000000;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        border: 2px solid #000000;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    /* تحسين النافذة المنبثقة للمؤشر */
+    .leaflet-popup-content-wrapper {
+        background: rgba(0, 0, 0, 0.9);
+        color: #FFFFFF;
+        border: 2px solid #FFD700;
+        border-radius: 15px;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .leaflet-popup-content {
+        margin: 0;
+        min-width: 200px;
+    }
+
+    .leaflet-popup-tip {
+        background: #FFD700;
+    }
+
+    .driver-popup {
+        padding: 15px;
+    }
+
+    .driver-popup-header {
+        text-align: center;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+    }
+
+    .driver-popup-header img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: 2px solid #FFD700;
+        margin-bottom: 8px;
+        object-fit: cover;
+    }
+
+    .driver-popup-header h4 {
+        color: #FFD700;
+        margin: 5px 0;
+        font-size: 1.1rem;
+    }
+
+    .driver-popup-info {
+        margin-bottom: 15px;
+    }
+
+    .driver-popup-info p {
+        margin: 5px 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .driver-popup-info i {
+        color: #FFD700;
+        width: 20px;
+        text-align: center;
+    }
+
+    .driver-popup-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .driver-popup-actions button {
+        padding: 8px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+    .driver-popup-actions .chat-btn {
+        background: #FFD700;
+        color: #000000;
+    }
+
+    .driver-popup-actions .book-btn {
+        background: transparent;
+        border: 1px solid #FFD700;
+        color: #FFD700;
+    }
+
+    .driver-popup-actions button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* تحسين عرض صورة السائق */
+    .driver-marker img.error {
+        /* استخدام صورة افتراضية عند فشل تحميل الصورة */
+        content: url('https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/driver-images%2F7605a607-6cf8-4b32-aee1-fa7558c98452.png?alt=media&token=5cf9e67c-ba6e-4431-a6a0-79dede15b527');
+        background:
+            #333333;
+    }
+
+    /* أنماط المؤشرات على الخريطة */
+    .custom-div-icon {
+        background: none;
+        border: none;
+    }
+
+    .driver-marker {
+        position: relative;
+        width: 60px;
+        height: 60px;
+        transform: translate(-50%, -50%);
+    }
+
+    .marker-pulse {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        transform: scale(1);
+        animation: pulse 2s infinite;
+    }
+
+    .driver-marker.active .marker-pulse {
+        border: 3px solid #2ECC40;
+    }
+
+    .driver-marker.inactive .marker-pulse {
+        border: 3px solid #FF4136;
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        100% {
+            transform: scale(1.5);
+            opacity: 0;
+        }
+    }
+
+    .marker-container {
+        position: relative;
+        width: 44px;
+        height: 44px;
+        margin: 8px;
+    }
+
+    .marker-container img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        border: 2px solid #FFD700;
+        background: #000000;
+        object-fit: cover;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .marker-status {
+        position: absolute;
+        bottom: -4px;
+        right: -4px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid #000000;
+        font-size: 10px;
+        color: #000000;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .marker-hover {
+        transform: scale(1.1);
+    }
+
+    /* النافذة المنبثقة */
+    .custom-popup {
+        padding: 0;
+        background: rgba(0, 0, 0, 0.95);
+        border: 2px solid #FFD700;
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+    .driver-popup {
+        color: #FFFFFF;
+    }
+
+    .driver-popup-header {
+        text-align: center;
+        padding: 15px;
+        position: relative;
+        background: linear-gradient(to bottom, rgba(255, 215, 0, 0.1), transparent);
+    }
+
+    .popup-status {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 4px 8px;
+        border-radius: 12px;
+        font-size: 0.8rem;
+        font-weight: bold;
+    }
+
+    .popup-status.active {
+        background: rgba(46, 204, 64, 0.2);
+        color: #2ECC40;
+        border: 1px solid #2ECC40;
+    }
+
+    .popup-status.inactive {
+        background: rgba(255, 65, 54, 0.2);
+        color: #FF4136;
+        border: 1px solid #FF4136;
+    }
+
+    .driver-popup-header img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        border: 3px solid #FFD700;
+        margin-bottom: 10px;
+        object-fit: cover;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .driver-popup-header h4 {
+        color: #FFD700;
+        margin: 8px 0;
+        font-size: 1.2rem;
+    }
+
+    .driver-rating {
+        color: #FFD700;
+        font-size: 1.1rem;
+    }
+
+    .stars-container {
+        display: flex;
+        justify-content: center;
+        gap: 4px;
+    }
+
+    .driver-popup-info {
+        padding: 15px;
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .info-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 8px;
+        color: #CCCCCC;
+    }
+
+    .info-row i {
+        color: #FFD700;
+        width: 20px;
+        text-align: center;
+    }
+
+    .driver-popup-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        padding: 15px;
+    }
+
+    .driver-popup-actions button {
+        padding: 8px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .chat-btn {
+        background: #FFD700;
+        color: #000000;
+    }
+
+    .book-btn {
+        background: transparent;
+        border: 1px solid #FFD700;
+        color: #FFD700;
+    }
+
+    .book-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .booking-notice {
+        text-align: center;
+        color: #FF4136;
+        font-size: 0.9rem;
+        padding: 8px;
+        background: rgba(255, 65, 54, 0.1);
+        margin-top: 10px;
+    }
+
+    /* تأثير Ripple */
+    .ripple {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .ripple-effect {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.4);
+        transform: scale(0);
+        animation: ripple 1s linear;
+        pointer-events: none;
+    }
+
+    @keyframes ripple {
+        to {
+            transform: scale(4);
+            opacity: 0;
+        }
+    }
+
+    /* تحسينات للشاشات المحمولة */
+    @media (max-width: 768px) {
+        .custom-popup {
+            width: 90vw !important;
+            max-width: 320px !important;
+        }
+
+        .driver-popup-header img {
+            width: 60px;
+            height: 60px;
+        }
+
+        .driver-popup-header h4 {
+            font-size: 1.1rem;
+        }
+
+        .info-row {
+            font-size: 0.9rem;
+        }
+    }
+
+    /* أنماط البحث عن السائقين في الجوار */
+    .nearby-search-btn {
+        width: 45px;
+        height: 45px;
+        background: #FFD700;
+        border: 2px solid #000000;
+        border-radius: 50%;
+        color: #000;
+        font-size: 1.3rem;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        margin-bottom: 12px;
+        position: absolute;
+        bottom: 100px;
+        right: 15px;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(5px);
+    }
+
+    .nearby-search-btn:hover {
+        transform: scale(1.1) rotate(15deg);
+        background: #FFD700;
+        box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+    }
+
+    .nearby-search-btn:active {
+        transform: scale(0.95);
+    }
+
+    .radius-control {
+        position: absolute;
+        bottom: 155px;
+        right: 15px;
+        background: rgba(0, 0, 0, 0.9);
+        padding: 15px;
+        border-radius: 15px;
+        border: 2px solid #FFD700;
+        color: #FFFFFF;
+        z-index: 1000;
+        width: 250px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+    }
+
+    .radius-control label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 1rem;
+        font-weight: 500;
+        color: #FFD700;
+    }
+
+    .radius-control input[type="range"] {
+        width: 100%;
+        height: 6px;
+        background: #333;
+        border-radius: 3px;
+        outline: none;
+        margin: 10px 0;
+        appearance: none;
+        appearance: none;
+        -webkit-appearance: none;
+    }
+
+    .radius-control input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 20px;
+        height: 20px;
+        background: #FFD700;
+        border: 2px solid #000;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .radius-control input[type="range"]::-webkit-slider-thumb:hover {
+        transform: scale(1.2);
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+
+    .nearby-results {
+        position: absolute;
+        top: 80px;
+        right: 15px;
+        width: 350px;
+        max-height: 75vh;
+        background: rgba(0, 0, 0, 0.95);
+        border: 2px solid #FFD700;
+        border-radius: 20px;
+        z-index: 1000;
+        overflow: hidden;
+        box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(10px);
+        animation: slideIn 0.3s ease-out;
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    .nearby-results-header {
+        padding: 20px;
+        background: linear-gradient(to right, #000000, #1a1a1a);
+        border-bottom: 2px solid #FFD700;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .nearby-results-header h3 {
+        color: #FFD700;
+        margin: 0;
+        font-size: 1.3rem;
+        font-weight: bold;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .nearby-results-header button {
+        background: none;
+        border: none;
+        color: #FFD700;
+        font-size: 1.2rem;
+        cursor: pointer;
+        padding: 5px;
+        transition: all 0.3s ease;
+    }
+
+    .nearby-results-header button:hover {
+        transform: rotate(90deg);
+        color: #FFFFFF;
+    }
+
+    .nearby-results-content {
+        padding: 20px;
+        max-height: calc(75vh - 80px);
+        overflow-y: auto;
+    }
+
+    .nearby-results-content::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .nearby-results-content::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 3px;
+    }
+
+    .nearby-results-content::-webkit-scrollbar-thumb {
+        background: #FFD700;
+        border-radius: 3px;
+    }
+
+    /* تحسين بطاقات السائقين */
+    .driver-card {
+        background: rgba(26, 26, 26, 0.9);
+        border: 1px solid #FFD700;
+        border-radius: 15px;
+        padding: 15px;
+        margin-bottom: 15px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .driver-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
+        border-color: #FFFFFF;
+    }
+
+    .driver-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+        transform: translateX(-100%);
+        transition: transform 0.6s ease;
+    }
+
+    .driver-card:hover::before {
+        transform: translateX(100%);
+    }
+
+    .driver-info {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 15px;
+    }
+
+    .driver-avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: 2px solid #FFD700;
+        object-fit: cover;
+        transition: all 0.3s ease;
+    }
+
+    .driver-card:hover .driver-avatar {
+        transform: scale(1.1);
+        border-color: #FFFFFF;
+    }
+
+    .driver-details h4 {
+        color: #FFD700;
+        margin: 0 0 5px 0;
+        font-size: 1.1rem;
+        font-weight: bold;
+    }
+
+    .driver-meta {
+        color: #CCCCCC;
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+
+    .driver-meta i {
+        color: #FFD700;
+        margin-left: 5px;
+        width: 20px;
+        text-align: center;
+    }
+
+    .driver-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+    .driver-btn {
+        padding: 10px;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .chat-btn {
+        background: #FFD700;
+        color: #000000;
+    }
+
+    .chat-btn:hover {
+        background: #FFFFFF;
+        transform: translateY(-2px);
+    }
+
+    .book-btn {
+        background: transparent;
+        border: 1px solid #FFD700;
+        color: #FFD700;
+    }
+
+    .book-btn:hover {
+        background: #FFD700;
+        color: #000000;
+        transform: translateY(-2px);
+    }
+
+    /* حالة عدم وجود نتائج */
+    .no-results {
+        text-align: center;
+        padding: 30px;
+        color: #CCCCCC;
+        font-size: 1.1rem;
+    }
+
+    /* تحسينات للشاشات المحمولة */
+    @media (max-width: 768px) {
+        .nearby-results {
+            width: calc(100% - 30px);
+            top: 70px;
+        }
+
+        .radius-control {
+            width: calc(100% - 30px);
+            right: 15px;
+        }
+    }
+
+    /* أنماط بطاقة السائق على الخريطة */
+    .leaflet-popup-content-wrapper {
+        background: rgba(0, 0, 0, 0.95) !important;
+        color: #FFFFFF !important;
+        border: 2px solid #FFD700 !important;
+        border-radius: 20px !important;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        padding: 0 !important;
+        overflow: hidden;
+    }
+
+    .leaflet-popup-tip {
+        background: #FFD700 !important;
+    }
+
+    .driver-map-card {
+        width: 300px;
+        padding: 0;
+        position: relative;
+    }
+
+    .driver-card-header {
+        background: #000000;
+        padding: 20px;
+        text-align: center;
+        border-bottom: 2px solid #FFD700;
+        position: relative;
+    }
+
+    .driver-logo {
+        width: 80px;
+        height: 80px;
+        border-radius: 15px;
+        margin: 0 auto 15px;
+        border: 2px solid #FFD700;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+    }
+
+    .driver-logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .close-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: none;
+        border: none;
+        color: #FFD700;
+        font-size: 18px;
+        cursor: pointer;
+        padding: 5px;
+        transition: all 0.3s ease;
+    }
+
+    .close-button:hover {
+        transform: rotate(90deg);
+        color: #FFFFFF;
+    }
+
+    .driver-name {
+        color: #FFD700;
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin: 10px 0;
+    }
+
+    .driver-identity {
+        color: #FFFFFF;
+        font-size: 1rem;
+        opacity: 0.8;
+    }
+
+    .driver-actions {
+        padding: 15px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .action-button {
+        padding: 12px;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .chat-button {
+        background: #FFD700;
+        color: #000000;
+    }
+
+    .chat-button:hover {
+        background: #FFFFFF;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+    }
+
+    .book-button {
+        background: transparent;
+        border: 2px solid #FFD700;
+        color: #FFD700;
+    }
+
+    .book-button:hover {
+        background: #FFD700;
+        color: #000000;
+        transform: translateY(-2px);
+    }
+
+    .driver-info {
+        padding: 15px;
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .info-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        color: #FFFFFF;
+    }
+
+    .info-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .info-label i {
+        color: #FFD700;
+        width: 20px;
+        text-align: center;
+    }
+
+    .info-value {
+        color: #FFD700;
+        font-weight: bold;
+    }
+
+    /* تأثيرات حركية */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .driver-map-card {
+        animation: fadeIn 0.3s ease forwards;
+    }
+
+    /* تجاوب مع الشاشات الصغيرة */
+    @media (max-width: 768px) {
+        .driver-map-card {
+            width: 280px;
+        }
+
+        .driver-logo {
+            width: 60px;
+            height: 60px;
+        }
+
+        .driver-name {
+            font-size: 1.1rem;
+        }
+    }
+
+    /* أنماط البحث عن السائقين في الجوار */
+    .nearby-search-btn {
+        width: 45px;
+        height: 45px;
+        background: #FFD700;
+        border: 2px solid #000000;
+        border-radius: 50%;
+        color: #000;
+        font-size: 1.3rem;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(5px);
+    }
+
+    .nearby-search-btn:hover {
+        transform: scale(1.1) rotate(15deg);
+        background: #FFD700;
+        box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+    }
+
+    .radius-control {
+        background: rgba(0, 0, 0, 0.9);
+        padding: 15px;
+        border-radius: 15px;
+        border: 2px solid #FFD700;
+        color: #FFFFFF;
+        width: 250px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+    }
+
+    .radius-control label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 1rem;
+        font-weight: 500;
+        color: #FFD700;
+    }
+
+    .radius-control input[type="range"] {
+        width: 100%;
+        height: 6px;
+        background: #333;
+        border-radius: 3px;
+        outline: none;
+        margin: 10px 0;
+
+    }
+
+    .radius-control input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 20px;
+        height: 20px;
+        background: #FFD700;
+        border: 2px solid #000;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .radius-control input[type="range"]::-webkit-slider-thumb:hover {
+        transform: scale(1.2);
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+
+    /* أنماط علامات السائقين */
+    .driver-marker {
+        position: relative;
+        width: 40px;
+        height: 40px;
+        transform: translate(-50%, -50%);
+    }
+
+    .marker-container {
+        position: relative;
+        width: 40px;
+        height: 40px;
+    }
+
+    .marker-container img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        border: 2px solid #FFD700;
+        object-fit: cover;
+        background: #000000;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+
+    /* أنماط أيقونات المستخدم */
+    .user-profile-btn {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 4px;
+        border-radius: 20px;
+        transition: all 0.3s ease;
+    }
+
+    .user-profile-btn img {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 2px solid #FFD700;
+        object-fit: cover;
+        transition: all 0.3s ease;
+    }
+
+    .user-profile-btn:hover img {
+        transform: scale(1.1);
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    }
+
+
+
+    /* أنماط معلومات المستخدم في القائمة الجانبية */
+    .side-nav-user-info {
+        padding: 20px;
+        border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        margin-bottom: 20px;
+    }
+
+    .user-info-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .user-info-header img {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        border: 3px solid #FFD700;
+        object-fit: cover;
+    }
+
+    .user-details {
+        flex: 1;
+    }
+
+    .user-details h6 {
+        color: #FFD700;
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: bold;
+    }
+
+    .user-details span {
+        color: #FFFFFF;
+        font-size: 0.9rem;
+        opacity: 0.8;
+    }
+
+    /* أنماط العدادات والشارات */
+    .notification-badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background: #FF4136;
+        color: white;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: bold;
+        border: 2px solid #1a1a1a;
+        animation: pulse 2s infinite;
+    }
+
+    .has-badge[data-count]:after {
+        position: absolute;
+        right: -10px;
+        top: -10px;
+        content: attr(data-count);
+        font-size: 12px;
+        padding: 3px;
+        border-radius: 50%;
+        line-height: 1em;
+        color: white;
+        background: rgba(255, 0, 0, 0.85);
+        text-align: center;
+        min-width: 20px;
+        height: 20px;
+        font-weight: bold;
+        border: 2px solid #1a1a1a;
+        font-family: sans-serif;
+        animation: badge-pulse 2s infinite;
+    }
+
+    @keyframes badge-pulse {
+        0% {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        50% {
+            transform: scale(1.2);
+            opacity: 0.8;
+        }
+
+        100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    /* تحسينات التفاعل */
+    .side-nav-item {
+        position: relative;
+        transition: all 0.3s ease;
+    }
+
+    .side-nav-item:hover {
+        background: rgba(255, 215, 0, 0.1);
+    }
+
+    .side-nav-item.has-notification:before {
+        content: '';
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 8px;
+        height: 8px;
+        background: #FF4136;
+        border-radius: 50%;
+        animation: notification-pulse 2s infinite;
+    }
+
+    @keyframes notification-pulse {
+        0% {
+            transform: translateY(-50%) scale(1);
+            opacity: 1;
+        }
+
+        50% {
+            transform: translateY(-50%) scale(1.5);
+            opacity: 0.5;
+        }
+
+        100% {
+            transform: translateY(-50%) scale(1);
+            opacity: 1;
+        }
+    }
+
+    /* أنماط الشارات */
+    .notification-badge,
+    .message-badge {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.5rem;
+        background-color: #FFD700 !important;
+        color: #000000;
+        border: 2px solid #000000;
+        animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        50% {
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+
+        100% {
+            transform: translate(-50%, -50%) scale(1);
+        }
+    }
+
+    /* أنماط صورة المستخدم في الشريط العلوي */
+    .user-profile-btn img {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        border: 2px solid #FFD700;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .user-profile-btn img:hover {
+        transform: scale(1.1);
+    }
+
+    /* أنماط قائمة الإشعارات والرسائل */
+    .notifications-list,
+    .messages-list {
+        padding: 0;
+    }
+
+    .notification-item,
+    .message-item {
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+        border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+        transition: background-color 0.3s ease;
+    }
+
+    .notification-item:hover,
+    .message-item:hover {
+        background-color: rgba(255, 215, 0, 0.05);
+    }
+
+    .notification-item img,
+    .message-item img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-left: 1rem;
+        border: 2px solid #FFD700;
+        object-fit: cover;
+    }
+
+    .notification-content,
+    .message-content {
+        flex: 1;
+    }
+
+    .notification-title,
+    .message-sender {
+        font-weight: bold;
+        color: #FFD700;
+        margin-bottom: 0.3rem;
+    }
+
+    .notification-text,
+    .message-text {
+        color: #FFFFFF;
+        font-size: 0.9rem;
+    }
+
+    .notification-time,
+    .message-time {
+        font-size: 0.8rem;
+        color: #999999;
+    }
+
+    /* أنماط معلومات المستخدم في الشريط الجانبي */
+    .side-nav-user-info {
+        padding: 1.5rem;
+        text-align: center;
+        border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+    }
+
+    .side-nav-user-info img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        border: 3px solid #FFD700;
+        margin-bottom: 1rem;
+        object-fit: cover;
+    }
+
+    .side-nav-user-info h6 {
+        color: #FFD700;
+        margin-bottom: 0.3rem;
+    }
+
+    .side-nav-user-info .user-type {
+        color: #FFFFFF;
+        font-size: 0.9rem;
+        opacity: 0.8;
+    }
+
+    /* أنماط النوافذ المنبثقة */
+    .modal-content {
+        background-color: #1a1a1a;
+        border: 2px solid #FFD700;
+    }
+
+    .modal-header {
+        border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+    }
+
+    .modal-title {
+        color: #FFD700;
+    }
+
+    /* أنماط زر تسجيل الخروج */
+    .logout-btn {
+        width: 100%;
+        padding: 0.8rem;
+        background: transparent;
+        border: 2px solid #FFD700;
+        color: #FFD700;
+        border-radius: 10px;
+        margin-top: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .logout-btn:hover {
+        background: #FFD700;
+        color: #000000;
+    }
+
+    /* أنماط الإشعارات غير المقروءة */
+    .unread {
+        background-color: rgba(255, 215, 0, 0.1);
+    }
+
+    .unread::before {
+        content: '';
+        display: block;
+        width: 8px;
+        height: 8px;
+        background-color: #FFD700;
+        border-radius: 50%;
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+
+    /* أنماط الملف الشخصي في الشريط الجانبي */
+    .side-nav-user-info {
+        padding: 20px;
+        border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        text-align: center;
+    }
+
+    .side-nav-user-info img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        border: 3px solid #FFD700;
+        margin-bottom: 10px;
+        object-fit: cover;
+    }
+
+    .side-nav-user-info h6 {
+        color: #FFD700;
+        margin: 0;
+        font-size: 1.1rem;
+    }
+
+    .side-nav-user-info .user-type {
+        color: #FFFFFF;
+        font-size: 0.9rem;
+        opacity: 0.8;
+        display: block;
+        margin-top: 5px;
+    }
+
+    /* أنماط زر الملف الشخصي في الشريط العلوي */
+    .user-profile-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 4px;
+        border-radius: 20px;
+        transition: all 0.3s ease;
+    }
+
+    .user-profile-btn img {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 2px solid #FFD700;
+        object-fit: cover;
+    }
+
+    /* تحسينات النوافذ المنبثقة */
+    .modal {
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* تحسينات زر الملف الشخصي */
+    .user-profile-btn {
+        position: relative;
+        border: none;
+        background: transparent;
+        padding: 5px 10px;
+        border-radius: 20px;
+        transition: all 0.3s ease;
+    }
+
+    .user-profile-btn:hover {
+        background: rgba(255, 215, 0, 0.1);
+    }
+
+    .user-profile-btn img {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        border: 2px solid #FFD700;
+        object-fit: cover;
+    }
+
+    /* تحسينات القائمة المنسدلة */
+    .dropdown-menu {
+        background-color: #1a1a1a;
+        border: 1px solid #FFD700;
+        border-radius: 10px;
+        margin-top: 10px;
+    }
+
+    .dropdown-item {
+        color: #FFFFFF;
+        padding: 8px 20px;
+        transition: all 0.3s ease;
+    }
+
+    .dropdown-item:hover {
+        background-color: #FFD700;
+        color: #000000;
+    }
+
+    .dropdown-divider {
+        border-color: rgba(255, 215, 0, 0.2);
+    }
+
+
+    .document-upload {
+        border: 2px dashed #FFD700;
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+        cursor: pointer;
+        background: #1a1a1a;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        transition: all 0.3s ease;
+    }
+
+    .document-upload:hover {
+        border-color: #FFF;
+        background: #242424;
+    }
+
+    .document-upload img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 8px;
+    }
+
+    .upload-placeholder {
+        color: #FFD700;
+    }
+
+    .upload-placeholder i {
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+
+    .upload-placeholder p {
+        margin: 0;
+        font-size: 0.9rem;
+    }
+
+
+    .toggle-availability-btn {
+        background-color: #333;
+        color: #FFD700;
+        border: 1px solid #FFD700;
+        border-radius: 15px;
+        padding: 8px 15px;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-weight: bold;
+    }
+
+    .toggle-availability-btn:hover {
+        background-color: #FFD700;
+        color: #000;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
+    }
+
+    .toggle-availability-btn i {
+        font-size: 1.2rem;
+        transition: transform 0.3s ease;
+    }
+
+    .toggle-availability-btn:hover i {
+        transform: rotate(180deg);
+    }
+
+    .badge.bg-gold {
+        background-color: #FFD700;
+        color: #000;
+    }
+
+    .side-nav-user-info .btn {
+        margin-top: 10px;
+    }
+
+
+    /* أنماط نافذة محادثات السائق */
+    .driver-chats-container {
+        max-height: 400px;
+        overflow-y: auto;
+        border-radius: 10px;
+        background-color: #242424;
+        padding: 10px;
+        margin-top: 10px;
+    }
+
+    .chat-user-item {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border-radius: 10px;
+        margin-bottom: 8px;
+        background-color: #333;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    .chat-user-item:hover {
+        background-color: #444;
+        transform: translateY(-2px);
+    }
+
+    .chat-user-item.unread {
+        background-color: rgba(255, 215, 0, 0.1);
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+    }
+
+    .chat-user-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-right: 15px;
+        border: 2px solid #FFD700;
+    }
+
+    .chat-user-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .chat-user-info {
+        flex: 1;
+    }
+
+    .chat-user-info h6 {
+        color: #FFD700;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .chat-user-info p {
+        color: #CCC;
+        margin-bottom: 3px;
+        font-size: 0.9rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .chat-user-info small {
+        color: #999;
+        font-size: 0.8rem;
+    }
+
+    .chat-unread-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: #FFD700;
+        color: #000;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8rem;
+        font-weight: bold;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+
+    .no-chats-message {
+        text-align: center;
+        padding: 20px;
+        color: #999;
+        font-style: italic;
+    }
+
+    /* أنماط نافذة المحادثة */
+    .chat-window {
+        padding: 0 !important;
+        border-radius: 15px;
+        overflow: hidden;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .chat-header {
+        display: flex;
+        align-items: center;
+        padding: 15px !important;
+        border-bottom: 1px solid #FFD700 !important;
+        background-color: #242424 !important;
+        font-size: 1.2rem !important;
+    }
+
+    .chat-close-btn {
+        color: #FFD700 !important;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+    .chat-container {
+        display: flex;
+        flex-direction: column;
+        height: 450px;
+        width: 100%;
+    }
+
+    .chat-body {
+        flex: 1;
+        overflow-y: auto;
+        padding: 15px;
+        background-color: #1a1a1a;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .message {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        max-width: 80%;
+    }
+
+    .message.sent {
+        align-self: flex-end;
+        align-items: flex-end;
+    }
+
+    .message-bubble {
+        padding: 10px 15px;
+        border-radius: 18px;
+        position: relative;
+        max-width: 100%;
+        word-break: break-word;
+    }
+
+    .message-bubble.sent {
+        background-color: #FFD700;
+        color: #000;
+        border-bottom-right-radius: 5px;
+    }
+
+    .message-bubble.received {
+        background-color: #333;
+        color: #fff;
+        border-bottom-left-radius: 5px;
+    }
+
+    .timestamp {
+        font-size: 0.7rem;
+        color: #999;
+        margin-top: 5px;
+    }
+
+    .message.received .timestamp {
+        text-align: right;
+    }
+
+
+/* أنماط للتأثيرات الحركية في المسار */
+.animated-route {
+    stroke-dasharray: 10, 10;
+    animation: dash 2s linear infinite;
+}
+
+@keyframes dash {
+    to {
+        stroke-dashoffset: -20;
+    }
+}
+
+/* تأثيرات النبض للمواقع */
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(2);
+        opacity: 0;
+    }
+}
+
+/* تأثير التمرير للخريطة */
+.map-slide-in {
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* تنسيق مربع معلومات المسار */
+.route-info-box {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* تحسين ظهور العلامات على الخريطة */
+.user-location-marker,
+.shared-location-marker,
+.destination-location-marker {
+    transition: transform 0.3s ease;
+}
+
+.user-location-marker:hover,
+.shared-location-marker:hover,
+.destination-location-marker:hover {
+    transform: scale(1.1);
+    z-index: 1000 !important;
+}
+
+/* أنماط النافذة المنبثقة المحسنة */
+.custom-popup .leaflet-popup-content-wrapper {
+    background-color: #1a1a1a !important;
+    color: #FFFFFF !important;
+    border: 2px solid #FFD700 !important;
+    border-radius: 15px !important;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5) !important;
+}
+
+.custom-popup .leaflet-popup-content {
+    margin: 0 !important;
+    padding: 5px !important;
+    min-width: 250px;
+}
+
+.custom-popup .leaflet-popup-tip {
+    background-color: #FFD700 !important;
+}
+
+.custom-popup .leaflet-popup-close-button {
+    color: #FFD700 !important;
+    font-size: 20px !important;
+    padding: 5px !important;
+}
+
+/* تنسيق أزرار النافذة المنبثقة */
+.location-detailed-popup button {
+    transition: all 0.3s ease;
+}
+
+.location-detailed-popup button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+
+/* أنماط زر مشاركة الموقع */
+.location-btn {
+    background-color: #333;
+    color: #FFD700;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.location-btn:hover {
+    background-color: #FFD700;
+    color: #000;
+    transform: scale(1.1);
+}
+
+/* أنماط رسالة الموقع */
+.location-message {
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid #FFD700;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.location-message:hover {
+    background: rgba(255, 215, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.location-message-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.location-message-header i {
+    color: #FFD700;
+    font-size: 1.2rem;
+}
+
+.location-message-preview {
+    width: 100%;
+    height: 120px;
+    border-radius: 8px;
+    border: 1px solid #555;
+    background: #242424;
+    overflow: hidden;
+}
+
+.location-message-action {
+    text-align: center;
+    margin-top: 5px;
+    color: #FFD700;
+    font-size: 0.8rem;
+}
+
+/* أنماط علامة الموقع المشترك */
+.shared-location-marker {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.location-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    background: #FFD700;
+    color: #000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    border: 2px solid #000;
+}
+
+.pulsing-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 215, 0, 0.3);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(2);
+        opacity: 0;
+    }
+}
+
+/* تمييز الرسالة المحددة */
+.highlighted-message {
+    animation: highlight 3s ease;
+}
+
+@keyframes highlight {
+    0%, 100% {
+        background-color: transparent;
+    }
+    50% {
+        background-color: rgba(255, 215, 0, 0.2);
+    }
+}
+
+/* تحسين نافذة الموقع المنبثقة */
+.location-popup {
+    text-align: center;
+    padding: 10px;
+}
+
+.location-popup h6 {
+    color: #FFD700;
+    margin-bottom: 10px;
+}
+
+.location-popup p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.location-popup p i {
+    color: #FFD700;
+}
+
+.open-chat-btn {
+    background: #FFD700;
+    color: #000;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 0 auto;
+}
+
+.open-chat-btn:hover {
+    background: #ccac00;
+    transform: translateY(-2px);
+}
+
+
+/* أنماط زر مشاركة الموقع */
+.location-btn {
+    background-color: #333;
+    color: #FFD700;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.location-btn:hover {
+    background-color: #FFD700;
+    color: #000;
+    transform: scale(1.1);
+}
+
+/* أنماط رسالة الموقع */
+.location-message {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.location-message:hover {
+    transform: translateY(-2px);
+}
+
+/* تأثير نبض للموقع على الخريطة */
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(2);
+        opacity: 0;
+    }
+}
+
+/* أنماط نافذة الموقع المنبثقة */
+.custom-popup {
+    background-color: #1a1a1a !important;
+    color: #FFFFFF !important;
+    border: 2px solid #FFD700 !important;
+    border-radius: 15px !important;
+}
+
+.custom-popup h6 {
+    color: #FFD700;
+}
+
+.custom-popup button {
+    background-color: #FFD700;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.custom-popup button:hover {
+    background-color: #FFFFFF;
+    transform: translateY(-2px);
+}
+
+
+
+
+/* أنماط للتأثيرات الحركية في المسار */
+.animated-route {
+    stroke-dasharray: 10, 10;
+    animation: dash 2s linear infinite;
+}
+
+@keyframes dash {
+    to {
+        stroke-dashoffset: -20;
+    }
+}
+
+/* تأثيرات النبض للمواقع */
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(2);
+        opacity: 0;
+    }
+}
+
+/* تأثير التمرير للخريطة */
+.map-slide-in {
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* تنسيق مربع معلومات المسار */
+.route-info-box {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* تحسين ظهور العلامات على الخريطة */
+.user-location-marker,
+.shared-location-marker,
+.destination-location-marker {
+    transition: transform 0.3s ease;
+}
+
+.user-location-marker:hover,
+.shared-location-marker:hover,
+.destination-location-marker:hover {
+    transform: scale(1.1);
+    z-index: 1000 !important;
+}
+
+/* أنماط النافذة المنبثقة المحسنة */
+.custom-popup .leaflet-popup-content-wrapper {
+    background-color: #1a1a1a !important;
+    color: #FFFFFF !important;
+    border: 2px solid #FFD700 !important;
+    border-radius: 15px !important;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5) !important;
+}
+
+.custom-popup .leaflet-popup-content {
+    margin: 0 !important;
+    padding: 5px !important;
+    min-width: 250px;
+}
+
+.custom-popup .leaflet-popup-tip {
+    background-color: #FFD700 !important;
+}
+
+.custom-popup .leaflet-popup-close-button {
+    color: #FFD700 !important;
+    font-size: 20px !important;
+    padding: 5px !important;
+}
+
+/* تنسيق أزرار النافذة المنبثقة */
+.location-detailed-popup button {
+    transition: all 0.3s ease;
+}
+
+.location-detailed-popup button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+
+
+
+/* أنماط معلومات المستخدم في الشريط الجانبي */
+.side-nav-user-info {
+    padding: 20px;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+    margin-bottom: 20px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), transparent);
+}
+
+/* تحسينات لأسلوب صورة المستخدم */
+.side-nav-user-info img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #FFD700;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.side-nav-user-info img:hover {
+    transform: scale(1.05);
+    border-color: #FFFFFF;
+}
+
+/* تحسينات لاسم المستخدم */
+.side-nav-user-info h6 {
+    color: #FFFFFF;
+    font-weight: bold;
+    margin: 10px 0 5px;
+    font-size: 1.1rem;
+}
+
+/* تحسينات لنوع المستخدم (السائق/المستخدم) */
+.side-nav-user-info .badge {
+    font-size: 0.9rem;
+    padding: 5px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.side-nav-user-info .badge.bg-gold {
+    background-color: #FFD700;
+    color: #000000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* تحسينات لأزرار التفاعل */
+.side-nav-user-info .btn {
+    transition: all 0.3s ease;
+    border-radius: 20px;
+    margin-top: 10px;
+}
+
+.side-nav-user-info .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.side-nav-user-info .btn-gold {
+    background-color: #FFD700;
+    color: #000000;
+    border: none;
+}
+
+.side-nav-user-info .btn-gold:hover {
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
+/* تحديثات CSS لجعل التطبيق أكثر توافقاً مع مختلف الشاشات */
+
+/* إعادة ضبط بعض القيم الأساسية وتحسين التجاوب */
+:root {
+    /* تصغير القياسات الأساسية */
+    --border-radius-sm: 6px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
+    
+    --spacing-xs: 0.15rem;
+    --spacing-sm: 0.25rem;
+    --spacing-md: 0.5rem;
+    --spacing-lg: 0.75rem;
+    
+    /* تعديل ارتفاع الخريطة ليكون نسبياً */
+    --map-height: 35vh;
+    
+    /* تصغير هوامش العناصر */
+    --map-margin-top: 1rem;
+    --map-margin-bottom: 0.5rem;
+    --header-margin-bottom: 0.5rem;
+}
+
+/* تحسينات عامة */
+body {
+    font-size: 14px;
+    padding-top: 60px; /* تقليل المساحة العلوية للتوافق مع الرأس الثابت */
+    overflow-x: hidden;
+}
+
+/* تصغير العناصر في الرأس */
+.app-header {
+    height: 50px;
+    padding: 0 0.5rem;
+}
+
+.app-logo {
+    font-size: 1rem;
+}
+
+.app-logo i {
+    font-size: 1.2rem;
+}
+
+.nav-link i {
+    font-size: 1rem;
+}
+
+/* تصغير حجم الخريطة */
+#map {
+    height: var(--map-height);
+    margin: 0.5rem 0;
+    border-width: 1px;
+    border-radius: 10px;
+}
+
+/* تحسين شريط الفلاتر */
+.location-filter {
+    padding: 0.25rem;
+    margin: 0.25rem 0;
+}
+
+.location-chips {
+    padding: 0.25rem 0;
+    gap: 0.25rem;
+}
+
+.location-chip {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.8rem;
+    min-width: 70px;
+    margin: 0.15rem;
+    white-space: nowrap;
+}
+
+.location-chip i {
+    font-size: 0.8rem;
+}
+
+/* تصغير بطاقات السائقين */
+.driver-card {
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+}
+
+.driver-image-container {
+    height: 150px;
+}
+
+.driver-info {
+    padding: 0.75rem;
+}
+
+.driver-name {
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+.driver-stats {
+    gap: 0.5rem;
+    margin: 0.5rem 0;
+    padding: 0.5rem 0;
+}
+
+.stat-value {
+    font-size: 0.9rem;
+}
+
+.stat-label {
+    font-size: 0.7rem;
+}
+
+.driver-actions {
+    padding: 0.5rem;
+    gap: 0.5rem;
+}
+
+.action-btn {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+    border-radius: 8px;
+}
+
+/* تصغير حجم الشريط الجانبي */
+.side-nav {
+    width: 250px;
+}
+
+.side-nav-header {
+    padding: 1rem;
+}
+
+.side-nav-title {
+    font-size: 1.2rem;
+}
+
+.side-nav-item {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+}
+
+.side-nav-item i {
+    font-size: 1rem;
+}
+
+/* تحسين شريط التنقل السفلي */
+.bottom-nav {
+    height: 55px;
+}
+
+.bottom-nav-item i {
+    font-size: 1.1rem;
+}
+
+.bottom-nav-item span {
+    font-size: 0.7rem;
+}
+
+/* تحسين النوافذ المنبثقة */
+.modal-content {
+    border-radius: 12px;
+}
+
+.modal-header {
+    padding: 0.75rem;
+}
+
+.modal-title {
+    font-size: 1.2rem;
+}
+
+.form-control, .form-select {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    border-radius: 8px;
+}
+
+.btn-primary {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+/* تصغير الصور الشخصية وعناصر التحميل */
+.user-photo-upload, .driver-photo-upload {
+    width: 100px;
+    height: 100px;
+}
+
+.document-upload {
+    height: 120px;
+}
+
+.upload-placeholder i {
+    font-size: 1.5rem;
+}
+
+/* تحسين أنماط بطاقات اختيار نوع الحساب */
+.account-type-card {
+    padding: 1rem;
+}
+
+.account-type-card .icon-container {
+    width: 60px;
+    height: 60px;
+}
+
+.account-type-card .icon-container i {
+    font-size: 2rem;
+}
+
+.account-type-card h6 {
+    font-size: 1rem;
+}
+
+/* تصغير أنماط الإشعارات */
+.notification-toast {
+    padding: 0.5rem;
+    min-width: 250px;
+    max-width: 90%;
+}
+
+.notification-title {
+    font-size: 0.9rem;
+}
+
+.notification-body {
+    font-size: 0.8rem;
+}
+
+/* تحسين حجم نافذة المحادثة */
+.chat-header {
+    padding: 0.75rem;
+}
+
+.chat-body {
+    height: 300px;
+}
+
+.message-bubble {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+}
+
+.timestamp {
+    font-size: 0.6rem;
+}
+
+/* تحسينات للنوافذ المنبثقة في الخريطة */
+.leaflet-popup-content-wrapper {
+    border-radius: 8px !important;
+}
+
+.leaflet-popup-content {
+    margin: 8px !important;
+    font-size: 0.9rem;
+}
+
+/* تصغير عناصر التحكم بالخريطة */
+.leaflet-bar a {
+    width: 30px !important;
+    height: 30px !important;
+    line-height: 30px !important;
+}
+
+.user-location-btn {
+    width: 35px;
+    height: 35px;
+}
+
+/* تحسين حجم مؤشرات السائقين على الخريطة */
+.driver-marker {
+    width: 40px !important;
+    height: 40px !important;
+}
+
+.marker-container img {
+    width: 35px !important;
+    height: 35px !important;
+}
+
+.marker-status {
+    width: 16px !important;
+    height: 16px !important;
+    font-size: 9px !important;
+}
+
+/* تحسينات مجموعة قواعد @media للشاشات المختلفة */
+@media (max-width: 576px) {
+    /* قواعد للشاشات الصغيرة جداً */
+    body {
+        font-size: 12px;
+    }
+    
+    .container {
+        padding: 0.25rem;
+    }
+    
+    .app-header {
+        height: 45px;
+    }
+    
+    .app-logo {
+        font-size: 0.9rem;
+    }
+    
+    .location-chip {
+        padding: 0.3rem 0.5rem;
+        font-size: 0.7rem;
+        min-width: 60px;
+    }
+    
+    #map {
+        height: 30vh;
+    }
+    
+    .modal-dialog {
+        margin: 0.5rem;
+    }
+    
+    .driver-image-container {
+        height: 120px;
+    }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+    /* قواعد للشاشات الصغيرة */
+    body {
+        font-size: 13px;
+    }
+    
+    .container {
+        padding: 0.35rem;
+    }
+    
+    #map {
+        height: 32vh;
+    }
+    
+    .location-chip {
+        padding: 0.35rem 0.55rem;
+        font-size: 0.75rem;
+    }
+    
+    .driver-image-container {
+        height: 130px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+    /* قواعد للشاشات المتوسطة */
+    body {
+        font-size: 14px;
+    }
+    
+    .container {
+        padding: 0.5rem;
+    }
+    
+    #map {
+        height: 35vh;
+    }
+    
+    .location-chip {
+        padding: 0.4rem 0.7rem;
+        font-size: 0.8rem;
+    }
+    
+    .driver-image-container {
+        height: 140px;
+    }
+}
+
+@media (min-width: 993px) and (max-width: 1200px) {
+    /* قواعد للشاشات الكبيرة */
+    body {
+        font-size: 15px;
+    }
+    
+    .container {
+        padding: 0.75rem;
+    }
+    
+    #map {
+        height: 40vh;
+    }
+    
+    .driver-image-container {
+        height: 160px;
+    }
+}
+
+@media (min-width: 1201px) {
+    /* قواعد للشاشات الكبيرة جداً */
+    body {
+        font-size: 16px;
+    }
+    
+    .container {
+        padding: 1rem;
+    }
+    
+    #map {
+        height: 45vh;
+    }
+    
+    .driver-image-container {
+        height: 180px;
+    }
+    
+    /* تحسين تخطيط شبكة السائقين للشاشات الكبيرة */
+    .drivers-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* تحسينات خاصة لشاشات الهواتف */
+@media (max-width: 480px) {
+    /* هواتف صغيرة */
+    .app-logo span {
+        display: none; /* إخفاء نص الشعار للشاشات الصغيرة جداً */
+    }
+    
+    .nav-link span {
+        display: none;
+    }
+    
+    .location-chip {
+        min-width: 50px;
+        font-size: 0.65rem;
+        padding: 0.25rem 0.4rem;
+    }
+    
+    .location-chip i {
+        font-size: 0.7rem;
+    }
+    
+    /* تقليل عدد الإحصائيات المعروضة لتوفير المساحة */
+    .driver-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* تصغير عناصر المحادثة */
+    .chat-body {
+        height: 250px;
+    }
+    
+    .message-bubble {
+        max-width: 85%;
+        padding: 0.4rem 0.6rem;
+        font-size: 0.8rem;
+    }
+    
+    /* تصغير عناصر الشريط السفلي */
+    .bottom-nav {
+        height: 50px;
+    }
+    
+    .bottom-nav-item i {
+        font-size: 1rem;
+    }
+    
+    .bottom-nav-item span {
+        font-size: 0.6rem;
+    }
+    
+    /* تعديل أسلوب النوافذ المنبثقة */
+    .modal-content {
+        border-radius: 10px;
+    }
+    
+    .modal-header {
+        padding: 0.5rem;
+    }
+    
+    .modal-title {
+        font-size: 1rem;
+    }
+    
+    /* تصغير إضافي للقوائم المنسدلة والمدخلات للمساحات الصغيرة */
+    .form-control, .form-select {
+        padding: 0.4rem;
+        font-size: 0.8rem;
+    }
+    
+    /* تعديل طريقة عرض عناصر التحميل */
+    .user-photo-upload, .driver-photo-upload {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .document-upload {
+        height: 100px;
+    }
+    
+    /* جعل الأزرار أكثر سهولة للضغط على الشاشات الصغيرة */
+    .action-btn {
+        padding: 0.5rem 0.7rem;
+    }
+}
+
+/* تحسينات إضافية تركز على تجربة المستخدم */
+.location-chip {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.location-chip:active {
+    transform: scale(0.95);
+}
+
+.action-btn {
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.action-btn:active {
+    transform: scale(0.95);
+}
+
+/* تحسينات لتعزيز التفاعل على الأجهزة اللمسية */
+@media (hover: none) {
+    .action-btn:active {
+        transform: scale(0.95);
+        opacity: 0.9;
+    }
+    
+    .location-chip:active {
+        transform: scale(0.95);
+        opacity: 0.8;
+    }
+}
+
+/* تحسين للعناصر التي يصعب الضغط عليها في الشاشات الصغيرة */
+.side-nav-item {
+    min-height: 44px; /* الحد الأدنى لسهولة التفاعل على الشاشات اللمسية */
+}
+
+/* تحسين تجربة التمرير وتقليل التأخير */
+* {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+/* تحسين الشريط الجانبي للشاشات الصغيرة */
+@media (max-width: 480px) {
+    .side-nav {
+        width: 80%; /* جعل الشريط الجانبي يغطي معظم الشاشة في الهواتف الصغيرة */
+    }
+}
+
+/* تحسين الأزرار العائمة والتفاعلات */
+.nearby-search-btn, .user-location-btn {
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* تقليل أحجام الأيقونات في نوافذ الخريطة */
+.leaflet-popup .fas {
+    font-size: 0.9rem;
+}
+
+/* تحسين تجربة التنقل بين المحافظات */
+.location-chips {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.location-chips::-webkit-scrollbar {
+    display: none;
+}
+
+/* تصحيح مشكلة تداخل العناصر الثابتة */
+.app-header {
+    z-index: 1030;
+}
+
+.bottom-nav {
+    z-index: 1025;
+}
+
+/* ضمان ظهور الشريط العلوي فوق باقي العناصر */
+.app-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+/* تعديل المساحة أسفل التطبيق لتجنب تداخلها مع الشريط السفلي */
+body {
+    padding-bottom: 60px;
+}
+
+/* تحسين وضوح العناصر في الوضع المظلم */
+.driver-card, .modal-content, .side-nav {
+    border-color: rgba(255, 215, 0, 0.3);
+}
+
+/* تحسين أسلوب الخريطة للشاشات الصغيرة */
+@media (max-width: 768px) {
+    .leaflet-control-zoom {
+        display: none; /* إخفاء عناصر التحكم بالتكبير/التصغير على الشاشات الصغيرة */
+    }
+}
+
+
+    /* تحديثات CSS لجعل التطبيق أكثر توافقاً مع مختلف الشاشات */
+
+    /* إعادة ضبط بعض القيم الأساسية وتحسين التجاوب */
+    :root {
+        /* تصغير القياسات الأساسية */
+        --border-radius-sm: 6px;
+        --border-radius-md: 8px;
+        --border-radius-lg: 12px;
+        
+        --spacing-xs: 0.15rem;
+        --spacing-sm: 0.25rem;
+        --spacing-md: 0.5rem;
+        --spacing-lg: 0.75rem;
+        
+        /* تعديل ارتفاع الخريطة ليكون نسبياً */
+        --map-height: 35vh;
+        
+        /* تصغير هوامش العناصر */
+        --map-margin-top: 1rem;
+        --map-margin-bottom: 0.5rem;
+        --header-margin-bottom: 0.5rem;
+    }
+
+    /* تحسينات عامة */
+    body {
+        font-size: 14px;
+        padding-top: 60px; /* تقليل المساحة العلوية للتوافق مع الرأس الثابت */
+        overflow-x: hidden;
+    }
+
+    /* تصغير العناصر في الرأس */
+    .app-header {
+        height: 50px;
+        padding: 0 0.5rem;
+    }
+
+    .app-logo {
+        font-size: 1rem;
+    }
+
+    .app-logo i {
+        font-size: 1.2rem;
+    }
+
+    .nav-link i {
+        font-size: 1rem;
+    }
+
+    /* تصغير حجم الخريطة */
+    #map {
+        height: var(--map-height);
+        margin: 0.5rem 0;
+        border-width: 1px;
+        border-radius: 10px;
+    }
+
+    /* تحسين شريط الفلاتر */
+    .location-filter {
+        padding: 0.25rem;
+        margin: 0.25rem 0;
+    }
+
+    .location-chips {
+        padding: 0.25rem 0;
+        gap: 0.25rem;
+    }
+
+    .location-chip {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.8rem;
+        min-width: 70px;
+        margin: 0.15rem;
+        white-space: nowrap;
+    }
+
+    .location-chip i {
+        font-size: 0.8rem;
+    }
+
+    /* تصغير بطاقات السائقين */
+    .driver-card {
+        border-radius: 10px;
+        margin-bottom: 0.5rem;
+    }
+
+    .driver-image-container {
+        height: 150px;
+    }
+
+    .driver-info {
+        padding: 0.75rem;
+    }
+
+    .driver-name {
+        font-size: 1rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .driver-stats {
+        gap: 0.5rem;
+        margin: 0.5rem 0;
+        padding: 0.5rem 0;
+    }
+
+    .stat-value {
+        font-size: 0.9rem;
+    }
+
+    .stat-label {
+        font-size: 0.7rem;
+    }
+
+    .driver-actions {
+        padding: 0.5rem;
+        gap: 0.5rem;
+    }
+
+    .action-btn {
+        padding: 0.5rem;
+        font-size: 0.8rem;
+        border-radius: 8px;
+    }
+
+    /* تصغير حجم الشريط الجانبي */
+    .side-nav {
+        width: 250px;
+    }
+
+    .side-nav-header {
+        padding: 1rem;
+    }
+
+    .side-nav-title {
+        font-size: 1.2rem;
+    }
+
+    .side-nav-item {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+
+    .side-nav-item i {
+        font-size: 1rem;
+    }
+
+    /* تحسين شريط التنقل السفلي */
+    .bottom-nav {
+        height: 55px;
+    }
+
+    .bottom-nav-item i {
+        font-size: 1.1rem;
+    }
+
+    .bottom-nav-item span {
+        font-size: 0.7rem;
+    }
+
+    /* تحسين النوافذ المنبثقة */
+    .modal-content {
+        border-radius: 12px;
+    }
+
+    .modal-header {
+        padding: 0.75rem;
+    }
+
+    .modal-title {
+        font-size: 1.2rem;
+    }
+
+    .form-control, .form-select {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+        border-radius: 8px;
+    }
+
+    .btn-primary {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    /* تصغير الصور الشخصية وعناصر التحميل */
+    .user-photo-upload, .driver-photo-upload {
+        width: 100px;
+        height: 100px;
+    }
+
+    .document-upload {
+        height: 120px;
+    }
+
+    .upload-placeholder i {
+        font-size: 1.5rem;
+    }
+
+    /* تحسين أنماط بطاقات اختيار نوع الحساب */
+    .account-type-card {
+        padding: 1rem;
+    }
+
+    .account-type-card .icon-container {
+        width: 60px;
+        height: 60px;
+    }
+
+    .account-type-card .icon-container i {
+        font-size: 2rem;
+    }
+
+    .account-type-card h6 {
+        font-size: 1rem;
+    }
+
+    /* تصغير أنماط الإشعارات */
+    .notification-toast {
+        padding: 0.5rem;
+        min-width: 250px;
+        max-width: 90%;
+    }
+
+    .notification-title {
+        font-size: 0.9rem;
+    }
+
+    .notification-body {
+        font-size: 0.8rem;
+    }
+
+    /* تحسين حجم نافذة المحادثة */
+    .chat-header {
+        padding: 0.75rem;
+    }
+
+    .chat-body {
+        height: 300px;
+    }
+
+    .message-bubble {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.9rem;
+    }
+
+    .timestamp {
+        font-size: 0.6rem;
+    }
+
+    /* تحسينات للنوافذ المنبثقة في الخريطة */
+    .leaflet-popup-content-wrapper {
+        border-radius: 8px !important;
+    }
+
+    .leaflet-popup-content {
+        margin: 8px !important;
+        font-size: 0.9rem;
+    }
+
+    /* تصغير عناصر التحكم بالخريطة */
+    .leaflet-bar a {
+        width: 30px !important;
+        height: 30px !important;
+        line-height: 30px !important;
+    }
+
+    .user-location-btn {
+        width: 35px;
+        height: 35px;
+    }
+
+    /* تحسين حجم مؤشرات السائقين على الخريطة */
+    .driver-marker {
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    .marker-container img {
+        width: 35px !important;
+        height: 35px !important;
+    }
+
+    .marker-status {
+        width: 16px !important;
+        height: 16px !important;
+        font-size: 9px !important;
+    }
+
+    /* تحسينات مجموعة قواعد @media للشاشات المختلفة */
+    @media (max-width: 576px) {
+        /* قواعد للشاشات الصغيرة جداً */
+        body {
+            font-size: 12px;
+        }
+        
+        .container {
+            padding: 0.25rem;
+        }
+        
+        .app-header {
+            height: 45px;
+        }
+        
+        .app-logo {
+            font-size: 0.9rem;
+        }
+        
+        .location-chip {
+            padding: 0.3rem 0.5rem;
+            font-size: 0.7rem;
+            min-width: 60px;
+        }
+        
+        #map {
+            height: 30vh;
+        }
+        
+        .modal-dialog {
+            margin: 0.5rem;
+        }
+        
+        .driver-image-container {
+            height: 120px;
+        }
+    }
+
+    @media (min-width: 577px) and (max-width: 768px) {
+        /* قواعد للشاشات الصغيرة */
+        body {
+            font-size: 13px;
+        }
+        
+        .container {
+            padding: 0.35rem;
+        }
+        
+        #map {
+            height: 32vh;
+        }
+        
+        .location-chip {
+            padding: 0.35rem 0.55rem;
+            font-size: 0.75rem;
+        }
+        
+        .driver-image-container {
+            height: 130px;
+        }
+    }
+
+    @media (min-width: 769px) and (max-width: 992px) {
+        /* قواعد للشاشات المتوسطة */
+        body {
+            font-size: 14px;
+        }
+        
+        .container {
+            padding: 0.5rem;
+        }
+        
+        #map {
+            height: 35vh;
+        }
+        
+        .location-chip {
+            padding: 0.4rem 0.7rem;
+            font-size: 0.8rem;
+        }
+        
+        .driver-image-container {
+            height: 140px;
+        }
+    }
+
+    @media (min-width: 993px) and (max-width: 1200px) {
+        /* قواعد للشاشات الكبيرة */
+        body {
+            font-size: 15px;
+        }
+        
+        .container {
+            padding: 0.75rem;
+        }
+        
+        #map {
+            height: 40vh;
+        }
+        
+        .driver-image-container {
+            height: 160px;
+        }
+    }
+
+    @media (min-width: 1201px) {
+        /* قواعد للشاشات الكبيرة جداً */
+        body {
+            font-size: 16px;
+        }
+        
+        .container {
+            padding: 1rem;
+        }
+        
+        #map {
+            height: 45vh;
+        }
+        
+        .driver-image-container {
+            height: 180px;
+        }
+        
+        /* تحسين تخطيط شبكة السائقين للشاشات الكبيرة */
+        .drivers-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    /* تحسينات خاصة لشاشات الهواتف */
+    @media (max-width: 480px) {
+        /* هواتف صغيرة */
+        .app-logo span {
+            display: none; /* إخفاء نص الشعار للشاشات الصغيرة جداً */
+        }
+        
+        .nav-link span {
+            display: none;
+        }
+        
+        .location-chip {
+            min-width: 50px;
+            font-size: 0.65rem;
+            padding: 0.25rem 0.4rem;
+        }
+        
+        .location-chip i {
+            font-size: 0.7rem;
+        }
+        
+        /* تقليل عدد الإحصائيات المعروضة لتوفير المساحة */
+        .driver-stats {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        /* تصغير عناصر المحادثة */
+        .chat-body {
+            height: 250px;
+        }
+        
+        .message-bubble {
+            max-width: 85%;
+            padding: 0.4rem 0.6rem;
+            font-size: 0.8rem;
+        }
+        
+        /* تصغير عناصر الشريط السفلي */
+        .bottom-nav {
+            height: 50px;
+        }
+        
+        .bottom-nav-item i {
+            font-size: 1rem;
+        }
+        
+        .bottom-nav-item span {
+            font-size: 0.6rem;
+        }
+        
+        /* تعديل أسلوب النوافذ المنبثقة */
+        .modal-content {
+            border-radius: 10px;
+        }
+        
+        .modal-header {
+            padding: 0.5rem;
+        }
+        
+        .modal-title {
+            font-size: 1rem;
+        }
+        
+        /* تصغير إضافي للقوائم المنسدلة والمدخلات للمساحات الصغيرة */
+        .form-control, .form-select {
+            padding: 0.4rem;
+            font-size: 0.8rem;
+        }
+        
+        /* تعديل طريقة عرض عناصر التحميل */
+        .user-photo-upload, .driver-photo-upload {
+            width: 80px;
+            height: 80px;
+        }
+        
+        .document-upload {
+            height: 100px;
+        }
+        
+        /* جعل الأزرار أكثر سهولة للضغط على الشاشات الصغيرة */
+        .action-btn {
+            padding: 0.5rem 0.7rem;
+        }
+    }
+
+    /* تحسينات إضافية تركز على تجربة المستخدم */
+    .location-chip {
+        cursor: pointer;
+        transition: transform 0.2s ease;
+    }
+
+    .location-chip:active {
+        transform: scale(0.95);
+    }
+
+    .action-btn {
+        transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    .action-btn:active {
+        transform: scale(0.95);
+    }
+
+    /* تحسينات لتعزيز التفاعل على الأجهزة اللمسية */
+    @media (hover: none) {
+        .action-btn:active {
+            transform: scale(0.95);
+            opacity: 0.9;
+        }
+        
+        .location-chip:active {
+            transform: scale(0.95);
+            opacity: 0.8;
+        }
+    }
+
+    /* تحسين للعناصر التي يصعب الضغط عليها في الشاشات الصغيرة */
+    .side-nav-item {
+        min-height: 44px; /* الحد الأدنى لسهولة التفاعل على الشاشات اللمسية */
+    }
+
+    /* تحسين تجربة التمرير وتقليل التأخير */
+    * {
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+    }
+
+    /* تحسين الشريط الجانبي للشاشات الصغيرة */
+    @media (max-width: 480px) {
+        .side-nav {
+            width: 80%; /* جعل الشريط الجانبي يغطي معظم الشاشة في الهواتف الصغيرة */
+        }
+    }
+
+    /* تحسين الأزرار العائمة والتفاعلات */
+    .nearby-search-btn, .user-location-btn {
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    /* تقليل أحجام الأيقونات في نوافذ الخريطة */
+    .leaflet-popup .fas {
+        font-size: 0.9rem;
+    }
+
+    /* تحسين تجربة التنقل بين المحافظات */
+    .location-chips {
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .location-chips::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* تصحيح مشكلة تداخل العناصر الثابتة */
+    .app-header {
+        z-index: 1030;
+    }
+
+    .bottom-nav {
+        z-index: 1025;
+    }
+
+    /* ضمان ظهور الشريط العلوي فوق باقي العناصر */
+    .app-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+    }
+
+    /* تعديل المساحة أسفل التطبيق لتجنب تداخلها مع الشريط السفلي */
+    body {
+        padding-bottom: 60px;
+    }
+
+    /* تحسين وضوح العناصر في الوضع المظلم */
+    .driver-card, .modal-content, .side-nav {
+        border-color: rgba(255, 215, 0, 0.3);
+    }
+
+    /* تحسين أسلوب الخريطة للشاشات الصغيرة */
+    @media (max-width: 768px) {
+        .leaflet-control-zoom {
+            display: none; /* إخفاء عناصر التحكم بالتكبير/التصغير على الشاشات الصغيرة */
+        }
+    }
+/* تحسينات الشريط العلوي */
+.app-header {
+    background-color: #222222;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    padding: 8px 15px;
+    height: 60px;
+    z-index: 1030;
+}
+
+.app-logo {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #FFD700 !important;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.app-logo:hover {
+    transform: scale(1.05);
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.app-logo i {
+    font-size: 1.4rem;
+    margin-right: 8px;
+}
+
+.nav-toggle {
+    background: transparent;
+    border: none;
+    color: #FFFFFF;
+    font-size: 1.2rem;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.nav-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #FFD700;
+}
+
+.tools {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.tools .nav-link {
+    color: #FFFFFF;
+    font-size: 1.2rem;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.tools .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #FFD700;
+}
+
+.tools .user-profile-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 20px;
+    padding: 5px 10px;
+    transition: all 0.3s ease;
+}
+
+.tools .user-profile-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.tools .user-profile-btn i {
+    font-size: 1.4rem;
+}
+
+.notification-badge, .message-badge {
+    font-size: 0.7rem;
+    padding: 3px 6px;
+    border: 2px solid #222222;
+    transform: translate(-40%, -30%) !important;
+}
+
+/* تحسينات الشريط الجانبي */
+.side-nav {
+    position: fixed;
+    top: 0;
+    right: -280px;
+    width: 280px;
+    height: 100vh;
+    background-color: #1a1a1a;
+    z-index: 1050;
+    transition: all 0.3s ease;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.side-nav.open {
+    right: 0;
+}
+
+.side-nav-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #333;
+}
+
+.side-nav-title {
+    color: #FFD700;
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.side-nav-close {
+    background: transparent;
+    border: none;
+    color: #FFFFFF;
+    font-size: 1.8rem;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.side-nav-close:hover {
+    color: #FF4136;
+}
+
+.side-nav-user-info {
+    padding: 20px 15px;
+    border-bottom: 1px solid #333;
+}
+
+.side-nav-user-info .btn-gold {
+    background-color: #FFD700;
+    color: #000000;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.side-nav-user-info .btn-gold:hover {
+    background-color: #F8C400;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+}
+
+.side-nav-user-info .btn-outline-light {
+    transition: all 0.3s ease;
+}
+
+.side-nav-user-info .btn-outline-light:hover {
+    background-color: #FFFFFF;
+    color: #000000;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+}
+
+.side-nav-items {
+    flex: 1;
+    padding: 15px;
+}
+
+.side-nav-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    color: #FFFFFF;
+    text-decoration: none;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    transition: all 0.3s ease;
+}
+
+.side-nav-item:hover, .side-nav-item.active {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #FFD700;
+    transform: translateX(-5px);
+}
+
+.side-nav-item i {
+    margin-left: 10px;
+    font-size: 1.2rem;
+    width: 25px;
+    text-align: center;
+}
+
+.side-nav-footer {
+    padding: 15px;
+    border-top: 1px solid #333;
+}
+
+.logout-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 12px;
+    background-color: #FF4136;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.logout-btn:hover {
+    background-color: #E02E24;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 65, 54, 0.3);
+}
+
+.logout-btn i {
+    margin-left: 10px;
+}
+
+.nav-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    z-index: 1040;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.nav-backdrop.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.badge.bg-gold {
+    background-color: #FFD700;
+    color: #000000;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+/* تعديلات متوافقة مع الهواتف الصغيرة */
+@media (max-width: 576px) {
+    .tools {
+        gap: 8px;
+    }
+    
+    .tools .nav-link {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+    
+    .side-nav {
+        width: 250px;
+    }
+    
+    .side-nav-title {
+        font-size: 1.3rem;
+    }
+}
+
+/* أنماط مؤشر التحميل */
+.loading-spinner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    backdrop-filter: blur(5px);
+}
+
+.loading-spinner .spinner {
+    width: 60px;
+    height: 60px;
+    border: 5px solid rgba(255, 215, 0, 0.3);
+    border-radius: 50%;
+    border-top-color: #FFD700;
+    animation: spin 1s ease-in-out infinite;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* أنماط التوست */
+.toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 350px;
+    width: 100%;
+}
+
+.custom-toast {
+    background-color: #222222;
+    color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    border-right: 4px solid;
+    min-width: 280px;
+    max-width: 100%;
+}
+
+.custom-toast.success {
+    border-right-color: #28a745;
+}
+
+.custom-toast.error {
+    border-right-color: #dc3545;
+}
+
+.custom-toast.warning {
+    border-right-color: #ffc107;
+}
+
+.custom-toast.info {
+    border-right-color: #17a2b8;
+}
+
+.custom-toast .toast-header {
+    display: flex;
+    align-items: center;
+    background-color: #1a1a1a;
+    padding: 12px 15px;
+    border-bottom: 1px solid #333;
+}
+
+.custom-toast .toast-header i {
+    font-size: 1.2rem;
+    margin-left: 10px;
+}
+
+.custom-toast .toast-header .me-auto {
+    margin-right: auto !important;
+}
+
+.custom-toast .toast-header .btn-close {
+    color: #FFFFFF;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.custom-toast .toast-header .btn-close:hover {
+    opacity: 1;
+}
+
+.custom-toast .toast-body {
+    padding: 12px 15px;
+    font-size: 0.9rem;
+}
+
+/* تأثيرات حركية للتوست */
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeOutRight {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+.animate__animated {
+    animation-duration: 0.3s;
+    animation-fill-mode: both;
+}
+
+.animate__fadeInRight {
+    animation-name: fadeInRight;
+}
+
+.animate__fadeOutRight {
+    animation-name: fadeOutRight;
+}
+
+/* تحسينات لعرض الملف الشخصي */
+.user-menu-container {
+    background-color: #1a1a1a;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+}
+
+.user-menu-container img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #FFD700;
+    margin-bottom: 15px;
+}
+
+.user-menu-container h6 {
+    color: #FFFFFF;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.user-menu-container p {
+    color: #CCCCCC;
+    margin-bottom: 5px;
+}
+
+.user-menu-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.user-menu-buttons button {
+    flex: 1;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.user-menu-buttons .profile-btn {
+    background-color: #FFD700;
+    color: #000000;
+}
+
+.user-menu-buttons .logout-btn {
+    background-color: #FF4136;
+    color: #FFFFFF;
+}
+
+.user-menu-buttons .profile-btn:hover {
+    background-color: #E5C100;
+    transform: translateY(-2px);
+}
+
+.user-menu-buttons .logout-btn:hover {
+    background-color: #D73229;
+    transform: translateY(-2px);
+}
+
+/* أنماط لـ SweetAlert2 */
+.dark-swal {
+    background-color: #1a1a1a !important;
+    color: #FFFFFF !important;
+}
+
+.dark-swal .swal2-title {
+    color: #FFFFFF !important;
+}
+
+.dark-swal .swal2-content {
+    color: #CCCCCC !important;
+}
+
+.dark-swal .swal2-confirm {
+    background-color: #FFD700 !important;
+    color: #000000 !important;
+    font-weight: bold !important;
+}
+
+.dark-swal .swal2-deny {
+    background-color: #FF4136 !important;
+}
+
+.dark-swal .swal2-cancel {
+    background-color: #6c757d !important;
+}
+
+
+
+
+
+
+
+
+/* تحسينات أنماط التحقق من النماذج */
+.form-control.is-valid,
+.was-validated .form-control:valid {
+    border-color: #28a745 !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: left 10px center;
+    background-size: 14px 14px;
+    padding-left: 30px;
+}
+
+.form-control.is-invalid,
+.was-validated .form-control:invalid {
+    border-color: #dc3545 !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23dc3545' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: left 10px center;
+    background-size: 14px 14px;
+    padding-left: 30px;
+}
+
+.invalid-feedback {
+    display: none;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 0.875em;
+    color: #dc3545;
+}
+
+.was-validated .form-control:invalid ~ .invalid-feedback,
+.form-control.is-invalid ~ .invalid-feedback {
+    display: block;
+}
+
+/* تحسينات نموذج التسجيل */
+.registration-section {
+    background-color: #1a1a1a;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.section-title {
+    color: #FFD700;
+    margin-bottom: 15px;
+    font-weight: bold;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+    padding-bottom: 10px;
+}
+
+.user-photo-upload, .driver-photo-upload {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #2a2a2a;
+    overflow: hidden;
+    position: relative;
+    margin: 0 auto;
+    cursor: pointer;
+    border: 3px dashed #FFD700;
+    transition: all 0.3s ease;
+}
+
+.user-photo-upload:hover, .driver-photo-upload:hover {
+    border-color: #FFFFFF;
+    transform: scale(1.05);
+}
+
+.user-photo-upload img, .driver-photo-upload img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+}
+
+.upload-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+}
+
+.upload-placeholder i {
+    font-size: 2rem;
+    color: #FFD700;
+    margin-bottom: 10px;
+}
+
+/* تحسينات خاصة بمسار RTL */
+.form-control {
+    text-align: right;
+}
+
+.form-check-input {
+    margin-left: 0.5rem;
+    margin-right: 0;
+}
+
+.form-check-label {
+    margin-right: 0.5rem;
+    margin-left: 0;
+}
+
+/* تأثيرات حركية للأزرار */
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+}
+
+.btn-gold {
+    background-color: #FFD700;
+    color: #000000;
+    border-color: #FFD700;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn-gold:hover {
+    background-color: #F8C400;
+    border-color: #F8C400;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+}
+
+/* تحسين رسائل الخطأ */
+.validation-message {
+    display: none;
+    font-size: 0.85rem;
+    color: #dc3545;
+    margin-top: 5px;
+}
+
+input:invalid + .validation-message {
+    display: block;
+}
+
+/* أنماط Sweetalert2 المخصصة */
+.swal2-popup {
+    font-family: 'Cairo', sans-serif;
+    border-radius: 15px;
+}
+
+.dark-swal .swal2-title {
+    font-family: 'Cairo', sans-serif;
+    font-weight: bold;
+}
+
+.user-registration-success {
+    text-align: center;
+    padding: 15px;
+}
+
+.user-registration-success p {
+    margin-bottom: 10px;
+}
+
+.user-registration-success .text-muted {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+
+
+/* أنماط شريط العنوان المحسن */
+.app-header {
+    background-color: #262626;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    padding: 0;
+    height: 64px;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    padding: 0 10px;
+}
+
+/* أزرار شريط العنوان */
+.menu-btn, .tool-btn, .profile-btn {
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFD700;
+    transition: all 0.2s ease;
+}
+
+.menu-btn:hover, .tool-btn:hover, .profile-btn:hover {
+    background-color: rgba(255, 215, 0, 0.1);
+    transform: scale(1.05);
+}
+
+.menu-btn:active, .tool-btn:active, .profile-btn:active {
+    transform: scale(0.95);
+}
+
+.menu-btn i, .tool-btn i {
+    font-size: 1.2rem;
+}
+
+/* شعار وعنوان التطبيق */
+.logo-container {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    gap: 10px;
+}
+
+.logo-wrapper {
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid #FFD700;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.app-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #FFD700;
+    margin: 0;
+}
+
+/* أدوات الشريط */
+.header-tools {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* شارات الإشعارات */
+.badge {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    min-width: 18px;
+    height: 18px;
+    background-color: #dc3545;
+    color: white;
+    border-radius: 10px;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    border: 1px solid #262626;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+}
+
+.tool-btn {
+    position: relative;
+}
+
+/* زر الملف الشخصي */
+.profile-btn {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+
+.profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+}
+
+#defaultProfileIcon {
+    font-size: 1.5rem;
+    color: #FFD700;
+}
+
+/* تعديلات للشاشات الصغيرة */
+@media (max-width: 576px) {
+    .app-title {
+        font-size: 1rem;
+    }
+    
+    .menu-btn, .tool-btn, .profile-btn {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .header-tools {
+        gap: 5px;
+    }
+    
+    .logo-wrapper {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .badge {
+        min-width: 16px;
+        height: 16px;
+        font-size: 0.6rem;
+    }
+}
+
+
+/* أنماط شريط العنوان المحسن مع إصلاح مشاكل التنسيق */
+.app-header {
+    background-color: #262626;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    padding: 0;
+    height: 60px;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+/* تنسيق زر تبديل القائمة الجانبية */
+.nav-toggle {
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.nav-toggle:hover {
+    background-color: rgba(255, 215, 0, 0.1);
+    transform: scale(1.05);
+}
+
+.nav-toggle:active {
+    transform: scale(0.95);
+}
+
+/* تنسيق شعار وعنوان التطبيق */
+.app-logo {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, transparent 100%);
+    border-radius: 10px;
+    padding: 5px 10px;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.app-logo:hover {
+    background: rgba(255, 215, 0, 0.1);
+    transform: translateY(-2px);
+    border-color: rgba(255, 215, 0, 0.4);
+}
+
+.app-logo i {
+    font-size: 1.3rem;
+}
+
+.app-logo span {
+    color: #FFD700;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+/* تنسيق أزرار الأدوات */
+.tools {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tools .nav-link {
+    background: transparent;
+    border-radius: 8px;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.tools .nav-link:hover {
+    background-color: rgba(255, 215, 0, 0.1);
+    transform: scale(1.05);
+}
+
+.tools .nav-link:active {
+    transform: scale(0.95);
+}
+
+.tools .nav-link i {
+    font-size: 1.1rem;
+}
+
+/* تنسيق زر الملف الشخصي */
+.user-profile-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 20px !important;
+    width: auto !important;
+    background: rgba(255, 215, 0, 0.05);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    padding: 5px 15px !important;
+}
+
+.user-profile-btn:hover {
+    background: rgba(255, 215, 0, 0.1);
+    border-color: rgba(255, 215, 0, 0.3);
+}
+
+.user-profile-btn #defaultProfileIcon {
+    font-size: 1.2rem;
+}
+
+.user-profile-btn #profileText {
+    color: #FFFFFF;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.user-profile-btn:hover #profileText {
+    color: #FFD700;
+}
+
+/* تنسيق شارات الإشعارات */
+.notification-badge, .message-badge {
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border: 2px solid #262626;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+/* تعديلات للشاشات الصغيرة */
+@media (max-width: 576px) {
+    .app-logo {
+        padding: 5px 8px;
+    }
+    
+    .app-logo i {
+        font-size: 1.1rem;
+    }
+    
+    .app-logo span {
+        font-size: 0.7rem;
+    }
+    
+    .tools {
+        gap: 5px;
+    }
+    
+    .tools .nav-link {
+        width: 34px;
+        height: 34px;
+    }
+    
+    .tools .nav-link i {
+        font-size: 1rem;
+    }
+    
+    .user-profile-btn {
+        padding: 3px 10px !important;
+    }
+    
+    .user-profile-btn #defaultProfileIcon {
+        font-size: 1.1rem;
+    }
 }

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إضافة منتج جديد</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">إضافة منتج جديد</h1>
+        <form id="add-product-form">
+            <div class="mb-3">
+                <label for="product-name" class="form-label">اسم المنتج</label>
+                <input type="text" class="form-control" id="product-name" required>
+            </div>
+            <div class="mb-3">
+                <label for="product-category" class="form-label">الفئة</label>
+                <select class="form-select" id="product-category" required>
+                    <option value="furniture">أثاث منزلي</option>
+                    <option value="electronics">إلكترونيات</option>
+                    <option value="kitchen">مطبخ</option>
+                    <option value="appliances">أجهزة كهربائية</option>
+                    <option value="furnishings">مفروشات</option>
+                    <option value="lighting">إضاءة</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="product-price" class="form-label">السعر</label>
+                <input type="number" class="form-control" id="product-price" required>
+            </div>
+            <div class="mb-3">
+                <label for="product-image" class="form-label">رابط الصورة</label>
+                <input type="url" class="form-control" id="product-image" required>
+            </div>
+            <button type="submit" class="btn btn-primary">إضافة المنتج</button>
+        </form>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script>
+        // تهيئة Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyDGpAHia_wEmrhnmYjrPf1n1TrAzwEMiAI",
+            authDomain: "messageemeapp.firebaseapp.com",
+            databaseURL: "https://messageemeapp-default-rtdb.firebaseio.com",
+            projectId: "messageemeapp",
+            storageBucket: "messageemeapp.appspot.com",
+            messagingSenderId: "255034474844",
+            appId: "1:255034474844:web:5e3b7a6bc4b2fb94cc4199"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        // إضافة منتج جديد
+        document.getElementById('add-product-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const product = {
+                name: document.getElementById('product-name').value,
+                category: document.getElementById('product-category').value,
+                price: parseFloat(document.getElementById('product-price').value),
+                image: document.getElementById('product-image').value,
+            };
+            database.ref('products55').push(product);
+            alert('تمت إضافة المنتج بنجاح!');
+            document.getElementById('add-product-form').reset();
+        });
+    </script>
+</body>
+</html>

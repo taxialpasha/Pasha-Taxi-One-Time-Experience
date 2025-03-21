@@ -1,30 +1,4 @@
 // User Authentication and Notifications System
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-messaging.js";
-
-// Initialize Firebase Authentication and get a reference to the service
-const auth = getAuth();
-const messaging = getMessaging();
-
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    // User is signed in, get FCM token
-    getToken(messaging, { vapidKey: 'BI9cpoewcZa1ftyZ_bGjO0GYa4_cT0HNja4YFd6FwLwHg5c0gQ5iSj_MJZRhMxKdgJ0-d-_rEXcpSQ_cx7GqCSc' }).then((currentToken) => {
-      if (currentToken) {
-        console.log('FCM Token:', currentToken);
-        // Send the token to your server and update the UI if necessary
-      } else {
-        console.log('No registration token available. Request permission to generate one.');
-      }
-    }).catch((err) => {
-      console.log('An error occurred while retrieving token. ', err);
-    });
-  } else {
-    // User is signed out
-    console.log('User is signed out');
-  }
-});
-
 class UserAuthSystem {
     constructor() {
         this.database = firebase.database();
@@ -63,11 +37,7 @@ class UserAuthSystem {
             driverRegistrationForm.addEventListener('submit', (e) => this.handleDriverRegistration(e));
         }
 
-        // زر تسجيل الخروج
-        const logoutButton = document.createElement('button');
-        logoutButton.className = 'nav-link';
        
-        logoutButton.onclick = () => this.handleLogout();
         
         // إضافة زر تسجيل الخروج إلى القائمة
         const toolsContainer = document.querySelector('.tools');
@@ -335,7 +305,7 @@ class UserAuthSystem {
         const messageBadge = document.querySelector('.message-badge');
         const notificationBadge = document.querySelector('.notification-badge');
         if (messageBadge) messageBadge.style.display = 'none';
-        if (notificationBadge) messageBadge.style.display = 'none';
+        if (notificationBadge) notificationBadge.style.display = 'none';
     }
 }
 

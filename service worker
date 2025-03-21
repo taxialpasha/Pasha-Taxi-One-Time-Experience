@@ -1,0 +1,124 @@
+// firebase-messaging-sw.js
+importScripts('https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js');
+importScripts('https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js');
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDGpAHia_wEmrhnmYjrPf1n1TrAzwEMiAI",
+  authDomain: "messageemeapp.firebaseapp.com",
+  projectId: "messageemeapp",
+  storageBucket: "messageemeapp.appspot.com",
+  messagingSenderId: "255034474844",
+  appId: "1:255034474844:web:5e3b7a6bc4b2fb94cc4199"
+};
+
+firebase.initializeApp(firebaseConfig);
+const messaging = firebase.messaging();
+
+// تكوين الإشعارات المتقدم
+const notificationConfig = {
+  default: {
+    requireInteraction: true,  // إبقاء الإشعار حتى يتفاعل المستخدم
+    silent: false,             // تشغيل الصوت
+    vibrate: [200, 100, 200], // نمط الاهتزاز
+    badge: '/icon-badge.png',  // شارة الإشعار
+    icon: '/icon.png',         // أيقونة الإشعار
+    tag: 'taxi-notification',  // معرف الإشعار
+    renotify: true,           // السماح بتكرار الإشعارات
+    actions: [                 // أزرار الإجراءات
+      {
+        action: 'open_app',
+        title: 'فتح التطبيق',
+        icon: '/open-icon.png'
+      },
+      {
+        action: 'dismiss',
+        title: 'إغلاق',
+        icon: '/dismiss-icon.png'
+      }
+    ]
+  },
+  urgent: {                    // إعدادات الإشعارات العاجلة
+    requireInteraction: true,
+    silent: false,
+    vibrate: [400, 100, 400, 100, 400],
+    priority: 'high',
+    actions: [
+      {
+        action: 'urgent_open',
+        title: 'فتح الآن',
+        icon: '/urgent-icon.png'
+      }
+    ]
+  }
+};
+
+// معالجة الإشعارات في الخلفية
+messaging.onBackgroundMessage(payload => {
+  console.log('[firebase-messaging-sw.js] Received background message:', payload);
+
+  const notificationType = payload.data?.type || 'default';
+  const config = notificationConfig[notificationType];
+
+  const notificationOptions = {
+    ...config,
+    body: payload.notification.body,
+    title: payload.notification.title,
+    data: {
+      url: payload.data?.url || '/',
+      timestamp: Date.now(),
+      type: notificationType
+    },
+    timestamp: Date.now(),
+    dir: 'rtl',
+    lang: 'ar',
+    image: payload.notification.image,
+    icon: payload.notification.icon || config.icon,
+    sound: '/notification-sound.mp3'
+  };
+
+  // عرض الإشعار
+  return self.registration.showNotification(
+    notificationOptions.title,
+    notificationOptions
+  );
+});
+
+// معالجة النقر على الإشعار
+self.addEventListener('notificationclick', event => {
+  const notification = event.notification;
+  const action = event.action;
+  const data = notification.data;
+
+  notification.close();
+
+  if (action === 'dismiss') return;
+
+  // فتح التطبيق في النافذة الحالية أو فتح نافذة جديدة
+  const urlToOpen = data.url || '/';
+  event.waitUntil(
+    clients.matchAll({
+      type: 'window',
+      includeUncontrolled: true
+    }).then(windowClients => {
+      // البحث عن نافذة مفتوحة للتطبيق
+      for (let client of windowClients) {
+        if (client.url.includes(urlToOpen) && 'focus' in client) {
+          return client.focus();
+        }
+      }
+      // فتح نافذة جديدة إذا لم تكن هناك نافذة مفتوحة
+      if (clients.openWindow) {
+        return clients.openWindow(urlToOpen);
+      }
+    })
+  );
+});
+
+// تحديث الإشعار
+self.addEventListener('notificationclose', event => {
+  const notification = event.notification;
+  const data = notification.data;
+
+  // يمكنك هنا تتبع إحصائيات إغلاق الإشعارات
+  console.log('Notification closed:', data);
+});

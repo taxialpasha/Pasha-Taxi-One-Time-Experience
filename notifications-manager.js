@@ -1,51 +1,11 @@
 // نظام إدارة الإشعارات لتطبيق تاكسي العراق
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-import { getMessaging, onMessage } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-messaging.js";
-
-// Firebase configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyDGpAHia_wEmrhnmYjrPf1n1TrAzwEMiAI",
-    authDomain: "messageemeapp.firebaseapp.com",
-    databaseURL: "https://messageemeapp-default-rtdb.firebaseio.com",
-    projectId: "messageemeapp",
-    storageBucket: "messageemeapp.appspot.com",
-    messagingSenderId: "255034474844",
-    appId: "1:255034474844:web:5e3b7a6bc4b2fb94cc4199"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const messaging = getMessaging(app);
-
-// Handle incoming messages
-onMessage(messaging, (payload) => {
-  console.log('Message received. ', payload);
-  // Play notification sound
-  const notificationSound = document.getElementById('notificationSound');
-  if (notificationSound) {
-    notificationSound.play();
-  }
-  // Show notification
-  showNotification(payload.notification.title, payload.notification.body);
-});
-
-function showNotification(title, body) {
-  const notification = new Notification(title, {
-    body: body,
-    icon: 'path/to/icon.png'
-  });
-  notification.onclick = () => {
-    window.focus();
-  };
-}
-
 class NotificationsManager {
     constructor() {
         this.database = firebase.database();
         this.storage = firebase.storage();
         this.notifications = [];
         this.unreadCount = 0;
-        this.notificationSound = document.getElementById('notificationSound') || new Audio('https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/%D9%86%D8%BA%D9%85%D8%A7%D8%AA%20%D8%AA%D9%83%D8%B3%D9%8A%20%D8%A7%D9%84%D8%A8%D8%A7%D8%B4%D9%87%2F%D8%A7%D9%84%D8%B1%D8%B3%D8%A7%D8%A6%D9%84-%D8%A7%D9%84%D9%82%D8%B5%D9%8A%D8%B1%D8%A9-%D8%A7%D9%84%D8%A3%D9%86%D9%8A%D9%82%D8%A9.mp3?alt=media&token=94afec9b-097d-471c-a1f6-ee051f95ae0f');
+        this.notificationSound = document.getElementById('notificationSound') || new Audio('https://github.com/AlQasimMall/taxialpasha/raw/main/%D8%A7%D9%84%D9%87%D8%A7%D8%AA%D9%81-%D8%A7%D9%84%D8%AB%D8%A7%D8%A8%D8%AA.mp3');
         this.userId = localStorage.getItem('userId') || this.generateUserId();
         this.userLocation = null;
         
@@ -460,22 +420,18 @@ class NotificationsManager {
     }
     
     // التحقق مما إذا كان السائق في نفس منطقة المستخدم
-    isDriverInUserLocation(driver, user) {
-        if (!driver || !user) return false;
+    isDriverInUserLocation(driverLocation) {
+        // إذا لم يكن لدينا معلومات عن موقع المستخدم، نفترض أنه في نفس المنطقة
+        if (!this.userLocation) return true;
         
-        if (!driver.province && !driver.area && !driver.location) return true;
-        if (!user.province && !user.area) return true;
+        // تحويل المواقع إلى نصوص للمقارنة
+        const userLocationStr = typeof this.userLocation === 'string' ? 
+            this.userLocation.toLowerCase() : JSON.stringify(this.userLocation).toLowerCase();
+        const driverLocationStr = driverLocation.toLowerCase();
         
-        const driverProvince = (driver.province || driver.location || '').toString().toLowerCase();
-        const driverArea = (driver.area || '').toString().toLowerCase();
-        
-        const userProvince = (user.province || '').toString().toLowerCase();
-        const userArea = (user.area || '').toString().toLowerCase();
-        
-        return driverProvince.includes(userProvince) || 
-               userProvince.includes(driverProvince) || 
-               driverArea.includes(userArea) || 
-               userArea.includes(driverArea);
+        // التحقق من وجود تطابق في الاسم
+        return userLocationStr.includes(driverLocationStr) || 
+               driverLocationStr.includes(userLocationStr);
     }
     
     // إنشاء إشعار للسائق الجديد
