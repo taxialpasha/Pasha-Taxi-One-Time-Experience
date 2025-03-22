@@ -791,3 +791,24 @@ async function loadUserData(user) {
         console.error('Error loading user data:', error);
     }
 }
+
+// عرض نافذة تأكيد تسجيل الدخول
+function showLoginPrompt(message) {
+    Swal.fire({
+        title: 'مطلوب تسجيل الدخول',
+        text: message,
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonText: 'تسجيل الدخول',
+        cancelButtonText: 'إلغاء',
+        confirmButtonColor: '#FFD700',
+        background: '#1a1a1a',
+        color: '#FFFFFF'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // فتح نافذة تسجيل الدخول
+            const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+            loginModal.show();
+        }
+    });
+}

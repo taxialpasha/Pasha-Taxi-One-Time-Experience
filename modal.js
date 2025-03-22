@@ -3,7 +3,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const modalElement = document.getElementById('myModal');
     if (modalElement) {
         try {
-            const modalInstance = new bootstrap.Modal(modalElement);
+            const modalInstance = new bootstrap.Modal(modalElement, {
+                backdrop: 'static'
+            });
             
             // Ejemplo de mostrar el modal (si existe el botón)
             const openButton = document.getElementById('openModalButton');
@@ -29,12 +31,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const exampleModalElement = document.getElementById('exampleModal');
     if (exampleModalElement) {
         try {
-            new bootstrap.Modal(exampleModalElement, {
+            const modalInstance = new bootstrap.Modal(exampleModalElement, {
                 keyboard: false
             });
             
             // Para mostrar el modal si es necesario
-            // myModal.show();
+            // modalInstance.show();
         } catch (error) {
             console.error("Error al inicializar exampleModal:", error);
         }
