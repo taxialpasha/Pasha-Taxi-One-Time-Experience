@@ -522,6 +522,50 @@ function showUserMenu(event) {
 <!-- Application CSS -->
 <style>
  
+    /* تعديل المسافات بين شريط القصص والعناصر المجاورة */
+    .stories-container {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding-top: 55px;
+    }
+
+    #map {
+        margin-top: 5px;
+        height: calc(100vh - 150px);
+    }
+
+    .story-item {
+        margin: 0 5px;
+    }
+
+    .app-header + .stories-container {
+        position: relative;
+        z-index: 10;
+    }
+
+    .app-header {
+        height: 55px;
+    }
+
+    .location-filter {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    @media (max-width: 768px) {
+        .stories-container {
+            padding-top: 60px;
+        }
+        
+        #map {
+            height: calc(100vh - 180px);
+        }
+        
+        .story-item {
+            margin: 0 3px;
+        }
+    }
+
 </style>
 </head>
 
@@ -672,7 +716,7 @@ function showUserMenu(event) {
     <div class="side-nav-items">
         <a href="/" class="side-nav-item"><i class="fas fa-home" style="color: #FFD700;"></i> الرئيسية</a>
         <a href="drivers.html" class="side-nav-item"><i class="fas fa-users" style="color: #4CAF50;"></i> السائقين</a>
-        <a href="Instagram interface.html" class="side-nav-item"><i class="fas fa-car" style="color: #2196F3;"></i> الرحلات</a>
+        <a href="trip1s.html" class="side-nav-item"><i class="fas fa-car" style="color: #2196F3;"></i> الرحلات</a>
         <a href="map.html" class="side-nav-item"><i class="fas fa-map" style="color: #FF5722;"></i> الخريطة</a>
         <a href="notifications.html" class="side-nav-item"><i class="fas fa-bell" style="color: #9C27B0;"></i> الإشعارات</a>
         <a href="messages.html" class="side-nav-item"><i class="fas fa-envelope" style="color: #FFC107;"></i> الرسائل</a>
@@ -901,161 +945,9 @@ function showUserMenu(event) {
     <!-- Main Content -->
     <div class="container">
         <!-- Map View -->
-        <div id="map"></div>
+     
 
-        <!-- Location Filter -->
-        <div class="location-filter">
-            <div class="location-chips" id="locationFilter">
-                <span class="location-chip active" data-location="all">
-                    <i class="fas fa-globe"></i>
-                    الكل
-                </span>
-                <span class="location-chip" data-location="بغداد">
-                    <i class="fas fa-map-marker-alt"></i>
-                    بغداد
-                </span>
-                <span class="location-chip" data-location="الكرخ">
-                    <i class="fas fa-map-marker-alt"></i>
-                    الكرخ
-                </span>
-                <span class="location-chip" data-location="الرصافة">
-                    <i class="fas fa-map-marker-alt"></i>
-                    الرصافة
-                </span>
-                <span class="location-chip" data-location="البصرة">
-                    <i class="fas fa-map-marker-alt"></i>
-                    البصرة
-                </span>
-                <span class="location-chip" data-location="نينوى">
-                    <i class="fas fa-map-marker-alt"></i>
-                    نينوى
-                </span>
-                <span class="location-chip" data-location="الموصل">
-                    <i class="fas fa-map-marker-alt"></i>
-                    الموصل
-                </span>
-                <span class="location-chip" data-location="النجف">
-                    <i class="fas fa-map-marker-alt"></i>
-                    النجف
-                </span>
-                <span class="location-chip" data-location="الكوفة">
-                    <i class="fas fa-map-marker-alt"></i>
-                    الكوفة
-                </span>
-                <span class="location-chip" data-location="كربلاء">
-                    <i class="fas fa-map-marker-alt"></i>
-                    كربلاء
-                </span>
-                <span class="location-chip" data-location="الحسينية">
-                    <i class="fas fa-map-marker-alt"></i>
-                    الحسينية
-                </span>
-                <span class="location-chip" data-location="أربيل">
-                    <i class="fas fa-map-marker-alt"></i>
-                    أربيل
-                </span>
-                <span class="location-chip" data-location="كركوك">
-                    <i class="fas fa-map-marker-alt"></i>
-                    كركوك
-                </span>
-                <span class="location-chip" data-location="الأنبار">
-                    <i class="fas fa-map-marker-alt"></i>
-                    الأنبار
-                </span>
-                <span class="location-chip" data-location="الرمادي">
-                    <i class="fas fa-map-marker-alt"></i>
-                    الرمادي
-                </span>
-                <span class="location-chip" data-location="الفلوجة">
-                    <i class="fas fa-map-marker-alt"></i>
-                    الفلوجة
-                </span>
-                <span class="location-chip" data-location="بابل">
-                    <i class="fas fa-map-marker-alt"></i>
-                    بابل
-                </span>
-                <span class="location-chip" data-location="الحلة">
-                    <i class="fas fa-map-marker-alt"></i>
-                    الحلة
-                </span>
-                <span class="location-chip" data-location="المسيب">
-                    <i class="fas fa-map-marker-alt"></i>
-                    المسيب
-                </span>
-                <span class="location-chip" data-location="الهاشمية">
-                    <i class="fas fa-map-marker-alt"></i>
-                    الهاشمية
-                </span>
-                <span class="location-chip" data-location="القاسم">
-                    <i class="fas fa-map-marker-alt"></i>
-                    القاسم
-                </span>
-                <span class="location-chip" data-location="ديالى">
-                    <i class="fas fa-map-marker-alt"></i>
-                    ديالى
-                </span>
-                <span class="location-chip" data-location="بعقوبة">
-                    <i class="fas fa-map-marker-alt"></i>
-                    بعقوبة
-                </span>
-                <span class="location-chip" data-location="ذي قار">
-                    <i class="fas fa-map-marker-alt"></i>
-                    ذي قار
-                </span>
-                <span class="location-chip" data-location="الناصرية">
-                    <i class="fas fa-map-marker-alt"></i>
-                    الناصرية
-                </span>
-                <span class="location-chip" data-location="السليمانية">
-                    <i class="fas fa-map-marker-alt"></i>
-                    السليمانية
-                </span>
-                <span class="location-chip" data-location="صلاح الدين">
-                    <i class="fas fa-map-marker-alt"></i>
-                    صلاح الدين
-                </span>
-                <span class="location-chip" data-location="تكريت">
-                    <i class="fas fa-map-marker-alt"></i>
-                    تكريت
-                </span>
-                <span class="location-chip" data-location="واسط">
-                    <i class="fas fa-map-marker-alt"></i>
-                    واسط
-                </span>
-                <span class="location-chip" data-location="الكوت">
-                    <i class="fas fa-map-marker-alt"></i>
-                    الكوت
-                </span>
-                <span class="location-chip" data-location="ميسان">
-                    <i class="fas fa-map-marker-alt"></i>
-                    ميسان
-                </span>
-                <span class="location-chip" data-location="العمارة">
-                    <i class="fas fa-map-marker-alt"></i>
-                    العمارة
-                </span>
-                <span class="location-chip" data-location="المثنى">
-                    <i class="fas fa-map-marker-alt"></i>
-                    المثنى
-                </span>
-                <span class="location-chip" data-location="السماوة">
-                    <i class="fas fa-map-marker-alt"></i>
-                    السماوة
-                </span>
-                <span class="location-chip" data-location="دهوك">
-                    <i class="fas fa-map-marker-alt"></i>
-                    دهوك
-                </span>
-                <span class="location-chip" data-location="القادسية">
-                    <i class="fas fa-map-marker-alt"></i>
-                    القادسية
-                </span>
-                <span class="location-chip" data-location="الديوانية">
-                    <i class="fas fa-map-marker-alt"></i>
-                    الديوانية
-                </span>
-
-            </div>
+      
 
         </div>
 
@@ -1307,104 +1199,7 @@ function showUserMenu(event) {
     <div class="loading-spinner" id="loadingSpinner">
         <div class="spinner"></div>
     </div>
-    <!-- نافذة تعديل بيانات السائق -->
-    <div class="modal fade" id="editDriverModal" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">تعديل بيانات السائق</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="editDriverForm" onsubmit="handleEditDriver(event)">
-                        <input type="hidden" id="editDriverId">
-
-                        <div class="mb-4 text-center">
-                            <div class="image-upload-container"
-                                onclick="document.getElementById('editDriverImage').click()">
-                                <input type="file" id="editDriverImage" accept="image/*" style="display: none"
-                                    onchange="handleEditImagePreview(event)">
-                                <img id="editImagePreview" src="#" alt=""
-                                    style="display: none; width: 100%; height: 200px; object-fit: cover; border-radius: 10px;">
-                                <div class="upload-placeholder">
-                                    <i class="fas fa-camera fa-2x mb-2"></i>
-                                    <p>انقر لتغيير الصورة</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label class="form-label">اسم السائق</label>
-                                <input type="text" class="form-control" id="editDriverName" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">رقم الهاتف</label>
-                                <input type="tel" class="form-control" id="editDriverPhone" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">نوع السيارة</label>
-                                <input type="text" class="form-control" id="editCarType" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">موديل السيارة</label>
-                                <input type="number" class="form-control" id="editCarModel" required>
-                            </div>
-                            <div class="col-md-12">
-                                <label class="form-label">المنطقة</label>
-                                <select class="form-control" id="editDriverLocation" required>
-                                    <option value="">اختر المحافظة</option>
-                                    <option value="بغداد">بغداد</option>
-                                    <option value="الكرخ">الكرخ</option>
-                                    <option value="الرصافة">الرصافة</option>
-                                    <option value="البصرة">البصرة</option>
-                                    <option value="نينوى">نينوى</option>
-                                    <option value="الموصل">الموصل</option>
-                                    <option value="النجف">النجف</option>
-                                    <option value="الكوفة">الكوفة</option>
-                                    <option value="كربلاء">كربلاء</option>
-                                    <option value="الحسينية">الحسينية</option>
-                                    <option value="أربيل">أربيل</option>
-                                    <option value="كركوك">كركوك</option>
-                                    <option value="الأنبار">الأنبار</option>
-                                    <option value="الرمادي">الرمادي</option>
-                                    <option value="الفلوجة">الفلوجة</option>
-                                    <option value="بابل">بابل</option>
-                                    <option value="الحلة">الحلة</option>
-                                    <option value="المسيب">المسيب</option>
-                                    <option value="الهاشمية">الهاشمية</option>
-                                    <option value="القاسم">القاسم</option>
-                                    <option value="ديالى">ديالى</option>
-                                    <option value="بعقوبة">بعقوبة</option>
-                                    <option value="ذي قار">ذي قار</option>
-                                    <option value="الناصرية">الناصرية</option>
-                                    <option value="السليمانية">السليمانية</option>
-                                    <option value="صلاح الدين">صلاح الدين</option>
-                                    <option value="تكريت">تكريت</option>
-                                    <option value="واسط">واسط</option>
-                                    <option value="الكوت">الكوت</option>
-                                    <option value="ميسان">ميسان</option>
-                                    <option value="العمارة">العمارة</option>
-                                    <option value="المثنى">المثنى</option>
-                                    <option value="السماوة">السماوة</option>
-                                    <option value="دهوك">دهوك</option>
-                                    <option value="القادسية">القادسية</option>
-                                    <option value="الديوانية">الديوانية</option>
-                                    <!-- إضافة باقي المدن -->
-                                </select>
-                            </div>
-                            <div class="col-12">
-                                <label class="form-label">معلومات إضافية</label>
-                                <textarea class="form-control" id="editDriverBio" rows="3"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="mt-4">
-                            <button type="submit" class="btn btn-primary w-100">حفظ التغييرات</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+   
         </div>
     </div>
 
@@ -1523,51 +1318,7 @@ function showUserMenu(event) {
             </div>
         </div>
     </div>
-    <!-- تعديل نافذة اختيار نوع الحساب -->
-    <div class="modal fade" id="profileModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header border-0 text-center">
-                    <h5 class="modal-title w-100">اختر العملية</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body py-4">
-                    <div class="row g-4">
-                        <!-- زر تسجيل الدخول -->
-                        <div class="col-12 mb-3">
-                            <div class="account-type-card" onclick="openLoginModal()">
-                                <div class="icon-container mb-3">
-                                    <i class="fas fa-sign-in-alt fa-3x"></i>
-                                </div>
-                                <h6>تسجيل الدخول</h6>
-                                <p class="small text-muted">لديك حساب بالفعل؟ سجل دخولك</p>
-                            </div>
-                        </div>
-                        <!-- زر انشاء حساب -->
-                        <div class="col-12">
-                            <div class="account-type-card" onclick="openUserRegistration()">
-                                <div class="icon-container mb-3">
-                                    <i class="fas fa-user fa-3x"></i>
-                                </div>
-                                <h6>انشاء حساب</h6>
-                                <p class="small text-muted">احجز رحلاتك بسهولة</p>
-                            </div>
-                        </div>
-                        <!-- زر إضافة سائق -->
-                        <div class="col-12">
-                            <div class="account-type-card" onclick="showAddDriverModal()">
-                                <div class="icon-container mb-3">
-                                    <i class="fas fa-user-plus fa-3x"></i>
-                                </div>
-                                <h6>إضافة سائق</h6>
-                                <p class="small text-muted">أضف سائق جديد إلى النظام</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+  
 
     <!-- نافذة تسجيل الدخول -->
     <div class="modal fade" id="loginModal" tabindex="-1">
@@ -1599,175 +1350,7 @@ function showUserMenu(event) {
         </div>
     </div>
 
-    <!-- نافذة تسجيل السائق -->
-    <div class="modal fade" id="driverRegistrationModal" tabindex="-1">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div class="text-center w-100">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/driver-images%2F7605a607-6cf8-4b32-aee1-fa7558c98452.png?alt=media&token=5cf9e67c-ba6e-4431-a6a0-79dede15b527"
-                            alt="شعار التطبيق" style="height: 60px;">
-                        <h5 class="modal-title mt-2">تسجيل سائق جديد</h5>
-                    </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="driverRegistrationForm" class="needs-validation" novalidate>
-                        <!-- المعلومات الشخصية -->
-                        <div class="registration-section mb-4">
-                            <h6 class="section-title">المعلومات الشخصية</h6>
-                            <div class="row g-3">
-                                <div class="col-12">
-                                    <div class="text-center mb-3">
-                                        <div class="driver-photo-upload"
-                                            onclick="document.getElementById('driverPhoto').click()">
-                                            <img id="driverPhotoPreview" src="#" alt="">
-                                            <div class="upload-placeholder">
-                                                <i class="fas fa-camera"></i>
-                                                <span>صورة شخصية</span>
-                                            </div>
-                                        </div>
-                                        <input type="file" id="driverPhoto" accept="image/*" style="display: none;"
-                                            onchange="previewDriverPhoto(this)">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <label class="form-label">الاسم الثلاثي</label>
-                                    <input type="text" class="form-control" name="fullName" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">العمر</label>
-                                    <input type="number" class="form-control" name="age" min="18" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">رقم الهاتف</label>
-                                    <input type="tel" class="form-control" name="phone" required>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- معلومات المركبة -->
-                        <div class="registration-section mb-4">
-                            <h6 class="section-title">معلومات المركبة</h6>
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label class="form-label">نوع المركبة</label>
-                                    <select class="form-select" name="vehicleType" required>
-                                        <option value="">اختر نوع المركبة</option>
-                                        <option value="أجرة">أجرة</option>
-                                        <option value="خصوصي">خصوصي</option>
-                                        <option value="باص">باص</option>
-                                        <option value="صالون">صالون</option>
-                                        <option value="تحميل">تحميل</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">موديل المركبة</label>
-                                    <input type="number" class="form-control" name="vehicleModel" min="1990" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">رقم المركبة</label>
-                                    <input type="text" class="form-control" name="vehicleNumber" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">لون المركبة</label>
-                                    <input type="text" class="form-control" name="vehicleColor" required>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- المستمسكات -->
-                        <div class="registration-section mb-4">
-                            <h6 class="section-title">المستمسكات</h6>
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label class="form-label">صورة الهوية الوجه الأمامي</label>
-                                    <div class="document-upload" onclick="document.getElementById('idFront').click()">
-                                        <div class="upload-placeholder">
-                                            <i class="fas fa-id-card"></i>
-                                            <span>اضغط للرفع</span>
-                                        </div>
-                                        <img id="idFrontPreview" src="#" alt="">
-                                    </div>
-                                    <input type="file" id="idFront" accept="image/*" style="display: none;"
-                                        onchange="previewDocument(this, 'idFrontPreview')" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">صورة الهوية الوجه الخلفي</label>
-                                    <div class="document-upload" onclick="document.getElementById('idBack').click()">
-                                        <div class="upload-placeholder">
-                                            <i class="fas fa-id-card"></i>
-                                            <span>اضغط للرفع</span>
-                                        </div>
-                                        <img id="idBackPreview" src="#" alt="">
-                                    </div>
-                                    <input type="file" id="idBack" accept="image/*" style="display: none;"
-                                        onchange="previewDocument(this, 'idBackPreview')" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">إجازة السوق الوجه الأمامي</label>
-                                    <div class="document-upload"
-                                        onclick="document.getElementById('licenseFront').click()">
-                                        <div class="upload-placeholder">
-                                            <i class="fas fa-id-card"></i>
-                                            <span>اضغط للرفع</span>
-                                        </div>
-                                        <img id="licenseFrontPreview" src="#" alt="">
-                                    </div>
-                                    <input type="file" id="licenseFront" accept="image/*" style="display: none;"
-                                        onchange="previewDocument(this, 'licenseFrontPreview')" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">إجازة السوق الوجه الخلفي</label>
-                                    <div class="document-upload"
-                                        onclick="document.getElementById('licenseBack').click()">
-                                        <div class="upload-placeholder">
-                                            <i class="fas fa-id-card"></i>
-                                            <span>اضغط للرفع</span>
-                                        </div>
-                                        <img id="licenseBackPreview" src="#" alt="">
-                                    </div>
-                                    <input type="file" id="licenseBack" accept="image/*" style="display: none;"
-                                        onchange="previewDocument(this, 'licenseBackPreview')" required>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- معلومات السكن -->
-                        <div class="registration-section mb-4">
-                            <h6 class="section-title">معلومات السكن</h6>
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label class="form-label">المحافظة</label>
-                                    <select class="form-select" name="province" onchange="loadAreas(this.value)"
-                                        required>
-                                        <option value="">اختر المحافظة</option>
-                                        <!-- سيتم ملء الخيارات بواسطة JavaScript -->
-                                    </select>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">المنطقة</label>
-                                    <select class="form-select" name="area" required>
-                                        <option value="">اختر المنطقة</option>
-                                        <!-- سيتم ملء الخيارات بواسطة JavaScript -->
-                                    </select>
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label">العنوان التفصيلي</label>
-                                    <textarea class="form-control" name="address" rows="2" required></textarea>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="text-center mt-4">
-                            <button type="submit" class="btn btn-primary btn-lg px-5">
-                                <i class="fas fa-user-plus me-2"></i>
-                                تسجيل
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+   
         </div>
     </div>
   
@@ -8514,8 +8097,8 @@ function showLoading() {
     <script src="auth-check.js"></script>
     <script src="sw-stories.js"></script>
     <script src="stories.js"></script>
-
     <script src="stories-integration.js"></script>
+    <script src="posts.js"></script>
 
 
 

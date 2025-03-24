@@ -31,7 +31,7 @@
 }
 
 #nearbyDriversMap {
-    height: 70vh;
+    height: 100vh;
     width: 100%;
     border-radius: 10px;
     overflow: hidden;
@@ -40,7 +40,7 @@
 }
 
 .loading-map {
-    height: 70vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -50,8 +50,8 @@
 }
 
 .loading-map i {
-    font-size: 2rem;
-    margin-bottom: 1rem;
+    font-size: 5rem;
+    margin-bottom: 10rem;
 }
 
 .leaflet-popup-content-wrapper {
@@ -681,13 +681,13 @@
 
 /* تحديثات الخريطة */
 :root {
-    --map-height: 40vh;
+    --map-height: 100vh;
     /* ارتفاع الخريطة */
-    --map-min-height: 50px;
+    --map-min-height: 500px;
     /* الحد الأدنى لارتفاع الخريطة */
     --map-margin-top: 3rem;
     /* المسافة بين شريط التايتل والخريطة */
-    --map-margin-bottom: 1rem;
+    --map-margin-bottom: 0rem;
     /* المسافة بين الخريطة والفلاتر */
     --map-border-radius: 20px;
     /* تقويس حواف الخريطة */
@@ -730,14 +730,14 @@
     display: flex;
     flex-direction: column;
     /* ترتيب العناصر عموديًا */
-    gap: 2rem;
+    gap: 20rem;
     /* مسافة بين العناصر */
     padding: 0rem;
     /* حشوة داخلية للحاوية */
 }
 
 .app-header {
-    margin-bottom: 3rem;
+    margin-bottom: 30rem;
     /* مسافة بين شريط التايتل والخريطة */
 }
 
@@ -8571,7 +8571,7 @@ body {
     /* تحسين مظهر حاوية الخريطة مع إضافة المسافات */
     /* تحسين مظهر حاوية الخريطة مع إضافة المسافات */
     #map {
-        height: 60vh;
+        height: 100vh;
         /* ارتفاع نسبي */
         width: 100%;
         border: 2px solid #FFD700;
@@ -11801,9 +11801,10 @@ body {
         .container {
             padding: 0.35rem;
         }
-        
+    
         #map {
-            height: 32vh;
+            margin-top: 5px;
+            height: calc(100vh - 150px);
         }
         
         .location-chip {
@@ -11825,9 +11826,10 @@ body {
         .container {
             padding: 0.5rem;
         }
-        
+    
         #map {
-            height: 35vh;
+            margin-top: 5px;
+            height: calc(100vh - 150px);
         }
         
         .location-chip {
@@ -11849,10 +11851,11 @@ body {
         .container {
             padding: 0.75rem;
         }
-        
-        #map {
-            height: 40vh;
-        }
+       
+    #map {
+        margin-top: 5px;
+        height: calc(100vh - 150px);
+    }
         
         .driver-image-container {
             height: 160px;
@@ -11868,9 +11871,10 @@ body {
         .container {
             padding: 1rem;
         }
-        
+   
         #map {
-            height: 45vh;
+            margin-top: 5px;
+            height: calc(100vh - 150px);
         }
         
         .driver-image-container {
@@ -13090,4 +13094,1402 @@ input:invalid + .validation-message {
     .user-profile-btn #defaultProfileIcon {
         font-size: 1.1rem;
     }
+}
+
+
+/* أنماط قسم القصص */
+.stories-container {
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+    padding: 10px;
+    margin-top: 60px; /* مسافة بعد شريط التنقل العلوي */
+    background-color: #1a1a1a;
+    scrollbar-width: none; /* إخفاء شريط التمرير على Firefox */
+}
+
+.stories-container::-webkit-scrollbar {
+    display: none; /* إخفاء شريط التمرير على Chrome/Safari */
+}
+
+.story-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 8px;
+    position: relative;
+    cursor: pointer;
+}
+
+/* حلقة القصة */
+.story-circle {
+    width: 70px;
+    height: 70px;
+    position: relative;
+    margin-bottom: 5px;
+}
+
+/* الحلقة الخارجية للقصة غير المشاهدة */
+.story-circle::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #FFD700, #FF7A00);
+    z-index: 1;
+}
+
+/* الحلقة الخارجية للقصة المشاهدة */
+.story-circle.viewed::before {
+    background: #777;
+}
+
+/* الدائرة البيضاء حول الصورة */
+.story-circle::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+    background: #1a1a1a;
+    margin: 2px;
+    z-index: 2;
+}
+
+/* صورة القصة */
+.story-img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: relative;
+    z-index: 3;
+}
+
+/* اسم صاحب القصة */
+.story-username {
+    font-size: 0.7rem;
+    color: #fff;
+    max-width: 70px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center;
+}
+
+/* زر إضافة قصة جديدة */
+.add-story {
+    position: relative;
+}
+
+.add-story .story-circle::before {
+    background: #333;
+}
+
+.add-story-icon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #FFD700;
+    color: #000;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    z-index: 4;
+    border: 2px solid #1a1a1a;
+}
+
+/* عارض القصص */
+.story-viewer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    z-index: 9999;
+    display: none;
+    flex-direction: column;
+}
+
+.story-viewer.active {
+    display: flex;
+}
+
+/* شريط التقدم */
+.story-progress {
+    display: flex;
+    padding: 10px;
+    gap: 5px;
+}
+
+.progress-item {
+    height: 3px;
+    background-color: rgba(255, 255, 255, 0.3);
+    flex-grow: 1;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0;
+    background-color: #fff;
+    transition: width 0.1s linear;
+}
+
+/* رأس القصة */
+.story-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    color: #fff;
+}
+
+.story-user {
+    display: flex;
+    align-items: center;
+}
+
+.story-user img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left: 10px;
+}
+
+.story-user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.story-user-name {
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.story-time {
+    font-size: 0.7rem;
+    opacity: 0.7;
+}
+
+.story-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.story-action {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+/* محتوى القصة */
+.story-content {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.story-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.story-video {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* أزرار التنقل */
+.story-navigation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.nav-prev, .nav-next {
+    flex: 1;
+    cursor: pointer;
+}
+
+/* مؤشر التحميل */
+.story-loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    border: 3px solid #fff;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* مودال إضافة قصة جديدة */
+.add-story-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 9999;
+    overflow: hidden;
+}
+
+.add-story-modal.active {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-story-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    color: white;
+}
+
+.add-story-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.add-story-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.story-preview {
+    width: 100%;
+    max-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    background-color: #1a1a1a;
+}
+
+.story-preview img, .story-preview video {
+    max-width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+}
+
+.add-story-actions {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.upload-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px;
+    background-color: #FFD700;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.select-media-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px;
+    background-color: transparent;
+    color: #FFD700;
+    border: 1px solid #FFD700;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* أنماط إضافية لتمييز القصص النشطة */
+.story-item.has-new::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #FF4136;
+    border: 2px solid #1a1a1a;
+    z-index: 5;
+}
+
+/* تحريك القصص من اليسار لليمين */
+.rtl .stories-container {
+    direction: rtl;
+}
+
+
+/* تنسيقات المنشورات - النمط الإنستجرامي */
+
+/* قسم المنشورات */
+.posts-section {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+    padding-bottom: 60px; /* مساحة للشريط السفلي */
+}
+
+/* --------- منشئ المنشور --------- */
+.post-creator {
+    background-color: #242424;
+    border-radius: 15px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.post-creator:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
+}
+
+.post-creator-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.post-creator-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #FFD700;
+}
+
+.post-creator-text {
+    background-color: #333;
+    border-radius: 20px;
+    padding: 10px 15px;
+    flex-grow: 1;
+    color: #aaa;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.post-creator-text:hover {
+    background-color: #444;
+    color: #fff;
+}
+
+.post-creator-actions {
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 10px;
+}
+
+.post-action {
+    background: none;
+    border: none;
+    color: #ddd;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.post-action:hover {
+    background-color: rgba(255, 215, 0, 0.1);
+    color: #FFD700;
+}
+
+.post-action i {
+    font-size: 18px;
+    color: #FFD700;
+}
+
+/* --------- حاوية المنشورات --------- */
+.posts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* مؤشر التحميل */
+.loading-posts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    color: #aaa;
+}
+
+.loading-posts .spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #FFD700;
+    border-top: 3px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-posts p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* --------- رسالة لا توجد منشورات --------- */
+.no-posts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    text-align: center;
+    color: #aaa;
+    background-color: #242424;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.no-posts i {
+    color: #FFD700;
+    margin-bottom: 15px;
+    opacity: 0.7;
+}
+
+.no-posts p {
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+.no-more-posts {
+    text-align: center;
+    padding: 20px;
+    color: #aaa;
+    font-size: 14px;
+}
+
+/* --------- المنشور --------- */
+.post {
+    background-color: #242424;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.post:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* رأس المنشور */
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.post-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.post-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #FFD700;
+}
+
+.post-user-info h6 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.post-user-info small {
+    font-size: 12px;
+    color: #aaa;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.post-options {
+    position: relative;
+}
+
+.post-options-btn {
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 18px;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.post-options-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.post-options-menu {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background-color: #333;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    padding: 10px 0;
+    min-width: 200px;
+    z-index: 10;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+.post-options-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.post-option-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    color: #ddd;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: right;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.post-option-item:hover {
+    background-color: rgba(255, 215, 0, 0.1);
+    color: #FFD700;
+}
+
+/* محتوى المنشور */
+.post-content {
+    padding: 15px;
+}
+
+.post-text {
+    margin: 0 0 15px 0;
+    font-size: 14px;
+    line-height: 1.5;
+    white-space: pre-line;
+    color: #fff;
+}
+
+.post-text a {
+    color: #FFD700;
+    text-decoration: none;
+}
+
+.post-text a:hover {
+    text-decoration: underline;
+}
+
+.post-text .hashtag, .post-text .mention {
+    color: #FFD700;
+    font-weight: 500;
+}
+
+.post-media {
+    margin-top: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.post-image {
+    width: 100%;
+    max-height: 500px;
+    object-fit: contain;
+    background-color: #1a1a1a;
+    display: block;
+}
+
+.post-video {
+    width: 100%;
+    max-height: 500px;
+    background-color: #1a1a1a;
+    display: block;
+}
+
+/* إحصائيات المنشور */
+.post-stats {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    color: #aaa;
+    font-size: 13px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.post-likes {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.post-likes i {
+    color: #FF4D67;
+    font-size: 14px;
+}
+
+.post-comments-shares {
+    display: flex;
+    gap: 15px;
+}
+
+/* أزرار التفاعل مع المنشور */
+.post-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.post-action-btn {
+    background: none;
+    border: none;
+    color: #aaa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 1;
+    border-radius: 5px;
+    font-size: 13px;
+}
+
+.post-action-btn:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #fff;
+}
+
+.post-action-btn i {
+    font-size: 16px;
+}
+
+.like-btn.active {
+    color: #FF4D67;
+}
+
+.like-btn.active i {
+    color: #FF4D67;
+}
+
+.save-btn.active {
+    color: #FFD700;
+}
+
+.save-btn.active i {
+    color: #FFD700;
+}
+
+/* تأثير القلب عند الإعجاب */
+.heart-animation {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    background-color: #FF4D67;
+    opacity: 0;
+    border-radius: 50%;
+    animation: heart-burst 1s ease;
+    pointer-events: none;
+}
+
+@keyframes heart-burst {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0.8;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.4;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(2);
+        opacity: 0;
+    }
+}
+
+/* --------- نافذة إنشاء المنشور --------- */
+.create-post-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.create-post-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.create-post-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #FFD700;
+}
+
+.create-post-user-info h6 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.post-privacy {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+    color: #aaa;
+}
+
+.create-post-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.create-post-textarea {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    min-height: 100px;
+    resize: none;
+    padding: 0;
+}
+
+.create-post-textarea:focus {
+    outline: none;
+}
+
+.create-post-textarea::placeholder {
+    color: #777;
+}
+
+.media-preview-container {
+    position: relative;
+    margin-top: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+    max-height: 300px;
+}
+
+.media-preview-image,
+.media-preview-video {
+    width: 100%;
+    max-height: 300px;
+    object-fit: contain;
+    background-color: #1a1a1a;
+    display: block;
+}
+
+.remove-media-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.remove-media-btn:hover {
+    background-color: rgba(255, 0, 0, 0.6);
+}
+
+.create-post-options {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 15px;
+}
+
+.create-post-options p {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    color: #aaa;
+}
+
+.post-options-buttons {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+}
+
+.post-option-btn {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 20px;
+    padding: 8px 15px;
+    color: #ddd;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 13px;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.post-option-btn:hover {
+    background-color: rgba(255, 215, 0, 0.1);
+    color: #FFD700;
+}
+
+.post-option-btn i {
+    font-size: 16px;
+    color: #FFD700;
+}
+
+/* نهاية نافذة إنشاء المنشور المنبثقة */
+.modal-footer .btn-gold {
+    background-color: #FFD700;
+    color: #000;
+    font-weight: 600;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.modal-footer .btn-gold:hover {
+    background-color: #e5c100;
+    transform: translateY(-2px);
+}
+
+.modal-footer .btn-gold:disabled {
+    background-color: #615300;
+    color: #aaa;
+    transform: none;
+}
+
+/* --------- نافذة التعليقات --------- */
+.comments-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 0 5px;
+}
+
+.comments-container::-webkit-scrollbar {
+    width: 5px;
+}
+
+.comments-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.comments-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 215, 0, 0.3);
+    border-radius: 10px;
+}
+
+.comments-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 215, 0, 0.5);
+}
+
+.loading-comments {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.loading-comments .spinner {
+    width: 30px;
+    height: 30px;
+    border: 3px solid #FFD700;
+    border-top: 3px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.no-comments {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 20px;
+    text-align: center;
+    color: #aaa;
+}
+
+.no-comments p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.comment {
+    display: flex;
+    gap: 10px;
+    animation: fadeIn 0.3s ease;
+}
+
+.comment-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.comment-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex-grow: 1;
+}
+
+.comment-bubble {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 18px;
+    padding: 10px 15px;
+    position: relative;
+}
+
+.comment-bubble h6 {
+    margin: 0 0 5px 0;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.comment-bubble p {
+    margin: 0;
+    font-size: 14px;
+    color: #ddd;
+    word-break: break-word;
+}
+
+.comment-actions {
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    gap: 10px;
+}
+
+.comment-action {
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 0;
+}
+
+.comment-action:hover {
+    color: #FFD700;
+    text-decoration: underline;
+}
+
+.comment-time {
+    color: #777;
+    font-size: 11px;
+    margin-left: auto;
+}
+
+.comment-input-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+}
+
+.comment-input {
+    flex-grow: 1;
+    background: none;
+    border: none;
+    color: #fff;
+    padding: 8px 5px;
+    font-size: 14px;
+}
+
+.comment-input:focus {
+    outline: none;
+}
+
+.comment-input::placeholder {
+    color: #777;
+}
+
+.send-comment-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFD700;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.send-comment-btn:hover {
+    transform: scale(1.1);
+}
+
+.send-comment-btn:disabled {
+    background-color: #615300;
+    color: #444;
+    transform: none;
+}
+
+/* --------- نافذة المشاركة --------- */
+.share-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.share-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.share-option:hover {
+    background-color: rgba(255, 215, 0, 0.1);
+    transform: translateY(-3px);
+}
+
+.share-option i {
+    font-size: 24px;
+}
+
+.share-option span {
+    font-size: 14px;
+}
+
+.share-option:nth-child(1) i {
+    color: #25D366;
+}
+
+.share-option:nth-child(2) i {
+    color: #1877F2;
+}
+
+.share-option:nth-child(3) i {
+    color: #1DA1F2;
+}
+
+.share-option:nth-child(4) i {
+    color: #0088cc;
+}
+
+.share-option:nth-child(5) i {
+    color: #FFD700;
+}
+
+/* --------- تكييف للشاشات الصغيرة --------- */
+@media (max-width: 768px) {
+    .post-creator-actions {
+        justify-content: space-between;
+    }
+    
+    .post-action span {
+        display: none;
+    }
+    
+    .post-action i {
+        font-size: 20px;
+    }
+    
+    .post-action {
+        padding: 8px;
+    }
+    
+    .post-actions {
+        flex-wrap: wrap;
+    }
+    
+    .post-action-btn {
+        flex: 1 0 40%;
+        padding: 8px 5px;
+    }
+    
+    .post-action-btn span {
+        font-size: 12px;
+    }
+    
+    .share-options {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .share-option {
+        padding: 10px;
+    }
+    
+    .share-option i {
+        font-size: 20px;
+    }
+    
+    .share-option span {
+        font-size: 12px;
+    }
+}
+
+
+
+    /* تعديل المسافات بين شريط القصص والعناصر المجاورة */
+    .stories-container {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding-top: 55px;
+    }
+
+
+    .story-item {
+        margin: 0 5px;
+    }
+
+    .app-header + .stories-container {
+        position: relative;
+        z-index: 10;
+    }
+
+    .app-header {
+        height: 55px;
+    }
+
+    .location-filter {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    @media (max-width: 768px) {
+        .stories-container {
+            padding-top: 60px;
+        }
+        
+     
+        .story-item {
+            margin: 0 3px;
+        }
+    }
+
+
+    
+
+    /* إضافة أنماط لشارة السائق في القصص */
+.driver-badge {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    background-color: #FFD700;
+    color: #000;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    border: 2px solid #1a1a1a;
+    z-index: 5;
+}
+
+/* أنماط رسالة مشاهدة فقط */
+.stories-view-only-notice {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 10px auto;
+    width: fit-content;
+    border: 1px solid #333;
+}
+
+.stories-view-only-notice i {
+    color: #FFD700;
+}
+
+/* تعديل أسلوب زر إضافة القصة للسائقين */
+.story-item.add-story .story-circle::before {
+    background: linear-gradient(45deg, #FFD700, #FF8C00);
+}
+
+.story-item.add-story .add-story-icon {
+    animation: pulse-gold 2s infinite;
+}
+
+@keyframes pulse-gold {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(255, 215, 0, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
+    }
+}
+
+/* تحسين مظهر شريط عنوان عارض القصص لتمييز السائقين */
+.story-header .story-user-info .driver-indicator {
+    display: inline-flex;
+    align-items: center;
+    background-color: rgba(255, 215, 0, 0.2);
+    color: #FFD700;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    margin-top: 4px;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.story-header .story-user-info .driver-indicator i {
+    margin-left: 4px;
+    font-size: 0.7rem;
+}
+
+/* زر "ابحث عن سائق" بجانب شرح المشاهدة فقط */
+.find-driver-btn {
+    background-color: rgba(255, 215, 0, 0.2);
+    color: #FFD700;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 20px;
+    padding: 4px 10px;
+    font-size: 0.8rem;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.find-driver-btn:hover {
+    background-color: rgba(255, 215, 0, 0.3);
+    transform: translateY(-2px);
+}
+
+.stories-view-only-notice .action-links {
+    margin-left: 10px;
 }

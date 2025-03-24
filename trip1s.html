@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="تطبيق تاكسي العراق - خدمة حجز سيارات الأجرة الأفضل في العراق">
+    <meta name="keywords" content="تاكسي العراق, سيارات أجرة, حجز تاكسي, نقل, مواصلات">
+    <meta name="author" content="تاكسي العراق">
+    <meta name="theme-color" content="#FFD700">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <title>تاكسي العراق - خدمة حجز السيارات الأولى في العراق</title>
+
+    <!-- App Icons -->
+    <link rel="icon" type="image/png"
+        href="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/driver-images%2F7605a607-6cf8-4b32-aee1-fa7558c98452.png?alt=media&token=5cf9e67c-ba6e-4431-a6a0-79dede15b527">
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/driver-images%2F7605a607-6cf8-4b32-aee1-fa7558c98452.png?alt=media&token=5cf9e67c-ba6e-4431-a6a0-79dede15b527">
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="./manifest.json">
+
+    <!-- External CSS Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+    <!-- App CSS -->
+    <style>
+        :root {
+            --primary-color: #FFD700;
+            --primary-dark: #E6C200;
+            --text-dark: #262626;
+            --text-light: #8e8e8e;
+            --bg-light: #fafafa;
+            --bg-white: #ffffff;
+            --bg-dark: #000000;
+            --bg-gray: #121212;
+            --border-color: #dbdbdb;
+            --story-border: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            direction: rtl;
+            padding-top: 60px;
+            padding-bottom: 60px;
+            overflow-x: hidden;
+        }
+
+        /* Header Styling */
+        .app-header {
+            background-color: var(--bg-white);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 15px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .app-logo {
+            display: flex;
+            align-items: center;
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .app-logo img {
+            height: 30px;
+            margin-left: 8px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header-action {
+            color: var(--text-dark);
+            font-size: 1.5rem;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            background-color: #ff3040;
+            color: white;
+            font-size: 0.6rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Stories Section */
+        .stories-container {
+            background: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin: 15px 0;
+            padding: 15px 0;
+            overflow-x: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+        }
+
+        .stories-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .stories-wrapper {
+            display: inline-flex;
+            padding: 0 10px;
+        }
+
+        .story-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 10px;
+        }
+
+        .story-avatar {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            padding: 3px;
+            background: var(--story-border);
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .story-avatar img {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            border: 2px solid var(--bg-white);
+            object-fit: cover;
+        }
+
+        .story-username {
+            font-size: 0.75rem;
+            color: var(--text-dark);
+            max-width: 65px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        /* Feed Section */
+        .feed-container {
+            margin-bottom: 20px;
+        }
+
+        .post-card {
+            background-color: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .post-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-left: 12px;
+            object-fit: cover;
+        }
+
+        .post-user-info {
+            flex: 1;
+        }
+
+        .post-username {
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin: 0;
+            color: var(--text-dark);
+        }
+
+        .post-location {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        .post-more-btn {
+            color: var(--text-dark);
+            font-size: 1.2rem;
+            background: none;
+            border: none;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        .post-image {
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+        }
+
+        .post-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 15px;
+        }
+
+        .post-actions-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .post-action-btn {
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            font-size: 1.4rem;
+            padding: 5px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .post-action-btn.liked {
+            color: #ed4956;
+        }
+
+        .post-action-btn.saved {
+            color: var(--primary-color);
+        }
+
+        .post-likes {
+            padding: 0 15px;
+            margin-bottom: 8px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .post-caption {
+            padding: 0 15px 5px;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .post-caption-username {
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+        .post-comments-link {
+            padding: 0 15px;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            display: block;
+        }
+
+        .post-time {
+            padding: 0 15px 15px;
+            font-size: 0.7rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            background-color: var(--bg-white);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            height: 50px;
+        }
+
+        .bottom-nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 1.2rem;
+            padding: 5px 0;
+        }
+
+        .bottom-nav-item.active {
+            color: var(--primary-color);
+        }
+
+        .bottom-nav-item span {
+            font-size: 0.6rem;
+            margin-top: 2px;
+        }
+
+        /* Side Nav for Mobile */
+        .side-nav {
+            position: fixed;
+            top: 0;
+            right: -280px;
+            width: 280px;
+            height: 100vh;
+            background-color: var(--bg-white);
+            z-index: 2000;
+            transition: right 0.3s ease;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+        }
+
+        .side-nav.open {
+            right: 0;
+        }
+
+        .side-nav-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .side-nav-title {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .side-nav-close {
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .side-nav-user-info {
+            padding: 20px 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .side-nav-items {
+            padding: 15px 0;
+        }
+
+        .side-nav-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+
+        .side-nav-item:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .side-nav-item i {
+            margin-left: 15px;
+            width: 25px;
+            text-align: center;
+        }
+
+        .side-nav-footer {
+            padding: 15px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 10px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .logout-btn i {
+            margin-left: 10px;
+        }
+
+        .logout-btn:hover {
+            background-color: #d32f2f;
+        }
+
+        .nav-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1900;
+            display: none;
+        }
+
+        .nav-backdrop.show {
+            display: block;
+        }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.8);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 215, 0, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Toast Container */
+        .toast-container {
+            position: fixed;
+            bottom: 70px;
+            right: 20px;
+            z-index: 9999;
+        }
+
+        .custom-toast {
+            background-color: var(--bg-white);
+            color: var(--text-dark);
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            max-width: 300px;
+            min-width: 250px;
+        }
+
+        .custom-toast i {
+            margin-left: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* Create Post Button */
+        .create-post-btn {
+            position: fixed;
+            bottom: 70px;
+            right: 20px;
+            width: 55px;
+            height: 55px;
+            background-color: var(--primary-color);
+            color: var(--text-dark);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .create-post-btn:hover {
+            transform: scale(1.1);
+            background-color: var(--primary-dark);
+        }
+
+        /* Media Queries */
+        @media (max-width: 767px) {
+            .post-card {
+                border-radius: 0;
+                border-left: none;
+                border-right: none;
+            }
+        }
+
+        /* Add taxi status badges */
+        .driver-status {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        .status-active {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .status-busy {
+            background-color: #FF5722;
+            color: white;
+        }
+
+        .driver-rating {
+            display: flex;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .driver-rating i {
+            color: var(--primary-color);
+            margin-left: 3px;
+        }
+
+        /* Verified badge */
+        .verified-badge {
+            color: #3897f0;
+            font-size: 0.9rem;
+            margin-right: 4px;
+        }
+
+        /* Car type tag */
+        .car-type {
+            background-color: #f0f0f0;
+            color: var(--text-dark);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            margin-right: 5px;
+        }
+
+        /* Like animation */
+        @keyframes like-animation {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .liked-animate {
+            animation: like-animation 0.3s ease;
+        }
+
+        /* Double tap to like */
+        .post-image-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .like-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .like-overlay i {
+            font-size: 80px;
+            color: white;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            transform: scale(0);
+            transition: transform 0.3s;
+        }
+
+        .like-overlay.show {
+            opacity: 1;
+        }
+
+        .like-overlay.show i {
+            transform: scale(1);
+            animation: like-pop 0.5s forwards;
+        }
+
+        @keyframes like-pop {
+            0% {
+                transform: scale(0);
+            }
+            70% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="app-header">
+        <div class="app-logo">
+            <img src="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/driver-images%2F7605a607-6cf8-4b32-aee1-fa7558c98452.png?alt=media&token=5cf9e67c-ba6e-4431-a6a0-79dede15b527" alt="تاكسي العراق">
+            <span>تاكسي العراق</span>
+        </div>
+        <div class="header-actions">
+            <a href="#" class="header-action" id="notificationsBtn">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge" style="display: none;">0</span>
+            </a>
+            <a href="#" class="header-action" id="messagesBtn">
+                <i class="fas fa-paper-plane"></i>
+                <span class="notification-badge" style="display: none;">0</span>
+            </a>
+            <a href="#" class="header-action" onclick="toggleSideNav()">
+                <i class="fas fa-bars"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Stories Section -->
+        <div class="stories-container">
+            <div class="stories-wrapper">
+                <!-- سائقين مميزين كقصص -->
+                <div class="story-item">
+                    <div class="story-avatar">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/driver-images%2F7605a607-6cf8-4b32-aee1-fa7558c98452.png?alt=media&token=5cf9e67c-ba6e-4431-a6a0-79dede15b527" alt="إضافة قصة">
+                    </div>
+                    <span class="story-username">إضافة</span>
+                </div>
+                <div class="story-item">
+                    <div class="story-avatar">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/user-photos%2F1741376568952_default-avatar.png?alt=media&token=ad672ccf-c8e1-4788-a252-52de6c3ceedd" alt="أحمد">
+                    </div>
+                    <span class="story-username">أحمد</span>
+                </div>
+                <div class="story-item">
+                    <div class="story-avatar">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/user-photos%2F1741376568952_default-avatar.png?alt=media&token=ad672ccf-c8e1-4788-a252-52de6c3ceedd" alt="محمد">
+                    </div>
+                    <span class="story-username">محمد</span>
+                </div>
+                <div class="story-item">
+                    <div class="story-avatar">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/user-photos%2F1741376568952_default-avatar.png?alt=media&token=ad672ccf-c8e1-4788-a252-52de6c3ceedd" alt="حسين">
+                    </div>
+                    <span class="story-username">حسين</span>
+                </div>
+                <div class="story-item">
+                    <div class="story-avatar">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/user-photos%2F1741376568952_default-avatar.png?alt=media&token=ad672ccf-c8e1-4788-a252-52de6c3ceedd" alt="علي">
+                    </div>
+                    <span class="story-username">علي</span>
+                </div>
+                <div class="story-item">
+                    <div class="story-avatar">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/user-photos%2F1741376568952_default-avatar.png?alt=media&token=ad672ccf-c8e1-4788-a252-52de6c3ceedd" alt="عمر">
+                    </div>
+                    <span class="story-username">عمر</span>
+                </div>
+                <div class="story-item">
+                    <div class="story-avatar">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/user-photos%2F1741376568952_default-avatar.png?alt=media&token=ad672ccf-c8e1-4788-a252-52de6c3ceedd" alt="سعد">
+                    </div>
+                    <span class="story-username">سعد</span>
+                </div>
+                <div class="story-item">
+                    <div class="story-avatar">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/user-photos%2F1741376568952_default-avatar.png?alt=media&token=ad672ccf-c8e1-4788-a252-52de6c3ceedd" alt="فاطمة">
+                    </div>
+                    <span class="story-username">فاطمة</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feed Section -->
+        <div class="feed-container">
+            <!-- Post Card 1 -->
+            <div class="post-card">
+                <div class="post-header">
+                    <img class="post-avatar" src="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/user-photos%2F1741376568952_default-avatar.png?alt=media&token=ad672ccf-c8e1-4788-a252-52de6c3ceedd" alt="محمد عبدالله">
+                    <div class="post-user-info">
+                        <h3 class="post-username">محمد عبدالله <i class="fas fa-check-circle verified-badge"></i></h3>
+                        <p class="post-location">
+                            <span class="driver-status status-active">متاح</span>
+                            <span class="car-type">تويوتا كامري 2022</span>
+                        </p>
+                    </div>
+                    <button class="post-more-btn">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                </div>
+                <div class="post-image-container">
+                    <img class="post-image" src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="رحلات VIP">
+                    <div class="like-overlay">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                </div>
+                <div class="post-actions">
+                    <div class="post-actions-left">
+                        <button class="post-action-btn" onclick="toggleLike(this)">
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <button class="post-action-btn" onclick="showCommentModal()">
+                            <i class="far fa-comment"></i>
+                        </button>
+                        <button class="post-action-btn" onclick="sharePost()">
+                            <i class="far fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <button class="post-action-btn" onclick="toggleSave(this)">
+                        <i class="far fa-bookmark"></i>
+                    </button>
+                </div>
+                <div class="post-likes">
+                    ٣٥٥ إعجاب
+                </div>
+                <div class="post-caption">
+                    <span class="post-caption-username">حسن جاسم</span>
+                    خدمة VIP للرحلات الطويلة والسفرات الخاصة، سيارة فخمة مع جميع وسائل الراحة، خبرة في الطرق بين المحافظات، تأمين رحلة آمنة ومريحة للعائلات والشركات.
+                    #رحلات_VIP #تاكسي_العراق #سيارات_فخمة
+                </div>
+                <a href="#" class="post-comments-link" onclick="showCommentModal()">
+                    عرض جميع التعليقات (67)
+                </a>
+                <div class="post-time">
+                    منذ أسبوع
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Post Button -->
+    <button class="create-post-btn" onclick="showCreatePostModal()">
+        <i class="fas fa-plus"></i>
+    </button>
+
+    <!-- Side Navigation -->
+    <div class="side-nav" id="sideNav">
+        <div class="side-nav-header">
+            <h2 class="side-nav-title">تاكسي العراق</h2>
+            <button class="side-nav-close" onclick="toggleSideNav()">×</button>
+        </div>
+        
+        <!-- إضافة قسم معلومات المستخدم -->
+        <div class="side-nav-user-info">
+            <div class="text-center">
+                <i class="fas fa-user-circle text-white" style="font-size: 4rem;"></i>
+                <h6 class="text-white mt-3">مرحباً بك</h6>
+                <p class="text-white-50 small">قم بتسجيل الدخول للوصول إلى حسابك</p>
+                <div class="mt-3">
+                    <button class="btn btn-warning w-100 mb-2" data-bs-toggle="modal" data-bs-target="#loginModal">
+                        تسجيل الدخول
+                    </button>
+                    <button class="btn btn-outline-light w-100 mb-2" data-bs-toggle="modal" data-bs-target="#userRegistrationModal">
+                        إنشاء حساب
+                    </button>
+                    <button class="btn btn-outline-light w-100" data-bs-toggle="modal" data-bs-target="#addDriverModal">
+                        إضافة سائق
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="side-nav-items">
+            <a href="/" class="side-nav-item"><i class="fas fa-home" style="color: #FFD700;"></i> الرئيسية</a>
+            <a href="/drivers" class="side-nav-item"><i class="fas fa-users" style="color: #4CAF50;"></i> السائقين</a>
+            <a href="/trips" class="side-nav-item"><i class="fas fa-car" style="color: #2196F3;"></i> الرحلات</a>
+            <a href="/map" class="side-nav-item"><i class="fas fa-map" style="color: #FF5722;"></i> الخريطة</a>
+            <a href="/notifications" class="side-nav-item"><i class="fas fa-bell" style="color: #9C27B0;"></i> الإشعارات</a>
+            <a href="/messages" class="side-nav-item"><i class="fas fa-envelope" style="color: #FFC107;"></i> الرسائل</a>
+            <a href="/settings" class="side-nav-item"><i class="fas fa-cog" style="color: #607D8B;"></i> الإعدادات</a>
+            <a href="#" class="side-nav-item driver-only" style="display: none;"><i class="fas fa-user-plus" style="color: #E91E63;"></i> إضافة سائق</a>
+        </div>
+        
+        <!-- إضافة زر تسجيل الخروج في الشريط الجانبي -->
+        <div class="side-nav-footer">
+            <button onclick="handleLogout()" class="logout-btn" style="display: none;">
+                <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+            </button>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <a href="/" class="bottom-nav-item active">
+            <i class="fas fa-home"></i>
+            <span>الرئيسية</span>
+        </a>
+        <a href="/search" class="bottom-nav-item">
+            <i class="fas fa-search"></i>
+            <span>بحث</span>
+        </a>
+        <a href="/trips" class="bottom-nav-item">
+            <i class="fas fa-car"></i>
+            <span>الرحلات</span>
+        </a>
+        <a href="/notifications" class="bottom-nav-item">
+            <i class="fas fa-bell"></i>
+            <span>الإشعارات</span>
+        </a>
+        <a href="/profile" class="bottom-nav-item">
+            <i class="fas fa-user"></i>
+            <span>حسابي</span>
+        </a>
+    </div>
+
+    <!-- كود الـ Backdrop للشريط الجانبي -->
+    <div class="nav-backdrop" id="navBackdrop" onclick="toggleSideNav()"></div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Loading Spinner -->
+    <div class="loading-spinner" id="loadingSpinner">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- External Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Firebase Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"></script>
+
+    <!-- App JavaScript -->
+    <script>
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyDGpAHia_wEmrhnmYjrPf1n1TrAzwEMiAI",
+            authDomain: "messageemeapp.firebaseapp.com",
+            databaseURL: "https://messageemeapp-default-rtdb.firebaseio.com",
+            projectId: "messageemeapp",
+            storageBucket: "messageemeapp.appspot.com",
+            messagingSenderId: "255034474844",
+            appId: "1:255034474844:web:5e3b7a6bc4b2fb94cc4199"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+        const storage = firebase.storage();
+
+        // Toggle Side Navigation
+        function toggleSideNav() {
+            const sideNav = document.getElementById('sideNav');
+            const navBackdrop = document.getElementById('navBackdrop');
+            
+            sideNav.classList.toggle('open');
+            navBackdrop.classList.toggle('show');
+            document.body.classList.toggle('side-nav-open');
+        }
+
+        // Toggle Like Button
+        function toggleLike(btn) {
+            const isLiked = btn.classList.toggle('liked');
+            const icon = btn.querySelector('i');
+            
+            if (isLiked) {
+                icon.classList.remove('far');
+                icon.classList.add('fas', 'liked-animate');
+                
+                // Update like count
+                const likesElem = btn.closest('.post-card').querySelector('.post-likes');
+                const likesText = likesElem.textContent.trim();
+                const likesCount = parseInt(likesText.match(/\d+/)[0]);
+                likesElem.textContent = getArabicNumber(likesCount + 1) + ' إعجاب';
+            } else {
+                icon.classList.remove('fas', 'liked-animate');
+                icon.classList.add('far');
+                
+                // Update like count
+                const likesElem = btn.closest('.post-card').querySelector('.post-likes');
+                const likesText = likesElem.textContent.trim();
+                const likesCount = parseInt(likesText.match(/\d+/)[0]);
+                likesElem.textContent = getArabicNumber(likesCount - 1) + ' إعجاب';
+            }
+        }
+
+        // Toggle Save Button
+        function toggleSave(btn) {
+            const isSaved = btn.classList.toggle('saved');
+            const icon = btn.querySelector('i');
+            
+            if (isSaved) {
+                icon.classList.remove('far');
+                icon.classList.add('fas');
+                showToast('تم حفظ المنشور');
+            } else {
+                icon.classList.remove('fas');
+                icon.classList.add('far');
+                showToast('تم إلغاء حفظ المنشور');
+            }
+        }
+
+        // Show Comment Modal
+        function showCommentModal() {
+            Swal.fire({
+                title: 'التعليقات',
+                html: `
+                    <div class="comments-container" style="max-height: 300px; overflow-y: auto; margin-bottom: 15px;">
+                        <div class="comment-item" style="display: flex; margin-bottom: 10px; text-align: right;">
+                            <img src="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/user-photos%2F1741376568952_default-avatar.png?alt=media&token=ad672ccf-c8e1-4788-a252-52de6c3ceedd" style="width: 32px; height: 32px; border-radius: 50%; margin-left: 10px;">
+                            <div>
+                                <p style="margin: 0; font-weight: bold; font-size: 0.9rem;">علي حسين</p>
+                                <p style="margin: 0; font-size: 0.85rem;">خدمة رائعة، شكراً لك!</p>
+                            </div>
+                        </div>
+                        <div class="comment-item" style="display: flex; margin-bottom: 10px; text-align: right;">
+                            <img src="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/user-photos%2F1741376568952_default-avatar.png?alt=media&token=ad672ccf-c8e1-4788-a252-52de6c3ceedd" style="width: 32px; height: 32px; border-radius: 50%; margin-left: 10px;">
+                            <div>
+                                <p style="margin: 0; font-weight: bold; font-size: 0.9rem;">محمد سعيد</p>
+                                <p style="margin: 0; font-size: 0.85rem;">ما هي أسعار الرحلات؟</p>
+                            </div>
+                        </div>
+                        <div class="comment-item" style="display: flex; margin-bottom: 10px; text-align: right;">
+                            <img src="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/user-photos%2F1741376568952_default-avatar.png?alt=media&token=ad672ccf-c8e1-4788-a252-52de6c3ceedd" style="width: 32px; height: 32px; border-radius: 50%; margin-left: 10px;">
+                            <div>
+                                <p style="margin: 0; font-weight: bold; font-size: 0.9rem;">سارة أحمد</p>
+                                <p style="margin: 0; font-size: 0.85rem;">هل متوفر للتوصيل بعد الساعة 10 مساءً؟</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="add-comment" style="display: flex; align-items: center;">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/user-photos%2F1741376568952_default-avatar.png?alt=media&token=ad672ccf-c8e1-4788-a252-52de6c3ceedd" style="width: 32px; height: 32px; border-radius: 50%; margin-left: 10px;">
+                        <input type="text" class="form-control" placeholder="أضف تعليقاً..." style="flex: 1; border-radius: 20px;">
+                        <button class="btn btn-sm btn-warning rounded-pill ms-2">نشر</button>
+                    </div>
+                `,
+                showCancelButton: true,
+                confirmButtonText: 'إغلاق',
+                cancelButtonText: 'إلغاء',
+                confirmButtonColor: '#FFD700',
+                cancelButtonColor: '#6c757d'
+            });
+        }
+
+        // Share Post
+        function sharePost() {
+            Swal.fire({
+                title: 'مشاركة المنشور',
+                html: `
+                    <div class="sharing-options" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-bottom: 20px;">
+                        <button class="share-option" style="background: none; border: none; display: flex; flex-direction: column; align-items: center;">
+                            <div style="width: 50px; height: 50px; border-radius: 50%; background-color: #25D366; display: flex; align-items: center; justify-content: center; margin-bottom: 5px;">
+                                <i class="fab fa-whatsapp" style="color: white; font-size: 24px;"></i>
+                            </div>
+                            <span style="font-size: 12px;">واتساب</span>
+                        </button>
+                        <button class="share-option" style="background: none; border: none; display: flex; flex-direction: column; align-items: center;">
+                            <div style="width: 50px; height: 50px; border-radius: 50%; background-color: #3b5998; display: flex; align-items: center; justify-content: center; margin-bottom: 5px;">
+                                <i class="fab fa-facebook-f" style="color: white; font-size: 24px;"></i>
+                            </div>
+                            <span style="font-size: 12px;">فيسبوك</span>
+                        </button>
+                        <button class="share-option" style="background: none; border: none; display: flex; flex-direction: column; align-items: center;">
+                            <div style="width: 50px; height: 50px; border-radius: 50%; background-color: #1DA1F2; display: flex; align-items: center; justify-content: center; margin-bottom: 5px;">
+                                <i class="fab fa-twitter" style="color: white; font-size: 24px;"></i>
+                            </div>
+                            <span style="font-size: 12px;">تويتر</span>
+                        </button>
+                        <button class="share-option" style="background: none; border: none; display: flex; flex-direction: column; align-items: center;">
+                            <div style="width: 50px; height: 50px; border-radius: 50%; background-color: #0088cc; display: flex; align-items: center; justify-content: center; margin-bottom: 5px;">
+                                <i class="fab fa-telegram" style="color: white; font-size: 24px;"></i>
+                            </div>
+                            <span style="font-size: 12px;">تلغرام</span>
+                        </button>
+                    </div>
+                    <div class="copy-link" style="display: flex; margin-top: 20px;">
+                        <input type="text" class="form-control" value="https://taxi-iraq.com/post/123456" readonly style="border-start-end-radius: 0; border-end-end-radius: 0;">
+                        <button class="btn btn-warning" onclick="copyToClipboard()" style="border-start-start-radius: 0; border-end-start-radius: 0;">نسخ الرابط</button>
+                    </div>
+                `,
+                showConfirmButton: false,
+                showCloseButton: true
+            });
+        }
+
+        // Show Create Post Modal
+        function showCreatePostModal() {
+            Swal.fire({
+                title: 'منشور جديد',
+                html: `
+                    <div class="create-post-form">
+                        <div class="mb-3 text-center">
+                            <div style="width: 100%; height: 200px; border: 2px dashed #ccc; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; margin-bottom: 15px;" onclick="document.getElementById('postImage').click()">
+                                <div id="imagePreviewContainer" style="display: none; width: 100%; height: 100%;">
+                                    <img id="imagePreview" src="#" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
+                                </div>
+                                <div id="uploadPlaceholder">
+                                    <i class="fas fa-camera" style="font-size: 48px; color: #ccc; margin-bottom: 10px;"></i>
+                                    <p style="margin: 0; color: #666;">انقر لإضافة صورة</p>
+                                </div>
+                            </div>
+                            <input type="file" id="postImage" accept="image/*" style="display: none;" onchange="previewImage(this)">
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" rows="4" placeholder="اكتب وصفاً للمنشور..."></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="statusToggle">
+                                <label class="form-check-label" for="statusToggle">متاح للعمل</label>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                showCancelButton: true,
+                confirmButtonText: 'نشر',
+                cancelButtonText: 'إلغاء',
+                confirmButtonColor: '#FFD700',
+                preConfirm: () => {
+                    return new Promise((resolve) => {
+                        const imageFile = document.getElementById('postImage').files[0];
+                        if (!imageFile) {
+                            Swal.showValidationMessage('يرجى إضافة صورة للمنشور');
+                            resolve(false);
+                        } else {
+                            resolve(true);
+                        }
+                    });
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    showLoading();
+                    setTimeout(() => {
+                        hideLoading();
+                        showToast('تم نشر المنشور بنجاح');
+                        // هنا يمكن إضافة كود لإعادة تحميل المنشورات
+                    }, 1500);
+                }
+            });
+        }
+
+        // Preview Image For Post Creation
+        function previewImage(input) {
+            const preview = document.getElementById('imagePreview');
+            const previewContainer = document.getElementById('imagePreviewContainer');
+            const placeholder = document.getElementById('uploadPlaceholder');
+            
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    previewContainer.style.display = 'block';
+                    placeholder.style.display = 'none';
+                };
+                
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // Copy Link to Clipboard
+        function copyToClipboard() {
+            const copyText = document.querySelector('.copy-link input');
+            copyText.select();
+            document.execCommand('copy');
+            showToast('تم نسخ الرابط');
+        }
+
+        // Show Toast Message
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `custom-toast animate__animated animate__fadeInRight ${type}`;
+            
+            let icon;
+            switch(type) {
+                case 'success':
+                    icon = '<i class="fas fa-check-circle text-success"></i>';
+                    break;
+                case 'error':
+                    icon = '<i class="fas fa-times-circle text-danger"></i>';
+                    break;
+                case 'warning':
+                    icon = '<i class="fas fa-exclamation-circle text-warning"></i>';
+                    break;
+                default:
+                    icon = '<i class="fas fa-info-circle text-info"></i>';
+            }
+            
+            toast.innerHTML = `${icon}<div>${message}</div>`;
+            
+            document.getElementById('toastContainer').appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.replace('animate__fadeInRight', 'animate__fadeOutRight');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Show Loading Spinner
+        function showLoading() {
+            document.getElementById('loadingSpinner').style.display = 'flex';
+        }
+
+        // Hide Loading Spinner
+        function hideLoading() {
+            document.getElementById('loadingSpinner').style.display = 'none';
+        }
+
+        // Handle Logout
+        function handleLogout() {
+            showLoading();
+            setTimeout(() => {
+                hideLoading();
+                localStorage.removeItem('currentUser');
+                showToast('تم تسجيل الخروج بنجاح');
+                
+                // إعادة تعيين حالة واجهة المستخدم
+                document.querySelector('.side-nav-user-info').innerHTML = `
+                    <div class="text-center">
+                        <i class="fas fa-user-circle text-white" style="font-size: 4rem;"></i>
+                        <h6 class="text-white mt-3">مرحباً بك</h6>
+                        <p class="text-white-50 small">قم بتسجيل الدخول للوصول إلى حسابك</p>
+                        <div class="mt-3">
+                            <button class="btn btn-warning w-100 mb-2" data-bs-toggle="modal" data-bs-target="#loginModal">
+                                تسجيل الدخول
+                            </button>
+                            <button class="btn btn-outline-light w-100 mb-2" data-bs-toggle="modal" data-bs-target="#userRegistrationModal">
+                                إنشاء حساب
+                            </button>
+                            <button class="btn btn-outline-light w-100" data-bs-toggle="modal" data-bs-target="#addDriverModal">
+                                إضافة سائق
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                document.querySelector('.logout-btn').style.display = 'none';
+            }, 1000);
+        }
+
+        // Convert Number to Arabic Numerals
+        function getArabicNumber(num) {
+            const arabicNumbers = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+            return num.toString().replace(/[0-9]/g, w => arabicNumbers[+w]);
+        }
+
+        // Double Tap to Like
+        document.addEventListener('DOMContentLoaded', function() {
+            const postImages = document.querySelectorAll('.post-image-container');
+            
+            postImages.forEach(container => {
+                let lastTap = 0;
+                const overlay = container.querySelector('.like-overlay');
+                
+                container.addEventListener('click', function(e) {
+                    const currentTime = new Date().getTime();
+                    const tapLength = currentTime - lastTap;
+                    
+                    if (tapLength < 300 && tapLength > 0) {
+                        // Double tap detected
+                        const post = container.closest('.post-card');
+                        const likeBtn = post.querySelector('.post-actions-left .post-action-btn');
+                        
+                        if (!likeBtn.classList.contains('liked')) {
+                            toggleLike(likeBtn);
+                            
+                            // Show heart animation
+                            overlay.classList.add('show');
+                            setTimeout(() => {
+                                overlay.classList.remove('show');
+                            }, 1000);
+                        }
+                        
+                        e.preventDefault();
+                    }
+                    
+                    lastTap = currentTime;
+                });
+            });
+        });
+
+        // Initialize User State on Page Load
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = localStorage.getItem('currentUser');
+            
+            if (currentUser) {
+                try {
+                    const user = JSON.parse(currentUser);
+                    
+                    // Update user info in sidebar
+                    document.querySelector('.side-nav-user-info').innerHTML = `
+                        <div class="text-center">
+                            <img src="${user.photoUrl || 'https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/user-photos%2F1741376568952_default-avatar.png?alt=media&token=ad672ccf-c8e1-4788-a252-52de6c3ceedd'}" 
+                                 alt="${user.fullName || 'المستخدم'}" 
+                                 class="rounded-circle mb-3"
+                                 style="width: 80px; height: 80px; object-fit: cover; border: 3px solid #FFD700;">
+                            <h6 class="text-white mb-1">${user.fullName || 'المستخدم'}</h6>
+                            <span class="badge bg-warning mb-2">${user.userType || 'مستخدم'}</span>
+                            <p class="text-white-50 small mb-3">${user.email || ''}</p>
+                        </div>
+                    `;
+                    
+                    document.querySelector('.logout-btn').style.display = 'flex';
+                } catch (error) {
+                    console.error('Error parsing user data:', error);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+                </div>
+                <div class="post-image-container">
+                    <img class="post-image" src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="خدمة توصيل للنساء">
+                    <div class="like-overlay">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                </div>
+                <div class="post-actions">
+                    <div class="post-actions-left">
+                        <button class="post-action-btn" onclick="toggleLike(this)">
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <button class="post-action-btn" onclick="showCommentModal()">
+                            <i class="far fa-comment"></i>
+                        </button>
+                        <button class="post-action-btn" onclick="sharePost()">
+                            <i class="far fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <button class="post-action-btn" onclick="toggleSave(this)">
+                        <i class="far fa-bookmark"></i>
+                    </button>
+                </div>
+                <div class="post-likes">
+                    ١٨٢ إعجاب
+                </div>
+                <div class="post-caption">
+                    <span class="post-caption-username">فاطمة علي</span>
+                    خدمة توصيل خاصة للنساء والعائلات في مناطق بغداد والكرخ. سيارة نظيفة ومكيفة، خدمة على مدار الساعة، أسعار منافسة وخصومات للرحلات المتكررة.
+                    #توصيل_آمن_للنساء #تاكسي_العراق
+                </div>
+                <a href="#" class="post-comments-link" onclick="showCommentModal()">
+                    عرض جميع التعليقات (23)
+                </a>
+                <div class="post-time">
+                    منذ 3 أيام
+                </div>
+            </div>
+
+            <!-- Post Card 5 -->
+            <div class="post-card">
+                <div class="post-header">
+                    <img class="post-avatar" src="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/user-photos%2F1741376568952_default-avatar.png?alt=media&token=ad672ccf-c8e1-4788-a252-52de6c3ceedd" alt="حسن جاسم">
+                    <div class="post-user-info">
+                        <h3 class="post-username">حسن جاسم <i class="fas fa-check-circle verified-badge"></i></h3>
+                        <p class="post-location">
+                            <span class="driver-status status-active">متاح</span>
+                            <span class="car-type">تويوتا لاندكروزر 2023</span>
+                        </p>
+                    </div>
+                    <button class="post-more-btn">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                </div>
+                <div class="post-image-container">
+                    <img class="post-image" src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="سيارتي الجديدة">
+                    <div class="like-overlay">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                </div>
+                <div class="post-actions">
+                    <div class="post-actions-left">
+                        <button class="post-action-btn" onclick="toggleLike(this)">
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <button class="post-action-btn" onclick="showCommentModal()">
+                            <i class="far fa-comment"></i>
+                        </button>
+                        <button class="post-action-btn" onclick="sharePost()">
+                            <i class="far fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <button class="post-action-btn" onclick="toggleSave(this)">
+                        <i class="far fa-bookmark"></i>
+                    </button>
+                </div>
+                <div class="post-likes">
+                    ١٢٥ إعجاب
+                </div>
+                <div class="post-caption">
+                    <span class="post-caption-username">محمد عبدالله</span>
+                    سيارتي الجديدة للخدمة، جاهز للرحلات ضمن مناطق بغداد بأسعار مناسبة.
+                    #تاكسي_العراق #خدمة_متميزة
+                </div>
+                <a href="#" class="post-comments-link" onclick="showCommentModal()">
+                    عرض جميع التعليقات (15)
+                </a>
+                <div class="post-time">
+                    منذ 3 ساعات
+                </div>
+            </div>
+
+            <!-- Post Card 2 -->
+            <div class="post-card">
+                <div class="post-header">
+                    <img class="post-avatar" src="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/user-photos%2F1741376568952_default-avatar.png?alt=media&token=ad672ccf-c8e1-4788-a252-52de6c3ceedd" alt="عمر حسين">
+                    <div class="post-user-info">
+                        <h3 class="post-username">عمر حسين</h3>
+                        <p class="post-location">
+                            <span class="driver-status status-busy">مشغول</span>
+                            <span class="car-type">هوندا أكورد 2020</span>
+                        </p>
+                    </div>
+                    <button class="post-more-btn">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                </div>
+                <div class="post-image-container">
+                    <img class="post-image" src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="رحلات بغداد">
+                    <div class="like-overlay">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                </div>
+                <div class="post-actions">
+                    <div class="post-actions-left">
+                        <button class="post-action-btn" onclick="toggleLike(this)">
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <button class="post-action-btn" onclick="showCommentModal()">
+                            <i class="far fa-comment"></i>
+                        </button>
+                        <button class="post-action-btn" onclick="sharePost()">
+                            <i class="far fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <button class="post-action-btn" onclick="toggleSave(this)">
+                        <i class="far fa-bookmark"></i>
+                    </button>
+                </div>
+                <div class="post-likes">
+                    ٨٧ إعجاب
+                </div>
+                <div class="post-caption">
+                    <span class="post-caption-username">عمر حسين</span>
+                    متوفر للرحلات بين الكرخ والرصافة، خدمة مميزة وأسعار تنافسية. للحجز تواصلوا معي عبر الخاص.
+                    #تاكسي_بغداد #رحلات_آمنة
+                </div>
+                <a href="#" class="post-comments-link" onclick="showCommentModal()">
+                    عرض جميع التعليقات (8)
+                </a>
+                <div class="post-time">
+                    منذ يوم واحد
+                </div>
+            </div>
+
+            <!-- Post Card 3 -->
+            <div class="post-card">
+                <div class="post-header">
+                    <img class="post-avatar" src="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/user-photos%2F1741376568952_default-avatar.png?alt=media&token=ad672ccf-c8e1-4788-a252-52de6c3ceedd" alt="أحمد محمود">
+                    <div class="post-user-info">
+                        <h3 class="post-username">أحمد محمود <i class="fas fa-check-circle verified-badge"></i></h3>
+                        <p class="post-location">
+                            <span class="driver-status status-active">متاح</span>
+                            <span class="car-type">كيا سبورتاج 2023</span>
+                        </p>
+                    </div>
+                    <button class="post-more-btn">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                </div>
+                <div class="post-image-container">
+                    <img class="post-image" src="https://images.unsplash.com/photo-1590666027616-38e0ec55cc48?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80" alt="رحلة إلى النجف">
+                    <div class="like-overlay">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                </div>
+                <div class="post-actions">
+                    <div class="post-actions-left">
+                        <button class="post-action-btn liked" onclick="toggleLike(this)">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                        <button class="post-action-btn" onclick="showCommentModal()">
+                            <i class="far fa-comment"></i>
+                        </button>
+                        <button class="post-action-btn" onclick="sharePost()">
+                            <i class="far fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <button class="post-action-btn saved" onclick="toggleSave(this)">
+                        <i class="fas fa-bookmark"></i>
+                    </button>
+                </div>
+                <div class="post-likes">
+                    ٢٣٦ إعجاب
+                </div>
+                <div class="post-caption">
+                    <span class="post-caption-username">أحمد محمود</span>
+                    رحلات يومية بين بغداد والنجف، سيارة مكيفة وخدمة VIP. متوفر للتوصيل على مدار الأسبوع، الاستلام من باب المنزل والتوصيل لأي مكان.
+                    #النجف #كربلاء #زيارة #تاكسي_العراق
+                </div>
+                <a href="#" class="post-comments-link" onclick="showCommentModal()">
+                    عرض جميع التعليقات (42)
+                </a>
+                <div class="post-time">
+                    منذ يومين
+                </div>
+            </div>
+
+            <!-- Post Card 4 -->
+            <div class="post-card">
+                <div class="post-header">
+                    <img class="post-avatar" src="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/user-photos%2F1741376568952_default-avatar.png?alt=media&token=ad672ccf-c8e1-4788-a252-52de6c3ceedd" alt="فاطمة علي">
+                    <div class="post-user-info">
+                        <h3 class="post-username">فاطمة علي</h3>
+                        <p class="post-location">
+                            <span class="driver-status status-active">متاح</span>
+                            <span class="car-type">نيسان صني 2021</span>
+                        </p>
+                    </div>
+                    <button class="post-more-btn">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
