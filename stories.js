@@ -398,10 +398,7 @@ addViewerOnlyExplanation() {
     // إنشاء عنصر الشرح
     const explanation = document.createElement('div');
     explanation.className = 'stories-view-only-notice';
-    explanation.innerHTML = `
-        <i class="fas fa-info-circle"></i>
-        <span>يمكنك مشاهدة قصص السائقين فقط. نشر القصص متاح للسائقين.</span>
-    `;
+  
     
     // إضافة إلى حاوية القصص
     this.storiesContainer.appendChild(explanation);

@@ -570,16 +570,16 @@ function showUserMenu(event) {
     </div>
 </nav>
 <!-- إضافة في قسم شريط العنوان، بعد شريط التنقل العلوي -->
-<div class="stories-container rtl">
+<div class="stories-container rtl" style="display: flex; gap: 10px; padding: 10px; overflow-x: auto; white-space: nowrap;">
     <!-- عنصر إضافة قصة جديدة (يظهر فقط للمستخدمين المسجلين) -->
-    <div class="story-item add-story" id="addStoryBtn">
-        <div class="story-circle">
-            <img src="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/user-photos%2F1741376568952_default-avatar.png?alt=media&token=ad672ccf-c8e1-4788-a252-52de6c3ceedd" alt="إضافة قصة" class="story-img">
-            <div class="add-story-icon">
-                <i class="fas fa-plus"></i>
+    <div class="story-item add-story" id="addStoryBtn" style="background: none; display: inline-block; position: relative;">
+       
+            <img src="https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/user-photos%2F1741376568952_default-avatar.png?alt=media&token=ad672ccf-c8e1-4788-a252-52de6c3ceedd" alt="إضافة قصة" class="story-img" style="border-radius: 50%; width: 60px; height: 60px; object-fit: cover;">
+            <div class="add-story-icon" style="position: absolute; bottom: 0; right: 0; background: #FFD700; border-radius: 50%; padding: 5px;">
+                <i class="fas fa-plus" style="color: #000;"></i>
             </div>
         </div>
-        <span class="story-username">قصتك</span>
+        <span class="story-username" style="display: block; text-align: center; margin-top: 5px;"></span>
     </div>
     
     <!-- سيتم إضافة عناصر القصص هنا ديناميكيًا -->
@@ -621,6 +621,168 @@ function showUserMenu(event) {
     </div>
 </div>
 
+    <!-- Map View -->
+    <div id="map"></div>
+      <!-- Drivers Grid -->
+
+        <!-- Location Filter -->
+        <div class="location-filter">
+            <div class="location-chips" id="locationFilter">
+                <span class="location-chip active" data-location="all">
+                    <i class="fas fa-globe"></i>
+                    الكل
+                </span>
+                <span class="location-chip" data-location="بغداد">
+                    <i class="fas fa-map-marker-alt"></i>
+                    بغداد
+                </span>
+                <span class="location-chip" data-location="الكرخ">
+                    <i class="fas fa-map-marker-alt"></i>
+                    الكرخ
+                </span>
+                <span class="location-chip" data-location="الرصافة">
+                    <i class="fas fa-map-marker-alt"></i>
+                    الرصافة
+                </span>
+                <span class="location-chip" data-location="البصرة">
+                    <i class="fas fa-map-marker-alt"></i>
+                    البصرة
+                </span>
+                <span class="location-chip" data-location="نينوى">
+                    <i class="fas fa-map-marker-alt"></i>
+                    نينوى
+                </span>
+                <span class="location-chip" data-location="الموصل">
+                    <i class="fas fa-map-marker-alt"></i>
+                    الموصل
+                </span>
+                <span class="location-chip" data-location="النجف">
+                    <i class="fas fa-map-marker-alt"></i>
+                    النجف
+                </span>
+                <span class="location-chip" data-location="الكوفة">
+                    <i class="fas fa-map-marker-alt"></i>
+                    الكوفة
+                </span>
+                <span class="location-chip" data-location="كربلاء">
+                    <i class="fas fa-map-marker-alt"></i>
+                    كربلاء
+                </span>
+                <span class="location-chip" data-location="الحسينية">
+                    <i class="fas fa-map-marker-alt"></i>
+                    الحسينية
+                </span>
+                <span class="location-chip" data-location="أربيل">
+                    <i class="fas fa-map-marker-alt"></i>
+                    أربيل
+                </span>
+                <span class="location-chip" data-location="كركوك">
+                    <i class="fas fa-map-marker-alt"></i>
+                    كركوك
+                </span>
+                <span class="location-chip" data-location="الأنبار">
+                    <i class="fas fa-map-marker-alt"></i>
+                    الأنبار
+                </span>
+                <span class="location-chip" data-location="الرمادي">
+                    <i class="fas fa-map-marker-alt"></i>
+                    الرمادي
+                </span>
+                <span class="location-chip" data-location="الفلوجة">
+                    <i class="fas fa-map-marker-alt"></i>
+                    الفلوجة
+                </span>
+                <span class="location-chip" data-location="بابل">
+                    <i class="fas fa-map-marker-alt"></i>
+                    بابل
+                </span>
+                <span class="location-chip" data-location="الحلة">
+                    <i class="fas fa-map-marker-alt"></i>
+                    الحلة
+                </span>
+                <span class="location-chip" data-location="المسيب">
+                    <i class="fas fa-map-marker-alt"></i>
+                    المسيب
+                </span>
+                <span class="location-chip" data-location="الهاشمية">
+                    <i class="fas fa-map-marker-alt"></i>
+                    الهاشمية
+                </span>
+                <span class="location-chip" data-location="القاسم">
+                    <i class="fas fa-map-marker-alt"></i>
+                    القاسم
+                </span>
+                <span class="location-chip" data-location="ديالى">
+                    <i class="fas fa-map-marker-alt"></i>
+                    ديالى
+                </span>
+                <span class="location-chip" data-location="بعقوبة">
+                    <i class="fas fa-map-marker-alt"></i>
+                    بعقوبة
+                </span>
+                <span class="location-chip" data-location="ذي قار">
+                    <i class="fas fa-map-marker-alt"></i>
+                    ذي قار
+                </span>
+                <span class="location-chip" data-location="الناصرية">
+                    <i class="fas fa-map-marker-alt"></i>
+                    الناصرية
+                </span>
+                <span class="location-chip" data-location="السليمانية">
+                    <i class="fas fa-map-marker-alt"></i>
+                    السليمانية
+                </span>
+                <span class="location-chip" data-location="صلاح الدين">
+                    <i class="fas fa-map-marker-alt"></i>
+                    صلاح الدين
+                </span>
+                <span class="location-chip" data-location="تكريت">
+                    <i class="fas fa-map-marker-alt"></i>
+                    تكريت
+                </span>
+                <span class="location-chip" data-location="واسط">
+                    <i class="fas fa-map-marker-alt"></i>
+                    واسط
+                </span>
+                <span class="location-chip" data-location="الكوت">
+                    <i class="fas fa-map-marker-alt"></i>
+                    الكوت
+                </span>
+                <span class="location-chip" data-location="ميسان">
+                    <i class="fas fa-map-marker-alt"></i>
+                    ميسان
+                </span>
+                <span class="location-chip" data-location="العمارة">
+                    <i class="fas fa-map-marker-alt"></i>
+                    العمارة
+                </span>
+                <span class="location-chip" data-location="المثنى">
+                    <i class="fas fa-map-marker-alt"></i>
+                    المثنى
+                </span>
+                <span class="location-chip" data-location="السماوة">
+                    <i class="fas fa-map-marker-alt"></i>
+                    السماوة
+                </span>
+                <span class="location-chip" data-location="دهوك">
+                    <i class="fas fa-map-marker-alt"></i>
+                    دهوك
+                </span>
+                <span class="location-chip" data-location="القادسية">
+                    <i class="fas fa-map-marker-alt"></i>
+                    القادسية
+                </span>
+                <span class="location-chip" data-location="الديوانية">
+                    <i class="fas fa-map-marker-alt"></i>
+                    الديوانية
+                </span>
+
+            </div>
+
+        </div>
+      <div class="drivers-grid" id="driversGrid"></div>
+    </div>
+    
 <!-- مودال إضافة قصة جديدة -->
 <div class="add-story-modal" id="addStoryModal">
     <div class="add-story-header">
@@ -899,169 +1061,9 @@ function showUserMenu(event) {
     </nav>
 
     <!-- Main Content -->
-    <div class="container">
-        <!-- Map View -->
-        <div id="map"></div>
+   
 
-        <!-- Location Filter -->
-        <div class="location-filter">
-            <div class="location-chips" id="locationFilter">
-                <span class="location-chip active" data-location="all">
-                    <i class="fas fa-globe"></i>
-                    الكل
-                </span>
-                <span class="location-chip" data-location="بغداد">
-                    <i class="fas fa-map-marker-alt"></i>
-                    بغداد
-                </span>
-                <span class="location-chip" data-location="الكرخ">
-                    <i class="fas fa-map-marker-alt"></i>
-                    الكرخ
-                </span>
-                <span class="location-chip" data-location="الرصافة">
-                    <i class="fas fa-map-marker-alt"></i>
-                    الرصافة
-                </span>
-                <span class="location-chip" data-location="البصرة">
-                    <i class="fas fa-map-marker-alt"></i>
-                    البصرة
-                </span>
-                <span class="location-chip" data-location="نينوى">
-                    <i class="fas fa-map-marker-alt"></i>
-                    نينوى
-                </span>
-                <span class="location-chip" data-location="الموصل">
-                    <i class="fas fa-map-marker-alt"></i>
-                    الموصل
-                </span>
-                <span class="location-chip" data-location="النجف">
-                    <i class="fas fa-map-marker-alt"></i>
-                    النجف
-                </span>
-                <span class="location-chip" data-location="الكوفة">
-                    <i class="fas fa-map-marker-alt"></i>
-                    الكوفة
-                </span>
-                <span class="location-chip" data-location="كربلاء">
-                    <i class="fas fa-map-marker-alt"></i>
-                    كربلاء
-                </span>
-                <span class="location-chip" data-location="الحسينية">
-                    <i class="fas fa-map-marker-alt"></i>
-                    الحسينية
-                </span>
-                <span class="location-chip" data-location="أربيل">
-                    <i class="fas fa-map-marker-alt"></i>
-                    أربيل
-                </span>
-                <span class="location-chip" data-location="كركوك">
-                    <i class="fas fa-map-marker-alt"></i>
-                    كركوك
-                </span>
-                <span class="location-chip" data-location="الأنبار">
-                    <i class="fas fa-map-marker-alt"></i>
-                    الأنبار
-                </span>
-                <span class="location-chip" data-location="الرمادي">
-                    <i class="fas fa-map-marker-alt"></i>
-                    الرمادي
-                </span>
-                <span class="location-chip" data-location="الفلوجة">
-                    <i class="fas fa-map-marker-alt"></i>
-                    الفلوجة
-                </span>
-                <span class="location-chip" data-location="بابل">
-                    <i class="fas fa-map-marker-alt"></i>
-                    بابل
-                </span>
-                <span class="location-chip" data-location="الحلة">
-                    <i class="fas fa-map-marker-alt"></i>
-                    الحلة
-                </span>
-                <span class="location-chip" data-location="المسيب">
-                    <i class="fas fa-map-marker-alt"></i>
-                    المسيب
-                </span>
-                <span class="location-chip" data-location="الهاشمية">
-                    <i class="fas fa-map-marker-alt"></i>
-                    الهاشمية
-                </span>
-                <span class="location-chip" data-location="القاسم">
-                    <i class="fas fa-map-marker-alt"></i>
-                    القاسم
-                </span>
-                <span class="location-chip" data-location="ديالى">
-                    <i class="fas fa-map-marker-alt"></i>
-                    ديالى
-                </span>
-                <span class="location-chip" data-location="بعقوبة">
-                    <i class="fas fa-map-marker-alt"></i>
-                    بعقوبة
-                </span>
-                <span class="location-chip" data-location="ذي قار">
-                    <i class="fas fa-map-marker-alt"></i>
-                    ذي قار
-                </span>
-                <span class="location-chip" data-location="الناصرية">
-                    <i class="fas fa-map-marker-alt"></i>
-                    الناصرية
-                </span>
-                <span class="location-chip" data-location="السليمانية">
-                    <i class="fas fa-map-marker-alt"></i>
-                    السليمانية
-                </span>
-                <span class="location-chip" data-location="صلاح الدين">
-                    <i class="fas fa-map-marker-alt"></i>
-                    صلاح الدين
-                </span>
-                <span class="location-chip" data-location="تكريت">
-                    <i class="fas fa-map-marker-alt"></i>
-                    تكريت
-                </span>
-                <span class="location-chip" data-location="واسط">
-                    <i class="fas fa-map-marker-alt"></i>
-                    واسط
-                </span>
-                <span class="location-chip" data-location="الكوت">
-                    <i class="fas fa-map-marker-alt"></i>
-                    الكوت
-                </span>
-                <span class="location-chip" data-location="ميسان">
-                    <i class="fas fa-map-marker-alt"></i>
-                    ميسان
-                </span>
-                <span class="location-chip" data-location="العمارة">
-                    <i class="fas fa-map-marker-alt"></i>
-                    العمارة
-                </span>
-                <span class="location-chip" data-location="المثنى">
-                    <i class="fas fa-map-marker-alt"></i>
-                    المثنى
-                </span>
-                <span class="location-chip" data-location="السماوة">
-                    <i class="fas fa-map-marker-alt"></i>
-                    السماوة
-                </span>
-                <span class="location-chip" data-location="دهوك">
-                    <i class="fas fa-map-marker-alt"></i>
-                    دهوك
-                </span>
-                <span class="location-chip" data-location="القادسية">
-                    <i class="fas fa-map-marker-alt"></i>
-                    القادسية
-                </span>
-                <span class="location-chip" data-location="الديوانية">
-                    <i class="fas fa-map-marker-alt"></i>
-                    الديوانية
-                </span>
-
-            </div>
-
-        </div>
-
-        <!-- Drivers Grid -->
-        <div class="drivers-grid" id="driversGrid"></div>
-    </div>
+      
 
 
 

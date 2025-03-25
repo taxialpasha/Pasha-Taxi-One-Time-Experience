@@ -71,9 +71,14 @@
 }
 /* تحسينات العنوان */
 .app-header {
+    margin-bottom: 0;  /* إزالة المسافة بين شريط التايتل والعناصر أسفله */
+    border-bottom: none;  /* إزالة الحدود السفلية لتكامل أفضل */
+    height: 50px;  /* ضبط ارتفاع ثابت لشريط العنوان */
+    padding: 0 10px;  /* تقليل الهوامش الجانبية */
+    position: sticky;  /* جعل الشريط ثابتًا عند التمرير */
+    top: 0;  /* تثبيت في الأعلى */
+    z-index: 1030;  /* ضمان ظهور الشريط فوق جميع العناصر */
     background: var(--background-dark);
-    border-bottom: 2px solid var(--primary-color);
-    padding: var(--spacing-md) 1rem;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     display: flex;
     justify-content: space-between;
@@ -118,9 +123,10 @@
 
 /* تحسينات البطاقات */
 .driver-card {
+    margin-bottom: 10px;  /* تقليل المسافة السفلية */
+    border-radius: 10px;  /* تقليل تقويس الحواف */
     background: var(--background-light);
     border: 1px solid var(--primary-color);
-    border-radius: var(--border-radius-lg);
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -131,18 +137,18 @@
 }
 
 .driver-info {
-    padding: var(--spacing-lg);
+    padding: 10px;  /* تقليل الحشو الداخلي */
 }
 
 .driver-name {
+    font-size: 1.1rem;  /* تصغير حجم الخط */
+    margin-bottom: 5px;  /* تقليل المسافة السفلية */
     color: var(--primary-color);
-    font-size: 1.25rem;
     font-weight: bold;
-    margin-bottom: var(--spacing-md);
 }
 
 .driver-image-container {
-    height: 200px; /* تعديل ارتفاع الصورة ليكون أطول */
+    height: 180px;  /* تقليل ارتفاع الصورة */
     overflow: hidden;
 }
 
@@ -153,7 +159,8 @@
 
 /* تحسينات الأزرار */
 .action-btn {
-    padding: var(--spacing-md) var(--spacing-lg);
+    padding: 8px;  /* تقليل الحشو */
+    font-size: 0.9rem;  /* تصغير حجم الخط */
     border-radius: var(--border-radius-md);
     font-weight: bold;
     transition: all 0.3s ease;
@@ -428,6 +435,9 @@
 
 /* Preserve original location chip styles */
 .location-chip {
+    margin: 0 5px;  /* تقليل المسافة بين الفلاتر */
+    padding: 5px 10px;  /* تقليل الحشو الداخلي */
+    font-size: 0.9rem;  /* تصغير حجم الخط */
     background-color: #000000 !important;
     border: 2px solid #FFD700 !important;
     color: #FFFFFF !important;
@@ -705,20 +715,13 @@
 
 /* تحديث الخريطة */
 #map {
-    height: var(--map-height);
-    /* ارتفاع الخريطة */
-    min-height: var(--map-min-height);
-    /* الحد الأدنى للارتفاع */
+    margin-top: 0;
+    margin-bottom: 0;
+    border-radius: 0;  /* إزالة تقويس الحواف للتكامل البصري */
+    height: calc(100vh - 115px);  /* تعديل الارتفاع ليناسب المساحة المتاحة */
+    border: none;  /* إزالة الحدود للتكامل البصري */
+    box-shadow: none;  /* إزالة الظل للتكامل البصري */
     width: 100%;
-    /* عرض الخريطة */
-    border-radius: var(--map-border-radius);
-    /* تقويس الحواف */
-    margin: var(--map-margin-top) auto var(--map-margin-bottom);
-    /* المسافات حول الخريطة */
-    box-shadow: var(--map-shadow);
-    /* الظل */
-    border: 1px solid var(--secondary-color);
-    /* الحدود */
     z-index: 1;
     position: relative;
     background: linear-gradient(135deg, #0e7583, #80deea);
@@ -727,13 +730,12 @@
 
 /* المسافة بين الخريطة والعناصر الأخرى */
 .container {
+    padding: 0;  /* إزالة الحشو الداخلي */
+    margin: 0;  /* إزالة الهوامش */
+    max-width: 100%;  /* تحديد العرض الأقصى */
     display: flex;
     flex-direction: column;
-    /* ترتيب العناصر عموديًا */
     gap: 20rem;
-    /* مسافة بين العناصر */
-    padding: 0rem;
-    /* حشوة داخلية للحاوية */
 }
 
 .app-header {
@@ -949,43 +951,26 @@
 
 /* تحديث حاوية الفلاتر مع التثبيت */
 .location-filter {
-    background-color: #1a1a1a;
-    /* اللون الجديد */
-    padding: 0;
-    /* إزالة الحشوة */
-    border-radius: 10px;
-    /* تقليل التقويس */
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
-    /* تخفيف الظلال */
-    margin: 0.3rem;
-    /* مسافة صغيرة للخارج */
-    position: sticky;
-    top: 100px;
-    /* تقليل المسافة من الأعلى */
-    z-index: 1000;
-    overflow: hidden;
-    backdrop-filter: blur(3px);
-    /* تقليل تأثير التمويه */
-    -webkit-backdrop-filter: blur(3px);
-    border-bottom: none;
-    /* إزالة الحدود */
-    transition: all 0.2s ease;
+    margin: 0;  /* إزالة جميع الهوامش */
+    padding: 0;  /* إزالة الحشو الداخلي */
+    position: sticky;  /* جعل الشريط ثابتًا عند التمرير */
+    top: 50px;  /* ليظهر مباشرة بعد شريط العنوان */
+    z-index: 1010;  /* أقل من القصص وشريط العنوان */
+    background-color: #1a1a1a;  /* للتمييز البصري */
+    border-bottom: 1px solid rgba(255, 215, 0, 0.1);  /* إضافة حد سفلي خفيف */
 }
 
 /* تحسين تنسيق الفلاتر */
 .location-chips {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 0.5rem;
-    /* تقليل الفجوة بين العناصر */
-    overflow-x: 0auto;
-    padding: 1.0rem 0;
-    /* تقليل الحشوة الرأسية */
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-    white-space: 1nowrap;
-    margin: 0auto;
-    max-width: 100%;
+    padding: 5px 0;  /* تقليل الحشو العمودي */
+    margin: 0;  /* إزالة الهوامش */
+    white-space: nowrap;  /* لمنع التفاف العناصر */
+    overflow-x: auto;  /* للسماح بالتمرير الأفقي */
+    scrollbar-width: none;  /* إخفاء شريط التمرير على Firefox */
+}
+
+.location-chips::-webkit-scrollbar {
+    display: none;  /* إخفاء شريط التمرير على Chrome/Safari */
 }
 
 /* تحسين أزرار الفلتر */
@@ -1227,9 +1212,11 @@ h6 {
     }
 
     .drivers-grid {
+        padding-top: 10px;  /* إضافة مسافة صغيرة في الأعلى */
+        padding-bottom: 60px;  /* إضافة مسافة للشريط السفلي */
+        gap: 10px;  /* تقليل المسافة بين البطاقات */
         display: grid;
         grid-template-columns: 1fr;
-        gap: 1rem;
     }
 
     @media (min-width: 768px) {
@@ -1513,14 +1500,14 @@ body {
 }
 
 .driver-stats {
+    gap: 5px;  /* تقليل المسافة بين العناصر */
+    margin: 5px 0;  /* تقليل الهوامش */
+    padding: 5px 0;  /* تقليل الحشو */
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.2rem;
-    margin: 1.2rem 0;
     text-align: center;
     border-top: 1px solid #eee;
     border-bottom: 1px solid #eee;
-    padding: 1.2rem 0;
 }
 
 .stat-item {
@@ -1542,10 +1529,10 @@ body {
 }
 
 .driver-actions {
+    padding: 10px;  /* تقليل الحشو */
+    gap: 5px;  /* تقليل المسافة بين الأزرار */
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    padding: 1.5rem;
 }
 
 .action-btn {
@@ -3403,18 +3390,18 @@ body {
     -webkit-backdrop-filter: blur(10px);
 }
 .bottom-nav {
+    height: 55px;  /* تقليل الارتفاع */
+    border-top: 1px solid rgba(255, 215, 0, 0.1);  /* إضافة حد علوي خفيف */
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 65px;
     background: #000000;
     display: flex;
     justify-content: space-around;
     align-items: center;
     z-index: 1040;
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
-    border-top: 1px solid #333333;
 }
 
 /* Card text colors */
@@ -10914,8 +10901,9 @@ body {
 
 /* تصغير حجم الخريطة */
 #map {
-    height: var(--map-height);
-    margin: 0.5rem 0;
+    margin-top: 0; /* مسافة صفر بين الخريطة وشريط التايتل */
+    margin-bottom: 0; /* مسافة صفر بين الخريطة والقصص */
+    height: calc(100vh - 60px); /* تعديل ارتفاع الخريطة ليكون متناسب مع الشاشة */
     border-width: 1px;
     border-radius: 10px;
 }
@@ -12081,6 +12069,7 @@ body {
     padding: 8px 15px;
     height: 60px;
     z-index: 1030;
+    margin-bottom: 10px; /* مسافة بين شريط التايتل وبطاقة السائق */
 }
 
 .app-logo {
@@ -14493,3 +14482,118 @@ input:invalid + .validation-message {
 .stories-view-only-notice .action-links {
     margin-left: 10px;
 }
+
+/* تنسيقات إضافية لمنشورات السائقين */
+
+/* شارة السائق */
+.driver-badge {
+    background-color: #FFD700;
+    color: #333;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    margin-right: 5px;
+    display: inline-flex;
+    align-items: center;
+    font-weight: bold;
+}
+
+.driver-badge i {
+    margin-left: 3px;
+}
+
+/* معلومات المركبة */
+.vehicle-info {
+    font-size: 0.8rem;
+    color: #aaa;
+    margin-top: 3px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.vehicle-info i {
+    color: #FFD700;
+}
+
+/* تنسيق رسالة حصر النشر للسائقين */
+.drivers-only-post-notice {
+    background-color: rgba(255, 215, 0, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 10px;
+    padding: 15px;
+    margin: 15px 0;
+    text-align: center;
+    color: #FFD700;
+    font-weight: bold;
+    position: relative;
+}
+
+.drivers-only-post-notice i {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #FFD700;
+}
+
+/* رسالة لا توجد منشورات */
+.no-posts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    color: #888;
+    text-align: center;
+}
+
+.no-posts i {
+    color: #FFD700;
+    margin-bottom: 15px;
+}
+
+/* تنسيق مخصص لمنشورات السائقين */
+.post[data-author-role="driver"] {
+    border-right: 3px solid #FFD700;
+}
+
+.post[data-author-role="driver"] .post-header {
+    background-color: rgba(255, 215, 0, 0.05);
+}
+
+/* تنسيق حالة عدم وجود سائقين */
+.no-drivers-message {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: center;
+    color: #fff;
+}
+
+.no-drivers-message h3 {
+    color: #FFD700;
+    margin-bottom: 10px;
+}
+
+.no-drivers-message p {
+    margin-bottom: 15px;
+}
+
+.no-drivers-message .btn-become-driver {
+    background-color: #FFD700;
+    color: #333;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.no-drivers-message .btn-become-driver:hover {
+    background-color: #f1c40f;
+    transform: translateY(-2px);
+}
+
+
+
+

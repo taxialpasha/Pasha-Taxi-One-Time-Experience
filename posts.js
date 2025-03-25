@@ -24,10 +24,10 @@ class PostsManager {
             this.currentUser = JSON.parse(userData);
         }
 
-        // تهيئة عنصر واجهة منشئ المنشورات
+        // تهيئة عنصر واجهة منشئ المنشورات فقط إذا كان المستخدم سائق
         this.initPostCreator();
         
-        // تحميل المنشورات الأولية
+        // تحميل المنشورات الأولية (يمكن للجميع مشاهدة المنشورات)
         this.loadInitialPosts();
         
         // إضافة مستمع للتمرير لتحميل المزيد من المنشورات
@@ -41,8 +41,22 @@ class PostsManager {
                     if (userData) {
                         this.currentUser = { ...userData, uid: user.uid };
                         localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+                        
+                        // تحديث حالة ظهور منشئ المنشورات بناءً على نوع المستخدم
+                        this.updatePostCreatorVisibility();
                     }
-                    this.updatePostCreatorVisibility();
+                });
+                
+                // التحقق من وجود المستخدم في جدول السائقين
+                this.database.ref(`drivers`).orderByChild('uid').equalTo(user.uid).once('value').then(snapshot => {
+                    if (snapshot.exists()) {
+                        // إذا وجدنا المستخدم في جدول السائقين، نعين نوع المستخدم إلى سائق
+                        this.currentUser = { ...this.currentUser, userType: 'driver', role: 'driver' };
+                        localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+                        
+                        // تحديث حالة ظهور منشئ المنشورات
+                        this.updatePostCreatorVisibility();
+                    }
                 });
             } else {
                 this.currentUser = null;
@@ -310,15 +324,17 @@ class PostsManager {
     updatePostCreatorVisibility() {
         const postCreator = document.querySelector('.post-creator');
         if (postCreator) {
-            if (this.currentUser) {
+            // التحقق من وجود المستخدم ومن أنه سائق
+            if (this.currentUser && (this.currentUser.userType === 'driver' || this.currentUser.role === 'driver')) {
                 postCreator.style.display = 'block';
                 
                 // تحديث معلومات المستخدم في منشئ المنشورات
                 const avatar = postCreator.querySelector('.post-creator-avatar');
                 if (avatar) {
-                    avatar.src = this.currentUser.photoUrl || 'https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/user-photos%2F1741376568952_default-avatar.png?alt=media&token=ad672ccf-c8e1-4788-a252-52de6c3ceedd';
+                    avatar.src = this.currentUser.photoUrl || this.currentUser.imageUrl || 'https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/user-photos%2F1741376568952_default-avatar.png?alt=media&token=ad672ccf-c8e1-4788-a252-52de6c3ceedd';
                 }
             } else {
+                // إخفاء منشئ المنشورات إذا لم يكن المستخدم سائق
                 postCreator.style.display = 'none';
             }
         }
@@ -330,7 +346,7 @@ class PostsManager {
             const userName = createPostUser.querySelector('h6');
             
             if (avatar) {
-                avatar.src = this.currentUser.photoUrl || 'https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/user-photos%2F1741376568952_default-avatar.png?alt=media&token=ad672ccf-c8e1-4788-a252-52de6c3ceedd';
+                avatar.src = this.currentUser.photoUrl || this.currentUser.imageUrl || 'https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/user-photos%2F1741376568952_default-avatar.png?alt=media&token=ad672ccf-c8e1-4788-a252-52de6c3ceedd';
             }
             
             if (userName) {
@@ -341,12 +357,13 @@ class PostsManager {
         // تحديث أيقونة التعليق
         const commentAvatar = document.querySelector('.comment-avatar');
         if (commentAvatar && this.currentUser) {
-            commentAvatar.src = this.currentUser.photoUrl || 'https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/user-photos%2F1741376568952_default-avatar.png?alt=media&token=ad672ccf-c8e1-4788-a252-52de6c3ceedd';
+            commentAvatar.src = this.currentUser.photoUrl || this.currentUser.imageUrl || 'https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/user-photos%2F1741376568952_default-avatar.png?alt=media&token=ad672ccf-c8e1-4788-a252-52de6c3ceedd';
         }
     }
 
     // فتح منشئ المنشورات
     openPostCreator(mediaType = null) {
+        // التحقق من وجود المستخدم وأنه سائق
         if (!this.currentUser) {
             Swal.fire({
                 title: 'مطلوب تسجيل الدخول',
@@ -359,6 +376,17 @@ class PostsManager {
                 if (result.isConfirmed) {
                     openLoginModal();
                 }
+            });
+            return;
+        }
+        
+        // التحقق من نوع المستخدم
+        if (this.currentUser.userType !== 'driver' && this.currentUser.role !== 'driver') {
+            Swal.fire({
+                title: 'غير مسموح',
+                text: 'عذراً، فقط السائقين يمكنهم نشر المنشورات',
+                icon: 'warning',
+                confirmButtonText: 'حسناً'
             });
             return;
         }
@@ -465,8 +493,15 @@ class PostsManager {
 
     // إنشاء منشور جديد
     async createPost() {
+        // التحقق من وجود المستخدم وأنه سائق
         if (!this.currentUser) {
             showToast('يجب تسجيل الدخول لنشر منشور', 'error');
+            return;
+        }
+        
+        // التحقق من نوع المستخدم
+        if (this.currentUser.userType !== 'driver' && this.currentUser.role !== 'driver') {
+            showToast('عذراً، فقط السائقين يمكنهم نشر المنشورات', 'error');
             return;
         }
         
@@ -497,13 +532,15 @@ class PostsManager {
                 text: text,
                 authorId: this.currentUser.uid,
                 authorName: this.currentUser.fullName || this.currentUser.name || 'مستخدم',
-                authorImage: this.currentUser.photoUrl || null,
+                authorImage: this.currentUser.photoUrl || this.currentUser.imageUrl || null,
                 timestamp: firebase.database.ServerValue.TIMESTAMP,
                 likes: 0,
                 comments: 0,
                 shares: 0,
                 mediaType: null,
-                mediaUrl: null
+                mediaUrl: null,
+                // إضافة علامة توضح أن المنشور من سائق
+                fromDriver: true
             };
             
             // إذا كان هناك ملف وسائط، قم برفعه
@@ -745,13 +782,19 @@ class PostsManager {
             }
         }
         
+        // إضافة شارة "سائق" إلى رأس المنشور
+        const driverBadge = postData.fromDriver ? 
+            `<span class="driver-badge">
+                <i class="fas fa-taxi"></i> سائق
+            </span>` : '';
+        
         // إنشاء HTML للمنشور
         postElement.innerHTML = `
         <div class="post-header">
             <div class="post-user">
                 <img src="${postData.authorImage || 'https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/user-photos%2F1741376568952_default-avatar.png?alt=media&token=ad672ccf-c8e1-4788-a252-52de6c3ceedd'}" alt="صورة المستخدم" class="post-avatar">
                 <div class="post-user-info">
-                    <h6>${postData.authorName}</h6>
+                    <h6>${postData.authorName} ${driverBadge}</h6>
                     <small>${postTime} <i class="fas fa-globe-asia fa-sm"></i></small>
                 </div>
             </div>
@@ -2177,3 +2220,728 @@ if (!document.querySelector('.post-creator')) {
     const currentUser = JSON.parse(localStorage.getItem('currentUser')) || {};
 }
 }
+
+// هذا الملف يحتوي على كود دمج زر المراسلة في المنشورات
+// يجب تضمينه بعد تحميل ملف posts.js ونظام المراسلة
+
+/**
+ * تعديل دالة إنشاء بطاقة المنشور لإضافة زر المراسلة
+ */
+const originalCreateDriverCard = window.postsManager.createDriverCard;
+
+window.postsManager.createDriverCard = function(driver, key) {
+    // استدعاء الدالة الأصلية للحصول على HTML الخاص بالبطاقة
+    const originalHTML = originalCreateDriverCard.call(this, driver, key);
+    
+    // إنشاء عنصر DOM مؤقت لتعديل HTML
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = originalHTML;
+    
+    // البحث عن قسم أزرار التفاعل
+    const actionsDiv = tempDiv.querySelector('.post-actions');
+    
+    if (actionsDiv) {
+        // التحقق من وجود المستخدم الحالي
+        const currentUser = this.currentUser || JSON.parse(localStorage.getItem('currentUser') || '{}');
+        
+        // التحقق من أن السائق ليس المستخدم نفسه
+        if (currentUser && currentUser.uid !== key) {
+            // إنشاء زر المراسلة
+            const chatButton = document.createElement('button');
+            chatButton.className = 'post-action-btn chat-btn';
+            chatButton.setAttribute('data-driver-id', key);
+            chatButton.innerHTML = '<i class="fas fa-comment-dots"></i><span>مراسلة</span>';
+            
+            // إضافة معالج النقر
+            chatButton.addEventListener('click', function() {
+                if (window.chatSystem) {
+                    window.chatSystem.openChatWithUser(key);
+                } else {
+                    window.openChatWindow(key);
+                }
+            });
+            
+            // تحديد موقع إدراج زر المراسلة (بعد زر الإعجاب)
+            const likeButton = actionsDiv.querySelector('.like-btn');
+            const commentButton = actionsDiv.querySelector('.comment-btn');
+            
+            if (likeButton && commentButton) {
+                // إدراج بين زر الإعجاب وزر التعليق
+                actionsDiv.insertBefore(chatButton, commentButton);
+            } else {
+                // إضافة في نهاية قسم الأزرار
+                actionsDiv.appendChild(chatButton);
+            }
+        }
+    }
+    
+    // استخراج HTML المعدل
+    return tempDiv.innerHTML;
+};
+
+/**
+ * تعديل دالة إنشاء المنشور لإضافة زر المراسلة
+ */
+const originalAddPostToDOM = window.postsManager.addPostToDOM;
+
+window.postsManager.addPostToDOM = function(postId, postData) {
+    // استدعاء الدالة الأصلية أولاً
+    originalAddPostToDOM.call(this, postId, postData);
+    
+    // إضافة زر المراسلة للمنشور
+    this.addChatButtonToPost(postId, postData);
+};
+
+/**
+ * إضافة دالة جديدة لإضافة زر المراسلة للمنشور
+ */
+window.postsManager.addChatButtonToPost = function(postId, postData) {
+    // البحث عن عنصر المنشور
+    const postElement = document.querySelector(`.post[data-post-id="${postId}"]`);
+    if (!postElement) return;
+    
+    // البحث عن قسم الأزرار
+    const actionsDiv = postElement.querySelector('.post-actions');
+    if (!actionsDiv) return;
+    
+    // التحقق مما إذا كان المنشور ينتمي لسائق
+    if (!postData.fromDriver && !postData.authorId) return;
+    
+    // التحقق من عدم وجود زر المراسلة بالفعل
+    if (actionsDiv.querySelector('.chat-btn')) return;
+    
+    // الحصول على المستخدم الحالي
+    const currentUser = this.currentUser || JSON.parse(localStorage.getItem('currentUser') || '{}');
+    
+    // التحقق من أن المستخدم ليس كاتب المنشور
+    if (currentUser && currentUser.uid === postData.authorId) return;
+    
+    // إنشاء زر المراسلة
+    const chatButton = document.createElement('button');
+    chatButton.className = 'post-action-btn chat-btn';
+    chatButton.setAttribute('data-post-id', postId);
+    chatButton.setAttribute('data-author-id', postData.authorId);
+    
+    // التحقق من وجود رسائل غير مقروءة
+    if (window.chatSystem) {
+        window.chatSystem.getUnreadMessagesCount(postData.authorId).then(count => {
+            if (count > 0) {
+                chatButton.innerHTML = `
+                    <i class="fas fa-comment-dots"></i>
+                    <span>مراسلة</span>
+                    <span class="chat-badge">${count}</span>
+                `;
+            } else {
+                chatButton.innerHTML = `
+                    <i class="fas fa-comment-dots"></i>
+                    <span>مراسلة</span>
+                `;
+            }
+        }).catch(error => {
+            console.error('Error getting unread count:', error);
+            chatButton.innerHTML = `
+                <i class="fas fa-comment-dots"></i>
+                <span>مراسلة</span>
+            `;
+        });
+    } else {
+        chatButton.innerHTML = `
+            <i class="fas fa-comment-dots"></i>
+            <span>مراسلة</span>
+        `;
+    }
+    
+    // إضافة معالج النقر
+    chatButton.addEventListener('click', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        
+        // فتح المحادثة
+        if (window.chatSystem) {
+            window.chatSystem.openChatWithUser(postData.authorId);
+        } else if (typeof openChatWindow === 'function') {
+            openChatWindow(postData.authorId);
+        } else {
+            alert('نظام المراسلة غير متاح حالياً');
+        }
+    });
+    
+    // إدراج زر المراسلة بعد زر الإعجاب
+    const likeButton = actionsDiv.querySelector('.like-btn');
+    const commentButton = actionsDiv.querySelector('.comment-btn');
+    
+    if (likeButton && commentButton) {
+        actionsDiv.insertBefore(chatButton, commentButton);
+    } else {
+        actionsDiv.appendChild(chatButton);
+    }
+};
+
+// إضافة أنماط CSS خاصة بزر المراسلة في المنشورات
+(function() {
+    const style = document.createElement('style');
+    style.textContent = `
+    /* أنماط زر المراسلة في المنشور */
+    .post-action-btn.chat-btn {
+        position: relative;
+        background: linear-gradient(135deg, #FFD700, #FFA500);
+        border-radius: 20px;
+        padding: 6px 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        border: none;
+        margin: 0 5px;
+        transition: all 0.3s ease;
+        color: #000;
+        font-weight: bold;
+    }
+    
+    .post-action-btn.chat-btn i {
+        color: #000;
+        font-size: 1rem;
+    }
+    
+    .post-action-btn.chat-btn .chat-badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background: #FF3B30;
+        color: white;
+        border-radius: 50%;
+        min-width: 18px;
+        height: 18px;
+        font-size: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        border: 1px solid #fff;
+        font-weight: bold;
+    }
+    
+    .post-action-btn.chat-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    }
+    
+    .post-action-btn.chat-btn:active {
+        transform: translateY(1px);
+    }
+    
+    /* تعديل قسم أزرار المنشور */
+    .post-actions {
+        display: flex;
+        justify-content: space-around;
+        padding: 10px 0;
+    }
+    `;
+    document.head.appendChild(style);
+})();
+
+// إضافة وظيفة لتحديث أزرار المراسلة في جميع المنشورات
+function updateAllChatButtons() {
+    // التحقق من وجود مدير المنشورات
+    if (!window.postsManager || !window.postsManager.addChatButtonToPost) return;
+    
+    // الحصول على جميع المنشورات
+    const posts = document.querySelectorAll('.post');
+    posts.forEach(post => {
+        const postId = post.getAttribute('data-post-id');
+        if (postId) {
+            // جلب بيانات المنشور وإضافة زر المراسلة
+            firebase.database().ref(`posts/${postId}`).once('value').then(snapshot => {
+                const postData = snapshot.val();
+                if (postData) {
+                    window.postsManager.addChatButtonToPost(postId, postData);
+                }
+            }).catch(error => {
+                console.error('Error fetching post data:', error);
+            });
+        }
+    });
+}
+
+// تحديث أزرار المراسلة عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', function() {
+    // تأخير التحديث للتأكد من تحميل المنشورات
+    setTimeout(updateAllChatButtons, 2000);
+});
+
+// تحديث أزرار المراسلة عند تسجيل الدخول
+document.addEventListener('login-success', function() {
+    setTimeout(updateAllChatButtons, 1000);
+});
+
+// تحديث أزرار المراسلة دورياً
+setInterval(function() {
+    // تحديث أزرار المراسلة كل 5 دقائق للحفاظ على تحديث عدد الرسائل غير المقروءة
+    updateAllChatButtons();
+}, 300000); // 5 دقائق
+
+// التعديلات المطلوبة على ملف posts.js لإضافة وظائف التعديل والحذف
+
+// 1. تعديل دالة addPostToDOM لإضافة خيارات التعديل والحذف للمنشور
+// أضف هذا الكود داخل دالة addPostToDOM في كلاس PostsManager
+
+/**
+ * تعديل في دالة addPostToDOM لإضافة خيارات التعديل والحذف
+ */
+addPostToDOM(postId, postData) {
+    const postsContainer = document.getElementById('postsContainer');
+    if (!postsContainer) return;
+    
+    // إنشاء عنصر المنشور
+    const postElement = document.createElement('div');
+    postElement.className = 'post';
+    postElement.setAttribute('data-post-id', postId);
+    
+    // تنسيق الوقت
+    const postTime = this.formatPostTime(postData.timestamp);
+    
+    // التحقق من حالة الإعجاب
+    let isLiked = false;
+    let isSaved = false;
+    
+    if (this.currentUser) {
+        // يجب استدعاء هذه الدوال بشكل غير متزامن لتحديث واجهة المستخدم لاحقاً
+        this.checkIfLiked(postId, this.currentUser.uid).then(result => {
+            isLiked = result;
+            const likeButton = postElement.querySelector('.like-btn');
+            if (likeButton) {
+                if (isLiked) {
+                    likeButton.classList.add('active');
+                    likeButton.querySelector('i').classList.remove('far');
+                    likeButton.querySelector('i').classList.add('fas');
+                }
+            }
+        });
+        
+        this.checkIfSaved(postId, this.currentUser.uid).then(result => {
+            isSaved = result;
+            const saveButton = postElement.querySelector('.save-btn');
+            if (saveButton) {
+                if (isSaved) {
+                    saveButton.classList.add('active');
+                    saveButton.querySelector('i').classList.remove('far');
+                    saveButton.querySelector('i').classList.add('fas');
+                }
+            }
+        });
+    }
+    
+    // إنشاء محتوى المنشور
+    let mediaContent = '';
+    if (postData.mediaType && postData.mediaUrl) {
+        if (postData.mediaType === 'image') {
+            mediaContent = `
+            <div class="post-media">
+                <img src="${postData.mediaUrl}" alt="صورة المنشور" class="post-image">
+            </div>
+            `;
+        } else if (postData.mediaType === 'video') {
+            mediaContent = `
+            <div class="post-media">
+                <video src="${postData.mediaUrl}" controls class="post-video"></video>
+            </div>
+            `;
+        }
+    }
+    
+    // إضافة شارة "سائق" إلى رأس المنشور
+    const driverBadge = postData.fromDriver ? 
+        `<span class="driver-badge">
+            <i class="fas fa-taxi"></i> سائق
+        </span>` : '';
+    
+    // التحقق مما إذا كان المستخدم الحالي هو صاحب المنشور
+    const isPostOwner = this.currentUser && postData.authorId && this.currentUser.uid === postData.authorId;
+    
+    // إعداد قائمة الخيارات حسب ملكية المنشور
+    let optionsMenuItems = '';
+    
+    if (isPostOwner) {
+        // خيارات صاحب المنشور
+        optionsMenuItems = `
+            <button class="post-option-item" onclick="postsManager.editPost('${postId}')">
+                <i class="fas fa-edit"></i> تعديل المنشور
+            </button>
+            <button class="post-option-item" onclick="postsManager.deletePost('${postId}')">
+                <i class="fas fa-trash-alt"></i> حذف المنشور
+            </button>
+            <div class="option-divider"></div>
+        `;
+    }
+    
+    // إضافة خيارات مشتركة لجميع المستخدمين
+    optionsMenuItems += `
+        <button class="post-option-item" onclick="postsManager.toggleSave('${postId}')">
+            <i class="fas fa-bookmark"></i> ${isSaved ? 'إلغاء حفظ المنشور' : 'حفظ المنشور'}
+        </button>
+        <button class="post-option-item" onclick="postsManager.toggleNotifications('${postId}')">
+            <i class="fas fa-bell-slash"></i> إيقاف التنبيهات
+        </button>
+        <button class="post-option-item" onclick="postsManager.reportPost('${postId}')">
+            <i class="fas fa-flag"></i> الإبلاغ عن المنشور
+        </button>
+    `;
+    
+    // إنشاء HTML للمنشور
+    postElement.innerHTML = `
+    <div class="post-header">
+        <div class="post-user">
+            <img src="${postData.authorImage || 'https://firebasestorage.googleapis.com/v0/b/messageemeapp.appspot.com/o/user-photos%2F1741376568952_default-avatar.png?alt=media&token=ad672ccf-c8e1-4788-a252-52de6c3ceedd'}" alt="صورة المستخدم" class="post-avatar">
+            <div class="post-user-info">
+                <h6>${postData.authorName} ${driverBadge}</h6>
+                <small>${postTime} <i class="fas fa-globe-asia fa-sm"></i></small>
+            </div>
+        </div>
+        <div class="post-options">
+            <button class="post-options-btn">
+                <i class="fas fa-ellipsis-h"></i>
+            </button>
+            <div class="post-options-menu">
+                ${optionsMenuItems}
+            </div>
+        </div>
+    </div>
+    
+    <div class="post-content">
+        ${postData.text ? `<p class="post-text">${this.formatPostText(postData.text)}</p>` : ''}
+        ${mediaContent}
+    </div>
+    
+    <div class="post-stats">
+        <div class="post-likes">
+            <i class="fas fa-heart"></i>
+            <span id="likes-count-${postId}">${postData.likes || 0}</span>
+        </div>
+        <div class="post-comments-shares">
+            <span id="comments-count-${postId}">${postData.comments || 0} تعليق</span>
+            <span>${postData.shares || 0} مشاركة</span>
+        </div>
+    </div>
+    
+    <div class="post-actions">
+        <button class="post-action-btn like-btn" data-post-id="${postId}" onclick="postsManager.toggleLike('${postId}')">
+            <i class="far fa-heart"></i>
+            <span>إعجاب</span>
+        </button>
+        <button class="post-action-btn comment-btn" data-post-id="${postId}" data-bs-toggle="modal" data-bs-target="#commentsModal">
+            <i class="far fa-comment"></i>
+            <span>تعليق</span>
+        </button>
+        <button class="post-action-btn share-btn" data-post-id="${postId}" onclick="postsManager.sharePost('${postId}')">
+            <i class="far fa-share-square"></i>
+            <span>مشاركة</span>
+        </button>
+        <button class="post-action-btn save-btn" data-post-id="${postId}" onclick="postsManager.toggleSave('${postId}')">
+            <i class="far fa-bookmark"></i>
+            <span>حفظ</span>
+        </button>
+    </div>
+    `;
+    
+    // إضافة المنشور إلى الحاوية
+    const loadingEl = postsContainer.querySelector('.loading-posts');
+    if (loadingEl) {
+        postsContainer.insertBefore(postElement, loadingEl);
+    } else {
+        postsContainer.appendChild(postElement);
+    }
+    
+    // إضافة معالج النقر لخيارات المنشور
+    const optionsBtn = postElement.querySelector('.post-options-btn');
+    const optionsMenu = postElement.querySelector('.post-options-menu');
+    
+    if (optionsBtn && optionsMenu) {
+        optionsBtn.addEventListener('click', (event) => {
+            event.stopPropagation();
+            optionsMenu.classList.toggle('active');
+        });
+        
+        document.addEventListener('click', (event) => {
+            if (!optionsBtn.contains(event.target) && !optionsMenu.contains(event.target)) {
+                optionsMenu.classList.remove('active');
+            }
+        });
+    }
+}
+
+// 2. إضافة دالة التعديل
+
+/**
+ * تعديل المنشور
+ * @param {string} postId معرف المنشور المراد تعديله
+ */
+async editPost(postId) {
+    try {
+        // التحقق من وجود المستخدم
+        if (!this.currentUser) {
+            showToast('يجب تسجيل الدخول لتعديل المنشور', 'error');
+            return;
+        }
+        
+        // الحصول على بيانات المنشور
+        const snapshot = await this.postsRef.child(postId).once('value');
+        const postData = snapshot.val();
+        
+        if (!postData) {
+            showToast('لم يتم العثور على المنشور', 'error');
+            return;
+        }
+        
+        // التحقق من أن المستخدم هو صاحب المنشور
+        if (postData.authorId !== this.currentUser.uid) {
+            showToast('لا يمكنك تعديل منشور شخص آخر', 'error');
+            return;
+        }
+        
+        // إنشاء نافذة تعديل المنشور
+        let mediaPreviewHtml = '';
+        if (postData.mediaType && postData.mediaUrl) {
+            if (postData.mediaType === 'image') {
+                mediaPreviewHtml = `
+                <div class="current-media-preview">
+                    <img src="${postData.mediaUrl}" alt="صورة المنشور" class="edit-media-preview">
+                    <div class="media-actions">
+                        <button type="button" id="removeMediaBtn" class="btn btn-danger btn-sm">
+                            <i class="fas fa-trash"></i> حذف
+                        </button>
+                        <button type="button" id="replaceMediaBtn" class="btn btn-primary btn-sm">
+                            <i class="fas fa-exchange-alt"></i> استبدال
+                        </button>
+                    </div>
+                </div>
+                `;
+            } else if (postData.mediaType === 'video') {
+                mediaPreviewHtml = `
+                <div class="current-media-preview">
+                    <video src="${postData.mediaUrl}" controls class="edit-media-preview"></video>
+                    <div class="media-actions">
+                        <button type="button" id="removeMediaBtn" class="btn btn-danger btn-sm">
+                            <i class="fas fa-trash"></i> حذف
+                        </button>
+                        <button type="button" id="replaceMediaBtn" class="btn btn-primary btn-sm">
+                            <i class="fas fa-exchange-alt"></i> استبدال
+                        </button>
+                    </div>
+                </div>
+                `;
+            }
+        }
+        
+        // عرض نافذة تعديل المنشور
+        Swal.fire({
+            title: 'تعديل المنشور',
+            html: `
+            <div class="edit-post-container">
+                <textarea id="editPostText" class="swal2-textarea" rows="4" placeholder="ماذا تريد أن تشارك؟">${postData.text || ''}</textarea>
+                
+                <div id="editMediaPreviewContainer">
+                    ${mediaPreviewHtml}
+                </div>
+                
+                <div id="newMediaPreviewContainer" style="display: none;"></div>
+                
+                <input type="file" id="editMediaInput" accept="image/*,video/*" style="display: none;">
+                
+                <div class="edit-post-actions">
+                    <button type="button" id="addMediaBtn" class="btn btn-outline-primary">
+                        <i class="fas fa-image"></i> إضافة صورة/فيديو
+                    </button>
+                </div>
+            </div>
+            `,
+            showCancelButton: true,
+            confirmButtonText: 'حفظ التعديلات',
+            cancelButtonText: 'إلغاء',
+            confirmButtonColor: '#FFD700',
+            cancelButtonColor: '#6c757d',
+            customClass: {
+                confirmButton: 'btn btn-gold',
+                cancelButton: 'btn btn-secondary'
+            },
+            didOpen: () => {
+                // إضافة مستمعي الأحداث
+                const addMediaBtn = document.getElementById('addMediaBtn');
+                const editMediaInput = document.getElementById('editMediaInput');
+                const removeMediaBtn = document.getElementById('removeMediaBtn');
+                const replaceMediaBtn = document.getElementById('replaceMediaBtn');
+                
+                // التحقق من وجود الأزرار
+                if (addMediaBtn) {
+                    addMediaBtn.addEventListener('click', () => {
+                        editMediaInput.click();
+                    });
+                }
+                
+                if (editMediaInput) {
+                    editMediaInput.addEventListener('change', (e) => {
+                        const file = e.target.files[0];
+                        if (file) {
+                            const newMediaPreviewContainer = document.getElementById('newMediaPreviewContainer');
+                            newMediaPreviewContainer.innerHTML = '';
+                            newMediaPreviewContainer.style.display = 'block';
+                            
+                            // إخفاء الوسائط الحالية إن وجدت
+                            const currentMediaPreview = document.querySelector('.current-media-preview');
+                            if (currentMediaPreview) {
+                                currentMediaPreview.style.display = 'none';
+                            }
+                            
+                            if (file.type.startsWith('image/')) {
+                                const img = document.createElement('img');
+                                img.className = 'edit-media-preview';
+                                
+                                const reader = new FileReader();
+                                reader.onload = (e) => {
+                                    img.src = e.target.result;
+                                };
+                                reader.readAsDataURL(file);
+                                
+                                newMediaPreviewContainer.appendChild(img);
+                            } else if (file.type.startsWith('video/')) {
+                                const video = document.createElement('video');
+                                video.className = 'edit-media-preview';
+                                video.controls = true;
+                                
+                                const reader = new FileReader();
+                                reader.onload = (e) => {
+                                    video.src = e.target.result;
+                                };
+                                reader.readAsDataURL(file);
+                                
+                                newMediaPreviewContainer.appendChild(video);
+                            }
+                            
+                            // إضافة زر إزالة
+                            const removeBtn = document.createElement('button');
+                            removeBtn.className = 'btn btn-danger btn-sm remove-new-media-btn';
+                            removeBtn.innerHTML = '<i class="fas fa-times"></i> إلغاء';
+                            removeBtn.addEventListener('click', () => {
+                                newMediaPreviewContainer.innerHTML = '';
+                                newMediaPreviewContainer.style.display = 'none';
+                                editMediaInput.value = '';
+                                
+                                // إظهار الوسائط الحالية إن وجدت
+                                if (currentMediaPreview) {
+                                    currentMediaPreview.style.display = 'block';
+                                }
+                            });
+                            
+                            newMediaPreviewContainer.appendChild(removeBtn);
+                        }
+                    });
+                }
+                
+                if (removeMediaBtn) {
+                    removeMediaBtn.addEventListener('click', () => {
+                        const currentMediaPreview = document.querySelector('.current-media-preview');
+                        if (currentMediaPreview) {
+                            currentMediaPreview.remove();
+                        }
+                    });
+                }
+                
+                if (replaceMediaBtn) {
+                    replaceMediaBtn.addEventListener('click', () => {
+                        editMediaInput.click();
+                    });
+                }
+            }
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                const editPostText = document.getElementById('editPostText').value.trim();
+                const editMediaInput = document.getElementById('editMediaInput');
+                const newMediaFile = editMediaInput.files[0];
+                const currentMediaPreview = document.querySelector('.current-media-preview');
+                const removeMedia = !currentMediaPreview && !newMediaFile && postData.mediaUrl;
+                
+                // التحقق من وجود محتوى
+                if (!editPostText && !newMediaFile && !postData.mediaUrl) {
+                    showToast('يجب كتابة نص أو إضافة وسائط للمنشور', 'warning');
+                    return;
+                }
+                
+                // عرض مؤشر التحميل
+                Swal.fire({
+                    title: 'جاري حفظ التعديلات',
+                    text: 'يرجى الانتظار...',
+                    allowOutsideClick: false,
+                    showConfirmButton: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+                
+                try {
+                    // إعداد بيانات التحديث
+                    const updatedData = {
+                        text: editPostText,
+                        editedAt: firebase.database.ServerValue.TIMESTAMP,
+                        isEdited: true
+                    };
+                    
+                    // إذا كان المستخدم يريد إزالة الوسائط
+                    if (removeMedia) {
+                        updatedData.mediaType = null;
+                        updatedData.mediaUrl = null;
+                        
+                        // حذف الملف القديم من التخزين
+                        if (postData.mediaUrl) {
+                            try {
+                                const storageRef = this.storage.refFromURL(postData.mediaUrl);
+                                await storageRef.delete();
+                            } catch (storageError) {
+                                console.error('Error deleting old media:', storageError);
+                            }
+                        }
+                    }
+                    
+                    // إذا كان هناك ملف وسائط جديد
+                    if (newMediaFile) {
+                        const mediaType = newMediaFile.type.startsWith('image/') ? 'image' : 'video';
+                        updatedData.mediaType = mediaType;
+                        
+                        // حذف الملف القديم من التخزين
+                        if (postData.mediaUrl) {
+                            try {
+                                const storageRef = this.storage.refFromURL(postData.mediaUrl);
+                                await storageRef.delete();
+                            } catch (storageError) {
+                                console.error('Error deleting old media:', storageError);
+                            }
+                        }
+                        
+                        // رفع الملف الجديد
+                        const fileRef = this.storage.ref(`posts/${Date.now()}_${newMediaFile.name}`);
+                        const uploadTask = await fileRef.put(newMediaFile);
+                        const downloadUrl = await uploadTask.ref.getDownloadURL();
+                        
+                        updatedData.mediaUrl = downloadUrl;
+                    }
+                    
+                    // تحديث المنشور في قاعدة البيانات
+                    await this.postsRef.child(postId).update(updatedData);
+                    
+                    // تحديث العنصر في واجهة المستخدم
+                    this.updatePostInDOM(postId, {
+                        ...postData,
+                        ...updatedData
+                    });
+                    
+                    // عرض رسالة النجاح
+                    Swal.fire({
+                        title: 'تم التعديل!',
+                        text: 'تم تعديل المنشور بنجاح',
+                        icon: 'success',
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
+                    
+                } catch (error) {
+                    console.error('Error updating post:', error);
+      
