@@ -712,7 +712,6 @@ function showUserMenu(event) {
             </div>
         </div>
     </div>
-    
     <div class="side-nav-items">
         <a href="/" class="side-nav-item"><i class="fas fa-home" style="color: #FFD700;"></i> الرئيسية</a>
         <a href="drivers.html" class="side-nav-item"><i class="fas fa-users" style="color: #4CAF50;"></i> السائقين</a>
@@ -722,6 +721,9 @@ function showUserMenu(event) {
         <a href="messages.html" class="side-nav-item"><i class="fas fa-envelope" style="color: #FFC107;"></i> الرسائل</a>
         <a href="settings.html" class="side-nav-item"><i class="fas fa-cog" style="color: #607D8B;"></i> الإعدادات</a>
         <a href="#" class="side-nav-item driver-only" style="display: none;"><i class="fas fa-user-plus" style="color: #E91E63;"></i> إضافة سائق</a>
+        <a href="javascript:void(0)" class="side-nav-item" onclick="window.savedPostsManager.loadSavedPostsPage()">
+            <i class="fas fa-bookmark" style="color: #FF9800;"></i> المنشورات المحفوظة
+        </a>
     </div>
     <!-- إضافة زر تسجيل الخروج في الشريط الجانبي -->
     <div class="side-nav-footer">
@@ -8105,6 +8107,8 @@ function showLoading() {
 <script src="chat-system-integration.js"></script>
 <script src="post-chat-integration.js"></script>
 <link rel="stylesheet" href="message-notification-styles.css">
+
+<script src="saved-posts.js"></script>
 
 
 

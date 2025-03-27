@@ -14597,3 +14597,285 @@ input:invalid + .validation-message {
 
 
 
+/* أنماط CSS لتفاعلات المنشورات (الإعجاب، الحفظ، المشاركة) */
+
+/* تأثير نبض لزر الإعجاب */
+@keyframes heartPulse {
+    0% { transform: scale(1); }
+    15% { transform: scale(1.3); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.2); }
+    60% { transform: scale(1); }
+}
+
+.heart-pulse {
+    animation: heartPulse 0.7s ease;
+    color: #FF5050 !important;
+}
+
+/* تأثير حركي لزر الحفظ */
+@keyframes bookmarkAnimation {
+    0% { transform: scale(1); }
+    20% { transform: scale(1.2) translateY(-2px); }
+    40% { transform: scale(0.9) translateY(1px); }
+    60% { transform: scale(1.1) translateY(-1px); }
+    80% { transform: scale(0.95) translateY(0); }
+    100% { transform: scale(1); }
+}
+
+.bookmark-animation {
+    animation: bookmarkAnimation 0.7s ease;
+    color: #FFD700 !important;
+}
+
+/* تأثير للعداد عند تغييره */
+@keyframes countChange {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.share-count-animation {
+    animation: countChange 1s ease;
+    color: #FFD700 !important;
+}
+
+/* تأثير ظهور المنشور */
+.post {
+    transition: all 0.3s ease;
+}
+
+.post.animate__fadeIn {
+    animation-duration: 0.5s;
+}
+
+/* تنسيق زر الإعجاب النشط */
+.post-action-btn.like-btn.active {
+    color: #FF5050 !important;
+}
+
+.post-action-btn.like-btn.active i {
+    color: #FF5050 !important;
+}
+
+/* تنسيق زر الحفظ النشط */
+.post-action-btn.save-btn.active {
+    color: #FFD700 !important;
+}
+
+.post-action-btn.save-btn.active i {
+    color: #FFD700 !important;
+}
+
+/* تنسيق أزرار التفاعل مع المنشور */
+.post-actions {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.post-action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    background: transparent;
+    border: none;
+    color: #ccc;
+    padding: 8px 10px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.post-action-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.post-action-btn:active {
+    transform: translateY(1px);
+}
+
+/* تنسيق قائمة خيارات المشاركة */
+.share-options-container {
+    padding: 15px;
+}
+
+.share-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.share-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 10px;
+    border-radius: 10px;
+    border: 1px solid #444;
+    background: #333;
+    color: #fff;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.share-option i {
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+}
+
+.share-option span {
+    font-size: 0.9rem;
+}
+
+.share-option:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    background: #3a3a3a;
+}
+
+.share-option:active {
+    transform: translateY(1px);
+}
+
+/* تلوين أيقونات وسائل التواصل */
+#shareWhatsApp i { color: #25D366; }
+#shareFacebook i { color: #4267B2; }
+#shareTwitter i { color: #1DA1F2; }
+#shareTelegram i { color: #0088cc; }
+#shareCopyLink i { color: #FFD700; }
+/* تنسيق قائمة خيارات المنشور */
+.post-options-menu {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #242424;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+    width: 100px;
+    display: none;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+
+.post-options-menu.active {
+    display: block;
+    animation: fadeIn 0.2s ease;
+}
+
+.post-option-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    color: #fff;
+    background: transparent;
+    border: none;
+    width: 100%;
+    text-align: right;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.post-option-item:hover {
+    background-color: #333;
+}
+
+.post-option-item i {
+    margin-left: 8px;
+    width: 20px;
+    text-align: center;
+}
+
+/* تعديلات عامة للمنشورات */
+.post {
+    background-color: #242424;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.post-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.post-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #FFD700;
+}
+
+.post-content {
+    padding: 15px;
+}
+
+.post-text {
+    margin-bottom: 15px;
+    white-space: pre-wrap;
+    line-height: 1.5;
+}
+
+.post-media {
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.post-image {
+    width: 100%;
+    max-height: 500px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.post-video {
+    width: 100%;
+    max-height: 500px;
+    border-radius: 8px;
+}
+
+.post-stats {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 15px;
+    color: #aaa;
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* شارة السائق */
+.driver-badge {
+    display: inline-flex;
+    align-items: center;
+    background-color: #FFD700;
+    color: #000;
+    padding: 2px 6px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    margin-right: 5px;
+}
+
+.driver-badge i {
+    margin-left: 3px;
+    font-size: 0.8rem;
+}
