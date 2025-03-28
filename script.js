@@ -164,7 +164,7 @@ class DriverTracker {
 }
 
 // إنشاء نسخة عالمية من نظام التتبع
-const driverTracker = new DriverTracker();
+// (Duplicate declaration removed)
 
 // تحديث دالة إضافة السائق
 async function handleAddDriver(event) {
@@ -232,7 +232,7 @@ async function handleAddDriver(event) {
 }
 
 // إضافة أنماط CSS للعلامات
-const styles = `
+const driverStyles = `
     .custom-driver-marker {
         width: 40px;
         height: 40px;
@@ -313,7 +313,7 @@ const styles = `
 
 // إضافة الأنماط إلى الصفحة
 const styleSheet = document.createElement('style');
-styleSheet.textContent = styles;
+styleSheet.textContent = driverStyles;
 document.head.appendChild(styleSheet);
 
 // استعادة التتبع عند تحميل الصفحة

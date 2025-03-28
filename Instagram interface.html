@@ -1252,22 +1252,150 @@ function showUserMenu(event) {
             </div>
         </div>
     </div>
-    <!-- نافذة الرسائل المنبثقة -->
-    <div class="modal fade" id="messagesModal" tabindex="-1" aria-labelledby="messagesModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="messagesModalLabel">الرسائل</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  <!-- نافذة الرسائل المنبثقة المحسنة -->
+<div class="modal fade" id="messagesModal" tabindex="-1" aria-labelledby="messagesModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content chat-modal-content">
+            <div class="modal-header chat-modal-header">
+                <h5 class="modal-title" id="messagesModalLabel">
+                    <i class="fas fa-envelope-open-text me-2" style="color: #FFD700;"></i>
+                    الرسائل
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-0">
+                <!-- قسم البحث في الرسائل -->
+                <div class="messages-search-container p-2 border-bottom">
+                    <div class="input-group">
+                        <input type="text" id="messagesSearchInput" class="form-control" placeholder="البحث في الرسائل...">
+                        <span class="input-group-text">
+                            <i class="fas fa-search"></i>
+                        </span>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <div id="messagesContainer">
-                        <!-- قائمة الرسائل ستظهر هنا -->
+                
+                <!-- فلتر الرسائل -->
+                <div class="messages-filter-container p-2 border-bottom">
+                    <div class="btn-group w-100" role="group">
+                        <input type="radio" class="btn-check" name="messageFilterType" id="allMessages" checked>
+                        <label class="btn btn-outline-primary" for="allMessages">الكل</label>
+
+                        <input type="radio" class="btn-check" name="messageFilterType" id="driverMessages">
+                        <label class="btn btn-outline-primary" for="driverMessages">السائقين</label>
+
+                        <input type="radio" class="btn-check" name="messageFilterType" id="userMessages">
+                        <label class="btn btn-outline-primary" for="userMessages">المستخدمين</label>
+
+                        <input type="radio" class="btn-check" name="messageFilterType" id="unreadMessages">
+                        <label class="btn btn-outline-primary" for="unreadMessages">غير مقروءة</label>
+                    </div>
+                </div>
+
+                <!-- حاوية الرسائل -->
+                <div id="messagesList" class="messages-list">
+                    <div class="loading-messages">
+                        <div class="spinner-border text-gold" role="status">
+                            <span class="visually-hidden">جاري التحميل...</span>
+                        </div>
+                        <p>جاري تحميل الرسائل...</p>
+                    </div>
+                </div>
+                
+                <!-- رسالة لا توجد رسائل -->
+                <div id="noMessagesContainer" class="no-messages-container d-none">
+                    <div class="no-messages-content text-center p-5">
+                        <i class="fas fa-envelope-open fa-4x mb-3" style="color: #555;"></i>
+                        <h5>لا توجد رسائل</h5>
+                        <p class="text-muted">لم يتم العثور على أي رسائل.</p>
+                    </div>
+                </div>
+                
+                <!-- رسالة خطأ -->
+                <div id="errorMessagesContainer" class="error-messages-container d-none">
+                    <div class="error-messages-content text-center p-5">
+                        <i class="fas fa-exclamation-triangle fa-4x mb-3 text-danger"></i>
+                        <h5>حدث خطأ</h5>
+                        <p class="text-muted" id="errorMessagesText">حدث خطأ أثناء تحميل الرسائل.</p>
+                        <button class="btn btn-primary mt-3" onclick="loadMessagesBetweenUsersAndDrivers()">
+                            <i class="fas fa-sync-alt me-2"></i>
+                            إعادة المحاولة
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<!-- نافذة المحادثة بين المستخدم والسائق -->
+<div class="modal fade" id="chatModal" tabindex="-1" aria-labelledby="chatModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content chat-window">
+            <!-- رأس النافذة -->
+            <div class="chat-header">
+                <div class="chat-user-info d-flex align-items-center">
+                    <img id="chatUserAvatar" src="default-avatar.png" alt="صورة المستخدم" class="avatar">
+                    <div class="ms-2">
+                        <h5 id="chatUserName">اسم المستخدم</h5>
+                        <p id="chatUserInfo" class="mb-0 small text-white-50">معلومات إضافية</p>
+                    </div>
+                </div>
+                <div class="chat-header-actions">
+                    <button id="chatCallBtn" class="btn btn-sm btn-outline-light mx-1" title="اتصال">
+                        <i class="fas fa-phone"></i>
+                    </button>
+                    <button id="chatVideoBtn" class="btn btn-sm btn-outline-light mx-1" title="مكالمة فيديو">
+                        <i class="fas fa-video"></i>
+                    </button>
+                    <button id="chatInfoBtn" class="btn btn-sm btn-outline-light mx-1" title="معلومات">
+                        <i class="fas fa-info-circle"></i>
+                    </button>
+                    <button type="button" class="btn-close btn-close-white ms-2" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+            </div>
+            
+            <!-- جسم المحادثة -->
+            <div class="chat-body" id="chatMessagesContainer">
+                <div class="loading-messages">
+                    <div class="spinner-border text-gold" role="status">
+                        <span class="visually-hidden">جاري التحميل...</span>
+                    </div>
+                    <p>جاري تحميل الرسائل...</p>
+                </div>
+            </div>
+            
+            <!-- تذكير إرسال الموقع -->
+            <div id="locationReminderBanner" class="location-reminder-banner d-none">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-map-marker-alt text-danger me-2"></i>
+                    <span>مشاركة موقعك الحالي تساعد السائق على إيجادك بسهولة!</span>
+                </div>
+                <button class="btn btn-sm btn-primary ms-auto" id="quickShareLocationBtn">
+                    <i class="fas fa-location-arrow me-1"></i>
+                    مشاركة موقعي
+                </button>
+            </div>
+            
+            <!-- شريط الإدخال -->
+            <div class="chat-footer">
+                <button class="action-button location-btn" id="shareLocationBtn" title="مشاركة الموقع">
+                    <i class="fas fa-map-marker-alt"></i>
+                </button>
+                <button class="action-button emoji-btn" id="emojiBtn" title="إضافة رموز تعبيرية">
+                    <i class="fas fa-smile"></i>
+                </button>
+                <input type="text" class="chat-input" id="chatMessageInput" placeholder="اكتب رسالتك هنا...">
+                <button class="action-button attachment-btn" id="attachmentBtn" title="إرفاق ملف">
+                    <i class="fas fa-paperclip"></i>
+                </button>
+                <button class="action-button send-btn" id="sendMessageBtn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
     <!-- نافذة المحادثة -->
     <div class="modal fade" id="chatModal" tabindex="-1" aria-labelledby="chatModalLabel" aria-hidden="true">
@@ -8109,6 +8237,9 @@ function showLoading() {
 <link rel="stylesheet" href="message-notification-styles.css">
 
 <script src="saved-posts.js"></script>
+
+<script src="chatttttt-system-integration.js"></script>
+<script src="ssssstyle.css"></script>
 
 
 
