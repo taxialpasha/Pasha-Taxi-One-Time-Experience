@@ -1326,69 +1326,53 @@ function showUserMenu(event) {
         </div>
     </div>
 </div>
-
 <!-- نافذة المحادثة بين المستخدم والسائق -->
 <div class="modal fade" id="chatModal" tabindex="-1" aria-labelledby="chatModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content chat-window">
+        <div class="modal-content chat-window" style="max-width: 95%; border-radius: 15px; overflow: hidden;">
             <!-- رأس النافذة -->
-            <div class="chat-header">
+            <div class="chat-header" style="background: #333; color: #FFD700; padding: 15px; display: flex; align-items: center; justify-content: space-between;">
                 <div class="chat-user-info d-flex align-items-center">
-                    <img id="chatUserAvatar" src="default-avatar.png" alt="صورة المستخدم" class="avatar">
+                    <img id="chatUserAvatar" src="default-avatar.png" alt="صورة المستخدم" class="avatar" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
                     <div class="ms-2">
-                        <h5 id="chatUserName">اسم المستخدم</h5>
-                        <p id="chatUserInfo" class="mb-0 small text-white-50">معلومات إضافية</p>
+                        <h5 id="chatUserName" style="margin: 0; font-size: 1.2rem;">اسم المستخدم</h5>
+                        <p id="chatUserInfo" class="mb-0 small text-white-50" style="font-size: 0.9rem;">معلومات إضافية</p>
                     </div>
                 </div>
                 <div class="chat-header-actions">
-                    <button id="chatCallBtn" class="btn btn-sm btn-outline-light mx-1" title="اتصال">
-                        <i class="fas fa-phone"></i>
-                    </button>
-                    <button id="chatVideoBtn" class="btn btn-sm btn-outline-light mx-1" title="مكالمة فيديو">
-                        <i class="fas fa-video"></i>
-                    </button>
-                    <button id="chatInfoBtn" class="btn btn-sm btn-outline-light mx-1" title="معلومات">
-                        <i class="fas fa-info-circle"></i>
-                    </button>
                     <button type="button" class="btn-close btn-close-white ms-2" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
             </div>
             
             <!-- جسم المحادثة -->
-            <div class="chat-body" id="chatMessagesContainer">
-                <div class="loading-messages">
+            <div class="chat-body" id="chatMessagesContainer" style="background: #1a1a1a; color: #fff; padding: 15px; max-height: 60vh; overflow-y: auto;">
+                <div class="loading-messages" style="text-align: center; padding: 20px;">
                     <div class="spinner-border text-gold" role="status">
                         <span class="visually-hidden">جاري التحميل...</span>
                     </div>
-                    <p>جاري تحميل الرسائل...</p>
+                    <p style="margin-top: 10px;">جاري تحميل الرسائل...</p>
                 </div>
             </div>
             
             <!-- تذكير إرسال الموقع -->
-            <div id="locationReminderBanner" class="location-reminder-banner d-none">
+            <div id="locationReminderBanner" class="location-reminder-banner d-none" style="background: #FFD700; color: #000; padding: 10px; display: flex; align-items: center; justify-content: space-between;">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-map-marker-alt text-danger me-2"></i>
-                    <span>مشاركة موقعك الحالي تساعد السائق على إيجادك بسهولة!</span>
+                    <span style="font-size: 0.9rem;">مشاركة موقعك الحالي تساعد السائق على إيجادك بسهولة!</span>
                 </div>
-                <button class="btn btn-sm btn-primary ms-auto" id="quickShareLocationBtn">
+                <button class="btn btn-sm btn-primary ms-auto" id="quickShareLocationBtn" style="background: #333; color: #FFD700; border: none; padding: 5px 10px; border-radius: 5px;">
                     <i class="fas fa-location-arrow me-1"></i>
                     مشاركة موقعي
                 </button>
             </div>
             
             <!-- شريط الإدخال -->
-            <div class="chat-footer">
-                <button class="action-button location-btn" id="shareLocationBtn" title="مشاركة الموقع">
+            <div class="chat-footer" style="background: #333; padding: 10px; display: flex; align-items: center; gap: 10px;">
+                <button class="action-button location-btn" id="shareLocationBtn" title="مشاركة الموقع" style="background: #FFD700; color: #000; border: none; padding: 10px; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
                     <i class="fas fa-map-marker-alt"></i>
                 </button>
-                <button class="action-button emoji-btn" id="emojiBtn" title="إضافة رموز تعبيرية">
-                    <i class="fas fa-smile"></i>
-                </button>
-                <input type="text" class="chat-input" id="chatMessageInput" placeholder="اكتب رسالتك هنا...">
-                <button class="action-button attachment-btn" id="attachmentBtn" title="إرفاق ملف">
-                    <i class="fas fa-paperclip"></i>
-                </button>
-                <button class="action-button send-btn" id="sendMessageBtn">
+                <input type="text" class="chat-input" id="chatMessageInput" placeholder="اكتب رسالتك هنا..." style="flex: 1; padding: 10px; border: 1px solid #FFD700; border-radius: 20px; background: #1a1a1a; color: #fff;">
+                <button class="action-button send-btn" id="sendMessageBtn" style="background: #FFD700; color: #000; border: none; padding: 10px; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
                     <i class="fas fa-paper-plane"></i>
                 </button>
             </div>

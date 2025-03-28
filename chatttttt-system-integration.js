@@ -1171,6 +1171,19 @@ document.addEventListener('DOMContentLoaded', function() {
             showToast('سيتم إضافة ميزة المرفقات قريباً', 'info');
         });
     }
+
+    // إضافة معالج لزر post-action-btn chat-btn
+    const chatButton = document.querySelector('.post-action-btn.chat-btn');
+    if (chatButton) {
+        chatButton.addEventListener('click', async function() {
+            const targetUserId = chatButton.getAttribute('data-target-user-id'); // افترض أن معرف المستخدم موجود في خاصية data-target-user-id
+            if (targetUserId) {
+                await openChatWithUser(targetUserId);
+            } else {
+                showToast('لم يتم العثور على معرف المستخدم', 'error');
+            }
+        });
+    }
 });
 
 // دالة تصفية الرسائل بناءً على النص المدخل

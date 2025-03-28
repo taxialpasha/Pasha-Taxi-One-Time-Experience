@@ -1103,62 +1103,84 @@ class PostsManager {
         }
     }
     
-    // تبديل حالة الحفظ
-    async toggleSave(postId) {
-        if (!this.currentUser) {
-            Swal.fire({
-                title: 'مطلوب تسجيل الدخول',
-                text: 'يجب عليك تسجيل الدخول أولاً للتفاعل مع المنشورات',
-                icon: 'info',
-                showCancelButton: true,
-                confirmButtonText: 'تسجيل الدخول',
-                cancelButtonText: 'إلغاء'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    openLoginModal();
-                }
-            });
-            return;
-        }
-        
-        try {
-            const userId = this.currentUser.uid;
-            const savedRef = this.savedPostsRef.child(userId).child(postId);
-            
-            // تحقق مما إذا كان المنشور محفوظاً بالفعل
-            const snapshot = await savedRef.once('value');
-            const isSaved = snapshot.exists();
-            
-            if (isSaved) {
-                // إزالة من المحفوظات
-                await savedRef.remove();
-            } else {
-                // إضافة إلى المحفوظات
-                await savedRef.set(true);
+   // تبديل حالة الحفظ
+async toggleSave(postId) {
+    if (!this.currentUser) {
+        Swal.fire({
+            title: 'مطلوب تسجيل الدخول',
+            text: 'يجب عليك تسجيل الدخول أولاً للتفاعل مع المنشورات',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonText: 'تسجيل الدخول',
+            cancelButtonText: 'إلغاء'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                openLoginModal();
             }
+        });
+        return;
+    }
+    
+    try {
+        const userId = this.currentUser.uid;
+        const savedRef = this.savedPostsRef.child(userId).child(postId);
+        
+        // تحقق مما إذا كان المنشور محفوظاً بالفعل
+        const snapshot = await savedRef.once('value');
+        const isSaved = snapshot.exists();
+        
+        if (isSaved) {
+            // إزالة من المحفوظات
+            await savedRef.remove();
             
             // تحديث واجهة المستخدم
             const saveButton = document.querySelector(`.save-btn[data-post-id="${postId}"]`);
-            
             if (saveButton) {
-                if (isSaved) {
-                    saveButton.classList.remove('active');
-                    saveButton.querySelector('i').classList.remove('fas');
-                    saveButton.querySelector('i').classList.add('far');
-                    showToast('تمت إزالة المنشور من المحفوظات', 'info');
-                } else {
-                    saveButton.classList.add('active');
-                    saveButton.querySelector('i').classList.remove('far');
-                    saveButton.querySelector('i').classList.add('fas');
-                    showToast('تم حفظ المنشور', 'success');
-                }
+                saveButton.classList.remove('active');
+                saveButton.querySelector('i').classList.remove('fas');
+                saveButton.querySelector('i').classList.add('far');
+                saveButton.querySelector('span').textContent = 'حفظ';
+                showToast('تمت إزالة المنشور من المحفوظات', 'info');
+            }
+        } else {
+            // الحصول على بيانات المنشور
+            const postSnapshot = await this.postsRef.child(postId).once('value');
+            const postData = postSnapshot.val();
+            
+            if (!postData) {
+                showToast('لم يتم العثور على المنشور', 'error');
+                return;
             }
             
-        } catch (error) {
-            console.error('Error toggling save:', error);
-            showToast('حدث خطأ أثناء حفظ المنشور', 'error');
+            // حفظ المنشور بالكامل في المحفوظات
+            await savedRef.set({
+                postId: postId,
+                timestamp: firebase.database.ServerValue.TIMESTAMP,
+                postData: postData
+            });
+            
+            // تحديث واجهة المستخدم
+            const saveButton = document.querySelector(`.save-btn[data-post-id="${postId}"]`);
+            if (saveButton) {
+                saveButton.classList.add('active');
+                saveButton.querySelector('i').classList.remove('far');
+                saveButton.querySelector('i').classList.add('fas');
+                saveButton.querySelector('span').textContent = 'محفوظ';
+                
+                // إضافة تأثير حركي للحفظ
+                const saveIcon = saveButton.querySelector('i');
+                saveIcon.classList.add('save-animation');
+                setTimeout(() => saveIcon.classList.remove('save-animation'), 1000);
+                
+                showToast('تم حفظ المنشور', 'success');
+            }
         }
+        
+    } catch (error) {
+        console.error('Error toggling save:', error);
+        showToast('حدث خطأ أثناء حفظ المنشور', 'error');
     }
+}
     
     // مشاركة المنشور
     sharePost(postId) {

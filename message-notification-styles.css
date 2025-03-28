@@ -101,11 +101,10 @@
 
 .chat-header {
     background: linear-gradient(135deg, #FFD700, #FFA500);
-    padding: 20px;
+    padding: 15px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 15px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     color: #000;
 }
 
@@ -154,9 +153,9 @@
 }
 
 .chat-body {
-    padding: 20px;
-    height: 400px;
+    flex-grow: 1;
     overflow-y: auto;
+    padding: 15px;
     background: #1e1e1e;
     color: #fff;
     scrollbar-width: thin;
@@ -225,12 +224,13 @@
 }
 
 .chat-footer {
-    padding: 15px 20px;
+    flex-shrink: 0;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
     background: #2a2a2a;
     border-top: 1px solid rgba(255, 215, 0, 0.3);
-    display: flex;
-    gap: 10px;
-    align-items: center;
 }
 
 .chat-input {
@@ -241,13 +241,14 @@
     background: #333;
     color: #fff;
     outline: none;
+    font-size: 1rem;
     transition: all 0.3s ease;
-    font-size: 0.95rem;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .chat-input:focus {
     border-color: #FFD700;
-    box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
 }
 
 .action-button {
@@ -521,4 +522,220 @@
     background: none; /* Ensure no background on hover */
     box-shadow: none; /* Ensure no shadow on hover */
     transform: none; /* Disable hover transform */
+}
+
+/* ===== Responsive Chat Modal ===== */
+.chat-window {
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.chat-header {
+    flex-shrink: 0;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: #000;
+}
+
+.chat-body {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 15px;
+    background: #1e1e1e;
+    color: #fff;
+    scrollbar-width: thin;
+    scrollbar-color: #FFD700 #333;
+}
+
+.chat-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-body::-webkit-scrollbar-thumb {
+    background: #FFD700;
+    border-radius: 10px;
+}
+
+.chat-footer {
+    flex-shrink: 0;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #2a2a2a;
+    border-top: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+/* ===== Improved Chat Input ===== */
+.chat-input {
+    flex-grow: 1;
+    padding: 12px 15px;
+    border-radius: 25px;
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    background: #333;
+    color: #fff;
+    outline: none;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.chat-input:focus {
+    border-color: #FFD700;
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+}
+
+/* ===== Responsive Design Adjustments ===== */
+@media (max-width: 768px) {
+    .chat-window {
+        max-width: 100%;
+        border-radius: 0;
+    }
+
+    .chat-header {
+        flex-wrap: wrap;
+        text-align: center;
+    }
+
+    .chat-header .chat-user-info {
+        flex: 1 1 100%;
+        margin-bottom: 10px;
+    }
+
+    .chat-footer {
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    .chat-input {
+        font-size: 0.9rem;
+    }
+}
+
+/* تنسيقات زر الحفظ والتأثيرات الحركية */
+.post-action-btn.save-btn {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.post-action-btn.save-btn.active {
+    color: #FFD700;
+    font-weight: bold;
+}
+
+.post-action-btn.save-btn.active i {
+    color: #FFD700;
+}
+
+/* تأثير النبض عند الضغط على زر الحفظ */
+.save-animation {
+    animation: savedPulse 0.5s ease-in-out;
+}
+
+@keyframes savedPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.5); }
+    100% { transform: scale(1); }
+}
+
+/* تأثير الموجة عند حفظ المنشور */
+.post-action-btn.save-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 215, 0, 0.3);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%, -50%);
+    transform-origin: 50% 50%;
+}
+
+.post-action-btn.save-btn.active::after {
+    animation: saveRipple 1s ease-out;
+}
+
+@keyframes saveRipple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(30, 30);
+        opacity: 0;
+    }
+}
+
+/* تنسيقات شارة "محفوظ" */
+.post-action-btn.save-btn .saved-badge {
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #FFD700;
+    color: #000;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.post-action-btn.save-btn.active .saved-badge {
+    opacity: 1;
+    bottom: -5px;
+}
+
+/* تنسيقات متقدمة للمنشورات المحفوظة */
+.saved-post {
+    position: relative;
+}
+
+.saved-post::before {
+    content: 'محفوظ';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #FFD700;
+    color: #000;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.saved-post-date {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #aaa;
+    font-size: 0.8rem;
+}
+
+/* تحسينات للمنشورات المحفوظة على الهاتف المحمول */
+@media (max-width: 768px) {
+    .saved-post::before {
+        top: 5px;
+        left: 5px;
+        padding: 2px 8px;
+        font-size: 0.6rem;
+    }
+    
+    .saved-post-date {
+        top: 5px;
+        right: 5px;
+        font-size: 0.7rem;
+    }
 }

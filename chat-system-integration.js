@@ -492,31 +492,70 @@ class ChatSystem {
     createChatModal() {
         const modalDiv = document.createElement('div');
         modalDiv.className = 'modal fade';
-        modalDiv.id = 'postChatModal';
+        modalDiv.id = 'chatModal';
         modalDiv.tabIndex = '-1';
+        modalDiv.setAttribute('aria-labelledby', 'chatModalLabel');
         modalDiv.setAttribute('aria-hidden', 'true');
         
         modalDiv.innerHTML = `
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content chat-modal">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content chat-window">
+                <!-- رأس النافذة -->
                 <div class="chat-header">
-                    <img src="default-avatar.png" alt="صورة المستخدم" class="avatar" id="chatUserAvatar">
-                    <div class="user-info">
-                        <h5 id="chatUserName">اسم المستخدم</h5>
-                        <p id="chatUserInfo">معلومات إضافية</p>
+                    <div class="chat-user-info d-flex align-items-center">
+                        <img id="chatUserAvatar" src="default-avatar.png" alt="صورة المستخدم" class="avatar">
+                        <div class="ms-2">
+                            <h5 id="chatUserName">اسم المستخدم</h5>
+                            <p id="chatUserInfo" class="mb-0 small text-white-50">معلومات إضافية</p>
+                        </div>
                     </div>
-                    <button type="button" class="close-btn" data-bs-dismiss="modal">
-                        <i class="fas fa-times"></i>
+                    <div class="chat-header-actions">
+                        <button id="chatCallBtn" class="btn btn-sm btn-outline-light mx-1" title="اتصال">
+                            <i class="fas fa-phone"></i>
+                        </button>
+                        <button id="chatVideoBtn" class="btn btn-sm btn-outline-light mx-1" title="مكالمة فيديو">
+                            <i class="fas fa-video"></i>
+                        </button>
+                        <button id="chatInfoBtn" class="btn btn-sm btn-outline-light mx-1" title="معلومات">
+                            <i class="fas fa-info-circle"></i>
+                        </button>
+                        <button type="button" class="btn-close btn-close-white ms-2" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                </div>
+                
+                <!-- جسم المحادثة -->
+                <div class="chat-body" id="chatMessagesContainer">
+                    <div class="loading-messages">
+                        <div class="spinner-border text-gold" role="status">
+                            <span class="visually-hidden">جاري التحميل...</span>
+                        </div>
+                        <p>جاري تحميل الرسائل...</p>
+                    </div>
+                </div>
+                
+                <!-- تذكير إرسال الموقع -->
+                <div id="locationReminderBanner" class="location-reminder-banner d-none">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-map-marker-alt text-danger me-2"></i>
+                        <span>مشاركة موقعك الحالي تساعد السائق على إيجادك بسهولة!</span>
+                    </div>
+                    <button class="btn btn-sm btn-primary ms-auto" id="quickShareLocationBtn">
+                        <i class="fas fa-location-arrow me-1"></i>
+                        مشاركة موقعي
                     </button>
                 </div>
-                <div class="chat-body" id="chatMessagesContainer">
-                    <div class="no-messages">لا توجد رسائل سابقة</div>
-                </div>
+                
+                <!-- شريط الإدخال -->
                 <div class="chat-footer">
                     <button class="action-button location-btn" id="shareLocationBtn" title="مشاركة الموقع">
                         <i class="fas fa-map-marker-alt"></i>
                     </button>
+                    <button class="action-button emoji-btn" id="emojiBtn" title="إضافة رموز تعبيرية">
+                        <i class="fas fa-smile"></i>
+                    </button>
                     <input type="text" class="chat-input" id="chatMessageInput" placeholder="اكتب رسالتك هنا...">
+                        <i class="fas fa-paperclip"></i>
+                    </button>
                     <button class="action-button send-btn" id="sendMessageBtn">
                         <i class="fas fa-paper-plane"></i>
                     </button>
@@ -532,6 +571,12 @@ class ChatSystem {
         const sendBtn = document.getElementById('sendMessageBtn');
         const messageInput = document.getElementById('chatMessageInput');
         const locationBtn = document.getElementById('shareLocationBtn');
+        const quickLocationBtn = document.getElementById('quickShareLocationBtn');
+        const emojiBtn = document.getElementById('emojiBtn');
+        const attachmentBtn = document.getElementById('attachmentBtn');
+        const callBtn = document.getElementById('chatCallBtn');
+        const videoBtn = document.getElementById('chatVideoBtn');
+        const infoBtn = document.getElementById('chatInfoBtn');
         
         if (sendBtn && messageInput) {
             // إرسال الرسالة عند النقر على زر الإرسال
@@ -554,44 +599,50 @@ class ChatSystem {
             });
         }
         
-        // تخزين النافذة المنبثقة للاستخدام لاحقًا
-        this.chatModal = new bootstrap.Modal(document.getElementById('postChatModal'));
-    }
-    
-    // إضافة زر المراسلة إلى منشور
-    addChatButtonToPost(postId, authorId) {
-        const postActions = document.querySelector(`.post[data-post-id="${postId}"] .post-actions`);
-        
-        if (!postActions) return;
-        
-        // إنشاء زر المراسلة
-        const chatButton = document.createElement('button');
-        chatButton.className = 'post-action-btn chat-btn';
-        chatButton.setAttribute('data-post-id', postId);
-        chatButton.setAttribute('data-author-id', authorId);
-        
-        // التحقق من وجود رسائل غير مقروءة
-        this.getUnreadMessagesCount(authorId).then(count => {
-            chatButton.innerHTML = `
-                <i class="fas fa-comment-dots"></i>
-                ${count > 0 ? `<span class="chat-badge">${count}</span>` : ''}
-            `;
-        });
-        
-        // إضافة معالج النقر
-        chatButton.addEventListener('click', (event) => {
-            event.preventDefault();
-            event.stopPropagation();
-            this.openChatWithUser(authorId);
-        });
-        
-        // إدراج زر المراسلة بعد زر الإعجاب
-        const likeButton = postActions.querySelector('.like-btn');
-        if (likeButton && likeButton.nextSibling) {
-            postActions.insertBefore(chatButton, likeButton.nextSibling);
-        } else {
-            postActions.appendChild(chatButton);
+        if (quickLocationBtn) {
+            // مشاركة الموقع السريع عند النقر على زر التذكير
+            quickLocationBtn.addEventListener('click', () => {
+                this.shareLocation();
+            });
         }
+
+        if (emojiBtn) {
+            // فتح قائمة الرموز التعبيرية
+            emojiBtn.addEventListener('click', () => {
+                showToast('ميزة الرموز التعبيرية قيد التطوير', 'info');
+            });
+        }
+
+        if (attachmentBtn) {
+            // فتح نافذة اختيار الملفات
+            attachmentBtn.addEventListener('click', () => {
+                showToast('ميزة إرفاق الملفات قيد التطوير', 'info');
+            });
+        }
+
+        if (callBtn) {
+            // بدء مكالمة صوتية
+            callBtn.addEventListener('click', () => {
+                showToast('ميزة الاتصال الصوتي قيد التطوير', 'info');
+            });
+        }
+
+        if (videoBtn) {
+            // بدء مكالمة فيديو
+            videoBtn.addEventListener('click', () => {
+                showToast('ميزة مكالمة الفيديو قيد التطوير', 'info');
+            });
+        }
+
+        if (infoBtn) {
+            // عرض معلومات إضافية
+            infoBtn.addEventListener('click', () => {
+                showToast('ميزة عرض المعلومات قيد التطوير', 'info');
+            });
+        }
+        
+        // تخزين النافذة المنبثقة للاستخدام لاحقًا
+        this.chatModal = new bootstrap.Modal(document.getElementById('chatModal'));
     }
     
     // فتح نافذة المحادثة مع مستخدم معين
