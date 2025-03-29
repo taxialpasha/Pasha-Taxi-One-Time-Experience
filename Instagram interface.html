@@ -613,6 +613,8 @@ function showUserMenu(event) {
         </div>
     </div>
 </nav>
+
+
 <!-- إضافة في قسم شريط العنوان، بعد شريط التنقل العلوي -->
 <div class="stories-container rtl">
     <!-- عنصر إضافة قصة جديدة (يظهر فقط للمستخدمين المسجلين) -->
@@ -686,6 +688,8 @@ function showUserMenu(event) {
         </div>
     </div>
 </div>
+
+
 <!-- تحديث الشريط الجانبي ليشمل قسم معلومات المستخدم -->
 <div class="side-nav" id="sideNav">
     <div class="side-nav-header">
@@ -1208,50 +1212,75 @@ function showUserMenu(event) {
     <div id="notificationStatus" class="mt-2 small text-muted"></div>
     </div>
 
-    <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="searchModalLabel">بحث عن سائق</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="search-wrapper">
-                        <!-- حقل البحث -->
-                        <div class="search-input-wrapper mb-3">
-                            <div class="input-group">
-                                <input type="text" class="form-control search-input" id="navbarSearchInput"
-                                    placeholder="ابحث عن اسم السائق، المنطقة، نوع السيارة..." autofocus>
-                                <span class="input-group-text">
-                                    <i class="fas fa-search"></i>
-                                </span>
-                            </div>
+    <<!-- تعديل نافذة البحث المنبثقة لتشمل البحث في المنشورات -->
+<div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="searchModalLabel">بحث</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="search-wrapper">
+                    <!-- حقل البحث -->
+                    <div class="search-input-wrapper mb-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control search-input" id="navbarSearchInput"
+                                placeholder="ابحث عن سائق، منطقة، منشور..." autofocus>
+                            <span class="input-group-text">
+                                <i class="fas fa-search"></i>
+                            </span>
                         </div>
+                    </div>
 
-                        <!-- خيارات البحث -->
-                        <div class="search-options mb-3">
-                            <div class="btn-group w-100" role="group">
-                                <input type="radio" class="btn-check" name="searchType" id="searchAll" checked>
-                                <label class="btn btn-outline-primary" for="searchAll">الكل</label>
+                    <!-- خيارات البحث -->
+                    <div class="search-options mb-3">
+                        <div class="btn-group w-100" role="group">
+                            <input type="radio" class="btn-check" name="searchType" id="searchAll" checked>
+                            <label class="btn btn-outline-primary" for="searchAll">الكل</label>
 
-                                <input type="radio" class="btn-check" name="searchType" id="searchName">
-                                <label class="btn btn-outline-primary" for="searchName">الاسم</label>
+                            <input type="radio" class="btn-check" name="searchType" id="searchName">
+                            <label class="btn btn-outline-primary" for="searchName">السائقين</label>
 
-                                <input type="radio" class="btn-check" name="searchType" id="searchLocation">
-                                <label class="btn btn-outline-primary" for="searchLocation">المنطقة</label>
+                            <input type="radio" class="btn-check" name="searchType" id="searchLocation">
+                            <label class="btn btn-outline-primary" for="searchLocation">المناطق</label>
 
-                                <input type="radio" class="btn-check" name="searchType" id="searchCar">
-                                <label class="btn btn-outline-primary" for="searchCar">السيارة</label>
-                            </div>
+                            <input type="radio" class="btn-check" name="searchType" id="searchPosts">
+                            <label class="btn btn-outline-primary" for="searchPosts">المنشورات</label>
                         </div>
+                    </div>
 
-                        <!-- نتائج البحث -->
-                        <div id="searchResults" class="search-results"></div>
+                    <!-- خيارات البحث في المنشورات (تظهر فقط عند اختيار البحث في المنشورات) -->
+                    <div class="post-search-options mb-3" id="postSearchOptions" style="display: none;">
+                        <div class="btn-group w-100" role="group">
+                            <input type="radio" class="btn-check" name="postSearchType" id="searchPostsAll" checked>
+                            <label class="btn btn-outline-secondary" for="searchPostsAll">الكل</label>
+
+                            <input type="radio" class="btn-check" name="postSearchType" id="searchPostsContent">
+                            <label class="btn btn-outline-secondary" for="searchPostsContent">المحتوى</label>
+
+                            <input type="radio" class="btn-check" name="postSearchType" id="searchPostsAuthor">
+                            <label class="btn btn-outline-secondary" for="searchPostsAuthor">الكاتب</label>
+                        </div>
+                    </div>
+
+                    <!-- نتائج البحث -->
+                    <div id="searchResults" class="search-results">
+                        <!-- نتائج البحث ستظهر هنا -->
+                        <div class="search-loading" style="display: none;">
+                            <div class="spinner"></div>
+                            <p>جاري البحث...</p>
+                        </div>
+                        <div class="no-results" style="display: none;">
+                            <i class="fas fa-search fa-3x"></i>
+                            <p>لا توجد نتائج للبحث</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
   <!-- نافذة الرسائل المنبثقة المحسنة -->
 <div class="modal fade" id="messagesModal" tabindex="-1" aria-labelledby="messagesModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -8224,8 +8253,115 @@ function showLoading() {
 
 <script src="chatttttt-system-integration.js"></script>
 <script src="ssssstyle.css"></script>
+<script src="post-search.js"></script>
 
+<!-- إضافة هذا الكود في نهاية الصفحة، قبل إغلاق وسم body -->
 
+<!-- تضمين ملف نظام البحث في المنشورات -->
+<script src="post-search.js"></script>
+
+<!-- تفعيل البحث في المنشورات -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // تهيئة نظام البحث إذا لم يكن محملاً
+        if (typeof postSearchSystem === 'undefined') {
+            console.warn('نظام البحث في المنشورات غير موجود، جاري تهيئته...');
+            
+            // تحميل ملف البحث ديناميكياً إذا لم يكن موجوداً
+            const script = document.createElement('script');
+            script.src = 'post-search.js';
+            script.onload = function() {
+                if (window.postSearchSystem) {
+                    window.postSearchSystem.init();
+                }
+            };
+            document.body.appendChild(script);
+        } else if (window.postSearchSystem && typeof window.postSearchSystem.init === 'function') {
+            // إذا كان نظام البحث موجوداً بالفعل، تأكد من تهيئته
+            window.postSearchSystem.init();
+        }
+        
+        // إعداد التفاعل بين عناصر البحث
+        setupSearchInteractions();
+    });
+    
+    function setupSearchInteractions() {
+        // التبديل بين خيارات البحث المختلفة
+        const searchTypeRadios = document.querySelectorAll('input[name="searchType"]');
+        const postSearchOptions = document.getElementById('postSearchOptions');
+        
+        searchTypeRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                // إظهار أو إخفاء خيارات البحث في المنشورات
+                if (radio.id === 'searchPosts') {
+                    postSearchOptions.style.display = 'block';
+                } else {
+                    postSearchOptions.style.display = 'none';
+                }
+                
+                // تحديث نص مساعدة البحث حسب الاختيار
+                const searchInput = document.getElementById('navbarSearchInput');
+                switch (radio.id) {
+                    case 'searchName':
+                        searchInput.placeholder = 'ابحث عن اسم السائق...';
+                        break;
+                    case 'searchLocation':
+                        searchInput.placeholder = 'ابحث عن المنطقة...';
+                        break;
+                    case 'searchPosts':
+                        searchInput.placeholder = 'ابحث في المنشورات...';
+                        break;
+                    default:
+                        searchInput.placeholder = 'ابحث عن سائق، منطقة، منشور...';
+                }
+            });
+        });
+        
+        // فلترة نتائج البحث حسب النوع المحدد
+        document.querySelectorAll('input[name="postSearchType"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                // تحديث نوع البحث في نظام البحث في المنشورات
+                if (window.postSearchSystem) {
+                    switch (radio.id) {
+                        case 'searchPostsContent':
+                            window.postSearchSystem.searchType = 'content';
+                            break;
+                        case 'searchPostsAuthor':
+                            window.postSearchSystem.searchType = 'author';
+                            break;
+                        default:
+                            window.postSearchSystem.searchType = 'all';
+                    }
+                    
+                    // إعادة البحث بالنوع الجديد
+                    const searchInput = document.getElementById('navbarSearchInput');
+                    if (searchInput.value.trim().length >= 2) {
+                        window.postSearchSystem.searchQuery = searchInput.value.trim();
+                        window.postSearchSystem.performSearch();
+                    }
+                }
+            });
+        });
+        
+        // تفعيل البحث عند إدخال نص
+        const searchInput = document.getElementById('navbarSearchInput');
+        searchInput.addEventListener('input', function() {
+            const query = searchInput.value.trim();
+            if (query.length >= 2) {
+                // تنفيذ البحث في نظام البحث في المنشورات
+                if (window.postSearchSystem) {
+                    window.postSearchSystem.searchQuery = query;
+                    window.postSearchSystem.performSearch();
+                }
+            } else {
+                // إخفاء نتائج البحث إذا كان النص أقل من 2 حرف
+                if (window.postSearchSystem) {
+                    window.postSearchSystem.hideResults();
+                }
+            }
+        });
+    }
+</script>
 
 
 
