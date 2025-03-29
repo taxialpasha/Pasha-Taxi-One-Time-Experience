@@ -213,60 +213,67 @@ function copyMarkersToPopupMap(popupMap) {
         console.error('Error copying markers:', error);
     }
 }
+// دالة إنشاء زر الخريطة المنبثقة
+function createMapPopupButton() {
+    // إنشاء الزر
+    const mapButton = document.createElement('button');
+    mapButton.id = 'mapPopupButton';
+    mapButton.className = 'map-popup-btn';
+    mapButton.innerHTML = '<i class="fas fa-map-marked-alt"></i>'; // فقط الأيقونة بدون نص
+    mapButton.title = 'عرض الخريطة في نافذة منبثقة'; // نص تلميح يظهر عند التحويم
+    
+    // إضافة معالج النقر
+    mapButton.addEventListener('click', openMapPopup);
+    
+    // إضافة الزر إلى الصفحة
+    document.body.appendChild(mapButton);
+    
+    // إضافة التنسيقات الخاصة بالزر
+    addMapPopupStyles();
+}
 
 // دالة إضافة التنسيقات
 function addMapPopupStyles() {
     const style = document.createElement('style');
     style.textContent = `
-       .map-popup-btn {
-    position: fixed;
-    top: 50%; /* وضع الزر في منتصف الصفحة عمودياً */
-    right: 20px; /* المسافة من اليمين */
-    transform: translateY(-50%); /* ضبط المحاذاة العمودية */
-    width: 50px; /* عرض أصغر للزر */
-    height: 50px; /* ارتفاع أصغر للزر */
-    border-radius: 50%; /* شكل دائري */
-    background-color: #FFD700; /* لون خلفية أصفر ذهبي */
-    color: #000000; /* لون النص أسود */
-    border: none;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    cursor: pointer;
-    z-index: 1000;
-    display: flex;
-    align-items: center; /* محاذاة الأيقونة في الوسط */
-    justify-content: center; /* محاذاة الأيقونة في الوسط */
-    transition: all 0.3s ease;
-    padding: 0;
-}
-
-/* تكبير الأيقونة */
-.map-popup-btn i {
-    font-size: 22px;
-}
-
-/* إخفاء النص تحت الأيقونة */
-.map-popup-btn span {
-    display: none;
-}
-
-/* تأثير التحويم */
-.map-popup-btn:hover {
-    transform: translateY(-50%) scale(1.1); /* الحفاظ على المحاذاة العمودية مع تكبير الزر */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
-}
-
-/* تأثير الضغط */
-.map-popup-btn:active {
-    transform: translateY(-50%) scale(0.95); /* الحفاظ على المحاذاة العمودية مع تصغير الزر */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-/* تخصيص للهواتف المحمولة */
-@media (max-width: 768px) {
-    .map-popup-btn {
-        right: 15px; /* تقريب الزر من الحافة اليمنى على الشاشات الصغيرة */
-    }
-}
+        /* تنسيقات زر الخريطة المنبثقة */
+        .map-popup-btn {
+            position: fixed;
+            top: 50%; /* وضع الزر في منتصف الصفحة عمودياً */
+            right: 20px; /* المسافة من اليمين */
+            transform: translateY(-50%); /* ضبط المحاذاة العمودية */
+            width: 50px; /* عرض أصغر للزر */
+            height: 50px; /* ارتفاع أصغر للزر */
+            border-radius: 50%; /* شكل دائري */
+            background-color: #FFD700; /* لون خلفية أصفر ذهبي */
+            color: #000000; /* لون النص أسود */
+            border: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            z-index: 1000;
+            display: flex;
+            align-items: center; /* محاذاة الأيقونة في الوسط */
+            justify-content: center; /* محاذاة الأيقونة في الوسط */
+            transition: all 0.3s ease;
+            padding: 0;
+        }
+        
+        /* تكبير الأيقونة */
+        .map-popup-btn i {
+            font-size: 22px;
+        }
+        
+        /* تأثير التحويم */
+        .map-popup-btn:hover {
+            transform: translateY(-50%) scale(1.1); /* الحفاظ على المحاذاة العمودية مع تكبير الزر */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* تأثير الضغط */
+        .map-popup-btn:active {
+            transform: translateY(-50%) scale(0.95); /* الحفاظ على المحاذاة العمودية مع تصغير الزر */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
         
         /* تنسيقات النافذة المنبثقة البسيطة */
         .map-modal-overlay {
@@ -370,28 +377,18 @@ function addMapPopupStyles() {
         /* تعديل للهواتف المحمولة */
         @media (max-width: 768px) {
             .map-popup-btn {
-                bottom: 70px;
-                right: 15px;
-                width: 50px;
-                height: 50px;
-            }
-            
-            .map-popup-btn i {
-                font-size: 20px;
-            }
-            
-            .map-popup-btn span {
-                font-size: 8px;
-            }
-            
-            .map-modal-content {
-                width: 95%;
-                max-height: 85vh;
+                right: 15px; /* تقريب الزر من الحافة اليمنى على الشاشات الصغيرة */
             }
         }
     `;
     document.head.appendChild(style);
 }
+
+// تشغيل النظام عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', function() {
+    // تأخير بسيط لضمان تحميل جميع المكتبات
+    setTimeout(createMapPopupButton, 1000);
+});
 
 // تشغيل النظام عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', function() {
