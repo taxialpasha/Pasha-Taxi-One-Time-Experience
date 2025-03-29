@@ -89,6 +89,7 @@ function createSimpleMapModal() {
 }
 
 // دالة تهيئة الخريطة في النافذة المنبثقة
+// دالة تهيئة الخريطة في النافذة المنبثقة
 function initializePopupMap() {
     // التحقق من وجود مكتبة Leaflet
     if (typeof L === 'undefined') {
@@ -105,6 +106,14 @@ function initializePopupMap() {
     
     // بيانات الموقع الافتراضي (بغداد)
     const defaultLocation = [33.3152, 44.3661];
+    
+    // إضافة مؤشر التحميل قبل تهيئة الخريطة
+    popupMap.innerHTML = `
+        <div class="map-loading">
+            <div class="spinner"></div>
+            <p>جاري تحميل الخريطة والسائقين...</p>
+        </div>
+    `;
     
     // إنشاء خريطة جديدة
     const map = L.map('popupMap', {
@@ -141,13 +150,37 @@ function initializePopupMap() {
         }
     }).addTo(map);
     
+    // إضافة طبقة السائقين كطبقة منفصلة
+    const driversLayer = L.layerGroup().addTo(map);
+    
+    // إضافة عناصر التحكم بالطبقات
+    const layerControl = L.control.layers(
+        {}, // لا توجد طبقات أساسية إضافية
+        { "السائقين": driversLayer }, // طبقات متراكبة
+        { position: 'topright', collapsed: false }
+    ).addTo(map);
+    
+    // تحميل بيانات السائقين من قاعدة البيانات
+    loadAllDriversToPopupMap(map, driversLayer);
+    
     // محاولة نسخ العلامات من الخريطة الأصلية
     copyMarkersToPopupMap(map);
     
     // تحديث حجم الخريطة بعد التهيئة
     setTimeout(() => {
         map.invalidateSize();
+        
+        // إزالة مؤشر التحميل
+        const loadingElement = popupMap.querySelector('.map-loading');
+        if (loadingElement) {
+            loadingElement.remove();
+        }
     }, 500);
+    
+    // إضافة مصفي للسائقين
+    addDriversFilterControl(map, driversLayer);
+    
+    return { map, driversLayer };
 }
 
 // دالة نسخ العلامات من الخريطة الأصلية
